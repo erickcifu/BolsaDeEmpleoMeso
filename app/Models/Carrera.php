@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property $id
  * @property $carrera
  * @property $facultad_id
+ * @property $EstadoCarrera
  * @property $created_at
  * @property $updated_at
  *
  * @property Estudiante[] $estudiantes
- * @property Facultade $facultade
+ * @property Facultad $facultad
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -23,7 +24,7 @@ class Carrera extends Model
     static $rules = [
 		'carrera' => 'required',
 		'facultad_id' => 'required',
-        'Estado' => 'required',
+        'EstadoCarrera' => 'required',
     ];
 
     protected $perPage = 20;
@@ -33,7 +34,7 @@ class Carrera extends Model
      *
      * @var array
      */
-    protected $fillable = ['carrera','facultad_id'];
+    protected $fillable = ['carrera','EstadoCarrera','facultad_id'];
 
 
     /**
@@ -47,7 +48,7 @@ class Carrera extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function facultade()
+    public function facultad()
     {
         return $this->hasOne('App\Models\Facultad', 'id', 'facultad_id');
     }

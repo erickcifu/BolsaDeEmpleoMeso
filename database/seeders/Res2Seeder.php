@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Residencia;
+use App\Models\Municipio;
 use Illuminate\Database\Seeder;
 
 class Res2Seeder extends Seeder
@@ -13,451 +13,451 @@ class Res2Seeder extends Seeder
      *     @return void
      */
     public function run(){
-        $Marcos1 = Residencia::create([
+        $Marcos1 = Municipio::create([
             'municipio' => 'San Marcos',
             'departamento_id' => 7,
         ]);
-        $Marcos2 = Residencia::create([
+        $Marcos2 = Municipio::create([
             'municipio' => 'Ayutla',
             'departamento_id' => 7,
         ]);
-        $Marcos3 = Residencia::create([
+        $Marcos3 = Municipio::create([
             'municipio' => 'Catarina',
             'departamento_id' => 7,
         ]);
-        $Marcos4 = Residencia::create([
+        $Marcos4 = Municipio::create([
             'municipio' => 'Comitancillo',
             'departamento_id' => 7,
         ]);
-        $Marcos5 = Residencia::create([
+        $Marcos5 = Municipio::create([
             'municipio' => 'Concepción Tutuapa',
             'departamento_id' => 7,
         ]);
-        $Marcos6 = Residencia::create([
+        $Marcos6 = Municipio::create([
             'municipio' => 'El Quetzal',
             'departamento_id' => 7,
         ]);
-        $Marcos7 = Residencia::create([
+        $Marcos7 = Municipio::create([
             'municipio' => 'El Tumbador',
             'departamento_id' => 7,
         ]);
-        $Marcos8 = Residencia::create([
+        $Marcos8 = Municipio::create([
             'municipio' => 'Esquipulas Palo Gordo',
             'departamento_id' => 7,
         ]);
-        $Marcos9 = Residencia::create([
+        $Marcos9 = Municipio::create([
             'municipio' => 'Ixchiguán',
             'departamento_id' => 7,
         ]);
-        $Marcos10 = Residencia::create([
+        $Marcos10 = Municipio::create([
             'municipio' => 'La Blanca',
             'departamento_id' => 7,
         ]);
-        $Marcos11 = Residencia::create([
+        $Marcos11 = Municipio::create([
             'municipio' => 'La Reforma',
             'departamento_id' => 7,
         ]);
-        $Marcos12 = Residencia::create([
+        $Marcos12 = Municipio::create([
             'municipio' => 'Malacatán',
             'departamento_id' => 7,
         ]);
-        $Marcos13 = Residencia::create([
+        $Marcos13 = Municipio::create([
             'municipio' => 'Nuevo Progreso',
             'departamento_id' => 7,
         ]);
-        $Marcos14 = Residencia::create([
+        $Marcos14 = Municipio::create([
             'municipio' => 'Ocós',
             'departamento_id' => 7,
         ]);
-        $Marcos15 = Residencia::create([
+        $Marcos15 = Municipio::create([
             'municipio' => 'Pajapita',
             'departamento_id' => 7,
         ]);
-        $Marcos16 = Residencia::create([
+        $Marcos16 = Municipio::create([
             'municipio' => 'Río Blanco',
             'departamento_id' => 7,
         ]);
-        $Marcos17 = Residencia::create([
+        $Marcos17 = Municipio::create([
             'municipio' => 'San Antonio Sacatepéquez',
             'departamento_id' => 7,
         ]);
-        $Marcos18 = Residencia::create([
+        $Marcos18 = Municipio::create([
             'municipio' => 'San Cristóbal Cucho',
             'departamento_id' => 7,
         ]);
-        $Marcos19 = Residencia::create([
+        $Marcos19 = Municipio::create([
             'municipio' => 'San José El Rodeo',
             'departamento_id' => 7,
         ]);
-        $Marcos20 = Residencia::create([
+        $Marcos20 = Municipio::create([
             'municipio' => 'San José Ojetenam',
             'departamento_id' => 7,
         ]);
-        $Marcos21 = Residencia::create([
+        $Marcos21 = Municipio::create([
             'municipio' => 'San Lorenzo',
             'departamento_id' => 7,
         ]);
-        $Marcos22 = Residencia::create([
+        $Marcos22 = Municipio::create([
             'municipio' => 'San Miguel Ixtahuacán',
             'departamento_id' => 7,
         ]);
-        $Marcos23 = Residencia::create([
+        $Marcos23 = Municipio::create([
             'municipio' => 'San Pablo',
             'departamento_id' => 7,
         ]);
-        $Marcos24 = Residencia::create([
+        $Marcos24 = Municipio::create([
             'municipio' => 'San Pedro Sacatepéquez',
             'departamento_id' => 7,
         ]);
-        $Marcos25 = Residencia::create([
+        $Marcos25 = Municipio::create([
             'municipio' => 'San Rafael Pie de la Cuesta',
             'departamento_id' => 7,
         ]);
-        $Marcos26 = Residencia::create([
+        $Marcos26 = Municipio::create([
             'municipio' => 'Sibinal',
             'departamento_id' => 7,
         ]);
-        $Marcos27 = Residencia::create([
+        $Marcos27 = Municipio::create([
             'municipio' => 'Sipacapa',
             'departamento_id' => 7,
         ]);
-        $Marcos28 = Residencia::create([
+        $Marcos28 = Municipio::create([
             'municipio' => 'Tacaná',
             'departamento_id' => 7,
         ]);
-        $Marcos29 = Residencia::create([
+        $Marcos29 = Municipio::create([
             'municipio' => 'Tajumulco',
             'departamento_id' => 7,
         ]);
-        $Marcos30 = Residencia::create([
+        $Marcos30 = Municipio::create([
             'municipio' => 'Tejutla',
             'departamento_id' => 7,
         ]);
-        $Jutiapa1 = Residencia::create([
+        $Jutiapa1 = Municipio::create([
             'municipio' => 'Jutiapa',
             'departamento_id' => 8,
         ]);
-        $Jutiapa2 = Residencia::create([
+        $Jutiapa2 = Municipio::create([
             'municipio' => 'Agua Blanca',
             'departamento_id' => 8,
         ]);
-        $Jutiapa3 = Residencia::create([
+        $Jutiapa3 = Municipio::create([
             'municipio' => 'Asunción Mita',
             'departamento_id' => 8,
         ]);
-        $Jutiapa4 = Residencia::create([
+        $Jutiapa4 = Municipio::create([
             'municipio' => 'Atescatempa',
             'departamento_id' => 8,
         ]);
-        $Jutiapa5 = Residencia::create([
+        $Jutiapa5 = Municipio::create([
             'municipio' => 'Comapa',
             'departamento_id' => 8,
         ]);
-        $Jutiapa6 = Residencia::create([
+        $Jutiapa6 = Municipio::create([
             'municipio' => 'Conguaco',
             'departamento_id' => 8,
         ]);
-        $Jutiapa7 = Residencia::create([
+        $Jutiapa7 = Municipio::create([
             'municipio' => 'El Adelanto',
             'departamento_id' => 8,
         ]);
-        $Jutiapa8 = Residencia::create([
+        $Jutiapa8 = Municipio::create([
             'municipio' => 'El Progreso',
             'departamento_id' => 8,
         ]);
-        $Jutiapa9 = Residencia::create([
+        $Jutiapa9 = Municipio::create([
             'municipio' => 'Jalpatagua',
             'departamento_id' => 8,
         ]);
-        $Jutiapa10 = Residencia::create([
+        $Jutiapa10 = Municipio::create([
             'municipio' => 'Jerez',
             'departamento_id' => 8,
         ]);
-        $Jutiapa11 = Residencia::create([
+        $Jutiapa11 = Municipio::create([
             'municipio' => 'Moyuta',
             'departamento_id' => 8,
         ]);
-        $Jutiapa12 = Residencia::create([
+        $Jutiapa12 = Municipio::create([
             'municipio' => 'Pasaco',
             'departamento_id' => 8,
         ]);
-        $Jutiapa13 = Residencia::create([
+        $Jutiapa13 = Municipio::create([
             'municipio' => 'Quesada',
             'departamento_id' => 8,
         ]);
-        $Jutiapa14 = Residencia::create([
+        $Jutiapa14 = Municipio::create([
             'municipio' => 'San José Acatempa',
             'departamento_id' => 8,
         ]);
-        $Jutiapa15 = Residencia::create([
+        $Jutiapa15 = Municipio::create([
             'municipio' => 'Santa Catarina Mita',
             'departamento_id' => 8,
         ]);
-        $Jutiapa16 = Residencia::create([
+        $Jutiapa16 = Municipio::create([
             'municipio' => 'Yupiltepeque',
             'departamento_id' => 8,
         ]);
-        $Jutiapa17 = Residencia::create([
+        $Jutiapa17 = Municipio::create([
             'municipio' => 'Zapotitlán',
             'departamento_id' => 8,
         ]);
-        $BajaV1 = Residencia::create([
+        $BajaV1 = Municipio::create([
             'municipio' => 'Salamá',
             'departamento_id' => 9,
         ]);
-        $BajaV2 = Residencia::create([
+        $BajaV2 = Municipio::create([
             'municipio' => 'Cubulco',
             'departamento_id' => 9,
         ]);
-        $BajaV3 = Residencia::create([
+        $BajaV3 = Municipio::create([
             'municipio' => 'Granados',
             'departamento_id' => 9,
         ]);
-        $BajaV4 = Residencia::create([
+        $BajaV4 = Municipio::create([
             'municipio' => 'Purulhá',
             'departamento_id' => 9,
         ]);
-        $BajaV5 = Residencia::create([
+        $BajaV5 = Municipio::create([
             'municipio' => 'Rabinal',
             'departamento_id' => 9,
         ]);
-        $BajaV6 = Residencia::create([
+        $BajaV6 = Municipio::create([
             'municipio' => 'San Jerónimo',
             'departamento_id' => 9,
         ]);
-        $BajaV7 = Residencia::create([
+        $BajaV7 = Municipio::create([
             'municipio' => 'San Miguel Chicaj',
             'departamento_id' => 9,
         ]);
-        $BajaV8 = Residencia::create([
+        $BajaV8 = Municipio::create([
             'municipio' => 'Santa Cruz El Chol',
             'departamento_id' => 9,
         ]);
-        $SantaR1 = Residencia::create([
+        $SantaR1 = Municipio::create([
             'municipio' => 'Cuilapa',
             'departamento_id' => 10,
         ]);
-        $SantaR2 = Residencia::create([
+        $SantaR2 = Municipio::create([
             'municipio' => 'Barberena',
             'departamento_id' => 10,
         ]);
-        $SantaR3 = Residencia::create([
+        $SantaR3 = Municipio::create([
             'municipio' => 'Casillas',
             'departamento_id' => 10,
         ]);
-        $SantaR4 = Residencia::create([
+        $SantaR4 = Municipio::create([
             'municipio' => 'Chiquimulilla',
             'departamento_id' => 10,
         ]);
-        $SantaR5 = Residencia::create([
+        $SantaR5 = Municipio::create([
             'municipio' => 'Guazacapán',
             'departamento_id' => 10,
         ]);
-        $SantaR6 = Residencia::create([
+        $SantaR6 = Municipio::create([
             'municipio' => 'Nueva Santa Rosa',
             'departamento_id' => 10,
         ]);
-        $SantaR7 = Residencia::create([
+        $SantaR7 = Municipio::create([
             'municipio' => 'Oratorio',
             'departamento_id' => 10,
         ]);
-        $SantaR8 = Residencia::create([
+        $SantaR8 = Municipio::create([
             'municipio' => 'Pueblo Nuevo Viñas',
             'departamento_id' => 10,
         ]);
-        $SantaR9 = Residencia::create([
+        $SantaR9 = Municipio::create([
             'municipio' => 'San Juan Tecuaco',
             'departamento_id' => 10,
         ]);
-        $SantaR10 = Residencia::create([
+        $SantaR10 = Municipio::create([
             'municipio' => 'San Rafael Las Flores',
             'departamento_id' => 10,
         ]);
-        $SantaR11 = Residencia::create([
+        $SantaR11 = Municipio::create([
             'municipio' => 'Santa Cruz Naranjo',
             'departamento_id' => 10,
         ]);
-        $SantaR12 = Residencia::create([
+        $SantaR12 = Municipio::create([
             'municipio' => 'Santa María Ixhuatán',
             'departamento_id' => 10,
         ]);
-        $SantaR13 = Residencia::create([
+        $SantaR13 = Municipio::create([
             'municipio' => 'Santa Rosa de Lima',
             'departamento_id' => 10,
         ]);
-        $SantaR14 = Residencia::create([
+        $SantaR14 = Municipio::create([
             'municipio' => 'Taxisco',
             'departamento_id' => 10,
         ]);
-        $Zacapa1 = Residencia::create([
+        $Zacapa1 = Municipio::create([
             'municipio' => 'Zacapa',
             'departamento_id' => 11,
         ]);
-        $Zacapa2 = Residencia::create([
+        $Zacapa2 = Municipio::create([
             'municipio' => 'Cabañas',
             'departamento_id' => 11,
         ]);
-        $Zacapa3 = Residencia::create([
+        $Zacapa3 = Municipio::create([
             'municipio' => 'Estanzuela',
             'departamento_id' => 11,
         ]);
-        $Zacapa4 = Residencia::create([
+        $Zacapa4 = Municipio::create([
             'municipio' => 'Gualán',
             'departamento_id' => 11,
         ]);
-        $Zacapa5 = Residencia::create([
+        $Zacapa5 = Municipio::create([
             'municipio' => 'Huité',
             'departamento_id' => 11,
         ]);
-        $Zacapa6 = Residencia::create([
+        $Zacapa6 = Municipio::create([
             'municipio' => 'La Unión',
             'departamento_id' => 11,
         ]);
-        $Zacapa7 = Residencia::create([
+        $Zacapa7 = Municipio::create([
             'municipio' => 'Río Hondo',
             'departamento_id' => 11,
         ]);
-        $Zacapa8 = Residencia::create([
+        $Zacapa8 = Municipio::create([
             'municipio' => 'San Diego',
             'departamento_id' => 11,
         ]);
-        $Zacapa9 = Residencia::create([
+        $Zacapa9 = Municipio::create([
             'municipio' => 'San Jorge',
             'departamento_id' => 11,
         ]);
-        $Zacapa10 = Residencia::create([
+        $Zacapa10 = Municipio::create([
             'municipio' => 'Teculután',
             'departamento_id' => 11,
         ]);
-        $Zacapa11 = Residencia::create([
+        $Zacapa11 = Municipio::create([
             'municipio' => 'Usumatlán',
             'departamento_id' => 11,
         ]);
-        $Suchi1 = Residencia::create([
+        $Suchi1 = Municipio::create([
             'municipio' => 'Mazatenango',
             'departamento_id' => 12,
         ]);
-        $Suchi2 = Residencia::create([
+        $Suchi2 = Municipio::create([
             'municipio' => 'Chicacao',
             'departamento_id' => 12,
         ]);
-        $Suchi3 = Residencia::create([
+        $Suchi3 = Municipio::create([
             'municipio' => 'Cuyotenango',
             'departamento_id' => 12,
         ]);
-        $Suchi4 = Residencia::create([
+        $Suchi4 = Municipio::create([
             'municipio' => 'Patulul',
             'departamento_id' => 12,
         ]);
-        $Suchi5 = Residencia::create([
+        $Suchi5 = Municipio::create([
             'municipio' => 'Pueblo Nuevo',
             'departamento_id' => 12,
         ]);
-        $Suchi6 = Residencia::create([
+        $Suchi6 = Municipio::create([
             'municipio' => 'Río Bravo',
             'departamento_id' => 12,
         ]);
-        $Suchi7 = Residencia::create([
+        $Suchi7 = Municipio::create([
             'municipio' => 'Samayac',
             'departamento_id' => 12,
         ]);
-        $Suchi8 = Residencia::create([
+        $Suchi8 = Municipio::create([
             'municipio' => 'San Antonio Suchitepéquez',
             'departamento_id' => 12,
         ]);
-        $Suchi9 = Residencia::create([
+        $Suchi9 = Municipio::create([
             'municipio' => 'San Bernardino',
             'departamento_id' => 12,
         ]);
-        $Suchi10 = Residencia::create([
+        $Suchi10 = Municipio::create([
             'municipio' => 'San Francisco Zapotitlán',
             'departamento_id' => 12,
         ]);
-        $Suchi11 = Residencia::create([
+        $Suchi11 = Municipio::create([
             'municipio' => 'San Gabriel',
             'departamento_id' => 12,
         ]);
-        $Suchi12 = Residencia::create([
+        $Suchi12 = Municipio::create([
             'municipio' => 'San José El Ídolo',
             'departamento_id' => 12,
         ]);
-        $Suchi13 = Residencia::create([
+        $Suchi13 = Municipio::create([
             'municipio' => 'San José La Máquina',
             'departamento_id' => 12,
         ]);
-        $Suchi14 = Residencia::create([
+        $Suchi14 = Municipio::create([
             'municipio' => 'San Juan Bautista',
             'departamento_id' => 12,
         ]);
-        $Suchi15 = Residencia::create([
+        $Suchi15 = Municipio::create([
             'municipio' => 'San Lorenzo',
             'departamento_id' => 12,
         ]);
-        $Suchi16 = Residencia::create([
+        $Suchi16 = Municipio::create([
             'municipio' => 'San Miguel Panán',
             'departamento_id' => 12,
         ]);
-        $Suchi17 = Residencia::create([
+        $Suchi17 = Municipio::create([
             'municipio' => 'San Pablo Jocopilas',
             'departamento_id' => 12,
         ]);
-        $Suchi18 = Residencia::create([
+        $Suchi18 = Municipio::create([
             'municipio' => 'Santa Bárbara',
             'departamento_id' => 12,
         ]);
-        $Suchi19 = Residencia::create([
+        $Suchi19 = Municipio::create([
             'municipio' => 'Santo Domingo Suchitepéquez',
             'departamento_id' => 12,
         ]);
-        $Suchi20 = Residencia::create([
+        $Suchi20 = Municipio::create([
             'municipio' => 'Santo Tomás La Unión',
             'departamento_id' => 12,
         ]);
-        $Suchi21 = Residencia::create([
+        $Suchi21 = Municipio::create([
             'municipio' => 'Zunilito',
             'departamento_id' => 12,
         ]);
-        $Chiqui1 = Residencia::create([
+        $Chiqui1 = Municipio::create([
             'municipio' => 'Chiquimula',
             'departamento_id' => 13,
         ]);
-        $Chiqui2 = Residencia::create([
+        $Chiqui2 = Municipio::create([
             'municipio' => 'Camotán',
             'departamento_id' => 13,
         ]);
-        $Chiqui3 = Residencia::create([
+        $Chiqui3 = Municipio::create([
             'municipio' => 'Concepción Las Minas',
             'departamento_id' => 13,
         ]);
-        $Chiqui4 = Residencia::create([
+        $Chiqui4 = Municipio::create([
             'municipio' => 'Esquipulas',
             'departamento_id' => 13,
         ]);
-        $Chiqui5 = Residencia::create([
+        $Chiqui5 = Municipio::create([
             'municipio' => 'Ipala',
             'departamento_id' => 13,
         ]);
-        $Chiqui6 = Residencia::create([
+        $Chiqui6 = Municipio::create([
             'municipio' => 'Jocotán',
             'departamento_id' => 13,
         ]);
-        $Chiqui7 = Residencia::create([
+        $Chiqui7 = Municipio::create([
             'municipio' => 'Olopa',
             'departamento_id' => 13,
         ]);
-        $Chiqui8 = Residencia::create([
+        $Chiqui8 = Municipio::create([
             'municipio' => 'Quezaltepeque',
             'departamento_id' => 13,
         ]);
-        $Chiqui9 = Residencia::create([
+        $Chiqui9 = Municipio::create([
             'municipio' => 'San Jacinto',
             'departamento_id' => 13,
         ]);
-        $Chiqui10 = Residencia::create([
+        $Chiqui10 = Municipio::create([
             'municipio' => 'San José La Arada',
             'departamento_id' => 13,
         ]);
-        $Chiqui11 = Residencia::create([
+        $Chiqui11 = Municipio::create([
             'municipio' => 'San Juan Ermita',
             'departamento_id' => 13,
         ]);

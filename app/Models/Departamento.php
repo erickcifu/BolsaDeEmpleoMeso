@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $created_at
  * @property $updated_at
  *
- * @property Residencia[] $residencias
+ * @property Municipio[] $municipios
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -35,8 +35,8 @@ class Departamento extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function residencias()
+    public function municipios()
     {
-        return $this->hasMany('App\Models\Residencia', 'departamento_id', 'id');
+        return $this->hasMany('App\Models\Municipio', 'departamento_id', 'id');
     }
 }
