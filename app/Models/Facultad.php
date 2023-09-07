@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $facultad
- * @property $Estado
+ * @property $EstadoFacultad
  * @property $created_at
  * @property $updated_at
  *
@@ -20,7 +20,7 @@ class Facultad extends Model
 {
     static $rules = [
 		'facultad' => 'required',
-        'Estado' => 'required',
+        'EstadoFacultad' => 'required',
     ];
 
     protected $perPage = 20;
@@ -30,7 +30,7 @@ class Facultad extends Model
      *
      * @var array
      */
-    protected $fillable = ['facultad', 'Estado'];
+    protected $fillable = ['facultad', 'EstadoFacultad'];
 
     public function ofertas()
     {

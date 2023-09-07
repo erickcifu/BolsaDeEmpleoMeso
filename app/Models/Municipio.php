@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $municipio
- * @property $residencia_id
+ * @property $departamento_id
  * @property $created_at
  * @property $updated_at
  *
- * @property Residencia $residencia
+ * @property Departamento $departamento
+ * @property Estudiante[] $estudiantes
+ * @property Empresa[] $empresas
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -21,22 +23,40 @@ class Municipio extends Model
 {
     static $rules = [
 		'municipio' => 'required',
-		'residencia_id' => 'required',
+		'departamento_id' => 'required',
     ];
 
     protected $perPage = 20;
+
     /**
      * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $fillable = ['municipio','residencia_id'];
+    protected $fillable = ['municipio','departamento_id'];
+
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function residencia()
+    public function departamento()
     {
-        return $this->hasOne('App\Models\Residencia', 'id', 'residencia_id');
+        return $this->hasOne('App\Models\Departamento', 'id', 'departamento_id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function estudiantes()
+    {
+        return $this->hasMany('App\Models\Estudiante', 'municipio_id', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function empresas()
+    {
+        return $this->hasMany('App\Models\Empresa', 'municipio_id', 'id');
     }
 }

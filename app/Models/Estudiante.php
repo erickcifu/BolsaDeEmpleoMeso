@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $correo
  * @property $numero_personal
  * @property $numero_domiciliar
- * @property $residencia_id
+ * @property $municipio_id
  * @property $carrera_id
  * @property $user_id
  * @property $created_at
@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  *  @property Postulacion[] $postulaciones
  *
  * @property Carrera $carrera
- * @property Residencia $residencia
+ * @property Municipio $municipio
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -51,7 +51,7 @@ class Estudiante extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre','apellidos','carnet','DPI','correo','numero_personal','numero_domiciliar','curriculum','residencia_id','carrera_id', 'user_id'];
+    protected $fillable = ['nombre','apellidos','carnet','DPI','correo','numero_personal','numero_domiciliar','curriculum','municipio_id','carrera_id', 'user_id'];
 
 
      /**
@@ -77,9 +77,9 @@ class Estudiante extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function residencia()
+    public function municipio()
     {
-        return $this->hasOne('App\Models\Residencia', 'id', 'residencia_id');
+        return $this->hasOne('App\Models\Municipio', 'id', 'municipio_id');
     }
 
 }

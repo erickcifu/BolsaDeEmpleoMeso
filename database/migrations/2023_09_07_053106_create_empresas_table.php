@@ -4,23 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateEmpresasTable extends Migration
 {
     /**
      * Run the migrations.
+     * 
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('empresas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_empresa',200);
             $table->integer('nit');
-            $table->text('RTU');
-            $table->text('patenteDeComercio');
-            $table->text('descripcion');
-            $table->text('telefonoEmpresa');
-            $table->text('correoEmpresa');
-            $table->text('direccionEmpresa');
+            $table->string('RTU');
+            $table->string('patenteDeComercio');
+            $table->string('descripcion');
+            $table->string('telefonoEmpresa');
+            $table->string('correoEmpresa');
+            $table->string('direccionEmpresa');
             $table->boolean('estadoEmpresa');
             $table->unsignedBigInteger('user_id')->unique();
 
@@ -31,8 +33,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     * 
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('empresas');
     }

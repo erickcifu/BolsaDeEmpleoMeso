@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $RTU
  * @property $patenteDeComercio
  * @property $descripcion
- * @property $residencia_id
+ * @property $municipio_id
  * @property $telefonoEmpresa
  * @property $correoEmpresa
  * @property $direccionEmpresa
@@ -51,14 +51,14 @@ class Empresa extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre_empresa','descripcion','residencia_id', 'telefonoEmpresa', 'correoEmpresa', 'direccionEmpresa','estadoEmpresa', 'user_id'];
+    protected $fillable = ['nombre_empresa','descripcion','municipio_id', 'telefonoEmpresa', 'correoEmpresa', 'direccionEmpresa','estadoEmpresa', 'user_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function residencia()
     {
-        return $this->hasOne('App\Models\Residencia', 'id', 'residencia_id');
+        return $this->hasOne('App\Models\Municipio', 'id', 'residencia_id');
 
     }
 
