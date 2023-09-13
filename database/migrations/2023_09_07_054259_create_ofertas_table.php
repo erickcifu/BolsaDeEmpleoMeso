@@ -22,7 +22,7 @@ class CreateOfertasTable extends Migration
             $table->date('fecha');
             $table->integer('puestoVacante');
             $table->string('tipoContratacion',100);
-            $table->integer('edadRequerida',150);
+            $table->integer('edadRequerida');
             $table->string('genero',50);
             $table->string('perfil');
             $table->float('sueldoMax');

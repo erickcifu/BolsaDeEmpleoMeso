@@ -20,7 +20,7 @@ return new class extends Migration
             $table->binary('firma');
             $table->bigInteger('autoridadAcademica_id')->unsigned();
             $table->bigInteger('estudiante_id')->unsigned();
-            $table->foreign('autoridadAcademica_id')->references('id')->on('autoridad_academicas')->onDelete("cascade");
+            $table->foreign('autoridadacademica_id')->references('id')->on('autoridad_academicas')->onDelete("cascade");
             $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete("cascade");
             $table->timestamps();
         });
