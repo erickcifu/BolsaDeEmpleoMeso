@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 class Departamento extends Model
 {
     static $rules = [
-		'departamento' => 'required',
+		'nombreDepartamento' => 'required',
     ];
 
     protected $perPage = 20;
@@ -29,7 +29,7 @@ class Departamento extends Model
      *
      * @var array
      */
-    protected $fillable = ['departamento'];
+    protected $fillable = ['nombreDepartamento'];
 
 
     /**
@@ -37,6 +37,6 @@ class Departamento extends Model
      */
     public function municipios()
     {
-        return $this->hasMany('App\Models\Municipio', 'departamento_id', 'id');
+        return $this->hasMany('App\Models\Municipio', 'departamento_id', 'departamentoId');
     }
 }

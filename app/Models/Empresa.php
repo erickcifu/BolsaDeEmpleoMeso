@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $RTU
  * @property $patenteDeComercio
  * @property $descripcion
- * @property $municipio_id
+ * @property $residencia_id
  * @property $telefonoEmpresa
  * @property $correoEmpresa
  * @property $direccionEmpresa
@@ -31,16 +31,19 @@ class Empresa extends Model
      
     static $rules = [
     'logo' => 'required',
-	'nombre_empresa' => 'required',
+	'nombreEmpresa' => 'required',
     'nit' => 'required',
-    'RTU' => 'required',
-    'patenteDeComercio' => 'required',
-	'descripcion' => 'required',
-    'residencia_id'=>'required',
+    'rtu' => 'required',
+    'patenteComercio' => 'required',
+	'descripcionEmpresa' => 'required',
     'telefonoEmpresa'=>'required',
     'correoEmpresa'=>'required',
     'direccionEmpresa'=>'required',
+    'encargadoEmpresa' => 'required',
+    'telefonoEncargado' => 'required',
     'estadoEmpresa' => 'required',
+    'estadoSolicitud' => 'required',
+    'residencia_id'=>'required',
     'user_id'=>'required',
     ];
 
@@ -51,14 +54,14 @@ class Empresa extends Model
      *
      * @var array
      */
-    protected $fillable = ['nombre_empresa','descripcion','municipio_id', 'telefonoEmpresa', 'correoEmpresa', 'direccionEmpresa','estadoEmpresa', 'user_id'];
+    protected $fillable = ['logo', 'nombreEmpresa', 'nit', 'rtu', 'patenteComercio', 'descripcionEmpresa', 'telefonoEmpresa', 'correoEmpresa', 'direccionEmpresa', 'encargadoEmpresa', 'telefonoEncargado', 'estadoEmpresa', 'estadoSolicitud', 'residencia_id', 'user_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function residencia()
     {
-        return $this->hasOne('App\Models\Municipio', 'id', 'residencia_id');
+        return $this->hasOne('App\Models\Municipio', 'municipioId', 'residencia_id');
 
     }
 
@@ -71,6 +74,6 @@ class Empresa extends Model
      */
     public function ofertas()
     {
-        return $this->hasMany('App\Models\Oferta', 'empresa_id', 'id');
+        return $this->hasMany('App\Models\Oferta', 'empresa_id', 'empresaId');
     }
 }

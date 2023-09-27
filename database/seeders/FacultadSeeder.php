@@ -14,28 +14,28 @@ class FacultadSeeder extends Seeder
 
      public function run(){
         $Facultad1 = Facultad::create([
-            'facultad' => 'Pedadogía y Ciencias de la Educación',
+            'Nfacultad' => 'Pedadogía y Ciencias de la Educación',
         ]);
         $Facultad2 = Facultad::create([
-            'facultad' => 'Derecho',
+            'Nfacultad' => 'Derecho',
         ]);
         $Facultad3 = Facultad::create([
-            'facultad' => 'Ciencias Económicas',
+            'Nfacultad' => 'Ciencias Económicas',
         ]);
         $Facultad4 = Facultad::create([
-            'facultad' => 'Arquitectura',
+            'Nfacultad' => 'Arquitectura',
         ]);
         $Facultad5 = Facultad::create([
-            'facultad' => 'Ciencias de la Comunicación Social',
+            'Nfacultad' => 'Ciencias de la Comunicación Social',
         ]);
         $Facultad6 = Facultad::create([
-            'facultad' => 'Odontología',
+            'Nfacultad' => 'Odontología',
         ]);
         $Facultad7 = Facultad::create([
-            'facultad' => 'Medicina',
+            'Nfacultad' => 'Medicina',
         ]);
         $Facultad8 = Facultad::create([
-            'facultad' => 'Ingeniería',
+            'Nfacultad' => 'Ingeniería',
         ]);
     }
 

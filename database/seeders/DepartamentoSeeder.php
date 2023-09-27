@@ -14,70 +14,70 @@ class DepartamentoSeeder extends Seeder
      */
     public function run(){
         $departamento1 = Departamento::create([
-            'departamento' => 'Petén',
+            'nombreDepartamento' => 'Petén',
         ]);
         $departamento2 = Departamento::create([
-            'departamento' => 'Izabal',
+            'nombreDepartamento' => 'Izabal',
         ]);
         $departamento3 = Departamento::create([
-            'departamento' => 'Alta Verapaz',
+            'nombreDepartamento' => 'Alta Verapaz',
         ]);
         $departamento4 = Departamento::create([
-            'departamento' => 'Quiché',
+            'nombreDepartamento' => 'Quiché',
         ]);
         $departamento5 = Departamento::create([
-            'departamento' => 'Huehuetenango',
+            'nombreDepartamento' => 'Huehuetenango',
         ]);
         $departamento6 = Departamento::create([
-            'departamento' => 'Escuintla',
+            'nombreDepartamento' => 'Escuintla',
         ]);
         $departamento7 = Departamento::create([
-            'departamento' => 'San Marcos',
+            'nombreDepartamento' => 'San Marcos',
         ]);
         $departamento8 = Departamento::create([
-            'departamento' => 'Jutiapa',
+            'nombreDepartamento' => 'Jutiapa',
         ]);
         $departamento9 = Departamento::create([
-            'departamento' => 'Baja Verapaz',
+            'nombreDepartamento' => 'Baja Verapaz',
         ]);
         $departamento10 = Departamento::create([
-            'departamento' => 'Santa Rosa',
+            'nombreDepartamento' => 'Santa Rosa',
         ]);
         $departamento11 = Departamento::create([
-            'departamento' => 'Zacapa',
+            'nombreDepartamento' => 'Zacapa',
         ]);
         $departamento12 = Departamento::create([
-            'departamento' => 'Suchitepéquez',
+            'nombreDepartamento' => 'Suchitepéquez',
         ]);
         $departamento13 = Departamento::create([
-            'departamento' => 'Chiquimula',
+            'nombreDepartamento' => 'Chiquimula',
         ]);
         $departamento14 = Departamento::create([
-            'departamento' => 'Guatemala',
+            'nombreDepartamento' => 'Guatemala',
         ]);
         $departamento15 = Departamento::create([
-            'departamento' => 'Jalapa',
+            'nombreDepartamento' => 'Jalapa',
         ]);
         $departamento16 = Departamento::create([
-            'departamento' => 'Chimaltenango',
+            'nombreDepartamento' => 'Chimaltenango',
         ]);
         $departamento17 = Departamento::create([
-            'departamento' => 'Quetzaltenango',
+            'nombreDepartamento' => 'Quetzaltenango',
         ]);
         $departamento18 = Departamento::create([
-            'departamento' => 'El Progreso',
+            'nombreDepartamento' => 'El Progreso',
         ]);
         $departamento19 = Departamento::create([
-            'departamento' => 'Retalhuleu',
+            'nombreDepartamento' => 'Retalhuleu',
         ]);
         $departamento20 = Departamento::create([
-            'departamento' => 'Sololá',
+            'nombreDepartamento' => 'Sololá',
         ]);
         $departamento21 = Departamento::create([
-            'departamento' => 'Totonicapán',
+            'nombreDepartamento' => 'Totonicapán',
         ]);
         $departamento22 = Departamento::create([
-            'departamento' => 'Sacatepéquez',
+            'nombreDepartamento' => 'Sacatepéquez',
         ]);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\OfertasEstudiantes;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route Hooks - Do not delete//
+	//Route::get('/ofertasestudiantes', OfertasEstudiantes::class)->middleware('auth');
+	Route::view('ofertasestudiantes', 'livewire.ofertasestudiantes.index')->middleware('auth');
+	Route::view('entrevistas', 'livewire.entrevistas.index')->middleware('auth');
+	Route::view('postulacions', 'livewire.postulacions.index')->middleware('auth');
+	Route::view('ofertas', 'livewire.ofertas.index')->middleware('auth');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

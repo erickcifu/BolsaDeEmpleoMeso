@@ -4,64 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Estudiante
- *
- * @property $id
- * @property $nombre
- * @property $apellidos
- * @property $carnet
- * @property $DPI
- * @property $correo
- * @property $numero_personal
- * @property $numero_domiciliar
- * @property $municipio_id
- * @property $carrera_id
- * @property $user_id
- * @property $created_at
- * @property $updated_at
- *
- *  @property Postulacion[] $postulaciones
- *
- * @property Carrera $carrera
- * @property Municipio $municipio
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Estudiante extends Model
 {
+    use HasFactory;
+	
+    public $timestamps = true;
 
-    static $rules = [
-		'nombre' => 'required',
-		'apellidos' => 'required',
-        'carnet' => 'required',
-        'DPI' => 'required',
-		'correo' => 'required',
-		'numero_personal' => 'required',
-		'numero_domiciliar' => 'required',
-        'curriculum' => 'required',
-		'residencia_id' => 'required',
-		'carrera_id' => 'required',
-        'user_id' => 'user_id',
+    protected $table = 'estudiantes';
+
+    protected $fillable = [
+        'nombre',
+        'apellidos',
+        'carnet',
+        'DPI',
+        'correo',
+        'numero_personal',
+        'numero_domiciliar',
+        'curriculum',
+        'municipio_id',
+        'carrera_id',
+        'user_id'
     ];
-    protected $perPage = 20;
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['nombre','apellidos','carnet','DPI','correo','numero_personal','numero_domiciliar','curriculum','municipio_id','carrera_id', 'user_id'];
-
-
-     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function postulaciones()
-    {
-        return $this->hasMany('App\Models\Postulacion', 'empresa_id', 'id');
-    }
-
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -69,17 +33,52 @@ class Estudiante extends Model
     {
         return $this->hasOne('App\Models\Carrera', 'id', 'carrera_id');
     }
-
-    public function user(){
-        return $this->belongsTo('App\Models\User', 'id', 'user_id');
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cartadeRecomendacions()
+    {
+        return $this->hasMany('App\Models\CartadeRecomendacion', 'estudiante_id', 'estudianteId');
     }
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function municipio()
     {
-        return $this->hasOne('App\Models\Municipio', 'id', 'municipio_id');
+        return $this->hasOne('App\Models\Municipio', 'municipioId', 'municipio_id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function postulacions()
+    {
+        return $this->hasMany('App\Models\Postulacion', 'estudiante_id', 'estudianteId');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cvs()
+    {
+        return $this->hasMany('App\Models\Cv', 'estudiante_id', 'estudianteId');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cartaRecomendacion()
+    {
+        return $this->hasMany('App\Models\CartadeRecomendacion', 'estudiante_id', 'estudianteId');
+    }
 }

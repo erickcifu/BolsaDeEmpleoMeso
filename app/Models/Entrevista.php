@@ -1,11 +1,35 @@
-<?php
+<?php 
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class entrevista extends Model
+class Entrevista extends Model
 {
-    use HasFactory;
+	use HasFactory;
+	
+    public $timestamps = true;
+
+    protected $table = 'entrevistas';
+
+    protected $fillable = [
+        'tituloEntrevista',
+        'descripcionEntrevista',
+        'FechaEntrevista',
+        'horaInicio',
+        'horaFinal',
+        'Contratado',
+        'comentarioContratado',
+        'postulacion_id'
+    ];
+	
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function postulacion()
+    {
+        return $this->hasOne('App\Models\Postulacion', 'postulacionId', 'postulacion_id');
+    }
+    
 }

@@ -14,499 +14,499 @@ class Res3Seeder extends Seeder
      */
     public function run(){
         $Guate1 = Municipio::create([
-            'municipio' => 'Guatemala',
+            'nombreMunicipio' => 'Guatemala',
             'departamento_id' => 14,
         ]);
         $Guate2 = Municipio::create([
-            'municipio' => 'Amatitlán',
+            'nombreMunicipio' => 'Amatitlán',
             'departamento_id' => 14,
         ]);
         $Guate3 = Municipio::create([
-            'municipio' => 'Chinautla',
+            'nombreMunicipio' => 'Chinautla',
             'departamento_id' => 14,
         ]);
         $Guate4 = Municipio::create([
-            'municipio' => 'Chuarrancho',
+            'nombreMunicipio' => 'Chuarrancho',
             'departamento_id' => 14,
         ]);
         $Guate5 = Municipio::create([
-            'municipio' => 'Fraijanes',
+            'nombreMunicipio' => 'Fraijanes',
             'departamento_id' => 14,
         ]);
         $Guate6 = Municipio::create([
-            'municipio' => 'Mixco',
+            'nombreMunicipio' => 'Mixco',
             'departamento_id' => 14,
         ]);
         $Guate7 = Municipio::create([
-            'municipio' => 'Palencia',
+            'nombreMunicipio' => 'Palencia',
             'departamento_id' => 14,
         ]);
         $Guate8 = Municipio::create([
-            'municipio' => 'San José del Golfo',
+            'nombreMunicipio' => 'San José del Golfo',
             'departamento_id' => 14,
         ]);
         $Guate9 = Municipio::create([
-            'municipio' => 'San José Pinula',
+            'nombreMunicipio' => 'San José Pinula',
             'departamento_id' => 14,
         ]);
         $Guate10 = Municipio::create([
-            'municipio' => 'San Juan Sacatepéquez',
+            'nombreMunicipio' => 'San Juan Sacatepéquez',
             'departamento_id' => 14,
         ]);
         $Guate11 = Municipio::create([
-            'municipio' => 'San Miguel Petapa',
+            'nombreMunicipio' => 'San Miguel Petapa',
             'departamento_id' => 14,
         ]);
         $Guate12 = Municipio::create([
-            'municipio' => 'San Pedro Ayampuc',
+            'nombreMunicipio' => 'San Pedro Ayampuc',
             'departamento_id' => 14,
         ]);
         $Guate13 = Municipio::create([
-            'municipio' => 'San Pedro Sacatepéquez',
+            'nombreMunicipio' => 'San Pedro Sacatepéquez',
             'departamento_id' => 14,
         ]);
         $Guate14 = Municipio::create([
-            'municipio' => 'San Raymundo',
+            'nombreMunicipio' => 'San Raymundo',
             'departamento_id' => 14,
         ]);
         $Guate15 = Municipio::create([
-            'municipio' => 'Santa Catarina Pinula',
+            'nombreMunicipio' => 'Santa Catarina Pinula',
             'departamento_id' => 14,
         ]);
         $Guate16 = Municipio::create([
-            'municipio' => 'Villa Canales',
+            'nombreMunicipio' => 'Villa Canales',
             'departamento_id' => 14,
         ]);
         $Guate17 = Municipio::create([
-            'municipio' => 'Villa Nueva',
+            'nombreMunicipio' => 'Villa Nueva',
             'departamento_id' => 14,
         ]);
         $Jalapa1 = Municipio::create([
-            'municipio' => 'Jalapa',
+            'nombreMunicipio' => 'Jalapa',
             'departamento_id' => 15,
         ]);
         $Jalapa2 = Municipio::create([
-            'municipio' => 'Mataquescuintla',
+            'nombreMunicipio' => 'Mataquescuintla',
             'departamento_id' => 15,
         ]);
         $Jalapa3 = Municipio::create([
-            'municipio' => 'Monjas',
+            'nombreMunicipio' => 'Monjas',
             'departamento_id' => 15,
         ]);
         $Jalapa4 = Municipio::create([
-            'municipio' => 'San Carlos Alzatate',
+            'nombreMunicipio' => 'San Carlos Alzatate',
             'departamento_id' => 15,
         ]);
         $Jalapa5 = Municipio::create([
-            'municipio' => 'San Luis Jilotepeque',
+            'nombreMunicipio' => 'San Luis Jilotepeque',
             'departamento_id' => 15,
         ]);
         $Jalapa6 = Municipio::create([
-            'municipio' => 'San Manuel Chaparrón',
+            'nombreMunicipio' => 'San Manuel Chaparrón',
             'departamento_id' => 15,
         ]);
         $Jalapa7 = Municipio::create([
-            'municipio' => 'San Pedro Pinula',
+            'nombreMunicipio' => 'San Pedro Pinula',
             'departamento_id' => 15,
         ]);
         $Chimal1 = Municipio::create([
-            'municipio' => 'Chimaltenango',
+            'nombreMunicipio' => 'Chimaltenango',
             'departamento_id' => 16,
         ]);
         $Chimal2 = Municipio::create([
-            'municipio' => 'Acatenango',
+            'nombreMunicipio' => 'Acatenango',
             'departamento_id' => 16,
         ]);
         $Chimal3 = Municipio::create([
-            'municipio' => 'El Tejar',
+            'nombreMunicipio' => 'El Tejar',
             'departamento_id' => 16,
         ]);
         $Chimal4 = Municipio::create([
-            'municipio' => 'Parramos',
+            'nombreMunicipio' => 'Parramos',
             'departamento_id' => 16,
         ]);
         $Chimal5 = Municipio::create([
-            'municipio' => 'Patzicía',
+            'nombreMunicipio' => 'Patzicía',
             'departamento_id' => 16,
         ]);
         $Chimal6 = Municipio::create([
-            'municipio' => 'Patzún',
+            'nombreMunicipio' => 'Patzún',
             'departamento_id' => 16,
         ]);
         $Chimal7 = Municipio::create([
-            'municipio' => 'San Andrés Itzapa',
+            'nombreMunicipio' => 'San Andrés Itzapa',
             'departamento_id' => 16,
         ]);
         $Chimal8 = Municipio::create([
-            'municipio' => 'San José Poaquil',
+            'nombreMunicipio' => 'San José Poaquil',
             'departamento_id' => 16,
         ]);
         $Chimal9 = Municipio::create([
-            'municipio' => 'San Juan Comalapa',
+            'nombreMunicipio' => 'San Juan Comalapa',
             'departamento_id' => 16,
         ]);
         $Chimal10 = Municipio::create([
-            'municipio' => 'San Martín Jilotepeque',
+            'nombreMunicipio' => 'San Martín Jilotepeque',
             'departamento_id' => 16,
         ]);
         $Chimal11 = Municipio::create([
-            'municipio' => 'San Miguel Pochuta',
+            'nombreMunicipio' => 'San Miguel Pochuta',
             'departamento_id' => 16,
         ]);
         $Chimal12 = Municipio::create([
-            'municipio' => 'San Pedro Yepocapa',
+            'nombreMunicipio' => 'San Pedro Yepocapa',
             'departamento_id' => 16,
         ]);
         $Chimal13 = Municipio::create([
-            'municipio' => 'Santa Apolonia',
+            'nombreMunicipio' => 'Santa Apolonia',
             'departamento_id' => 16,
         ]);
         $Chimal14 = Municipio::create([
-            'municipio' => 'Santa Cruz Balanyá',
+            'nombreMunicipio' => 'Santa Cruz Balanyá',
             'departamento_id' => 16,
         ]);
         $Chimal15 = Municipio::create([
-            'municipio' => 'Tecpán Guatemala',
+            'nombreMunicipio' => 'Tecpán Guatemala',
             'departamento_id' => 16,
         ]);
         $Chimal16 = Municipio::create([
-            'municipio' => 'Zaragoza',
+            'nombreMunicipio' => 'Zaragoza',
             'departamento_id' => 16,
         ]);
         $Quetzal1 = Municipio::create([
-            'municipio' => 'Quetzaltenango',
+            'nombreMunicipio' => 'Quetzaltenango',
             'departamento_id' => 17,
         ]);
         $Quetzal2 = Municipio::create([
-            'municipio' => 'Almolonga',
+            'nombreMunicipio' => 'Almolonga',
             'departamento_id' => 17,
         ]);
         $Quetzal3 = Municipio::create([
-            'municipio' => 'Cabricán',
+            'nombreMunicipio' => 'Cabricán',
             'departamento_id' => 17,
         ]);
         $Quetzal4 = Municipio::create([
-            'municipio' => 'Cajolá',
+            'nombreMunicipio' => 'Cajolá',
             'departamento_id' => 17,
         ]);
         $Quetzal5 = Municipio::create([
-            'municipio' => 'Cantel',
+            'nombreMunicipio' => 'Cantel',
             'departamento_id' => 17,
         ]);
         $Quetzal6 = Municipio::create([
-            'municipio' => 'Coatepeque',
+            'nombreMunicipio' => 'Coatepeque',
             'departamento_id' => 17,
         ]);
         $Quetzal7 = Municipio::create([
-            'municipio' => 'Colomba Costa Cuca',
+            'nombreMunicipio' => 'Colomba Costa Cuca',
             'departamento_id' => 17,
         ]);
         $Quetzal8 = Municipio::create([
-            'municipio' => 'Concepción Chiquirichapa',
+            'nombreMunicipio' => 'Concepción Chiquirichapa',
             'departamento_id' => 17,
         ]);
         $Quetzal9 = Municipio::create([
-            'municipio' => 'El Palmar',
+            'nombreMunicipio' => 'El Palmar',
             'departamento_id' => 17,
         ]);
         $Quetzal10 = Municipio::create([
-            'municipio' => 'Flores Costa Cuca',
+            'nombreMunicipio' => 'Flores Costa Cuca',
             'departamento_id' => 17,
         ]);
         $Quetzal11 = Municipio::create([
-            'municipio' => 'Génova',
+            'nombreMunicipio' => 'Génova',
             'departamento_id' => 17,
         ]);
         $Quetzal12 = Municipio::create([
-            'municipio' => 'Huitán',
+            'nombreMunicipio' => 'Huitán',
             'departamento_id' => 17,
         ]);
         $Quetzal13 = Municipio::create([
-            'municipio' => 'La Esperanza',
+            'nombreMunicipio' => 'La Esperanza',
             'departamento_id' => 17,
         ]);
         $Quetzal14 = Municipio::create([
-            'municipio' => 'Olintepeque',
+            'nombreMunicipio' => 'Olintepeque',
             'departamento_id' => 17,
         ]);
         $Quetzal15 = Municipio::create([
-            'municipio' => 'Palestina de los Altos',
+            'nombreMunicipio' => 'Palestina de los Altos',
             'departamento_id' => 17,
         ]);
         $Quetzal16 = Municipio::create([
-            'municipio' => 'Salcajá',
+            'nombreMunicipio' => 'Salcajá',
             'departamento_id' => 17,
         ]);
         $Quetzal17 = Municipio::create([
-            'municipio' => 'San Carlos Sija',
+            'nombreMunicipio' => 'San Carlos Sija',
             'departamento_id' => 17,
         ]);
         $Quetzal18 = Municipio::create([
-            'municipio' => 'San Francisco La Unión',
+            'nombreMunicipio' => 'San Francisco La Unión',
             'departamento_id' => 17,
         ]);
         $Quetzal19 = Municipio::create([
-            'municipio' => 'San Juan Ostuncalco',
+            'nombreMunicipio' => 'San Juan Ostuncalco',
             'departamento_id' => 17,
         ]);
         $Quetzal20 = Municipio::create([
-            'municipio' => 'San Martín Sacatepéquez',
+            'nombreMunicipio' => 'San Martín Sacatepéquez',
             'departamento_id' => 17,
         ]);
         $Quetzal21 = Municipio::create([
-            'municipio' => 'San Mateo',
+            'nombreMunicipio' => 'San Mateo',
             'departamento_id' => 17,
         ]);
         $Quetzal22 = Municipio::create([
-            'municipio' => 'San Miguel Sigüilá',
+            'nombreMunicipio' => 'San Miguel Sigüilá',
             'departamento_id' => 17,
         ]);
         $Quetzal23 = Municipio::create([
-            'municipio' => 'Sibilia',
+            'nombreMunicipio' => 'Sibilia',
             'departamento_id' => 17,
         ]);
         $Quetzal24 = Municipio::create([
-            'municipio' => 'Zunil',
+            'nombreMunicipio' => 'Zunil',
             'departamento_id' => 17,
         ]);
         $Progreso1 = Municipio::create([
-            'municipio' => 'Guastatoya',
+            'nombreMunicipio' => 'Guastatoya',
             'departamento_id' => 18,
         ]);
         $Progreso2 = Municipio::create([
-            'municipio' => 'El Jícaro',
+            'nombreMunicipio' => 'El Jícaro',
             'departamento_id' => 18,
         ]);
         $Progreso3 = Municipio::create([
-            'municipio' => 'Morazán',
+            'nombreMunicipio' => 'Morazán',
             'departamento_id' => 18,
         ]);
         $Progreso4 = Municipio::create([
-            'municipio' => 'San Agustín Acasaguastlán',
+            'nombreMunicipio' => 'San Agustín Acasaguastlán',
             'departamento_id' => 18,
         ]);
         $Progreso5 = Municipio::create([
-            'municipio' => 'San Antonio La Paz',
+            'nombreMunicipio' => 'San Antonio La Paz',
             'departamento_id' => 18,
         ]);
         $Progreso6 = Municipio::create([
-            'municipio' => 'San Cristóbal Acasaguastlán',
+            'nombreMunicipio' => 'San Cristóbal Acasaguastlán',
             'departamento_id' => 18,
         ]);
         $Progreso7 = Municipio::create([
-            'municipio' => 'Sanarate',
+            'nombreMunicipio' => 'Sanarate',
             'departamento_id' => 18,
         ]);
         $Progreso8 = Municipio::create([
-            'municipio' => 'Sansare',
+            'nombreMunicipio' => 'Sansare',
             'departamento_id' => 18,
         ]);
         $Retal1 = Municipio::create([
-            'municipio' => 'Retalhuleu',
+            'nombreMunicipio' => 'Retalhuleu',
             'departamento_id' => 19,
         ]);
         $Retal2 = Municipio::create([
-            'municipio' => 'Champerico',
+            'nombreMunicipio' => 'Champerico',
             'departamento_id' => 19,
         ]);
         $Retal3 = Municipio::create([
-            'municipio' => 'El Asintal',
+            'nombreMunicipio' => 'El Asintal',
             'departamento_id' => 19,
         ]);
         $Retal4 = Municipio::create([
-            'municipio' => 'Nuevo San Carlos',
+            'nombreMunicipio' => 'Nuevo San Carlos',
             'departamento_id' => 19,
         ]);
         $Retal5 = Municipio::create([
-            'municipio' => 'San Andrés Villa Seca',
+            'nombreMunicipio' => 'San Andrés Villa Seca',
             'departamento_id' => 19,
         ]);
         $Retal6 = Municipio::create([
-            'municipio' => 'San Felipe Retalhuleu',
+            'nombreMunicipio' => 'San Felipe Retalhuleu',
             'departamento_id' => 19,
         ]);
         $Retal7 = Municipio::create([
-            'municipio' => 'San Martín Zapotitlán',
+            'nombreMunicipio' => 'San Martín Zapotitlán',
             'departamento_id' => 19,
         ]);
         $Retal8 = Municipio::create([
-            'municipio' => 'San Sebastián',
+            'nombreMunicipio' => 'San Sebastián',
             'departamento_id' => 19,
         ]);
         $Retal9 = Municipio::create([
-            'municipio' => 'Santa Cruz Muluá',
+            'nombreMunicipio' => 'Santa Cruz Muluá',
             'departamento_id' => 19,
         ]);
         $Solola1 = Municipio::create([
-            'municipio' => 'Sololá',
+            'nombreMunicipio' => 'Sololá',
             'departamento_id' => 20,
         ]);
         $Solola2 = Municipio::create([
-            'municipio' => 'Concepción',
+            'nombreMunicipio' => 'Concepción',
             'departamento_id' => 20,
         ]);
         $Solola3 = Municipio::create([
-            'municipio' => 'Nahualá',
+            'nombreMunicipio' => 'Nahualá',
             'departamento_id' => 20,
         ]);
         $Solola4 = Municipio::create([
-            'municipio' => 'Panajachel',
+            'nombreMunicipio' => 'Panajachel',
             'departamento_id' => 20,
         ]);
         $Solola5 = Municipio::create([
-            'municipio' => 'San Andrés Semetabaj',
+            'nombreMunicipio' => 'San Andrés Semetabaj',
             'departamento_id' => 20,
         ]);
         $Solola6 = Municipio::create([
-            'municipio' => 'San Antonio Palopó',
+            'nombreMunicipio' => 'San Antonio Palopó',
             'departamento_id' => 20,
         ]);
         $Solola7 = Municipio::create([
-            'municipio' => 'San José Chacayá',
+            'nombreMunicipio' => 'San José Chacayá',
             'departamento_id' => 20,
         ]);
         $Solola8 = Municipio::create([
-            'municipio' => 'San Juan La Laguna',
+            'nombreMunicipio' => 'San Juan La Laguna',
             'departamento_id' => 20,
         ]);
         $Solola9 = Municipio::create([
-            'municipio' => 'San Lucas Tolimán',
+            'nombreMunicipio' => 'San Lucas Tolimán',
             'departamento_id' => 20,
         ]);
         $Solola10 = Municipio::create([
-            'municipio' => 'San Marcos La Laguna',
+            'nombreMunicipio' => 'San Marcos La Laguna',
             'departamento_id' => 20,
         ]);
         $Solola11 = Municipio::create([
-            'municipio' => 'San Pablo La Laguna',
+            'nombreMunicipio' => 'San Pablo La Laguna',
             'departamento_id' => 20,
         ]);
         $Solola12 = Municipio::create([
-            'municipio' => 'San Pedro La Laguna',
+            'nombreMunicipio' => 'San Pedro La Laguna',
             'departamento_id' => 20,
         ]);
         $Solola13 = Municipio::create([
-            'municipio' => 'Santa Catarina Ixtahuacán',
+            'nombreMunicipio' => 'Santa Catarina Ixtahuacán',
             'departamento_id' => 20,
         ]);
         $Solola14 = Municipio::create([
-            'municipio' => 'Santa Catarina Palopó',
+            'nombreMunicipio' => 'Santa Catarina Palopó',
             'departamento_id' => 20,
         ]);
         $Solola15 = Municipio::create([
-            'municipio' => 'Santa Clara La Laguna',
+            'nombreMunicipio' => 'Santa Clara La Laguna',
             'departamento_id' => 20,
         ]);
         $Solola16 = Municipio::create([
-            'municipio' => 'Santa Cruz La Laguna',
+            'nombreMunicipio' => 'Santa Cruz La Laguna',
             'departamento_id' => 20,
         ]);
         $Solola17 = Municipio::create([
-            'municipio' => 'Santa Lucía Utatlán',
+            'nombreMunicipio' => 'Santa Lucía Utatlán',
             'departamento_id' => 20,
         ]);
         $Solola18 = Municipio::create([
-            'municipio' => 'Santa María Visitación',
+            'nombreMunicipio' => 'Santa María Visitación',
             'departamento_id' => 20,
         ]);
         $Solola19 = Municipio::create([
-            'municipio' => 'Santiago Atitlán',
+            'nombreMunicipio' => 'Santiago Atitlán',
             'departamento_id' => 20,
         ]);
         $Toto1 = Municipio::create([
-            'municipio' => 'Totonicapán',
+            'nombreMunicipio' => 'Totonicapán',
             'departamento_id' => 21,
         ]);
         $Toto2 = Municipio::create([
-            'municipio' => 'Momostenango',
+            'nombreMunicipio' => 'Momostenango',
             'departamento_id' => 21,
         ]);
         $Toto3 = Municipio::create([
-            'municipio' => 'San Andrés Xecul',
+            'nombreMunicipio' => 'San Andrés Xecul',
             'departamento_id' => 21,
         ]);
         $Toto4 = Municipio::create([
-            'municipio' => 'San Bartolo Aguas Calientes',
+            'nombreMunicipio' => 'San Bartolo Aguas Calientes',
             'departamento_id' => 21,
         ]);
         $Toto5 = Municipio::create([
-            'municipio' => 'San Cristóbal Totonicapán',
+            'nombreMunicipio' => 'San Cristóbal Totonicapán',
             'departamento_id' => 21,
         ]);
         $Toto6 = Municipio::create([
-            'municipio' => 'San Francisco El Alto',
+            'nombreMunicipio' => 'San Francisco El Alto',
             'departamento_id' => 21,
         ]);
         $Toto7 = Municipio::create([
-            'municipio' => 'Santa Lucía La Reforma',
+            'nombreMunicipio' => 'Santa Lucía La Reforma',
             'departamento_id' => 21,
         ]);
         $Toto8 = Municipio::create([
-            'municipio' => 'Santa María Chiquimula',
+            'nombreMunicipio' => 'Santa María Chiquimula',
             'departamento_id' => 21,
         ]);
         $Sacate1 = Municipio::create([
-            'municipio' => 'Antigua Guatemala',
+            'nombreMunicipio' => 'Antigua Guatemala',
             'departamento_id' => 22,
         ]);
         $Sacate2 = Municipio::create([
-            'municipio' => 'Ciudad Vieja',
+            'nombreMunicipio' => 'Ciudad Vieja',
             'departamento_id' => 22,
         ]);
         $Sacate3 = Municipio::create([
-            'municipio' => 'Jocotenango',
+            'nombreMunicipio' => 'Jocotenango',
             'departamento_id' => 22,
         ]);
         $Sacate4 = Municipio::create([
-            'municipio' => 'Magdalena Milpas Altas',
+            'nombreMunicipio' => 'Magdalena Milpas Altas',
             'departamento_id' => 22,
         ]);
         $Sacate5 = Municipio::create([
-            'municipio' => 'Pastores',
+            'nombreMunicipio' => 'Pastores',
             'departamento_id' => 22,
         ]);
         $Sacate6 = Municipio::create([
-            'municipio' => 'San Antonio Aguas Calientes',
+            'nombreMunicipio' => 'San Antonio Aguas Calientes',
             'departamento_id' => 22,
         ]);
         $Sacate7 = Municipio::create([
-            'municipio' => 'San Bartolomé Milpas Altas',
+            'nombreMunicipio' => 'San Bartolomé Milpas Altas',
             'departamento_id' => 22,
         ]);
         $Sacate8 = Municipio::create([
-            'municipio' => 'San Juan Alotenango',
+            'nombreMunicipio' => 'San Juan Alotenango',
             'departamento_id' => 22,
         ]);
         $Sacate9 = Municipio::create([
-            'municipio' => 'San Lucas Sacatepéquez',
+            'nombreMunicipio' => 'San Lucas Sacatepéquez',
             'departamento_id' => 22,
         ]);
         $Sacate10 = Municipio::create([
-            'municipio' => 'San Miguel Dueñas',
+            'nombreMunicipio' => 'San Miguel Dueñas',
             'departamento_id' => 22,
         ]);
         $Sacate11 = Municipio::create([
-            'municipio' => 'Santa Catarina Barahona',
+            'nombreMunicipio' => 'Santa Catarina Barahona',
             'departamento_id' => 22,
         ]);
         $Sacate12 = Municipio::create([
-            'municipio' => 'Santa Lucía Milpas Altas',
+            'nombreMunicipio' => 'Santa Lucía Milpas Altas',
             'departamento_id' => 22,
         ]);
         $Sacate13 = Municipio::create([
-            'municipio' => 'Santa María de Jesús',
+            'nombreMunicipio' => 'Santa María de Jesús',
             'departamento_id' => 22,
         ]);
         $Sacate14 = Municipio::create([
-            'municipio' => 'Santiago Sacatepéquez',
+            'nombreMunicipio' => 'Santiago Sacatepéquez',
             'departamento_id' => 22,
         ]);
         $Sacate15 = Municipio::create([
-            'municipio' => 'Santo Domingo Xenacoj',
+            'nombreMunicipio' => 'Santo Domingo Xenacoj',
             'departamento_id' => 22,
         ]);
         $Sacate16 = Municipio::create([
-            'municipio' => 'Sumpango',
+            'nombreMunicipio' => 'Sumpango',
             'departamento_id' => 22,
         ]);  
     }

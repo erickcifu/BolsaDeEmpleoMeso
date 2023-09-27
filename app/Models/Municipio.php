@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
 class Municipio extends Model
 {
     static $rules = [
-		'municipio' => 'required',
+		'nombreMunicipio' => 'required',
 		'departamento_id' => 'required',
     ];
 
@@ -33,7 +33,7 @@ class Municipio extends Model
      *
      * @var array
      */
-    protected $fillable = ['municipio','departamento_id'];
+    protected $fillable = ['nombreMunicipio','departamento_id'];
 
 
     /**
@@ -41,7 +41,7 @@ class Municipio extends Model
      */
     public function departamento()
     {
-        return $this->hasOne('App\Models\Departamento', 'id', 'departamento_id');
+        return $this->hasOne('App\Models\Departamento', 'departamentoId', 'departamento_id');
     }
     
     /**
@@ -49,7 +49,7 @@ class Municipio extends Model
      */
     public function estudiantes()
     {
-        return $this->hasMany('App\Models\Estudiante', 'municipio_id', 'id');
+        return $this->hasMany('App\Models\Estudiante', 'residencia_id', 'municipioId');
     }
     
     /**
@@ -57,6 +57,6 @@ class Municipio extends Model
      */
     public function empresas()
     {
-        return $this->hasMany('App\Models\Empresa', 'municipio_id', 'id');
+        return $this->hasMany('App\Models\Empresa', 'residencia_id', 'municipioId');
     }
 }
