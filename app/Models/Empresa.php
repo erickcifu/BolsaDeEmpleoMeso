@@ -28,7 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Empresa extends Model
 {
-     
+    protected $primaryKey = 'empresaId';
+
     static $rules = [
     'logo' => 'required',
 	'nombreEmpresa' => 'required',

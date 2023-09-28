@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Entrevista extends Model
 {
 	use HasFactory;
-	
+
+	protected $primaryKey = 'entrevistaId';
+
     public $timestamps = true;
 
     protected $table = 'entrevistas';

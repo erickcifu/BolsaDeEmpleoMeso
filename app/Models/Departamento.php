@@ -18,6 +18,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Departamento extends Model
 {
+
+    protected $primaryKey = 'departamentoId';
+
     static $rules = [
 		'nombreDepartamento' => 'required',
     ];

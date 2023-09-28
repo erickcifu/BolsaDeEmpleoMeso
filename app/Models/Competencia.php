@@ -11,6 +11,8 @@ class competencia extends Model
 
     public $timestamps = true;
 
+    protected $primaryKey = 'competenciaId';
+
     protected $table = 'competencias';
 
     protected $fillable = [

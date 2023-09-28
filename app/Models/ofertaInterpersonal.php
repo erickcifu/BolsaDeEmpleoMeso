@@ -9,7 +9,9 @@ class ofertaInterpersonal extends Model
 {
     public $timestamps = true;
 
-    protected $table = 'ofertatecnicas';
+    protected $primaryKey = 'ofertaInterpersonalId';
+
+    protected $table = 'ofertainterpersonals';
 
     protected $fillable = [
         'oferta_id',

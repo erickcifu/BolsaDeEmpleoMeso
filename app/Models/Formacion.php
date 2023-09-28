@@ -9,6 +9,8 @@ class Formacion extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'formacionId';
+
     public $timestamps = true;
 
     protected $table = 'formacions';

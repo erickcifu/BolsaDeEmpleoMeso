@@ -9,6 +9,8 @@ class CartadeRecomendacion extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'cartaId';
+
     protected $table = 'cartarecomendacions';
 
     protected $fillable = [

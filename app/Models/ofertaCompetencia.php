@@ -9,6 +9,8 @@ class ofertaCompetencia extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'ofertaCompentenciaId';
+
     public $timestamps = true;
 
     protected $table = 'ofertacompetencias';

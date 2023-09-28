@@ -9,6 +9,8 @@ class Certificacion extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'certificacionId';
+
     public $timestamps = true;
 
     protected $table = 'certificacions';
