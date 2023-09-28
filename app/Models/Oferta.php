@@ -9,6 +9,8 @@ class Oferta extends Model
 {
 	use HasFactory;
 	
+    protected $primaryKey = 'ofertaId';
+
     public $timestamps = true;
 
     protected $table = 'ofertas';

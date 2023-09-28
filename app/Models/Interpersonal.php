@@ -9,6 +9,8 @@ class Interpersonal extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'interpersonalId';
+
     public $timestamps = true;
 
     protected $table = 'interpersonals';

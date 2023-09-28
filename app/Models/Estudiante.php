@@ -8,6 +8,8 @@ class Estudiante extends Model
 {
     use HasFactory;
 	
+    protected $primaryKey = 'estudianteId';
+
     public $timestamps = true;
 
     protected $table = 'estudiantes';

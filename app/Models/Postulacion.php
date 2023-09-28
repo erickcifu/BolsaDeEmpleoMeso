@@ -9,6 +9,8 @@ class Postulacion extends Model
 {
 	use HasFactory;
 	
+    protected $primaryKey = 'postulacionId';
+
     public $timestamps = true;
 
     protected $table = 'postulacions';

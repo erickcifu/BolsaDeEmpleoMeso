@@ -9,6 +9,8 @@ class habilidadTecnica extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'tecnicaId';
+
     public $timestamps = true;
 
     protected $table = 'habilidadtecnicas';

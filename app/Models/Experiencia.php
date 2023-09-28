@@ -9,6 +9,8 @@ class Experiencia extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'experienciaId';
+
     public $timestamps = true;
 
     protected $table = 'experiencias';

@@ -12,6 +12,8 @@ class Cv extends Model
 
     protected $table = 'cvs';
 
+    protected $primaryKey = 'cvId';
+
     protected $fillable = [
         'direcionDomiciliar',
         'correoElectronico',

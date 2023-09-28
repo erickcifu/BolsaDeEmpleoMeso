@@ -9,6 +9,8 @@ class AutoridadAcademica extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'autoridadId';
+    
     public $timestamps = true;
 
     protected $table = 'autoridadacademicas';
