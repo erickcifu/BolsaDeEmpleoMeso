@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Models;
 
@@ -7,22 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrera extends Model
 {
-    use HasFactory;
-
+	use HasFactory;
+	
     public $timestamps = true;
 
     protected $table = 'carreras';
 
     protected $fillable = ['Ncarrera','EstadoCarrera','facultad_id'];
 	
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function autoridadAcademicas()
-    {
-        return $this->hasMany('App\Models\AutoridadAcademica', 'carrera_id', 'id');
-    }
-    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

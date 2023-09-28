@@ -1,32 +1,19 @@
-<?php
+<?php 
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
 {
-    use HasFactory;
+	use HasFactory;
 	
-    protected $primaryKey = 'estudianteId';
-
     public $timestamps = true;
 
     protected $table = 'estudiantes';
-
-    protected $fillable = [
-        'nombre',
-        'apellidos',
-        'carnet',
-        'DPI',
-        'correo',
-        'numero_personal',
-        'numero_domiciliar',
-        'curriculum',
-        'municipio_id',
-        'carrera_id',
-        'user_id'
-    ];
+    protected $primaryKey = 'estudianteId';
+    protected $fillable = ['estudianteId','nombre','apellidos','carnet','DPI','correo','numero_personal','numero_domiciliar','curriculum','municipio_id','carrera_id','user_id'];
 	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -39,9 +26,9 @@ class Estudiante extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function cartadeRecomendacions()
+    public function cartarecomendacions()
     {
-        return $this->hasMany('App\Models\CartadeRecomendacion', 'estudiante_id', 'estudianteId');
+        return $this->hasMany('App\Models\Cartarecomendacion', 'estudiante_id', 'estudianteId');
     }
     
     /**
@@ -53,34 +40,19 @@ class Estudiante extends Model
     }
     
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function postulacions()
     {
         return $this->hasMany('App\Models\Postulacion', 'estudiante_id', 'estudianteId');
     }
-
+    
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function cvs()
+    public function user()
     {
-        return $this->hasMany('App\Models\Cv', 'estudiante_id', 'estudianteId');
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function cartaRecomendacion()
-    {
-        return $this->hasMany('App\Models\CartadeRecomendacion', 'estudiante_id', 'estudianteId');
-    }
+    
 }
