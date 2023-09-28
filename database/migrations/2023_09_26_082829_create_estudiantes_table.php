@@ -19,7 +19,7 @@ class CreateEstudiantesTable extends Migration
             $table->string('nombre', 100);
             $table->string('apellidos', 100);
             $table->integer('carnet');
-            $table->integer('DPI');
+            $table->string('DPI',15);
             $table->string('correo', 100);
             $table->integer('numero_personal');
             $table->integer('numero_domiciliar');

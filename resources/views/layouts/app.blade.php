@@ -33,9 +33,18 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
-                        <li class="nav-item">
-                            <a href="{{ url('/ofertasestudiantes') }}" class="nav-link" style="color: #f0eadc;">Estudiantes</a> 
+						<li class="nav-item">
+                            <a href="{{ url('/estudiantes') }}" class="nav-link" style="color: #f0eadc;"> Estudiantes</a> 
                         </li>
+						<li class="nav-item">
+                            <a href="{{ url('/carreras') }}" class="nav-link" style="color: #f0eadc;"> Carreras</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/facultads') }}" class="nav-link" style="color: #f0eadc;"> Facultads</a> 
+                        </li>
+                        {{-- <li class="nav-item">
+                            <a href="{{ url('/ofertasestudiantes') }}" class="nav-link" style="color: #f0eadc;">Estudiantes</a> 
+                        </li> --}}
 						<li class="nav-item">
                             <a href="{{ url('/entrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
                         </li>
