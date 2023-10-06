@@ -43,41 +43,44 @@
                         <input wire:model="curriculum" type="file" class="form-control" id="curriculum" placeholder="Curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="departamento_id"><b style="color: black;">Departamento</b></label>
-                        <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento">
-                            @foreach ($departamentos as $departamento)
-                                <option value="{{ $departamento->departamentoId }}">{{ $departamento->nombreDepartamento }}</option>
+                        <label for="Departamento"><b style="color: black;">Departamento<b></label>
+                        <select wire:model="departamento" type="text" class="form-control" id="municipio_id" placeholder="Municipio">@error('municipio_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <option value="">seleccione un departamento</option>
+                            @foreach ($Departamentos as $departamento)
+                            <option value="{{$departamento->departamentoId}}">{{$departamento->nombreDepartamento}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="municipio_id"><b style="color: black;">Municipio<b></label>
-                        <select wire:model="municipio_id"  class="form-control" id="municipio_id" placeholder="Municipio">
-                            @foreach ($municipios as $municipio) <!-- Cambiar $municipios a $municipio -->
-                                @if ($municipio->departamento_id == $departamento_id)
-                                    <option value="{{ $municipio->municipioId }}">{{ $municipio->nombreMunicipio }}</option>
-                                @endif
-                            @endforeach
-                        </select>    
-                    </div>
-                    <div class="form-group">
-                        <label for="facultad_id"><b style="color: black;">Facultad</b></label>
-                        <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad">
-                            @foreach ($facultades as $facultad)
-                                <option value="{{ $facultad->id }}">{{ $facultad->Nfacultad }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="carrera_id"><b style="color: black;">Carrera</b></label>
-                        <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
-                            @foreach ($carreras as $carrera)
-                                @if ($carrera->facultad_id == $facultad_id)
-                                    <option value="{{ $carrera->id }}">{{ $carrera->Ncarrera }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            @if (!is_null($municipios))
+                                <label for="municipio_id"><b style="color: black;">Municipio<b></label>
+                                <select wire:model="municipio_id" type="text" class="form-control" id="municipio_id" placeholder="Residencia Id">@error('municipio_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    @foreach ($municipios as $municipio )
+                                    <option value="{{$municipio->municipioId}}">{{$municipio->nombreMunicipio}}</option>
+                                    @endforeach
+                                </select>
+                            @endif 
+                        </div>
+                        <div class="form-group">
+                            <label for="facultad_id"><b style="color: black;">Facultad</b></label>
+                            <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad">
+                                @foreach ($facultades as $facultad)
+                                    <option value="{{ $facultad->id }}">{{ $facultad->Nfacultad }}</option>
+                                @endforeach
+                            </select>
+                        </div>      
+                        <div class="form-group">
+                            @if (!is_null($carreras))
+                            <label for="carrera_id"><b style="color: black;">Carrera</b></label>
+                            <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
+                                @foreach ($carreras as $carrera)
+                                    @if ($carrera->facultad_id == $facultad_id)
+                                        <option value="{{ $carrera->id }}">{{ $carrera->Ncarrera }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @endif 
+                        </div>
                     <div class="form-group">
                         <label for="user_id"><b style="color: black;">User<b></label>
                         <input wire:model="user_id" type="text" class="form-control" id="user_id" placeholder="User Id">@error('user_id') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -136,22 +139,23 @@
                         <input wire:model="curriculum" type="file" class="form-control" id="curriculum" placeholder="Curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="departamento_id"><b style="color: black;">Departamento</b></label>
-                        <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento">
-                            @foreach ($departamentos as $departamento)
-                                <option value="{{ $departamento->departamentoId }}">{{ $departamento->nombreDepartamento }}</option>
+                        <label for="Departamento"><b style="color: black;">Departamento<b></label>
+                        <select wire:model="departamento" type="text" class="form-control" id="municipio_id" placeholder="Municipio">@error('municipio_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <option value="">seleccione un departamento</option>
+                            @foreach ($Departamentos as $departamento)
+                            <option value="{{$departamento->departamentoId}}">{{$departamento->nombreDepartamento}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="municipio_id"><b style="color: black;">Municipio<b></label>
-                        <select wire:model="municipio_id"  class="form-control" id="municipio_id" placeholder="Municipio">
-                            @foreach ($municipios as $municipio) <!-- Cambiar $municipios a $municipio -->
-                                @if ($municipio->departamento_id == $departamento_id)
-                                    <option value="{{ $municipio->municipioId }}">{{ $municipio->nombreMunicipio }}</option>
-                                @endif
-                            @endforeach
-                        </select>    
+                        @if (!is_null($municipios))
+                            <label for="municipio_id"><b style="color: black;">Municipio<b></label>
+                            <select wire:model="municipio_id" type="text" class="form-control" id="municipio_id" placeholder="Municipio">@error('municipio_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                                @foreach ($municipios as $municipio )
+                                    <option value="{{$municipio->municipioId}}">{{$municipio->nombreMunicipio}}</option>
+                                @endforeach
+                            </select>
+                        @endif   
                     </div>
                     <div class="form-group">
                         <label for="facultad_id"><b style="color: black;">Facultad</b></label>
@@ -162,6 +166,7 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        @if (!is_null($carreras))
                         <label for="carrera_id"><b style="color: black;">Carrera</b></label>
                         <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
                             @foreach ($carreras as $carrera)
@@ -170,6 +175,7 @@
                                 @endif
                             @endforeach
                         </select>
+                        @endif 
                     </div>
                     <div class="form-group">
                         <label for="user_id"><b style="color: black;"><b>User</label>
@@ -208,89 +214,122 @@
     </div>
 </div> 
 <!-- Vista Modal -->
-<div wire:ignore.self class="modal fade" id="ViewDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="ViewDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="ViewModalLabel">Editar Estudiante</h5>
+                <h5 class="modal-title" id="ViewModalLabel">Estudiante</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
-					<input type="hidden" wire:model="selected_id">
-                    <div class="form-group">
-                        <label for="nombre"><b style="color: black;">Nombres<b></label>
-                        <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre">@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <input type="hidden" wire:model="selected_id">
+                    <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 50%;">
+                            <div class="mb-2">
+                                <label for="nombre"><b style="color: black;">Nombres<b></label>
+                                <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" disabled>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 250%;">
+                            <div class="mb-2">
+                                <label for="apellidos"><b style="color: black;"><b>Apellidos</label>
+                                <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos"disabled>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="apellidos"><b style="color: black;"><b>Apellidos</label>
-                        <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">@error('apellidos') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="carnet"><b style="color: black;">Carnet<b></label>
-                        <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet">@error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="DPI"><b style="color: black;">DPI<b></label>
-                        <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi">@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="correo"><b style="color: black;">Correo Electronico<b></label>
-                        <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo">@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="numero_personal"><b style="color: black;">Numero Personal<b></label>
-                        <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal">@error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
-                        <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar">@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="curriculum"><b style="color: black;"><b>Cargar Curriculum</label>
-                        <input wire:model="curriculum" type="file" class="form-control" id="curriculum" placeholder="Curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="departamento_id"><b style="color: black;">Departamento</b></label>
-                        <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento">
-                            @foreach ($departamentos as $departamento)
-                                <option value="{{ $departamento->departamentoId }}">{{ $departamento->nombreDepartamento }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="municipio_id"><b style="color: black;">Municipio<b></label>
-                        <select wire:model="municipio_id"  class="form-control" id="municipio_id" placeholder="Municipio">
-                            @foreach ($municipios as $municipio) <!-- Cambiar $municipios a $municipio -->
-                                @if ($municipio->departamento_id == $departamento_id)
-                                    <option value="{{ $municipio->municipioId }}">{{ $municipio->nombreMunicipio }}</option>
-                                @endif
-                            @endforeach
-                        </select>    
-                    </div>
-                    <div class="form-group">
-                        <label for="facultad_id"><b style="color: black;">Facultad</b></label>
-                        <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad">
-                            @foreach ($facultades as $facultad)
-                                <option value="{{ $facultad->id }}">{{ $facultad->Nfacultad }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="carrera_id"><b style="color: black;">Carrera</b></label>
-                        <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
-                            @foreach ($carreras as $carrera)
-                                @if ($carrera->facultad_id == $facultad_id)
-                                    <option value="{{ $carrera->id }}">{{ $carrera->Ncarrera }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="user_id"><b style="color: black;"><b>User</label>
-                        <input wire:model="user_id" type="text" class="form-control" id="user_id" placeholder="User Id">@error('user_id') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-
+                        <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 50%;">
+                            <div class="mb-2">
+                                <label for="carnet"><b style="color: black;">Carnet<b></label>
+                                <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet" disabled>
+                            </div>
+                        </div> 
+                        <div style="display: inline-block; width: 250%;">   
+                            <div class="mb-2">
+                                <label for="DPI"><b style="color: black;">DPI<b></label>
+                                <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi" disabled> 
+                            </div>
+                        </div>
+                        </div>
+                        <div style="display: inline-block; width: 95%;">
+                            <div class="mb-2">
+                                <label for="correo"><b style="color: black;">Correo Electronico<b></label>
+                                <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo" disabled>  
+                            </div>
+                        </div>
+                        <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 50%;">
+                            <div class="mb-2">
+                                <label for="numero_personal"><b style="color: black;">Numero Personal<b></label>
+                                <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal" disabled>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 250%;">
+                            <div class="mb-2">
+                                <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
+                                <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar" disabled>
+                            </div>
+                        </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                                <label for="curriculum"><b style="color: black;"><b>Cargar Curriculum</label>
+                                <input wire:model="curriculum" type="text" class="form-control" id="curriculum" placeholder="Curriculum" disabled>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                                <label for="departamento_id"><b style="color: black;">Departamento</b></label>
+                                <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento" disabled>
+                                    @foreach ($Departamentos as $departamento)
+                                        <option value="{{ $departamento->departamentoId }}">{{ $departamento->nombreDepartamento }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        @if (!is_null($municipios))
+                            <div style="display: inline-block; width: 100%;">
+                                    <div class="mb-2">
+                                        <label for="municipio_id"><b style="color: black;">Municipio<b></label>
+                                        <select wire:model="municipio_id" type="text" class="form-control" id="municipio_id" placeholder="Residencia Id">@error('municipio_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        @foreach ($municipios as $municipio )
+                                            <option value="{{$municipio->municipioId}}">{{$municipio->nombreMunicipio}}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                            </div>    
+                         @endif 
+                        <div style="display: inline-block; width: 100%;">
+                                <div class="mb-2">
+                                    <label for="facultad_id"><b style="color: black;">Facultad</b></label>
+                                    <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad"disabled>
+                                        @foreach ($facultades as $facultad)
+                                            <option value="{{ $facultad->id }}">{{ $facultad->Nfacultad }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                                <div class="mb-2">
+                                    @if (!is_null($carreras))
+                                    <label for="carrera_id"><b style="color: black;">Carrera</b></label>
+                                    <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera"disabled>
+                                        @foreach ($carreras as $carrera)
+                                            @if ($carrera->facultad_id == $facultad_id)
+                                                <option value="{{ $carrera->id }}">{{ $carrera->Ncarrera }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @endif 
+                                </div>
+                            </div>
+                            <div style="display: inline-block; width: 100%;">
+                                <div class="mb-2">
+                                    <label for="user_id"><b style="color: black;"><b>User</label>
+                                    <input wire:model="user_id" type="text" class="form-control" id="user_id" placeholder="User Id" disabled>
+                                </div>
+                            </div>
                 </form>
             </div>
             <div class="modal-footer">

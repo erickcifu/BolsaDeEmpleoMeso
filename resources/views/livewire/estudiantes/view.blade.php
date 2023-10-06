@@ -36,7 +36,7 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Personal</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Domiciliar</th>
-								{{-- <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</th> --}}
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</th>
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
 							</tr>
 						</thead>
@@ -51,6 +51,7 @@
 								<td>{{ $row->correo }}</td>
 								<td>{{ $row->numero_personal }}</td>
 								<td>{{ $row->numero_domiciliar }}</td>
+								<td> <a href="{{ $row->curriculum }}" target="_blank"> ver archivo </a> </td>
 								{{-- <td>{{ $row->curriculum }}</td> --}}
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#ViewDataModal" class="dropdown-item" wire:click="view({{$row->estudianteId}})"><i class="fa-solid fa-eye"></i> Ver </a>

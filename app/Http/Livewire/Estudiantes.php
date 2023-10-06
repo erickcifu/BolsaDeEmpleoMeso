@@ -13,25 +13,27 @@ use Livewire\WithFileUploads;
 
 class Estudiantes extends Component
 {
-	public $carrera;
-	public $facultad_id;
-	public $municipio;
-	public $departamento_id;
 	use WithPagination;
 	use WithFileUploads;
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $nombre, $apellidos, $carnet, $DPI, $correo, $numero_personal, $numero_domiciliar, $curriculum, $municipio_id, $carrera_id, $user_id;
+	public $departamento=null, $municipio=null;
+	public $departamentos=null, $municipios=null; 
+	
+	public $carrera;
+	public $facultad_id;
+
+	
 
     public function render()
-    {
+    {	
+
+		$keyWord = '%'.$this->keyWord .'%';
 		$facultades = Facultad::all();
 		$carreras = Carrera::where('facultad_id', $this->facultad_id)->get();
-		$departamentos = Departamento::all();
-		$municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
-		$keyWord = '%'.$this->keyWord .'%';
         return view('livewire.estudiantes.view', [
-            'estudiantes' => Estudiante::with('Municipio')
+            'estudiantes' => Estudiante::latest()
 						->orWhere('nombre', 'LIKE', $keyWord)
 						->orWhere('apellidos', 'LIKE', $keyWord)
 						->orWhere('carnet', 'LIKE', $keyWord)
@@ -40,12 +42,7 @@ class Estudiantes extends Component
 						->orWhere('numero_personal', 'LIKE', $keyWord)
 						->orWhere('numero_domiciliar', 'LIKE', $keyWord)
 						->orWhere('curriculum', 'LIKE', $keyWord)
-						->orWhereHas('municipio', function ($query) use ($keyWord) {
-                            $query->where('nombreMunicipio', 'LIKE', $keyWord);
-							if ($this->departamento_id) {
-								$query->where('departamento_id', $this->departamento_id);
-							}
-                        })
+						->orWhere('municipio_id', 'LIKE', $keyWord)
 						->orWhereHas('carrera', function ($query) use ($keyWord) {
 							$query->where('Ncarrera', 'LIKE', $keyWord);
 							if ($this->facultad_id) {
@@ -56,8 +53,7 @@ class Estudiantes extends Component
 						->paginate(10),
 						'carreras' => $carreras,
 						'facultades' => $facultades,
-						'municipios' => $municipios,
-						'departamentos' => $departamentos,
+						'Departamentos'=>Departamento::all()
         ]);
     }
 	
@@ -93,19 +89,25 @@ class Estudiantes extends Component
 		'carrera_id' => 'required',
 		'user_id' => 'required',
 	];
+
+	public function updateddepartamento($departamento_id)
+	{
+	  $municipios=Municipio::join('departamentos','municipios.departamento_id','=','departamentos.departamentoId')
+									->where('departamentos.departamentoId',$departamento_id)->get();
+	   $this->municipios=$municipios;
+	}
+
+	public function updatedFacultad($facultad_id)
+	{
+		$carreras = Carrera::join('facultads', 'carreras.facultad_id', '=', 'facultads.id')
+							->where('facultads.id', $facultad_id)->get();
+		$this->carrera = $carreras;
+	}
+	
 	public function updated($propertyEstudiante){
         $this->validateOnly($propertyEstudiante);
     }
-	public function updatedFacultadId()
-	{
-		// Actualizar las carreras cuando cambie la facultad seleccionada
-		$this->carrera_id = null; // Restablecer el valor de la carrera
-	}
-	public function updatedDepartametoId()
-	{
-		// Actualizar las carreras cuando cambie la facultad seleccionada
-		$this->municipio_id = null; // Restablecer el valor de la carrera
-	}
+
 
     public function store()
     {
@@ -119,7 +121,7 @@ class Estudiantes extends Component
 			'correo' => $this-> correo,
 			'numero_personal' => $this-> numero_personal,
 			'numero_domiciliar' => $this-> numero_domiciliar,
-			'curriculum' => $this-> curriculum,
+			'curriculum' => 'storage/'.$this-> curriculum->store('curriculums','public'),
 			'municipio_id' => $this-> municipio_id,
 			'carrera_id' => $this-> carrera_id,
 			'user_id' => $this-> user_id
@@ -127,7 +129,7 @@ class Estudiantes extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Estudiante Successfully created.');
+		session()->flash('message', 'Estudiante creado exitosamente.');
     }
 
     public function edit($estudianteId)
@@ -142,10 +144,7 @@ class Estudiantes extends Component
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
 		$this->curriculum = $record-> curriculum;
-		// como llamar los camopos dedepartamento  
-		$this->departamento_id = $record-> departamentoId;
 		$this->municipio_id = $record-> municipio_id;
-		$this->facultad_id = $record-> facultad_id;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
     }
@@ -164,7 +163,7 @@ class Estudiantes extends Component
 			'correo' => $this-> correo,
 			'numero_personal' => $this-> numero_personal,
 			'numero_domiciliar' => $this-> numero_domiciliar,
-			'curriculum' => $this-> curriculum,
+			'curriculum' =>'storage/'. $this-> curriculum->store('curriculum','public'),
 			'municipio_id' => $this-> municipio_id,
 			'carrera_id' => $this-> carrera_id,
 			'user_id' => $this-> user_id
@@ -192,10 +191,10 @@ class Estudiantes extends Component
 		session()->flash('message', 'Estudiante Eliminado.');
 	}
 
-	public function view($estudianteId)
-	{
-		$record = Estudiante::findOrFail($estudianteId);
-		$this->selected_id = $estudianteId; 
+	 public function view($estudianteId)
+	 {
+        $record = Estudiante::findOrFail($estudianteId);
+        $this->selected_id = $estudianteId; 
 		$this->nombre = $record-> nombre;
 		$this->apellidos = $record-> apellidos;
 		$this->carnet = $record-> carnet;
@@ -204,10 +203,8 @@ class Estudiantes extends Component
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
 		$this->curriculum = $record-> curriculum;
-		$this->departamento_id = $record-> nombreDepartamento;
-		$this->municipio_id = $record-> nombreMunicipio;
-		$this->facultad_id = $record-> facultad_id;
+		$this->municipio_id = $record-> municipio_id;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
-	}
+	 }
 }
