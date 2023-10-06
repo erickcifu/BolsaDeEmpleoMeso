@@ -22,5 +22,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Livewire::component('OfertasEstudiantes', \App\Http\Livewire\OfertasEstudiantes::class);
+        
     }
 }
