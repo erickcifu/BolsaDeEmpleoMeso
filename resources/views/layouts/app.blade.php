@@ -33,6 +33,22 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
+						
+						<li class="nav-item">
+                            <a href="{{ url('/empresas') }}" class="nav-link"> Empresas</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/municipios') }}" class="nav-link" style="color: #f0eadc;">Municipios</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/departamentos') }}" class="nav-link" style="color: #f0eadc;">Departamentos</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/cartarecomendacions') }}" class="nav-link"  style="color: #f0eadc;">Cartas de Recomendacion</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;"> Autoridades Academicas</a> 
+                       {{--</li>
                         <li class="nav-item">
                             <a href="{{ url('/ofertasestudiantes') }}" class="nav-link" style="color: #f0eadc;">Estudiantes</a> 
                         </li>
@@ -44,7 +60,7 @@
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/ofertas') }}" class="nav-link" style="color: #f0eadc;">Ofertas</a> 
-                        </li>
+                        </li>--}}
                     </ul>
 					@endauth()
 
