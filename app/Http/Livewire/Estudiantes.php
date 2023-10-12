@@ -142,10 +142,7 @@ class Estudiantes extends Component
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
 		$this->curriculum = $record-> curriculum;
-		// como llamar los camopos dedepartamento  
-		$this->departamento_id = $record-> departamentoId;
 		$this->municipio_id = $record-> municipio_id;
-		$this->facultad_id = $record-> facultad_id;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
     }
@@ -204,9 +201,7 @@ class Estudiantes extends Component
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
 		$this->curriculum = $record-> curriculum;
-		$this->departamento_id = $record-> nombreDepartamento;
 		$this->municipio_id = $record-> nombreMunicipio;
-		$this->facultad_id = $record-> facultad_id;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
 	}
