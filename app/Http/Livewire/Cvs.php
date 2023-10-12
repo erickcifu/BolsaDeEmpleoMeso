@@ -9,11 +9,13 @@ use App\Models\Certificacion;
 use App\Models\Experiencia;
 use App\Models\Formacion;
 use Livewire\WithFileUploads;
+use Carbon\Carbon;
 
 class Cvs extends Component
 {
     use WithPagination;
 	use WithFileUploads;
+
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $cvId, $direcionDomiciliar, $correoElectronico, $telefonoCv, $fotoCv, $perfilProfesional, $habilidades, $referencias, $publicaciones, $intereses;
 	public $nombreCertificacion, $anioCertificacion, $cv_id;
@@ -21,6 +23,7 @@ class Cvs extends Component
 	public $anioInicioFormacion, $anioFinFormacion, $nivelFormacion, $institucionFormacion;
 	//para el multiformulario
 	public $paso = 1;
+	public $guardarId = 0;
 
     public function render()
     {
@@ -67,7 +70,6 @@ class Cvs extends Component
         $this->descripcionLaboral = null;		
 		$this->anioInicioFormacion =null;
 		$this->anioFinFormacion =null;
-		$this->nivelFormacion =null;
 		$this->institucionFormacion =null;
 	}
 	protected $rules = [
@@ -76,25 +78,75 @@ class Cvs extends Component
 		'telefonoCv' => 'required | size:8',
 		'fotoCv' => ' image | mimes:png,jpg,jpeg', 
 		'perfilProfesional' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'habilidades' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'referencias' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'publicaciones' => 'required|max:300',
-		'intereses' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'nombreCertificacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35', 
-		'anioCertificacion' => 'required | date | after:today',
-		'inicioExperiencia' => 'required | date',
-        'finExperiencia' => 'required| date',
-        'puestoTrabajo' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
-        'lugarTrabajo' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
-        'descripcionLaboral' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		'anioInicioFormacion' => 'required | date | after:today', 
-		'anioFinFormacion' => 'required | date | after:today',
-		'nivelFormacion' => '',
+		'habilidades' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ | max:300',
+		'referencias' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',
+		'publicaciones' => 'nullable | url | max:500',
+		'intereses' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ | max:300',
+		'nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35', 
+		'anioCertificacion' => 'nullable | date | before_or_equal:today',
+		'inicioExperiencia' => 'nullable | date | before_or_equal:today',
+        'finExperiencia' => 'nullable | date | before_or_equal:today',
+        'puestoTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+        'lugarTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+        'descripcionLaboral' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+		'anioInicioFormacion' => 'required | date | before_or_equal:today', 
+		'anioFinFormacion' => 'required | date | before_or_equal:today',
 		'institucionFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
 	];
 	public function updated($propertyOferta){
 		$this->validateOnly($propertyOferta);
 	}
+
+	protected $messages = [
+        'direcionDomiciliar.required' => 'Este campo no puede estar vacío.',
+
+		'correoElectronico.required' => 'Este campo no puede estar vacío.',
+		'correoElectronico' => 'Ingresa un correo electrónico válido',
+
+		'telefonoCv.required' => 'Este campo no puede estar vacío',
+		'telefonoCv.size' => 'El número de teléfono debe tener 8 dígitos',
+
+		'perfilProfesional.required' => 'Este campo no puede estar vacío',
+		'perfilProfesional.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'habilidades.required' => 'Este campo no puede estar vacío',
+		'habilidades.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'referencias.required' => 'Este campo no puede estar vacío',
+		'referencias.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'publicaciones.url' => 'Ingresa una URL válida',
+		'publicaciones.max' => 'La longitud máxima del texto para este campo son :max caracteres',
+
+		'intereses.required' => 'Este campo no puede estar vacío',
+		'intereses.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'nombreCertificacion.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'anioCertificacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+
+		'inicioExperiencia' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+
+		'finExperiencia' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+
+		'puestoTrabajo.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'lugarTrabajo.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'descripcionLaboral.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+		'anioInicioFormacion.required' => 'Este campo no puede estar vacío',
+		'anioInicioFormacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+
+		'anioFinFormacion.required' => 'Este campo no puede estar vacío',
+		'anioFinFormacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+
+		'institucionFormacion.required' => 'Este campo no puede estar vacío',
+		'institucionFormacion.regex' => 'Este campo solo puede contener letras, números y espacios',
+
+
+	];
+
 	public function ValidarPaso1(){
 		$this->validate([
 			'direcionDomiciliar' => 'required',
@@ -102,32 +154,31 @@ class Cvs extends Component
 			'telefonoCv' => 'required | size:8',
 			'fotoCv' => ' image | mimes:png,jpg,jpeg', 
 			'perfilProfesional' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-			'habilidades' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-			'referencias' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-			'publicaciones' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-			'intereses' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
+			'habilidades' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ | max:300',
+			'referencias' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',			
+			'publicaciones' => 'nullable | url | max:500',
+			'intereses' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ | max:300',
 		]);
 	}
 	public function ValidarPaso2(){
 		$this->validate([
-			'nombreCertificacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35', 
-			'anioCertificacion' => 'required | date | after:today',
+			'nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35', 
+			'anioCertificacion' => 'nullable | date | before_or_equal:today',
 		]);
 	}
 	public function ValidarPaso3(){
 		$this->validate([
-			'inicioExperiencia' => 'required | date',
-			'finExperiencia' => 'required| date',
-			'puestoTrabajo' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
-			'lugarTrabajo' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
-			'descripcionLaboral' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'inicioExperiencia' => 'nullable | date | before_or_equal:today',
+			'finExperiencia' => 'nullable | date | before_or_equal:today',
+			'puestoTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'lugarTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'descripcionLaboral' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
 		]);
 	}	
 	public function ValidarPaso4(){
 		$this->validate([
-			'anioInicioFormacion' => 'required | date | after:today',
-			'anioFinFormacion' => 'required | date | after:today',
-			'nivelFormacion' => '',
+			'anioInicioFormacion' => 'required | date | before_or_equal:today',
+			'anioFinFormacion' => 'required | date | before_or_equal:today',
 			'institucionFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
 		]);
 	} // fin de validación de cada paso del formulario
@@ -147,6 +198,7 @@ class Cvs extends Component
 	}
     $this->paso++; //Se suma 1 al paso
  }
+
  public function pasoAnterior()
  {
     $this->paso--; //Para volver se resta 1 al paso	
@@ -157,23 +209,24 @@ class Cvs extends Component
     {
         $this->validate();
 
-        Cv::create([ 
-			'cvId' => $this-> cvId,
+        $cv = Cv::create([ 
+			'cvId' => $this->cvId,
 			'direcionDomiciliar' => $this-> direcionDomiciliar,
 			'correoElectronico' => $this-> correoElectronico,
 			'telefonoCv' => $this-> telefonoCv,
-			'fotoCv' => $this-> fotoCv,
+			'fotoCv' => 'storage/'.$this-> fotoCv->store('fotografia', 'public'),
 			'perfilProfesional' => $this-> perfilProfesional,
 			'habilidades' => $this-> habilidades,
 			'referencias' => $this-> referencias,
 			'publicaciones' => $this-> publicaciones,
 			'intereses' => $this-> intereses
         ]);
+		$guardarId = $cv->id;
 
 		Certificacion::create([
 			'nombreCertificacion'=> $this-> nombreCertificacion,
 			'anioCertificacion' => $this -> anioCertificacion,
-			'id_cvs' => $this -> CvId
+			'cv_id' => $guardarId
 		]);
         Experiencia::create([
 			'inicioExperiencia' => $this-> inicioExperiencia,
@@ -181,20 +234,22 @@ class Cvs extends Component
 			'puestoTrabajo' => $this-> puestoTrabajo,
 			'lugarTrabajo' => $this-> lugarTrabajo,
 			'descripcionLaboral' => $this-> descripcionLaboral,
-			'id_cvs' => $this -> CvId
+			'cv_id' => $guardarId
 		]);
 		Formacion::create([
 			'anioInicioFormacion' => $this-> anioInicioFormacion,
 			'anioFinFormacion' => $this-> anioFinFormacion,
 			'nivelFormacion' => $this-> nivelFormacion,
 			'institucionFormacion' => $this-> institucionFormacion,
-			'id_cvs' => $this -> CvId
+			'cv_id' => $guardarId
 		]);
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Cv Successfully created.');
+		session()->flash('message', 'CV generado correctamente!.');
+		
     }
 
+	
     public function edit($id)
     {
         $record = Cv::findOrFail($id);
@@ -236,10 +291,10 @@ class Cvs extends Component
         }
     }
 
-    public function destroy($id)
+    public function destroy($cvId)
     {
-        if ($id) {
-            Cv::where('id', $id)->delete();
+        if ($cvId) {
+            Cv::where('cvId', $cvId)->delete();
         }
     }
 }
