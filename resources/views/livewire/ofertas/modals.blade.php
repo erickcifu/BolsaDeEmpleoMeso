@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;" >
-                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Generar CV</h5>
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear oferta</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
@@ -15,13 +15,13 @@
                             <b>Información general de la oferta</b>
                         </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" wire:ignore.self   data-bs-parent="#accordionExample">
+                        <div id="collapseOne" class="accordion-collapse collapse show" wire:ignore.self  data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                         <div class="hstack gap-3">
                             <div style="display: inline-block; width: 100%;">
                                 <div class="mb-2">
                                     <label for="imagenPuesto">Imagen</label>
-                                    <input wire:model="imagenPuesto" type="file" class="form-control" id="imagenPuesto" placeholder="Imagen">
+                                    <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen">
                                 </div>
                                 @error('imagenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>

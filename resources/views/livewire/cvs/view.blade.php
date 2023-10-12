@@ -6,7 +6,7 @@
 				<div class="card-header" style="background-color: #d3d3d3;">
 					<div style="display: flex; justify-content: space-between; align-items: left;">
 						<div class="float-left">
-							<h4>Cv </h4>
+							<h4>Creación de CV</h4>
 						</div>
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
@@ -26,36 +26,32 @@
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
-								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Direcion domiciliar</th>
+								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">ID</td> 
+								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">Fotografía</td> 
+								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Dirección domiciliar</th>
 								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Correo electronico</th>
-								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono</th>
-								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Teléfono</th>
+								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
 							@forelse($cvs as $row)
 							<tr>
-								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->cvId }}</td>
+								<td>{{ $row->cvId }}</td> 
+								<td> <img src="{{asset($row->fotoCv)}}" width="50" height="50" class="img-fluid">
+								</td>
 								<td>{{ $row->direcionDomiciliar }}</td>
 								<td>{{ $row->correoElectronico }}</td>
 								<td>{{ $row->telefonoCv }}</td>
 								<td width="90">
-									<div class="dropdown">
-										<a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-											Actions
-										</a>
-										<ul class="dropdown-menu">
-											<li><a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Edit </a></li>
-											<li><a class="dropdown-item" onclick="confirm('Confirm Delete Cv id {{$row->id}}? \nDeleted Cvs cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Delete </a></li>  
-										</ul>
-									</div>								
+									
+									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Editar </a>
+									<a class="dropdown-item" onclick="confirm('Confirm Delete Cv id {{$row->cvId}}? \nDeleted Cvs cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->cvId}})"><i class="fa fa-trash"></i> Eliminar </a> 						
 								</td>
 							</tr>
 							@empty
 							<tr>
-								<td class="text-center" colspan="100%">No data Found </td>
+								<td class="text-center" colspan="100%">Sin datos.</td>
 							</tr>
 							@endforelse
 						</tbody>
