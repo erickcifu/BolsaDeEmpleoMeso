@@ -6,7 +6,7 @@
 				
 					<div style="display: flex; justify-content: space-between; align-items: left;">
 					<div class="float-left">
-							<h4>Ofertas</h4>
+							<h4>Ofertas Estudiantes</h4>
 						</div>
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
