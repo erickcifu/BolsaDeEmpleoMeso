@@ -34,6 +34,7 @@
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
 						<li class="nav-item">
+
                             <a href="{{ url('/carta-pdf') }}" class="nav-link" style="color: #f0eadc;"> ver carta</a> 
                         </li>
                         <li class="nav-item">
@@ -53,6 +54,10 @@
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;"> Autoridad Academicas</a> 
+=======
+                            <a href="{{ url('/cvs') }}" class="nav-link" style="color: #f0eadc;"> Cvs</a> 
+                        </li>
+
 						<li class="nav-item">
                             <a href="{{ url('/estudiantes') }}" class="nav-link" style="color: #f0eadc;"> Estudiantes</a> 
                         </li>

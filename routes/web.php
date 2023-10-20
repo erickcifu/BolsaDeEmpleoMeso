@@ -25,6 +25,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Route Hooks - Do not delete//
+
     Route::get('/carta-pdf',[Cartarecomendacions::class,'downloadPDF']);
 	Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middleware('auth');
 	Route::view('departamentos', 'livewire.departamentos.index')->middleware('auth');
@@ -33,6 +34,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::view('empresasrrhh', 'livewire.empresasrrhh.index')->middleware('auth');
 	Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middleware('auth');
 	
+=======
+	Route::view('cvs', 'livewire.cvs.index')->middleware('auth');
+
 	Route::view('estudiantes', 'livewire.estudiantes.index')->middleware('auth');
 	Route::view('carreras', 'livewire.carreras.index')->middleware('auth');
 	Route::view('facultads', 'livewire.facultads.index')->middleware('auth');

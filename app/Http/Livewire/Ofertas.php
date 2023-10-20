@@ -21,6 +21,7 @@ class Ofertas extends Component
 	public $ofertaId;
 	//para el multiformulario
 	public $paso = 1;
+	public $mostrarErrores = false;
 
 	public function mount()
     {
@@ -78,7 +79,6 @@ class Ofertas extends Component
 		$this->generoRequerido = null;
 		$this->comentarioCierre = null;
 		$this->facultad_id = null;
-		$this->paso = 1;
     }
 
 	private function resetCierre()
@@ -183,6 +183,7 @@ public function validarPaso1()
 		'cantVacantes' => 'required | integer',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
     ]);
+	$this->mostrarErrores = true;
  }
 
  public function validarPaso2()
@@ -194,8 +195,8 @@ public function validarPaso1()
  		'edadRequerida' => 'required | integer',
  		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
 		'facultad_id' => 'required | integer',
-         
      ]);
+	 $this->mostrarErrores = true;
  }
  public function validarPaso3()
  {
@@ -205,20 +206,23 @@ public function validarPaso1()
 		'beneficios' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
 		'oportunidadesDesarrollo' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
      ]);
+	 $this->mostrarErrores = true;
  }
  // fin de validación de cada paso del formulario
 
  //Función para validar las reglas, dependiendo del paso en el que esté el formulario
  public function siguientePaso()
  {
- 	if ($this->paso === 1) {
-        $this->validarPaso1(); // Validar datos del paso 1
-    } elseif ($this->paso === 2) {
-         $this->validarPaso2(); // Validar datos del paso 2
-    }
-	 elseif ($this->paso === 3) {
-		$this->validarPaso3(); // Validar datos del paso 3
-	}
+	//if ($this->mostrarErrores) {
+		if ($this->paso === 1) {
+			$this->validarPaso1(); // Validar datos del paso 1
+		} elseif ($this->paso === 2) {
+			$this->validarPaso2(); // Validar datos del paso 2
+		}
+		elseif ($this->paso === 3) {
+			$this->validarPaso3(); // Validar datos del paso 3
+		}
+	//}
 
     $this->paso++; //Se suma 1 al paso
  }
@@ -249,13 +253,13 @@ public function validarPaso1()
 			'beneficios' => $this-> beneficios,
 			'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
 			'fechaMax' => $this-> fechaMax,
-			'imagenPuesto' => $this-> imagenPuesto,
+			'imagenPuesto' => 'storage/'.$this-> imagenPuesto->store('ofertaslab', 'public'),
 			'cantVacantes' => $this-> cantVacantes,
 			'modalidadTrabajo' => $this-> modalidadTrabajo,
 			'edadRequerida' => $this-> edadRequerida,
 			'generoRequerido' => $this-> generoRequerido,
 			'comentarioCierre' => '',
-			'empresa_id' => "1",
+			'empresa_id' => '1',
 			'facultad_id' => $this-> facultad_id,
         ]);
         
