@@ -28,7 +28,7 @@ class CreateEmpresasTable extends Migration
             $table->string('encargadoEmpresa', 250);
             $table->integer('telefonoEncargado');
             $table->boolean('estadoEmpresa')->default(1);
-            $table->string('estadoSolicitud', 10);
+            $table->string('estadoSolicitud', 50);
             $table->unsignedBigInteger('user_id')->unique();
             $table->unsignedBigInteger('residencia_id')->unique();
             $table->foreign('residencia_id')->references('municipioId')->on('municipios')->onDelete(null);

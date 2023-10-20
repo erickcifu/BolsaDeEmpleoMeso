@@ -34,6 +34,26 @@
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
 						<li class="nav-item">
+                            <a href="{{ url('/carta-pdf') }}" class="nav-link" style="color: #f0eadc;"> ver carta</a> 
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/empresasrrhh') }}" class="nav-link" style="color: #f0eadc;"> Empresasrrhh</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/empresas') }}" class="nav-link" style="color: #f0eadc;"> Empresas</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/municipios') }}" class="nav-link" style="color: #f0eadc;"> Municipios</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/departamentos') }}" class="nav-link" style="color: #f0eadc;"> Departamentos</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/cartarecomendacions') }}" class="nav-link" style="color: #f0eadc;"> Carta de Recomendacion</a> 
+                        </li>
+						<li class="nav-item">
+                            <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;"> Autoridad Academicas</a> 
+						<li class="nav-item">
                             <a href="{{ url('/estudiantes') }}" class="nav-link" style="color: #f0eadc;"> Estudiantes</a> 
                         </li>
 						<li class="nav-item">
