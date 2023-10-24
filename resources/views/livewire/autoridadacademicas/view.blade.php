@@ -60,7 +60,7 @@
 										
 										
 										<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->autoridadId}})"><i class="fa fa-edit"></i> Editar </a>
-										<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->autoridadId}})"><i class="fa fa-trash"></i> Eliminar Registro </a>
+										<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->autoridadId}})"><i class="fa fa-trash"></i> Eliminar </a>
 										
 										{{-- boton que cambie para que no usemos el destroy --}}
 									{{--<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$row->autoridadId}})"><i class="fa fa-trash"></i> Desactivar </a>	--}}
