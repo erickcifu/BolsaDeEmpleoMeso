@@ -54,7 +54,7 @@
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;"> Autoridad Academicas</a> 
-=======
+
                             <a href="{{ url('/cvs') }}" class="nav-link" style="color: #f0eadc;"> Cvs</a> 
                         </li>
 
