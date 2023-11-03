@@ -41,6 +41,7 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
@@ -92,6 +93,8 @@
 								
 								{{--<td>{{ $row->estadoSolicitud }}</td>--}}
 								<td>{{ $row->user->name }}</td>
+								<td>{{ $row->municipio->Departamento->nombreDepartamento}}</td>
+
 								<td>{{ $row->municipio->nombreMunicipio }}</td>
 								<td width="125">
 									<div class="dropdown">
