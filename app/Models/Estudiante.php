@@ -55,4 +55,11 @@ class Estudiante extends Model
         return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
     
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function cvs()
+    {
+        return $this->hasMany('App\Models\Cv', 'estudiante_id', 'estudianteId');
+    }
 }

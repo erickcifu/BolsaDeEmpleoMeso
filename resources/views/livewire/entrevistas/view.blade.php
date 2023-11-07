@@ -14,9 +14,6 @@
 						<div>
 							<input wire:model='keyWord' style="background-color: #d3d3d3;" type="text" class="form-control" name="search" id="search" placeholder="Buscar...">
 						</div>
-						<div class="btn" style="background-color: #005c35;" data-bs-toggle="modal" data-bs-target="#createDataModal">
-						<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i>  <h8 style="color: #f0eadc;">Crear</h8>
-						</div>
 					</div>
 				</div>
 				
@@ -41,8 +38,8 @@
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->tituloEntrevista }}</td>
 								<td>{{ $row->FechaEntrevista }}</td>
-								<td>{{ $row->hora_inicio }}</td>
-								<td>{{ $row->hora_final }}</td>
+								<td>{{ $row->horaInicio }}</td>
+								<td>{{ $row->horaFinal }}</td>
 								<td>
 								<?php if ($row->Contratado == 1): ?>
 									<span class="badge" style="background-color: #005c35;"><b>Contratado</b></span>

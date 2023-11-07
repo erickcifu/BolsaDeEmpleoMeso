@@ -111,7 +111,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn close-btn" data-bs-dismiss="modal" style="background-color: #d3d3d3;">Cancelar</button>
-                <button type="button" wire:click.prevent="postular()" class="btn btn-primary" style="background-color: #005c35;">Sí, deseo postularme!</button>
+                <button type="button" wire:click.prevent="postular()" data-bs-dismiss="modal" class="btn btn-primary" style="background-color: #005c35;">Sí, deseo postularme!</button>
             </div>
         </div>
     </div>

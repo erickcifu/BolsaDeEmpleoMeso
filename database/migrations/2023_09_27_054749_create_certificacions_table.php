@@ -18,6 +18,7 @@ class CreateCertificacionsTable extends Migration
             $table->bigIncrements('certificacionId');
             $table->string('nombreCertificacion',250);
             $table->date('anioCertificacion');
+            $table->string('institucionCertificadora',250);
             $table->unsignedBigInteger('cv_id')->unsigned();
             $table->timestamps();
             $table->foreign('cv_id')->references('cvId')->on('cvs')->onDelete('cascade');

@@ -14,7 +14,7 @@ class Autoridadacademica extends Model
     protected $table = 'autoridadacademicas';
     protected $primaryKey = 'autoridadId';
 
-    protected $fillable = ['autoridadId','nombreAutoridad','apellidosAutoridad','estadoAutoridad','facultad_id'];
+    protected $fillable = ['autoridadId','nombreAutoridad','apellidosAutoridad','estadoAutoridad','facultad_id', 'user_id'];
 	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -30,6 +30,14 @@ class Autoridadacademica extends Model
     public function facultad()
     {
         return $this->hasOne('App\Models\Facultad', 'id', 'facultad_id');
+    }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    */
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
     
 }

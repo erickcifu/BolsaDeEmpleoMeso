@@ -20,6 +20,7 @@ class CreateFormacionsTable extends Migration
             $table->date('anioFinFormacion');
             $table->string('nivelFormacion',100);
             $table->string('institucionFormacion',250);
+            $table->string('tituloObtenido',250);
             $table->unsignedBigInteger('cv_id')->unsigned();
             $table->timestamps();
             $table->foreign('cv_id')->references('cvId')->on('cvs')->onDelete('cascade');
