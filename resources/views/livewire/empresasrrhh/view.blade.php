@@ -5,7 +5,7 @@
 			<div class="card-header" style="background-color: #d3d3d3;">
 				<div style="display: flex; justify-content: space-between; align-items: left;">
 					<div class="float-left">
-						<h4>Empresasrrhh</h4>
+						
 					</div>
 					@if (session()->has('message'))
 					<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
@@ -40,7 +40,6 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
 								
 							</tr>
@@ -91,14 +90,12 @@
 								
 								{{--<td>{{ $row->estadoSolicitud }} <a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar </a></td>--}}
 								<td>{{ $row->user->name }}</td>
-								<td>{{ $row->municipio->Departamento->nombreDepartamento}}</td>
-
 								<td>{{ $row->municipio->nombreMunicipio }}</td>
 								
 							</tr>
 							@empty
 							<tr>
-								<td class="text-center" colspan="100%">No data Found </td>
+								<td class="text-center" colspan="100%">Sin datos</td>
 							</tr>
 							@endforelse
 						</tbody>

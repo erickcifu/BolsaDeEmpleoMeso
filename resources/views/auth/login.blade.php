@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header" style="background-color: #005c35">
+                <h4 class="text-left" style="color: #f0eadc;">Iniciar sesión</h4>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -45,7 +48,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Recuerdame') }}
                                     </label>
                                 </div>
                             </div>
@@ -53,21 +56,28 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                <button type="submit" class="btn" style="background-color: #005c35;">
+                                    <a style="color: #f0eadc;">{{ __('Login') }}<a>
                                 </button>
-
+                            
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                    <a class="btn btn-link" href="{{ route('password.request') }}" style="color: #005c35;">
+                                        Olvidé mi contraseña.
                                     </a>
                                 @endif
                             </div>
                         </div>
-                    </form>
+                    </form>   
+                </div>
+
+                <div class="card-footer" style="background-color: white">
+                @if (Route::has('register'))
+                    <a class="btn btn-link" style="color: #005c35;" href="{{ route('register') }}"><b>Registrate</b></a><h8 style="color: #005c35;">aquí, si aún no tienes una cuenta.</h8>
+                @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

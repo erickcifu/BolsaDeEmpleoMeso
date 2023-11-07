@@ -16,7 +16,7 @@ class OfertasEstudiantes extends Component
 	use WithFileUploads;
 
 	protected $paginationTheme = 'bootstrap';
-    public $selected_id, $keyWord, $descripcion, $puesto, $imagen, $sueldoMinimo, $fecha, $puestoVacante, $tipoContratacion, $edadRequerida, $genero, $perfil, $sueldoMax, $empresa_id;
+    public $selected_id, $keyWord,  $resumenPuesto, $nombrePuesto,$responsabilidadesPuesto,$requisitosEducativos, $experienciaLaboral, $sueldoMax, $sueldoMinimo, $jornadaLaboral, $condicionesLaborales, $beneficios, $oportunidadesDesarrollo, $fechaMax, $imagenPuesto, $cantVacantes, $modalidadTrabajo, $edadRequerida, $generoRequerido, $comentarioCierre, $empresa_id, $facultad_id;
 	public $fechaPostulacion, $oferta_id;
 
     public function mount()
@@ -32,19 +32,20 @@ class OfertasEstudiantes extends Component
         $keyWord = '%'.$this->keyWord .'%';
         return view('livewire.ofertasestudiantes.ofertas-estudiantes', [
             'ofertasestudiantes' => Oferta::latest()
-						->orWhere('descripcion', 'LIKE', $keyWord)
-						->orWhere('puesto', 'LIKE', $keyWord)
-						->orWhere('imagen', 'LIKE', $keyWord)
-						->orWhere('sueldoMinimo', 'LIKE', $keyWord)
-						->orWhere('fecha', 'LIKE', $keyWord)
-						->orWhere('puestoVacante', 'LIKE', $keyWord)
-						->orWhere('tipoContratacion', 'LIKE', $keyWord)
-						->orWhere('edadRequerida', 'LIKE', $keyWord)
-						->orWhere('genero', 'LIKE', $keyWord)
-						->orWhere('perfil', 'LIKE', $keyWord)
-						->orWhere('sueldoMax', 'LIKE', $keyWord)
-						->orWhere('empresa_id', 'LIKE', $keyWord)
-						->paginate(2),
+									->orWhere('resumenPuesto', 'LIKE', $keyWord)
+									->orWhere('nombrePuesto', 'LIKE', $keyWord)
+									->orWhere('imagenPuesto', 'LIKE', $keyWord)
+									->orWhere('sueldoMinimo', 'LIKE', $keyWord)
+									->orWhere('fechaMax', 'LIKE', $keyWord)
+									->orWhere('cantVacantes', 'LIKE', $keyWord)
+									->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
+									->orWhere('edadRequerida', 'LIKE', $keyWord)
+									->orWhere('generoRequerido', 'LIKE', $keyWord)
+									->orWhere('comentarioCierre', 'LIKE', $keyWord)
+									->orWhere('sueldoMax', 'LIKE', $keyWord)
+									->orWhere('empresa_id', 'LIKE', $keyWord)
+									->orWhere('facultad_id', 'LIKE', $keyWord)
+									->paginate(10),
         ]);
     }
 
@@ -55,135 +56,87 @@ class OfertasEstudiantes extends Component
 	
     private function resetInput()
     {		
-		$this->descripcion = null;
-		$this->puesto = null;
-		$this->imagen = null;
-		$this->sueldoMinimo = null;
-		$this->fecha = null;
-		$this->puestoVacante = null;
-		$this->tipoContratacion = null;
-		$this->edadRequerida = null;
-		$this->genero = null;
-		$this->perfil = null;
+		$this->resumenPuesto = null;
+		$this->nombrePuesto = null;
+		$this->responsabilidadesPuesto = null;
+		$this->requisitosEducativos = null;
+		$this->experienciaLaboral = null;
 		$this->sueldoMax = null;
-		$this->empresa_id = null;
+		$this->sueldoMinimo = null;
+		$this->jornadaLaboral = null;
+		$this->condicionesLaborales = null;
+		$this->beneficios = null;
+		$this->oportunidadesDesarrollo = null;
+		$this->fechaMax = null;
+		$this->imagenPuesto = null;
+		$this->cantVacantes = null;
+		$this->modalidadTrabajo = null;
+		$this->edadRequerida = null;
+		$this->generoRequerido = null;
+		$this->comentarioCierre = null;
+		$this->facultad_id = null;
     }
 
-    public function store()
-    {
-        $this->validate([
-		'descripcion' => 'required',
-		'puesto' => 'required',
-		'imagen' => 'image',
-		'sueldoMinimo' => 'required | numeric',
-		'fecha' => 'required',
-		'puestoVacante' => 'required',
-		'tipoContratacion' => 'required',
-		'edadRequerida' => 'required',
-		'genero' => 'required',
-		'perfil' => 'required',
-		'sueldoMax' => 'required | numeric',
-        ]);
+	
 
-        Oferta::create([ 
-			'descripcion' => $this-> descripcion,
-			'puesto' => $this-> puesto,
-			'imagen' => $this-> imagen,
-			'sueldoMinimo' => $this-> sueldoMinimo,
-			'fecha' => $this-> fecha,
-			'puestoVacante' => $this-> puestoVacante,
-			'tipoContratacion' => $this-> tipoContratacion,
-			'edadRequerida' => $this-> edadRequerida,
-			'genero' => $this-> genero,
-			'perfil' => $this-> perfil,
-			'sueldoMax' => $this-> sueldoMax,
-			'empresa_id' => $this-> empresa_id
-        ]);
-        
-        $this->resetInput();
-		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Oferta creada correctamente!');
-    }
-
-	public function mostrarOferta($id)
+	public function mostrarOferta($ofertaId)
     {
-        $record = Oferta::findOrFail($id);
-        $this->selected_id = $id; 
-		$this->descripcion = $record-> descripcion;
-		$this->puesto = $record-> puesto;
-		$this->imagen = $record-> imagen;
-		$this->sueldoMinimo = $record-> sueldoMinimo;
-		$this->fecha = $record-> fecha;
-		$this->puestoVacante = $record-> puestoVacante;
-		$this->tipoContratacion = $record-> tipoContratacion;
-		$this->edadRequerida = $record-> edadRequerida;
-		$this->genero = $record-> genero;
-		$this->perfil = $record-> perfil;
+        $record = Oferta::findOrFail($ofertaId);
+        $this->selected_id = $ofertaId; 
+		$this->resumenPuesto = $record-> resumenPuesto;
+		$this->nombrePuesto = $record-> nombrePuesto;
+		$this->responsabilidadesPuesto = $record-> responsabilidadesPuesto;
+		$this->requisitosEducativos = $record-> requisitosEducativos;
+		$this->experienciaLaboral = $record-> experienciaLaboral;
 		$this->sueldoMax = $record-> sueldoMax;
-		$this->empresa_id = $record-> empresa_id;
-    }
-
-    public function edit($id)
-    {
-        $record = Oferta::findOrFail($id);
-        $this->selected_id = $id; 
-		$this->descripcion = $record-> descripcion;
-		$this->puesto = $record-> puesto;
-		$this->imagen = $record-> imagen;
 		$this->sueldoMinimo = $record-> sueldoMinimo;
-		$this->fecha = $record-> fecha;
-		$this->puestoVacante = $record-> puestoVacante;
-		$this->tipoContratacion = $record-> tipoContratacion;
+		$this->jornadaLaboral = $record-> jornadaLaboral;
+		$this->condicionesLaborales = $record -> condicionesLaborales;
+		$this->beneficios = $record -> beneficios;
+		$this->oportunidadesDesarrollo = $record -> oportunidadesDesarrollo;
+		$this->fechaMax = $record-> fechaMax;
+		$this->imagenPuesto = $record-> imagenPuesto;
+		$this->cantVacantes = $record-> cantVacantes;
+		$this->modalidadTrabajo = $record-> modalidadTrabajo;
 		$this->edadRequerida = $record-> edadRequerida;
-		$this->genero = $record-> genero;
-		$this->perfil = $record-> perfil;
-		$this->sueldoMax = $record-> sueldoMax;
+		$this->generoRequerido = $record-> generoRequerido;
+		$this->comentarioCierre = $record-> comentarioCierre;
 		$this->empresa_id = $record-> empresa_id;
+		$this->facultad_id = $record-> facultad_id;
     }
 
-    public function update()
+    public function edit($ofertaId)
     {
-        $this->validate([
-		'descripcion' => 'required',
-		'puesto' => 'required',
-		'imagen' => 'required',
-		'sueldoMinimo' => 'required',
-		'fecha' => 'required',
-		'puestoVacante' => 'required',
-		'tipoContratacion' => 'required',
-		'edadRequerida' => 'required',
-		'genero' => 'required',
-		'perfil' => 'required',
-		'sueldoMax' => 'required',
-        ]);
-
-        if ($this->selected_id) {
-			$record = Oferta::find($this->selected_id);
-            $record->update([ 
-			'descripcion' => $this-> descripcion,
-			'puesto' => $this-> puesto,
-			'imagen' => $this-> imagen,
-			'sueldoMinimo' => $this-> sueldoMinimo,
-			'fecha' => $this-> fecha,
-			'puestoVacante' => $this-> puestoVacante,
-			'tipoContratacion' => $this-> tipoContratacion,
-			'edadRequerida' => $this-> edadRequerida,
-			'genero' => $this-> genero,
-			'perfil' => $this-> perfil,
-			'sueldoMax' => $this-> sueldoMax,
-			'empresa_id' => $this-> empresa_id
-            ]);
-
-            $this->resetInput();
-            $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Oferta actualizada correctamente!');
-        }
+        $record = Oferta::findOrFail($ofertaId);
+        $this->selected_id = $ofertaId; 
+		$this->resumenPuesto = $record-> resumenPuesto;
+		$this->nombrePuesto = $record-> nombrePuesto;
+		$this->responsabilidadesPuesto = $record-> responsabilidadesPuesto;
+		$this->requisitosEducativos = $record-> requisitosEducativos;
+		$this->experienciaLaboral = $record-> experienciaLaboral;
+		$this->sueldoMax = $record-> sueldoMax;
+		$this->sueldoMinimo = $record-> sueldoMinimo;
+		$this->jornadaLaboral = $record-> jornadaLaboral;
+		$this->condicionesLaborales = $record -> condicionesLaborales;
+		$this->beneficios = $record -> beneficios;
+		$this->oportunidadesDesarrollo = $record -> oportunidadesDesarrollo;
+		$this->fechaMax = $record-> fechaMax;
+		$this->imagenPuesto = $record-> imagenPuesto;
+		$this->cantVacantes = $record-> cantVacantes;
+		$this->modalidadTrabajo = $record-> modalidadTrabajo;
+		$this->edadRequerida = $record-> edadRequerida;
+		$this->generoRequerido = $record-> generoRequerido;
+		$this->comentarioCierre = $record-> comentarioCierre;
+		$this->empresa_id = $record-> empresa_id;
+		$this->facultad_id = $record-> facultad_id;
+		$this->paso=1;
     }
+
 
 	//FUNCION PARA OBTNER EL ID DESDE LA TABLA OFERTA
-	public function setOfertaId($id)
+	public function setOfertaId($ofertaId)
     {
-        $this->oferta_id = $id;
+        $this->oferta_id = $ofertaId;
     }
 	
 	//FUNCION PARA CREAR LA POSTULACION
@@ -196,11 +149,4 @@ class OfertasEstudiantes extends Component
 		$this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Te has postulado exitosamente a esta oferta.');
 	}
-
-    public function destroy($id)
-    {
-        if ($id) {
-            Oferta::where('id', $id)->delete();
-        }
-    }
 }

@@ -12,3 +12,16 @@
 
 // Bootstrap Icons
 @import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+// Styles to Welcome page
+.title-card-home {
+    position: relative;
+    width: 100%;
+    top: 75px;
+    z-index: 300;
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+}

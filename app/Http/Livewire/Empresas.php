@@ -9,9 +9,6 @@ use App\Models\User;
 use App\Models\Municipio;
 use App\Models\Departamento;
 use Livewire\WithFileUploads;
-use App\Mail\AltaEmpresa;
-use App\Mail\ActualizaEmpresa;
-use Illuminate\Support\Facades\Mail;
 use DB;
 use \Auth;
 
@@ -105,7 +102,6 @@ class Empresas extends Component
     {
 		$usuario=auth()->user()->id;
         $this->validate();
-		Mail::to($this->correoEmpresa)->send(new AltaEmpresa($this-> nombreEmpresa));
 
         Empresa::create([ 
 			
@@ -170,7 +166,6 @@ class Empresas extends Component
 		'residencia_id' => 'required',
 			
         ]);
-		Mail::to($this->correoEmpresa)->send(new ActualizaEmpresa($this-> nombreEmpresa));
 
         if ($this->selected_id) {
 			$record = Empresa::find($this->selected_id);

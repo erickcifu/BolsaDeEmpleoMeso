@@ -11,7 +11,7 @@ class Entrevistas extends Component
     use WithPagination;
 
 	protected $paginationTheme = 'bootstrap';
-    public $selected_id, $keyWord, $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $hora_inicio, $hora_final, $Contratado, $comentarioContratado, $postulacion_id;
+    public $selected_id, $keyWord, $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
 
     public function render()
     {
@@ -21,8 +21,8 @@ class Entrevistas extends Component
 						->orWhere('tituloEntrevista', 'LIKE', $keyWord)
 						->orWhere('descripcionEntrevista', 'LIKE', $keyWord)
 						->orWhere('FechaEntrevista', 'LIKE', $keyWord)
-						->orWhere('hora_inicio', 'LIKE', $keyWord)
-						->orWhere('hora_final', 'LIKE', $keyWord)
+						->orWhere('horaInicio', 'LIKE', $keyWord)
+						->orWhere('horaFinal', 'LIKE', $keyWord)
 						->orWhere('Contratado', 'LIKE', $keyWord)
 						->orWhere('comentarioContratado', 'LIKE', $keyWord)
 						->orWhere('postulacion_id', 'LIKE', $keyWord)
@@ -40,8 +40,8 @@ class Entrevistas extends Component
 		$this->tituloEntrevista = null;
 		$this->descripcionEntrevista = null;
 		$this->FechaEntrevista = null;
-		$this->hora_inicio = null;
-		$this->hora_final = null;
+		$this->horaInicio = null;
+		$this->horaFinal = null;
 		$this->Contratado = null;
 		$this->comentarioContratado = null;
 		$this->postulacion_id = null;
@@ -53,8 +53,8 @@ class Entrevistas extends Component
 		'tituloEntrevista' => 'required',
 		'descripcionEntrevista' => 'required',
 		'FechaEntrevista' => 'required',
-		'hora_inicio' => 'required',
-		'hora_final' => 'required',
+		'horaInicio' => 'required',
+		'horaFinal' => 'required',
 		'postulacion_id' => 'required',
         ]);
 
@@ -62,8 +62,8 @@ class Entrevistas extends Component
 			'tituloEntrevista' => $this-> tituloEntrevista,
 			'descripcionEntrevista' => $this-> descripcionEntrevista,
 			'FechaEntrevista' => $this-> FechaEntrevista,
-			'hora_inicio' => $this-> hora_inicio,
-			'hora_final' => $this-> hora_final,
+			'horaInicio' => $this-> horaInicio,
+			'horaFinal' => $this-> horaFinal,
 			'Contratado' => $this-> Contratado,
 			'comentarioContratado' => $this-> comentarioContratado,
 			'postulacion_id' => $this-> postulacion_id
@@ -74,29 +74,29 @@ class Entrevistas extends Component
 		session()->flash('message', 'Entrevista creada exitosamente.');
     }
 
-	public function mostrar($id)
+	public function mostrar($entrevistaId)
     {
-        $record = Entrevista::findOrFail($id);
-        $this->selected_id = $id; 
+        $record = Entrevista::findOrFail($entrevistaId);
+        $this->selected_id = $entrevistaId; 
 		$this->tituloEntrevista = $record-> tituloEntrevista;
 		$this->descripcionEntrevista = $record-> descripcionEntrevista;
 		$this->FechaEntrevista = $record-> FechaEntrevista;
-		$this->hora_inicio = $record-> hora_inicio;
-		$this->hora_final = $record-> hora_final;
+		$this->horaInicio = $record-> horaInicio;
+		$this->horaFinal = $record-> horaFinal;
 		$this->Contratado = $record-> Contratado;
 		$this->comentarioContratado = $record-> comentarioContratado;
 		$this->postulacion_id = $record-> postulacion_id;
     }
 
-    public function edit($id)
+    public function edit($entrevistaId)
     {
-        $record = Entrevista::findOrFail($id);
-        $this->selected_id = $id; 
+        $record = Entrevista::findOrFail($entrevistaId);
+        $this->selected_id = $entrevistaId; 
 		$this->tituloEntrevista = $record-> tituloEntrevista;
 		$this->descripcionEntrevista = $record-> descripcionEntrevista;
 		$this->FechaEntrevista = $record-> FechaEntrevista;
-		$this->hora_inicio = $record-> hora_inicio;
-		$this->hora_final = $record-> hora_final;
+		$this->horaInicio = $record-> horaInicio;
+		$this->horaFinal = $record-> horaFinal;
 		$this->Contratado = $record-> Contratado;
 		$this->comentarioContratado = $record-> comentarioContratado;
 		$this->postulacion_id = $record-> postulacion_id;
@@ -108,8 +108,8 @@ class Entrevistas extends Component
 		'tituloEntrevista' => 'required',
 		'descripcionEntrevista' => 'required',
 		'FechaEntrevista' => 'required',
-		'hora_inicio' => 'required',
-		'hora_final' => 'required',
+		'horaInicio' => 'required',
+		'horaFinal' => 'required',
 		'postulacion_id' => 'required',
         ]);
 
@@ -119,8 +119,8 @@ class Entrevistas extends Component
 			'tituloEntrevista' => $this-> tituloEntrevista,
 			'descripcionEntrevista' => $this-> descripcionEntrevista,
 			'FechaEntrevista' => $this-> FechaEntrevista,
-			'hora_inicio' => $this-> hora_inicio,
-			'hora_final' => $this-> hora_final,
+			'horaInicio' => $this-> horaInicio,
+			'horaFinal' => $this-> horaFinal,
 			'Contratado' => $this-> Contratado,
 			'comentarioContratado' => $this-> comentarioContratado,
 			'postulacion_id' => $this-> postulacion_id
@@ -132,10 +132,10 @@ class Entrevistas extends Component
         }
     }
 
-    public function destroy($id)
+    public function destroy($entrevistaId)
     {
         if ($id) {
-            Entrevista::where('id', $id)->delete();
+            Entrevista::where('entrevistaId', $entrevistaId)->delete();
         }
     }
 }
