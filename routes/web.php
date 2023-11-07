@@ -34,6 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	Route::view('empresasrrhh', 'livewire.empresasrrhh.index')->middleware('auth');
 	Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middleware('auth');
 	
+
 	Route::view('cvs', 'livewire.cvs.index')->middleware('auth');
 
 	Route::view('estudiantes', 'livewire.estudiantes.index')->middleware('auth');

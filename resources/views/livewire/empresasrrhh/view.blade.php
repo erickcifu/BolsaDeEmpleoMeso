@@ -40,6 +40,7 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
 								
 							</tr>
@@ -90,6 +91,8 @@
 								
 								{{--<td>{{ $row->estadoSolicitud }} <a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar </a></td>--}}
 								<td>{{ $row->user->name }}</td>
+								<td>{{ $row->municipio->Departamento->nombreDepartamento}}</td>
+
 								<td>{{ $row->municipio->nombreMunicipio }}</td>
 								
 							</tr>
