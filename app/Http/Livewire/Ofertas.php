@@ -100,7 +100,7 @@ class Ofertas extends Component
 		'oportunidadesDesarrollo' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
 		'fechaMax' => 'required | date | after:today',
 		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
-		'cantVacantes' => 'required | integer',
+		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
 		'edadRequerida' => 'required | integer',
 		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',

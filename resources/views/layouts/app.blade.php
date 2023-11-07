@@ -16,14 +16,23 @@
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
     @livewireStyles
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm" style="background-color: #005c35;" >
             <div class="container">
-                 <a class="navbar-brand" href="{{ url('/') }}" style="color: #f0eadc;">
-                   <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
-                </a>
+                @guest
+                    <a class="navbar-brand" href="{{ url('/') }}" style="color: #f0eadc;">
+                    <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />
+                    <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
+                    </a>
+                @else
+                <a class="navbar-brand" href="{{ url('/home') }}" style="color: #f0eadc;">
+                <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />
+                    <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
+                    </a>
+                @endguest
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,43 +42,10 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
+						
 						<li class="nav-item">
-
-                            <a href="{{ url('/carta-pdf') }}" class="nav-link" style="color: #f0eadc;"> ver carta</a> 
+                            <a href="#" class="nav-link" style="color: #f0eadc;">Perfil</a> 
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/empresasrrhh') }}" class="nav-link" style="color: #f0eadc;"> Empresasrrhh</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/empresas') }}" class="nav-link" style="color: #f0eadc;"> Empresas</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/municipios') }}" class="nav-link" style="color: #f0eadc;"> Municipios</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/departamentos') }}" class="nav-link" style="color: #f0eadc;"> Departamentos</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/cartarecomendacions') }}" class="nav-link" style="color: #f0eadc;"> Carta de Recomendacion</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;"> Autoridad Academicas</a> 
-
-                            <a href="{{ url('/cvs') }}" class="nav-link" style="color: #f0eadc;"> Cvs</a> 
-                        </li>
-
-						<li class="nav-item">
-                            <a href="{{ url('/estudiantes') }}" class="nav-link" style="color: #f0eadc;"> Estudiantes</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/carreras') }}" class="nav-link" style="color: #f0eadc;"> Carreras</a> 
-                        </li>
-						<li class="nav-item">
-                            <a href="{{ url('/facultads') }}" class="nav-link" style="color: #f0eadc;"> Facultads</a> 
-                        </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ url('/ofertasestudiantes') }}" class="nav-link" style="color: #f0eadc;">Estudiantes</a> 
-                        </li> --}}
 						<li class="nav-item">
                             <a href="{{ url('/entrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
                         </li>
@@ -86,7 +62,7 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
+                            <!-- @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
@@ -96,7 +72,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                            @endif -->
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #f0eadc;">

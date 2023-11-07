@@ -2,8 +2,8 @@
 <div wire:ignore.self class="modal fade" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <<div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear Carta de Recomendacion</h5>
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Nuevo Municipio</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
            <div class="modal-body">

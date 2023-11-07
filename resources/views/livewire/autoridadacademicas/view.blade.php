@@ -5,7 +5,7 @@
 			<div class="card-header" style="background-color: #d3d3d3;">
 				<div style="display: flex; justify-content: space-between; align-items: left;">
 					<div class="float-left">
-						<h4>Autoridadades Academicas</h4>
+						<h4>Autoridades Academicas</h4>
 					</div>
 					@if (session()->has('message'))
 					<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
@@ -60,7 +60,7 @@
 										
 										
 										<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->autoridadId}})"><i class="fa fa-edit"></i> Editar </a>
-										<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->autoridadId}})"><i class="fa fa-trash"></i> Eliminar </a>
+										<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->autoridadId}})"><i class="fa fa-trash"></i> Eliminar Registro </a>
 										
 										{{-- boton que cambie para que no usemos el destroy --}}
 									{{--<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$row->autoridadId}})"><i class="fa fa-trash"></i> Desactivar </a>	--}}

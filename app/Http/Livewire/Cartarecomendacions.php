@@ -76,7 +76,7 @@ class Cartarecomendacions extends Component
 	protected $rules = [
 		'fechaCarta' => 'required',
 		'cargoYTareasRealizadas' => 'required|regex:/^[\pL\s\-]+$/u',
-		'telefonoAutoridad' => 'required|size:8',
+		'telefonoAutoridad' => 'required|numeric',
 		'firmaAutoridad' => 'required|mimes:jpeg,png,jpg,gif',
 		'autoridadAcademica_id' => 'required',
 		'estudiante_id' => 'required',

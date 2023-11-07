@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('idiomas', function (Blueprint $table) {
-            $table->id();
+            $table->engine="InnoDB";
+            $table->bigIncrements('idiomaId');
+            $table->string('nombreIdioma',150);
             $table->timestamps();
         });
     }

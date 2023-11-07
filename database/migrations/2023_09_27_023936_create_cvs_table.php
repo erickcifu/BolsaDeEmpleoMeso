@@ -22,9 +22,14 @@ class CreateCvsTable extends Migration
             $table->string('fotoCv',300);
             $table->string('perfilProfesional',300);
             $table->string('habilidades',500);
-            $table->string('referencias',300);
+            $table->string('nombreRef1',200);
+            $table->integer('telRef1');
+            $table->string('nombreRef2',200);
+            $table->integer('telRef2');
             $table->string('publicaciones',500);
             $table->string('intereses',500);
+            $table->unsignedBigInteger('estudiante_id')->unsigned();
+            $table->foreign('estudiante_id')->references('estudianteId')->on('estudiantes')->onDelete('cascade');
             $table->timestamps();
         });
     }

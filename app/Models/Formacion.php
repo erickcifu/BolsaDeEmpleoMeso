@@ -20,6 +20,7 @@ class Formacion extends Model
         'anioFinFormacion',
         'nivelFormacion',
         'institucionFormacion',
+        'tituloObtenido',
         'cv_id',
     ];
 	

@@ -18,6 +18,7 @@ class Certificacion extends Model
     protected $fillable = [
         'nombreCertificacion',
         'anioCertificacion',
+        'institucionCertificadora',
         'cv_id',
     ];
 	

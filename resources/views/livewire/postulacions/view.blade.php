@@ -14,9 +14,7 @@
 						<div>
 							<input wire:model='keyWord' type="text" class="form-control" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
 						</div>
-						<div class="btn" style="background-color: #005c35;" data-bs-toggle="modal" data-bs-target="#createPostDataModal">
-						<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i>  <h8 style="color: #f0eadc;">Crear</h8>
-						</div>
+						
 					</div>
 				</div>
 				
@@ -37,7 +35,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->fechaPostulacion }}</td>
-								<td>{{ $row-> oferta -> puesto }}</td>
+								<td>{{ $row-> oferta -> nombrePuesto }}</td>
 								<td width="90">
 									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Editar </a>
 									<a class="dropdown-item" onclick="confirm('Confirm Delete Postulacion id {{$row->id}}? \nDeleted Postulacions cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Eliminar </a> 	

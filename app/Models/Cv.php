@@ -13,7 +13,7 @@ class Cv extends Model
 
     protected $table = 'cvs';
 
-    protected $fillable = ['cvId','direcionDomiciliar','correoElectronico','telefonoCv','fotoCv','perfilProfesional','habilidades','referencias','publicaciones','intereses'];
+    protected $fillable = ['cvId','direcionDomiciliar','correoElectronico','telefonoCv','fotoCv','perfilProfesional','habilidades','nombreRef1', 'telRef1', 'nombreRef2', 'telRef2','publicaciones','intereses', 'estudiante_id'];
 	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -39,4 +39,19 @@ class Cv extends Model
         return $this->hasMany('App\Models\Formacion', 'cv_id', 'cvId');
     }
     
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function idiomaCV()
+    {
+        return $this->hasMany('App\Models\idiomacv', 'cv_id', 'cvId');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function estudiantes()
+    {
+        return $this->hasOne('App\Models\Estudiante', 'estudianteId', 'estudiante_id');
+    }
 }
