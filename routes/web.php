@@ -81,6 +81,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('registroestudiante', 'livewire.registro.index')->middleware('auth');
+Route::view('registro-empresa', 'livewire.registroempresas.index')->middleware('auth');
 
 Route::get('/homeAdmin', [App\Http\Controllers\HomeAdminController::class, 'index'])->name('homeAdmin');
 Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::class, 'index'])->name('homeAutoridad');
