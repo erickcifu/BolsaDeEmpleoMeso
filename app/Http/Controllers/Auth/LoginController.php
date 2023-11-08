@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Empresa;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,21 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->external_id) {
+
+            $empresa = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
+
+            if (!$empresa) {
+                // Si es un usuario administrador, redirige a la página de administración
+                return redirect('registroempresa');
+            }
+
+            // Redirección predeterminada para otros tipos de usuarios
+            return redirect(RouteServiceProvider::HOME);
+        }
     }
 }
