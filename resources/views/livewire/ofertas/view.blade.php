@@ -37,7 +37,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@forelse($ofertas as $row)
+							@forelse($ofertasLaborales as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->nombrePuesto }}</td>

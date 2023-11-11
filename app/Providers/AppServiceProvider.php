@@ -7,6 +7,12 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public const DEFAULT_VIEW = 'ofertasmail';
+    public const DEFAULT_SUBJECT = 'Lista de Ofertas Vencidas';
+    public const SUBJECT_RECORDATORIO = 'Recordatorio de Ofertas por Vencer';
+    public const DEFAULT_TYPE = 'vencidas';
+    public const TYPE_RECORDATORIO = 'recordatorio';
+    public const URL_APP = 'http://127.0.0.1:8000/home';
     /**
      * Register any application services.
      */

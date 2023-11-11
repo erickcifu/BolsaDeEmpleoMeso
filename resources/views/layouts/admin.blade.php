@@ -68,13 +68,16 @@
                             <a href="{{ url('/empresasrrhh') }}" class="nav-link" style="color: #f0eadc;"> Solicitudes</a> 
                         </li>
 						<li class="nav-item">
-                            <a href="{{ url('/empresas') }}" class="nav-link" style="color: #f0eadc;"> Empresas</a> 
+                            <a href="{{ url('/empresas') }}" class="nav-link" style="color: #f0eadc;"> Empresas</a>
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/estudiantes') }}" class="nav-link" style="color: #f0eadc;"> Estudiantes</a> 
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;">Usuarios</a> 
+                        </li>						
+						<li class="nav-item">
+                            <a href="{{ url('/estadisticasrrhh') }}" class="nav-link" style="color: #f0eadc;">Estadisticas</a> 
                         </li>						
                     </ul>
 					@endauth()

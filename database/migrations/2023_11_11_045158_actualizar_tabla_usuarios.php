@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rols', function (Blueprint $table) {
-            $table->engine="InnoDB";
-            $table->bigIncrements('rolId');
-            $table->string('nombreRol',60);
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->bigInteger('rol_id')->unsigned()->after('external_auth');
+            $table->foreign('rol_id')->references('rolId')->on('rols')->onDelete(null);
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rols');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('rol_id');
+        });
     }
 };
