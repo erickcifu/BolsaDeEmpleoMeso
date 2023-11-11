@@ -14,4 +14,11 @@ class Rol extends Model
     protected $primaryKey = 'rolId';
     protected $fillable = ['nombreRol'];
 
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    */
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'rol_id', 'rolId');
+    }
 }

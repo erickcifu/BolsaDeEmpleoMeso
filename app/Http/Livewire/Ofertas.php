@@ -5,10 +5,13 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Oferta;
+use App\Models\Empresa;
+use App\Models\User;
 use App\Models\Postulacion;
 use App\Models\Facultad;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class Ofertas extends Component
 {
@@ -22,6 +25,7 @@ class Ofertas extends Component
 	//para el multiformulario
 	public $paso = 1;
 	public $mostrarErrores = false;
+	public $userID,	$empresaAut, $user, $ofertasLaborales;
 
 	public function mount()
     {
@@ -33,25 +37,37 @@ class Ofertas extends Component
 
 		$this->Postulaciones = Postulacion::all();
 		$facultades = Facultad::all();
-		$keyWord = '%'.$this->keyWord .'%';
-        return view('livewire.ofertas.view', [
-            'ofertas' => Oferta::latest()
-						->orWhere('resumenPuesto', 'LIKE', $keyWord)
-						->orWhere('nombrePuesto', 'LIKE', $keyWord)
-						->orWhere('imagenPuesto', 'LIKE', $keyWord)
-						->orWhere('sueldoMinimo', 'LIKE', $keyWord)
-						->orWhere('fechaMax', 'LIKE', $keyWord)
-						->orWhere('cantVacantes', 'LIKE', $keyWord)
-						->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
-						->orWhere('edadRequerida', 'LIKE', $keyWord)
-						->orWhere('generoRequerido', 'LIKE', $keyWord)
-						->orWhere('comentarioCierre', 'LIKE', $keyWord)
-						->orWhere('sueldoMax', 'LIKE', $keyWord)
-						->orWhere('empresa_id', 'LIKE', $keyWord)
-						->paginate(10),
-						'facultades' => $facultades,
-        ]);
-    }
+
+		if (Auth::check()) {
+
+			$this->userID = Auth::id();
+
+    		$this->user = User::with('empresa')->find($this->userID);
+
+    		// Accede a las ofertas laborales de la empresa
+    		$this->ofertasLaborales = $this->user->Empresa->ofertas;
+
+			$keyWord = '%'.$this->keyWord .'%';
+			return view('livewire.ofertas.view', [
+				'ofertas' => Oferta::latest()
+							->orWhere('resumenPuesto', 'LIKE', $keyWord)
+							->orWhere('nombrePuesto', 'LIKE', $keyWord)
+							->orWhere('imagenPuesto', 'LIKE', $keyWord)
+							->orWhere('sueldoMinimo', 'LIKE', $keyWord)
+							->orWhere('fechaMax', 'LIKE', $keyWord)
+							->orWhere('cantVacantes', 'LIKE', $keyWord)
+							->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
+							->orWhere('edadRequerida', 'LIKE', $keyWord)
+							->orWhere('generoRequerido', 'LIKE', $keyWord)
+							->orWhere('comentarioCierre', 'LIKE', $keyWord)
+							->orWhere('sueldoMax', 'LIKE', $keyWord)
+							->orWhere('empresa_id', 'LIKE', $keyWord)
+							->paginate(10),
+							'facultades' => $facultades,
+							'ofertasLaborales' => $this->ofertasLaborales,
+			]);
+		}
+	}
 	
     public function cancel()
     {
@@ -238,30 +254,43 @@ public function validarPaso1()
 
     public function store()
     {
-        $this->validate();
 
-        Oferta::create([ 
-			'resumenPuesto' => $this-> resumenPuesto,
-			'nombrePuesto' => $this-> nombrePuesto,
-			'responsabilidadesPuesto' => $this-> responsabilidadesPuesto,
-			'requisitosEducativos' => $this-> requisitosEducativos,
-			'experienciaLaboral' => $this-> experienciaLaboral,
-			'sueldoMax' => $this-> sueldoMax,
-			'sueldoMinimo' => $this-> sueldoMinimo,
-			'jornadaLaboral' => $this-> jornadaLaboral,
-			'condicionesLaborales' => $this-> condicionesLaborales,
-			'beneficios' => $this-> beneficios,
-			'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
-			'fechaMax' => $this-> fechaMax,
-			'imagenPuesto' => 'storage/'.$this-> imagenPuesto->store('ofertaslab', 'public'),
-			'cantVacantes' => $this-> cantVacantes,
-			'modalidadTrabajo' => $this-> modalidadTrabajo,
-			'edadRequerida' => $this-> edadRequerida,
-			'generoRequerido' => $this-> generoRequerido,
-			'comentarioCierre' => '',
-			'empresa_id' => '1',
-			'facultad_id' => $this-> facultad_id,
-        ]);
+		if (Auth::check()) {
+            // Obtiene el ID del usuario autenticado
+            $this->userID = Auth::id();
+			$this->user = User::with('empresa')->find($this->userID);
+			$this->empresaAut = $this->user->Empresa->empresaId;
+			$this->validate();
+
+			Oferta::create([ 
+				'resumenPuesto' => $this-> resumenPuesto,
+				'nombrePuesto' => $this-> nombrePuesto,
+				'responsabilidadesPuesto' => $this-> responsabilidadesPuesto,
+				'requisitosEducativos' => $this-> requisitosEducativos,
+				'experienciaLaboral' => $this-> experienciaLaboral,
+				'sueldoMax' => $this-> sueldoMax,
+				'sueldoMinimo' => $this-> sueldoMinimo,
+				'jornadaLaboral' => $this-> jornadaLaboral,
+				'condicionesLaborales' => $this-> condicionesLaborales,
+				'beneficios' => $this-> beneficios,
+				'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
+				'fechaMax' => $this-> fechaMax,
+				'imagenPuesto' => 'storage/'.$this-> imagenPuesto->store('ofertaslab', 'public'),
+				'cantVacantes' => $this-> cantVacantes,
+				'modalidadTrabajo' => $this-> modalidadTrabajo,
+				'edadRequerida' => $this-> edadRequerida,
+				'generoRequerido' => $this-> generoRequerido,
+				'comentarioCierre' => '',
+				'empresa_id' => $this->empresaAut,
+				'facultad_id' => $this-> facultad_id,
+			]);
+			$this->resetInput();
+            session()->flash('message', 'Oferta Creada satisfactoriamente.');
+			}
+			else {
+				dd("No hay un usuario autenticado");
+			}
+        
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');

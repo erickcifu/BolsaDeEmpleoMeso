@@ -28,7 +28,7 @@
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @else
-                <a class="navbar-brand" href="{{ url('/home') }}" style="color: #f0eadc;">
+                <a class="navbar-brand" href="{{ url('/ofertasestudiantes') }}" style="color: #f0eadc;">
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @endguest

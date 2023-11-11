@@ -15,7 +15,9 @@ class SliderController extends Controller
         sub.facultadName AS facultad,
         sub.nombrePuesto AS puesto,
         sub.resumenPuesto AS descripcion,
-        sub.updated_at AS fecha
+        sub.updated_at AS fecha,
+        sub.empresa_id AS empresa_id,
+        empresas.logo
     from
         (
             SELECT
@@ -23,6 +25,7 @@ class SliderController extends Controller
                 fac.total_registros,
                 ofertas.nombrePuesto,
                 ofertas.resumenPuesto,
+                ofertas.empresa_id,
                 ROW_NUMBER() OVER (
                     PARTITION BY fac.facultad_id
                     ORDER BY
@@ -39,7 +42,8 @@ class SliderController extends Controller
                         ofertas
                         LEFT JOIN facultads ON ofertas.facultad_id = facultads.id
                     GROUP BY
-                        facultad_id, facultads.Nfacultad
+                        facultad_id,
+                        facultads.Nfacultad
                     ORDER BY
                         total_registros DESC
                     LIMIT
@@ -47,12 +51,13 @@ class SliderController extends Controller
                 ) AS fac
                 LEFT JOIN ofertas ON fac.facultad_id = ofertas.facultad_id
             WHERE
-                ofertas.estadoOferta = 1 AND
-                ofertas.fechaMax >= NOW()
+                ofertas.estadoOferta = 1
+                AND ofertas.fechaMax >= NOW()
             ORDER BY
                 fac.facultad_id,
                 ofertas.updated_at ASC
         ) as sub
+        LEFT JOIN empresas ON sub.empresa_id = empresas.empresaId
     WHERE
         rn <= 5";
 
@@ -60,6 +65,13 @@ class SliderController extends Controller
 
         // Se obtiene los valores únicos de la columna "facultad"
         $facultadesUnicas = collect($resultados)->pluck('facultad')->unique();
+
+        // Obtiene los valores unicos de la columna "logo"
+        $logosUnicos = collect($resultados)->pluck('logo')->unique();
+        // Convierte la colección de logos a un array
+        $logosTemp = $logosUnicos->toArray();
+        // Obtiene los values de las imagenes para generar un array de strings y delimita a un máximo de 5 logos
+        $logos = array_slice(array_values($logosTemp), 0, 5);
 
         // Inicializa un array para almacenar los grupos
         $grupos = [];
@@ -69,8 +81,8 @@ class SliderController extends Controller
             $grupos[$facultad] = collect($resultados)->where('facultad', $facultad)->all();
         }
 
-        // dd($grupos);
+        // dd($grupos, $logos);
 
-        return view("welcome", compact("grupos"));
+        return view("welcome", ['grupos' => $grupos, 'logos' => $logos]);
     }
 }
