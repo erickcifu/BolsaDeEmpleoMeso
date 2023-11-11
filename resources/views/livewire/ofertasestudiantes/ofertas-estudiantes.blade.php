@@ -20,7 +20,7 @@
 				<div class="card-body">
 					@include('livewire.ofertasestudiantes.modalsEstudiante')
 						<div>
-							@forelse($ofertasestudiantes as $row)
+							@forelse($ofertas as $row)
 							<div class="card">
 								<h5 class="card-header" style="background-color: #005c35;"><b style="color: #f0eadc;">{{$row->nombrePuesto}}</b></h5>
 								<div class="card-body">

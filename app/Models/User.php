@@ -25,6 +25,7 @@ class User extends Authenticatable
         'avatar',
         'external_id',
         'external_auth',
+        'rol_id',
     ];
 
     /**
@@ -46,4 +47,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function estudiante()
+    {
+        return $this->hasOne('App\Models\Estudiante', 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function rol()
+    {
+        return $this->hasOne('App\Models\Rol', 'rolId', 'rol_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function empresa()
+    {
+        return $this->hasOne('App\Models\Empresa', 'user_id', 'id'); 
+    }
 }

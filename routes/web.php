@@ -63,6 +63,7 @@ Route::get('/google-callback', function () {
 			'email_verified' => 1,
 			'estado' => 1,
 			'password' => '',
+			'rol_id' => 1,
 		]);
 
 		Auth::login($userNew);
@@ -81,6 +82,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('registroestudiante', 'livewire.registro.index')->middleware('auth');
+
+Route::view('registroempresa', 'livewire.registroempresas.index')->middleware('auth');
+Route::view('estadisticasempresa', 'livewire.estadisticasempresa.index')->middleware('auth');
+Route::view('estadisticasrrhh', 'livewire.estadisticasrrhh.index')->middleware('auth');
+Route::view('estadisticassupervisor', 'livewire.estadisticassupervisor.index')->middleware('auth');
 Route::view('registro-empresa', 'livewire.registroempresas.index')->middleware('auth');
 
 Route::get('/homeAdmin', [App\Http\Controllers\HomeAdminController::class, 'index'])->name('homeAdmin');

@@ -55,6 +55,9 @@
 						<li class="nav-item">
                             <a href="{{ url('/ofertas') }}" class="nav-link" style="color: #f0eadc;">Ofertas</a> 
                         </li>
+						<li class="nav-item">
+                            <a href="{{ url('/estadisticasempresa') }}" class="nav-link" style="color: #f0eadc;">Estadisticas</a> 
+                        </li>
                     </ul>
 					@endauth()
 
