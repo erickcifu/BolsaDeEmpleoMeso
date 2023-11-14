@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ResSeeder::class);
         $this->call(Res2Seeder::class);
         $this->call(Res3Seeder::class);
+        $this->call(RolSeeder::class);
+        $this->call(UsuarioSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

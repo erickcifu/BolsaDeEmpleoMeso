@@ -30,6 +30,7 @@
                 @else
                 <a class="navbar-brand" href="{{ url('/ofertasestudiantes') }}" style="color: #f0eadc;">
                     <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />    
+
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @endguest
