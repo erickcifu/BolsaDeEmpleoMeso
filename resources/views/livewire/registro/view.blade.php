@@ -126,7 +126,7 @@
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
                        <label for="curriculum"><b style="color: black">Cargar Curriculum</b></label>
-                       <input wire:model="curriculum" type="file" class="form-control" id="curriculum"
+                       <input wire:model="curriculum" type="file"  accept="application/pdf" class="form-control" id="curriculum"
                            placeholder="Curriculum" />@error('curriculum')
                        <span class="error text-danger">{{ $message }}</span>
                        @enderror

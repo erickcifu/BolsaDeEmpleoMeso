@@ -57,7 +57,7 @@
 									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->ofertaId}})"><i class="fa fa-edit"></i> Editar </a>
 									<!-- <a data-bs-toggle="modal" data-bs-target="#EliminarOfertaModal" class="dropdown-item" wire:click="idEliminar({{$row->ofertaId}})"><i class="fa fa-trash"></i> Eliminar </a>	 -->
 									<a data-bs-toggle="modal" data-bs-target="#VerOfertaModal" class="dropdown-item" wire:click="mostrarOferta({{$row->ofertaId}})"><i class="fa fa-eye"></i> Ver detalles</a>
-									<a href="#"  wire:click="mostrarOferta({{$row->ofertaId}})" style="color: Black; text-decoration: none;"><i class="fa fa-pen"></i> Postulaciones </a>			
+									<a data-bs-toggle="modal" data-bs-target="#VerPostulacionesModal" wire:click="verPostulaciones({{$row->ofertaId}})" style="color: Black; text-decoration: none;"><i class="fa fa-pen"></i> Postulaciones </a>			
 								</td>
 							</tr>
 							@empty
