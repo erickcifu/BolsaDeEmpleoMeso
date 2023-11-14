@@ -44,9 +44,6 @@
 						<!--Nav Bar Hooks - Do not delete!!-->
 						
 						<li class="nav-item">
-                            <a href="#" class="nav-link" style="color: #f0eadc;">Perfil</a> 
-                        </li>
-						<li class="nav-item">
                             <a href="{{ url('/entrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
                         </li>
 						<li class="nav-item">
