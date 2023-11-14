@@ -12,6 +12,7 @@ use App\Models\Facultad;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class Ofertas extends Component
 {
@@ -22,10 +23,12 @@ class Ofertas extends Component
     public $selected_id, $keyWord, $resumenPuesto, $nombrePuesto,$responsabilidadesPuesto,$requisitosEducativos, $experienciaLaboral, $sueldoMax, $sueldoMinimo, $jornadaLaboral, $condicionesLaborales, $beneficios, $oportunidadesDesarrollo, $fechaMax, $imagenPuesto, $cantVacantes, $modalidadTrabajo, $edadRequerida, $generoRequerido, $comentarioCierre, $empresa_id, $facultad_id;
 	public $fechaPostulacion, $oferta_id;
 	public $ofertaId;
+	public $ofertapost;
 	//para el multiformulario
 	public $paso = 1;
 	public $mostrarErrores = false;
 	public $userID,	$empresaAut, $user, $ofertasLaborales;
+	public  $postulaciones;
 
 	public function mount()
     {
@@ -432,22 +435,30 @@ public function validarPaso1()
         }
     }
 
-	//FUNCION PARA OBTNER EL ID DESDE LA TABLA OFERTA
-	public function setOfertaId($ofertaId)
+	//FUNCION PARA BUSCAR LAS POSTULACIONES DENTRO DE LA TABLA OFERTAS
+	public function verPostulaciones($ofertaId)
     {
-        $this->oferta_id = $ofertaId;
+        $this->ofertapost = Oferta::with('postulacions')->find($ofertaId);
+
+		// Verificar si la oferta existe
+		if (!$this->ofertapost) {
+			session()->flash('message', 'La oferta no existe.');
+			return;
+		}
+		
+		$this->postulaciones = $this->ofertapost->postulacions;
+
+		// Obtener las postulaciones asociadas a la oferta
+		if ($this->postulaciones && $this->postulaciones->count() > 0) {
+			$this->dispatchBrowserEvent('showVerPostulacionesModal');
+			
+		} else {
+			session()->flash('message', 'No hay postulaciones para esta oferta.');
+		}
+		
     }
 	
-	//FUNCION PARA CREAR LA POSTULACION
-	public function postular(){
-        Postulacion::create([
-			'fechaPostulacion' =>  $this->fechaPostulacion,
-            'oferta_id' => $this-> oferta_id,
-        ]);
-		
-		$this->dispatchBrowserEvent('closeModal');
-        session()->flash('message', 'Te has postulado exitosamente a esta oferta.');
-	}
+	
 
 	public function idEliminar($ofertaId)
     {

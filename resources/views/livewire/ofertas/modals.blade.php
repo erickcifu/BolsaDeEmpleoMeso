@@ -695,31 +695,55 @@
 </div>
 
 
-<!-- Create Postulacion Modal -->
-<div wire:ignore.self class="modal fade" id="createPostDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createPostDataModalLabel" aria-hidden="true">
+<!-- Ver Postulaciones Modal -->
+<div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="VerPostulacionesModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerPostulacionesModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="createPostDataModalLabel" style="color: #f0eadc;">¿Desea Postularse a esta oferta laboral?</h5>
+                <h5 class="modal-title" id="VerPostulacionesModalLabel" style="color: #f0eadc;">Postulaciones</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
            <div class="modal-body">
-				<form>
-                    <div class="form-group">
-                        <label for="fechaPostulacion">Fecha de postulación</label>
-                        <input wire:model="fechaPostulacion" type='text' class="form-control" id="fechaPostulacion" readonly>@error('fecha') <span class="error text-danger" disabled>{{ $message }}</span> @enderror
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <label for="oferta_id">Oferta laboral</label>
-                        <input wire:model="oferta_id" type="text" class="form-control" id="oferta_id" placeholder="Oferta Id" readonly>@error('oferta_id') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn close-btn" data-bs-dismiss="modal" style="background-color: #d3d3d3;">Cancelar</button>
-                <button type="button" wire:click.prevent="postular()" class="btn btn-primary" style="background-color: #005c35;">Sí, deseo postularme!</button>
+           <div class="table-responsive">
+					<table class="table table-bordered table-sm">
+						<thead class="thead">
+							<tr> 
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</b></td> 
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Fecha de postulación</b></th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Postulante</b></th>
+                                <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</b></th>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</b></td>
+							</tr>
+						</thead>
+						<tbody>
+                        @if($postulaciones)
+                            @foreach($postulaciones as $row)
+							<tr>
+								<td>{{ $loop->iteration }}</td> 
+								<td>{{ $row->fechaPostulacion }}</td>
+								<td>{{ $row-> estudiante -> nombre }}, {{ $row-> estudiante -> apellidos }}</td>
+                                <td>
+                                    @if($row->estudiante  && File::exists($row->estudiante->curriculum))
+                                        <a href="{{ $row->estudiante->curriculum }}" target="_blank"> Ver archivo </a>
+                                    @else
+                                        Sin currículum disponible
+                                    @endif
+                                </td>
+								<td width="90">
+									<a class="dropdown-item" onclick="confirm('Confirm Delete Postulacion id {{$row->id}}? \nDeleted Postulacions cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Eliminar </a> 	
+									<a data-bs-toggle="modal" data-bs-target="#createEntrevistaModal" class="dropdown-item" wire:click="setPostulacionId({{$row->id}})"><i class="fa fa-clipboard-question"></i> Entrevista </a>					
+								</td>
+							</tr>
+							@endforeach
+                            @else
+							<tr>
+								<td class="text-center" colspan="100%">Sin datos</td>
+							</tr>
+                        @endif
+						</tbody>
+					</table>						
+					</div>
+				</div>
             </div>
         </div>
     </div>

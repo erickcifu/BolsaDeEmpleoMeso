@@ -11,6 +11,8 @@ use App\Models\Municipio;
 use App\Models\Departamento;
 use Livewire\WithFileUploads;
 
+use DB;
+
 class Estudiantes extends Component
 {
 	public $carrera;
@@ -119,7 +121,7 @@ class Estudiantes extends Component
 			'correo' => $this-> correo,
 			'numero_personal' => $this-> numero_personal,
 			'numero_domiciliar' => $this-> numero_domiciliar,
-			'curriculum' => $this-> curriculum,
+			'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'),
 			'municipio_id' => $this-> municipio_id,
 			'carrera_id' => $this-> carrera_id,
 			'user_id' => $this-> user_id
