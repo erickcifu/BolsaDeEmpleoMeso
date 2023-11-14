@@ -28,7 +28,8 @@
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @else
-                <a class="navbar-brand" href="{{ url('/home') }}" style="color: #f0eadc;">
+                <a class="navbar-brand" href="{{ url('/ofertasestudiantes') }}" style="color: #f0eadc;">
+                    <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />    
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @endguest
@@ -76,17 +77,37 @@
                             @endif -->
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #f0eadc;">
-                                    {{ Auth::user()->name }}
-                                </a>
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" v-pre style="color: #f0eadc; display: flex; align-items: center;">
+                        <div style="width: 35px; height: 35px; background-color: #f0eadc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 10px;">
+                            <span style="color: #111111; font-weight: bold; font-size: 14px;">
+                                @if (strlen(Auth::user()->name) >= 2)
+                                    {{ strtoupper(substr(Auth::user()->name, 0, 1) ) }}
+                                @else
+                                    {{ strtoupper(Auth::user()->name) }}
+                                @endif
+                            </span>
+                        </div>
+                        {{-- {{ Auth::user()->name }} --}}
+                    </a>
+
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
+                                    {{-- <a style="display: flex; align-items: right;  padding-left: 4em; height: 25px;" >Cuenta</a> --}}
+                                    <div class="nav-item dropdown mt-3 "> 
+                                    <b style="display: flex; align-items:right; padding-left: 1em; height: 25px;">{{ Auth::user()->name }}</b>
+                                    </div>
+                                    <br/>
+                                    <div class="nav-item dropdown mt-3 card"style="background-color: #d3d3d3;display: flex; align-items: center;">    
+                                        <a href="{{ url('/estudiantes') }}" class="nav-link">Perfil</a> 
+                                    </div>
+                                    <div class="nav-item dropdown mt-3 card"style="background-color: #d3d3d3;display: flex; align-items: center;">    
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                    </div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
