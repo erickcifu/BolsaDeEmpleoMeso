@@ -30,7 +30,7 @@ class CreateEmpresasTable extends Migration
             $table->boolean('estadoEmpresa')->default(1);
             $table->string('estadoSolicitud', 50);
             $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('residencia_id')->unique();
+            $table->unsignedBigInteger('residencia_id')->unsigned();
             $table->foreign('residencia_id')->references('municipioId')->on('municipios')->onDelete(null);
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->timestamps();

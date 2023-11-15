@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use DB;
 use \Auth;
 
-class Empresas extends Component
+class EmpresasIni extends Component
 {
     use WithPagination;
 	use WithFileUploads;
