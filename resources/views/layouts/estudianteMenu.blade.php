@@ -100,7 +100,7 @@
                                     </div>
                                     <br/>
                                     <div class="nav-item dropdown mt-3 card"style="background-color: #d3d3d3;display: flex; align-items: center;">    
-                                        <a href="{{ url('/MiPerfil') }}" class="nav-link">Perfil</a> 
+                                        <a href="{{ url('/MiPerfil') }}" wire:click="actualizarPerfil" class="nav-link">Perfil</a> 
                                     </div>
                                     <div class="nav-item dropdown mt-3 card"style="background-color: #d3d3d3;display: flex; align-items: center;">    
                                         <a class="dropdown-item" href="{{ route('logout') }}"

@@ -110,7 +110,7 @@ Route::view('carreras', 'livewire.carreras.index')->middleware('auth');
 Route::view('facultads', 'livewire.facultads.index')->middleware('auth');
 Route::get('/formulario/create', [Ofertas::class, 'FormularioCreate'])->name('formulario.create')->middleware('auth');
 //Route::get('/ofertasestudiantes', OfertasEstudiantes::class)->middleware('auth');
-Route::view('ofertasestudiantes', 'livewire.ofertasestudiantes.index')->middleware('auth');
+Route::view('ofertasestudiantes', 'livewire.ofertasestudiantes.index')->middleware('auth')->name('ofertasestudiantes');
 Route::view('entrevistas', 'livewire.entrevistas.index')->middleware('auth');
 Route::view('postulacions', 'livewire.postulacions.index')->middleware('auth');
 Route::view('ofertas', 'livewire.ofertas.index')->name('ofertas')->middleware('auth');

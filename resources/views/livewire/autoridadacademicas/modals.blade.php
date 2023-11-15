@@ -9,33 +9,39 @@
             <div class="modal-body" style="color: #f0eadc;">
 				<form>
                    
-                    <div class="form-group">
-                        
+                    <div class="form-group">                        
                         <label for="nombreAutoridad"><b style="color: black;">Nombre<b></label>
                         <input wire:model="nombreAutoridad" type="text" class="form-control" id="nombreAutoridad" placeholder="Nombre autoridad">@error('nombreAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <div class="form-group">
-                        
+                    <div class="form-group">                        
                         <label for="apellidosAutoridad"><b style="color: black;">Apellido<b></label>
                         <input wire:model="apellidosAutoridad" type="text" class="form-control" id="apellidosAutoridad" placeholder="Apellidos autoridad">@error('apellidosAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">                        
+                        <label for="email"><b style="color: black;">Correo<b></label>
+                        <input wire:model="email" type="text" class="form-control" id="email" placeholder="Correo autoridad">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">                        
+                        <label for="password"><b style="color: black;">Contraseña<b></label>
+                        <input wire:model="password" type="password" class="form-control" id="password" placeholder="Correo autoridad">@error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group" hidden > 
                         <label for="estadoAutoridad"><b style="color: black;">Estado<b></label>
                         <input wire:model="estadoAutoridad" value="1" type="text" class="form-control" id="estadoAutoridad" placeholder="Estado">@error('estadoAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                             
                     </div>
-                    <div class="form-group">
-                        
+                    <div class="form-group">                        
                         <label for="facultad_id"><b style="color: black;">facultad<b></label>
                         <select wire:model="facultad_id" type="text" class="form-control" id="facultad_id" placeholder="facultad">@error('facultad_id') <span class="error text-danger">{{ $message }}</span> @enderror
                             <option value="">Facultad</option>
                             @foreach ($facultades as $facultad)
-                                  <option value="{{$facultad->id}}"> {{$facultad->Nfacultad}}</option>      
-                            @endforeach
-                      
+                                  <option value="{{$facultad->id}}"> {{$facultad->Nfacultad}}</option>
+                            @endforeach                      
                         </select>
-                   
-                        </div>
+                        @error('facultad_id')
+                        <span class="error text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                 </form>
             </div>
@@ -83,7 +89,7 @@
                         <select wire:model="facultad_id" type="text" class="form-control" id="facultad_id" placeholder="facultad">@error('facultad_id') <span class="error text-danger">{{ $message }}</span> @enderror
                             <option value="">Facultad</option>
                             @foreach ($facultades as $facultad)
-                                  <option value="{{$facultad->id}}"> {{$facultad->Nfacultad}}</option>      
+                                  <option value="{{$facultad->id}}"> {{$facultad->Nfacultad}}</option>
                             @endforeach
                       
                         </select>
@@ -166,4 +172,3 @@
        </div>
     </div>
 </div>
-

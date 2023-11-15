@@ -16,9 +16,6 @@
 							<div>
 								<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
 							</div>
-							<div class="btn" style="background-color: #005c35;" data-bs-toggle="modal" data-bs-target="#createDataModal">
-							<i class="fa-solid fa-circle-plus"style="color: #f0eadc;"></i><h8 style="color: #f0eadc;"> Crear</h8>  
-							</div>
 						</div>
 					</div>
 				
@@ -54,8 +51,7 @@
 								{{-- <td>{{ $row->curriculum }}</td> --}}
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#ViewDataModal" class="dropdown-item" wire:click="view({{$row->estudianteId}})"><i class="fa-solid fa-eye"></i> Ver </a>
-									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar </a>
-									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>					
+									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>					
 								</td>
 							</tr>
 							@empty
