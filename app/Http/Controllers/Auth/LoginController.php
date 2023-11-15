@@ -43,7 +43,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if (!$user->external_id) {
+        if ($user->rol_id == 2) {
 
             $empresa = Empresa::where('user_id', $user->id)->first();
             $empresa_creada = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
@@ -60,6 +60,10 @@ class LoginController extends Controller
 
             // Redirección predeterminada para otros tipos de usuarios
             return redirect(RouteServiceProvider::HOME);
+        } elseif ($user->rol_id == 3) {
+            return redirect(RouteServiceProvider::HOMEADMIN);
+        } elseif ($user->rol_id == 4) {
+            return redirect(RouteServiceProvider::HOMEAUTORIDAD);
         }
     }
 }

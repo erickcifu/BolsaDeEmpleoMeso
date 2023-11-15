@@ -27,22 +27,23 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Logo</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nit</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Logo</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nit</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -92,18 +93,14 @@
 								
 								{{--<td>{{ $row->estadoSolicitud }}</td>--}}
 								<td>{{ $row->user->name }}</td>
+								<td>{{ $row->municipio->Departamento->nombreDepartamento}}</td>
+
 								<td>{{ $row->municipio->nombreMunicipio }}</td>
 								<td width="125">
 									<div class="dropdown">
 										
 										
 										<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar </a>
-									{{--	<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->empresaId}})"><i class="fa fa-trash"></i> Eliminar </a>
-										
-									--}}	
-
-									{{-- boton que cambie para que no usemos el destroy 
-									<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$row->empresaId}})"><i class="fa fa-trash"></i> Desactivar </a>	--}}
 									
 								</div>									
 								</td>

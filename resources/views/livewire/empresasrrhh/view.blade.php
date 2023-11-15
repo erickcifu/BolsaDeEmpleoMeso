@@ -26,21 +26,23 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Logo</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nit</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Logo</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nit</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 								
 							</tr>
 						</thead>
@@ -48,14 +50,14 @@
 							@forelse($empresas as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td> <img src="{{asset($row->logo)}}" width="50" height="50" class="img-fluid">
+								<td> <img src="{{asset($row->logo)}}" width="50" height="50" class="img-fluid"><a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar logo </a>
 								</td>
 								
 								<td>{{ $row->nombreEmpresa }}</td>
 								<td>{{ $row->nit }}</td>
-								<td> <a href="{{ $row->rtu }}" target="_blank"> ver archivo </a> </td>
+								<td> <a href="{{ $row->rtu }}" target="_blank"> ver archivo </a> <a data-bs-toggle="modal" data-bs-target="#rtuDataModal" class="dropdown-item" wire:click="editrtu({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar RTU</a> </td>
 								{{--<td>{{ $row->rtu }}</td>--}}
-								<td> <a href="{{ $row->patenteComercio }}" target="_blank"> ver archivo </a> </td>
+								<td> <a href="{{ $row->patenteComercio }}" target="_blank"> ver archivo </a>  <a data-bs-toggle="modal" data-bs-target="#panDataModal" class="dropdown-item" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar PDC </a> </td></td>
 								{{--<td>{{ $row->patenteComercio }}</td>--}}
 								<td>{{ $row->descripcionEmpresa }}</td>
 								<td>{{ $row->telefonoEmpresa }}</td>
@@ -67,14 +69,14 @@
 								<td>
 									<?php if ($row->estadoEmpresa == 1): ?>
 										<span class="badge" style="background-color: #005c35;"><b>Activo</b></span>
-										<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$row->empresaId}})"><i class="fa fa-trash"></i> Desactivar </a>
+										
 									<?php else: ?>
 										<span class="badge" style="background-color: #d3d3d3;"><b style="color: black;">Inactivo</b></span>
-										<a data-bs-toggle="modal" data-bs-target="#ActivarDataModal" class="dropdown-item" wire:click="edit2({{$row->empresaId}})"><i class="fa fa-edit"></i> Activar </a>
+										
 									<?php endif; ?>
 										
 								</td>
-                                <td>
+								<td>
 									<?php if ($row->estadoSolicitud == 'Aceptado'): ?>
 										<span class="badge" style="background-color: #005c35;"><b>Aceptado</b></span>
 								    <?php elseif ($row->estadoSolicitud == 'en Espera'): ?>
@@ -84,14 +86,23 @@
 										<span class="badge" style="background-color: #990d0d;"><b style="color: rgb(244, 241, 241);">{{ $row->estadoSolicitud }}</b></span>
 										
 									<?php endif; ?>
-									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar </a>
 										
 								</td>
+                                
 								
-								{{--<td>{{ $row->estadoSolicitud }} <a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar </a></td>--}}
+								{{--<td>{{ $row->estadoSolicitud }}</td>--}}
 								<td>{{ $row->user->name }}</td>
+								<td>{{ $row->municipio->Departamento->nombreDepartamento}}</td>
+
 								<td>{{ $row->municipio->nombreMunicipio }}</td>
-								
+								<td width="125">
+									<div class="dropdown">
+										
+										
+										<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar </a>
+									
+								</div>									
+								</td>
 							</tr>
 							@empty
 							<tr>
