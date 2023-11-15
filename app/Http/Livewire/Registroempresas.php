@@ -8,6 +8,9 @@ use App\Models\Empresa;
 use App\Models\Municipio;
 use App\Models\Departamento;
 use Livewire\WithFileUploads;
+use App\Mail\AltaEmpresa;
+use App\Mail\ActualizaEmpresa;
+use Illuminate\Support\Facades\Mail;
 
 class Registroempresas extends Component
 {
@@ -81,6 +84,7 @@ class Registroempresas extends Component
     {
         $usuario = auth()->user()->id;
         $this->validate();
+        Mail::to($this->correoEmpresa)->send(new AltaEmpresa($this-> nombreEmpresa));
 
         Empresa::create([
 
