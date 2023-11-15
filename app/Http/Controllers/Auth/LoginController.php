@@ -43,23 +43,21 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if (!$user->external_id) {
+        if ($user->rol_id == 2) {
 
-            $empresa = Empresa::where('user_id', $user->id)->first();
-            $empresa_creada = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
+            $empresa = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
 
             if (!$empresa) {
                 // Si es un usuario administrador, redirige a la página de administración
                 return redirect('registroempresa');
             }
-            if (!$empresa_creada) {
-                // Si es un usuario administrador, redirige a la página de administración
-                return redirect('empresasIni');
-            }
-
 
             // Redirección predeterminada para otros tipos de usuarios
             return redirect(RouteServiceProvider::HOME);
+        } elseif ($user->rol_id == 3) {
+            return redirect(RouteServiceProvider::HOMEADMIN);
+        } elseif ($user->rol_id == 4) {
+            return redirect(RouteServiceProvider::HOMEAUTORIDAD);
         }
     }
 }

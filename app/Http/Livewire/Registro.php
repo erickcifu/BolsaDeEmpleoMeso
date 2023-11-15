@@ -86,8 +86,8 @@ class Registro extends Component
             ]);
 
             $this->resetInput();
-            session()->flash('message', 'Estudiante Successfully created.');
-            return redirect()->route('home');
+            session()->flash('message', 'Perfil creado exitosamente.');
+            return redirect()->route('ofertasestudiantes');
         } else {
             dd("No hay un usuario autenticado");
         }
