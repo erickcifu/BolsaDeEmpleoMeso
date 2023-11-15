@@ -8,10 +8,12 @@ use App\Models\Carrera;
 use App\Models\Facultad;
 use App\Models\Municipio;
 use App\Models\Departamento;
+use App\Models\User;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
+use DB;
 
 class PerfilEstudiante extends Component
 {
@@ -23,6 +25,8 @@ class PerfilEstudiante extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $nombre, $apellidos, $carnet, $DPI, $correo, $numero_personal, $numero_domiciliar, $curriculum, $municipio_id, $carrera_id, $user_id;
+    public $user;
+
     public function render()
     {
         $facultades = Facultad::all();
@@ -145,4 +149,24 @@ class PerfilEstudiante extends Component
         $this->municipio_id = null; // Restablecer el valor de la carrera
     }
 
+    public function actualizarPerfil()
+    {
+        $this->user = Auth::user();
+        $this->user->estudiante->update([
+            'nombre' => $this-> nombre,
+			'apellidos' => $this-> apellidos,
+			'carnet' => $this-> carnet,
+			'DPI' => $this-> DPI,
+			'correo' => $this-> correo,
+			'numero_personal' => $this-> numero_personal,
+			'numero_domiciliar' => $this-> numero_domiciliar,
+			'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'),
+			'municipio_id' => $this-> municipio_id,
+			'carrera_id' => $this-> carrera_id,
+        ]);
+        dd($this->nombre, $this->apellidos);
+        session()->flash('message', 'Perfil actualizado exitosamente.');
+
+        return redirect()->route('MiPerfil');
+    }
 }

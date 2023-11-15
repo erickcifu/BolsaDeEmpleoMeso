@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\User;
 use App\Models\Estudiante;
 use App\Models\Carrera;
 use App\Models\Facultad;
@@ -12,6 +13,7 @@ use App\Models\Departamento;
 use Livewire\WithFileUploads;
 
 use DB;
+use \Auth;
 
 class Estudiantes extends Component
 {
@@ -32,29 +34,9 @@ class Estudiantes extends Component
 		$departamentos = Departamento::all();
 		$municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
 		$keyWord = '%'.$this->keyWord .'%';
+		$usuario=auth()->user()->id;
         return view('livewire.estudiantes.view', [
-            'estudiantes' => Estudiante::with('Municipio')
-						->orWhere('nombre', 'LIKE', $keyWord)
-						->orWhere('apellidos', 'LIKE', $keyWord)
-						->orWhere('carnet', 'LIKE', $keyWord)
-						->orWhere('DPI', 'LIKE', $keyWord)
-						->orWhere('correo', 'LIKE', $keyWord)
-						->orWhere('numero_personal', 'LIKE', $keyWord)
-						->orWhere('numero_domiciliar', 'LIKE', $keyWord)
-						->orWhere('curriculum', 'LIKE', $keyWord)
-						->orWhereHas('municipio', function ($query) use ($keyWord) {
-                            $query->where('nombreMunicipio', 'LIKE', $keyWord);
-							if ($this->departamento_id) {
-								$query->where('departamento_id', $this->departamento_id);
-							}
-                        })
-						->orWhereHas('carrera', function ($query) use ($keyWord) {
-							$query->where('Ncarrera', 'LIKE', $keyWord);
-							if ($this->facultad_id) {
-								$query->where('facultad_id', $this->facultad_id);
-							}
-						})
-						->orWhere('user_id', 'LIKE', $keyWord)
+            'estudiantes' => Estudiante::where('user_id',$usuario)
 						->paginate(10),
 						'carreras' => $carreras,
 						'facultades' => $facultades,
