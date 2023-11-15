@@ -107,6 +107,6 @@ class Registroempresas extends Component
 
         $this->resetInput();
         session()->flash('message', 'Registro de empresa creado exitosamente.');
-        return redirect()->route('home');
+        return redirect('empresasIni');
     }
 }
