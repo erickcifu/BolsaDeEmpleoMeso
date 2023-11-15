@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Municipio;
 use App\Models\Departamento;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RRHHEmpresa;
 
 class Empresasrrhh extends Component
 {
@@ -170,6 +172,7 @@ class Empresasrrhh extends Component
 			'estadoSolicitud' => 'required',
 			
         ]);
+		Mail::to($this->correoEmpresa)->send(new RRHHEmpresa($this-> nombreEmpresa,$this-> estadoSolicitud));
 
         if ($this->selected_id) {
 			$record = Empresa::find($this->selected_id);

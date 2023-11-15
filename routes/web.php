@@ -99,6 +99,7 @@ Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middle
 Route::view('departamentos', 'livewire.departamentos.index')->middleware('auth');
 Route::view('municipios', 'livewire.municipios.index')->middleware('auth');
 Route::view('empresas', 'livewire.empresas.index')->middleware('auth');
+Route::view('empresasIni', 'livewire.empresasIni.index')->middleware('auth');
 Route::view('empresasrrhh', 'livewire.empresasrrhh.index')->middleware('auth');
 Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middleware('auth');
 

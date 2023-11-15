@@ -31,7 +31,7 @@ class Empresas extends Component
     {
 		$usuario=auth()->user()->id;
 		//$keyWord = '%'.$this->keyWord .'%';
-        return view('livewire.empresas.view', [
+        return view('livewire.empresasIni.view', [
             'empresas' => Empresa::where('user_id',$usuario)
 						
 						->paginate(10),
