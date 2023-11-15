@@ -1,213 +1,74 @@
-<div class="container"> <div class="row justify-content-center"> <div class="col-md-12">
-    <body style="background-color: #d3d3d3">
-    <div class="float-center align-items-center" style="width: 70%;">
-        <h3 class="align-items-center" style="color: #005C38; padding-left: 1em;">Actualización de perfil</h3>
-    </div>
-    <div class="modal-body"  style="background-color: #ffffff">
-        <form style="width: 95%; padding-left: 2em;">
-            <br/>  
-           <div class="hstack gap-3">
-           <div style="display: inline-block; width: 100%;">
-           <div class="mb-2">
-               <label for="nombre"><b style="color: black">Nombres</b></label>
-               <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre"/>
-               @error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
-           </div>
-           </div>
-           
-           <div style="display: inline-block; width: 100%;">
-           <div class="mb-2">
-               <label for="apellidos"
-               ><b style="color: black">Apellidos</b></label
-               >
-               <input
-               wire:model="apellidos"
-               type="text"
-               class="form-control"
-               id="apellidos"
-               placeholder="Apellidos"
-               />
-               @error('apellidos')
-               <span class="error text-danger">{{ $message }}</span>
-               @enderror
-           </div>
-           </div>
-           </div>
-           <br/>
-           <div class="hstack gap-3">
-               <div style="display: inline-block; width: 100%;">
-               <div class="mb-2">
-                   <label for="carnet"
-                   ><b style="color: black">Carnet</b></label
-                   >
-                   <input
-                   wire:model="carnet"
-                   type="number"
-                   class="form-control"
-                   id="carnet"
-                   placeholder="Carnet"
-                   />@error('carnet')
-                   <span class="error text-danger">{{ $message }}</span>
-                   @enderror
-               </div>
-               </div>
-               <div style="display: inline-block; width: 100%;">
-               <div class="mb-2">
-                   <label for="DPI"><b style="color: black">Dpi</b></label>
-                   <input
-                   wire:model="DPI"
-                   type="number"
-                   class="form-control"
-                   id="DPI"
-                   placeholder="Dpi"
-                   />@error('DPI')
-                   <span class="error text-danger">{{ $message }}</span>
-                   @enderror
-               </div>
-               </div>
-           </div>
-           <br/>
-               <div class="hstack gap-3">
-                   <div style="display: inline-block; width: 100%;">
-                   <div class="mb-2">
-                       <label for="correo">
-                           <b style="color: black">Correo Electrónico</b>
-                       </label>
-                       <input
-                           wire:model="correo"
-                           type="email"
-                           class="form-control"
-                           id="correo"
-                           placeholder="Correo"
-                       />
-                       @error('correo')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-                   <div style="display: inline-block; width: 100%;">                
-                   <div class="mb-2">
-                       <label for="numero_personal"
-                       ><b style="color: black">Numero Personal</b></label
-                       >
-                       <input
-                       wire:model="numero_personal"
-                       type="number"
-                       size="8"
-                       value="00-000-000"
-                       class="form-control"
-                       id="numero_personal"
-                       placeholder="Numero Personal"
-                       />@error('numero_personal')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-               </div>
-               <br/>
-               <div class="hstack gap-3">
-                   <div style="display: inline-block; width: 100%;">
-                   <div class="mb-2">
-                       <label for="numero_domiciliar"><b style="color: black">Otro Numero de Telefono</b></label>
-                       <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar"
-                           placeholder="otro numero" />@error('numero_domiciliar')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-                   <div style="display: inline-block; width: 100%;">
-                   <div class="mb-2">
-                       <label for="curriculum"><b style="color: black">Cargar Curriculum</b></label>
-                       <input wire:model="curriculum" type="file"  accept="application/pdf" class="form-control" id="curriculum"
-                           placeholder="Curriculum" />@error('curriculum')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-               </div>
-               <br>
-               <div class="hstack gap-3">
-                   <div style="display: inline-block; width: 100%">
-                   <div class="mb-2">
-                       <label for="departamento_id"><b style="color: black">Departamento </b></label>
-                       <select wire:model="departamento_id" class="form-control" id="departamento_id"
-                       placeholder="Departamento" required>
-                           <option value="null" disabled selected>Seleccione una opción</option>
-                           @foreach ($departamentos as $departamento)
-                           <option value="{{ $departamento->departamentoId }}">
-                               {{ $departamento->nombreDepartamento }}
-                           </option>
-                           @endforeach
-                       </select>
-                       @error('departamento_id')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-                   <div style="display: inline-block; width: 100%;">
-                   <div class="mb-2">
-                       <label for="municipio_id"><b style="color: black">Municipio</b></label>
-                       <select wire:model="municipio_id" class="form-control" id="municipio_id" placeholder="Municipio">
-                           <option value="null" disabled selected>Seleccione una opción</option>
-                           @foreach ($municipios as $municipio)
-                           @if ($municipio->departamento_id ==
-                           $departamento_id)
-                           <option value="{{ $municipio->municipioId }}">
-                               {{ $municipio->nombreMunicipio }}
-                           </option>
-                           @endif @endforeach
-                       </select>
-                       @error('municipio_id')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-               </div>
-               <br/>
-               <div class="hstack gap-3">
-                   <div style="display: inline-block; width: 100%;">
-                   <div class="mb-2">
-                       <label for="facultad_id"><b style="color: black">Facultad</b></label>
-                       <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad">
-                           <option value="null" disabled selected>Seleccione una opción</option>
-                           @foreach ($facultades as $facultad)
-                           <option value="{{ $facultad->id }}">
-                               {{ $facultad->Nfacultad }}
-                           </option>
-                           @endforeach
-                       </select>
-                       @error('facultad_id')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-                   <div style="display: inline-block; width: 100%;">
-                   <div class="mb-2">
-                       <label for="carrera_id"><b style="color: black">Carrera</b></label>
-                       <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
-                           <option value="null" disabled selected>Seleccione una opción</option>
-                           @foreach ($carreras as $carrera)
-                           @if ($carrera->facultad_id == $facultad_id)
-                           <option value="{{ $carrera->id }}">{{ $carrera->Ncarrera }}</option>
-                           @endif
-                           @endforeach
-                       </select>
-                       @error('carrera_id')
-                       <span class="error text-danger">{{ $message }}</span>
-                       @enderror
-                   </div>
-                   </div>
-               </div>  
-               <br/>   
-           </form>     
-            </div>
-            <div class="modal-footer mt-3">
-                <button type="button" wire:click.prevent="store()" class="btn btn-primary"
-                    style="background-color: #005c35">
-                    Guardar
-                </button>
-            </div>
-        </div>
-    </div>
-    </body>
+@section('title', __('Estudiantes'))
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-header" style="background-color: #d3d3d3;">
+						<div style="display: flex; justify-content: space-between; align-items: center;">
+							<div class="float-left">
+								<h4>
+								Estudiantes </h4>
+							</div>
+							@if (session()->has('message'))
+							<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
+							@endif
+							<div>
+								<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
+							</div>
+							<div class="btn" style="background-color: #005c35;" data-bs-toggle="modal" data-bs-target="#createDataModal">
+							<i class="fa-solid fa-circle-plus"style="color: #f0eadc;"></i><h8 style="color: #f0eadc;"> Crear</h8>  
+							</div>
+						</div>
+					</div>
+				
+				<div class="card-body">
+						@include('livewire.estudiantes.modals')
+				<div class="table-responsive">
+					<table class="table table-bordered table-sm">
+						<thead class="thead">
+							<tr> 
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Apellidos</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carnet</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Dpi</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Personal</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Domiciliar</th>
+								{{-- <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</th> --}}
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+							</tr>
+						</thead>
+						<tbody>
+							@forelse($estudiantes as $row)
+							<tr>
+								<td>{{ $loop->iteration }}</td> 
+								<td>{{ $row->nombre }}</td>
+								<td>{{ $row->apellidos }}</td>
+								<td>{{ $row->carnet }}</td>
+								<td>{{ $row->DPI }}</td>
+								<td>{{ $row->correo }}</td>
+								<td>{{ $row->numero_personal }}</td>
+								<td>{{ $row->numero_domiciliar }}</td>
+								{{-- <td>{{ $row->curriculum }}</td> --}}
+								<td width="125" >
+									<a data-bs-toggle="modal" data-bs-target="#ViewDataModal" class="dropdown-item" wire:click="view({{$row->estudianteId}})"><i class="fa-solid fa-eye"></i> Ver </a>
+									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar </a>
+									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>					
+								</td>
+							</tr>
+							@empty
+							<tr>
+								<td class="text-center" colspan="100%">Sin datos </td>
+							</tr>
+							@endforelse
+						</tbody>
+					</table>						
+					<div class="float-end">{{ $estudiantes->links() }}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

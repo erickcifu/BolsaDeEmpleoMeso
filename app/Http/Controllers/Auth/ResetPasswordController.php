@@ -27,4 +27,24 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected function sendResetResponse()
+    {
+        $user = $this->guard()->user();
+
+        if($user->rol_id === 2) {
+            // IS Empresas
+            return redirect('/home');
+        } elseif($user->rol_id === 3){
+            // IS RRHH
+            return redirect('/homeAdmin');
+        } elseif($user->rol_id === 4){
+            // IS Autoridad Academica
+            return redirect('/homeAutoridad');
+        } else {
+            // IS Unknow
+            return redirect('/');
+        }
+        
+    }
 }
