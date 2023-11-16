@@ -67,9 +67,9 @@
                         <li class="nav-item">
                             <a href="{{ url('/empresasrrhh') }}" class="nav-link" style="color: #f0eadc;"> Solicitudes</a> 
                         </li>
-						<li class="nav-item">
+						{{-- <li class="nav-item">
                             <a href="{{ url('/empresas') }}" class="nav-link" style="color: #f0eadc;"> Empresas</a>
-                        </li>
+                        </li> --}}
 						<li class="nav-item">
                             <a href="{{ url('/estudiantes') }}" class="nav-link" style="color: #f0eadc;"> Estudiantes</a> 
                         </li>
