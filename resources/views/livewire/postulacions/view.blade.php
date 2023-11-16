@@ -21,32 +21,40 @@
 				<div class="card-body">
 						@include('livewire.postulacions.modals')
 				<div class="table-responsive">
-					<table class="table table-bordered table-sm">
+				<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</b></td> 
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Fecha de postulación</b></th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Oferta laboral</b></th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Postulante</b></th>
+                                <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</b></th>
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</b></td>
 							</tr>
 						</thead>
 						<tbody>
-							@forelse($postulacions as $row)
+                        @if($postulacions)
+                            @foreach($postulacions as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->fechaPostulacion }}</td>
-								<td>{{ $row-> oferta -> nombrePuesto }}</td>
+								<td>{{ $row-> estudiante -> nombre }}, {{ $row-> estudiante -> apellidos }}</td>
+                                <td>
+                                    @if($row->estudiante  && File::exists($row->estudiante->curriculum))
+                                        <a href="{{ $row->estudiante->curriculum }}" target="_blank"> Ver archivo </a>
+                                    @else
+                                        Sin currículum disponible
+                                    @endif
+                                </td>
 								<td width="90">
-									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Editar </a>
-									<a class="dropdown-item" onclick="confirm('Confirm Delete Postulacion id {{$row->id}}? \nDeleted Postulacions cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Eliminar </a> 	
-									<a data-bs-toggle="modal" data-bs-target="#createEntrevistaModal" class="dropdown-item" wire:click="setPostulacionId({{$row->id}})"><i class="fa fa-clipboard-question"></i> Entrevista </a>					
+									<a data-bs-toggle="modal" data-bs-target="#createEntrevistaModal" class="dropdown-item" wire:click="setPostulacionId({{$row->postulacionId}})"><i class="fa fa-clipboard-question"></i> Entrevista </a>					
 								</td>
 							</tr>
-							@empty
+							@endforeach
+                            @else
 							<tr>
 								<td class="text-center" colspan="100%">Sin datos</td>
 							</tr>
-							@endforelse
+                        @endif
 						</tbody>
 					</table>						
 					<div class="float-end">{{ $postulacions->links() }}</div>

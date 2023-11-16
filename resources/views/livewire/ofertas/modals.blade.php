@@ -730,8 +730,7 @@
                                     @endif
                                 </td>
 								<td width="90">
-									<a class="dropdown-item" onclick="confirm('Confirm Delete Postulacion id {{$row->id}}? \nDeleted Postulacions cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Eliminar </a> 	
-									<a data-bs-toggle="modal" data-bs-target="#createEntrevistaModal" class="dropdown-item" wire:click="setPostulacionId({{$row->id}})"><i class="fa fa-clipboard-question"></i> Entrevista </a>					
+									<a data-bs-toggle="modal" data-bs-target="#createEntrevistaModal" class="dropdown-item" wire:click="setPostulacionId({{$row->postulacionId}})"><i class="fa fa-clipboard-question"></i> Entrevista </a>					
 								</td>
 							</tr>
 							@endforeach
@@ -744,6 +743,50 @@
 					</table>						
 					</div>
 				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enrevista Modal -->
+<div wire:ignore.self class="modal fade" id="createEntrevistaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createEntrevistaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="createEntrevistaModalLabel" style="color: #f0eadc;">Agendar Entrevista</h5>
+                <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           <div class="modal-body">
+				<form>
+                    <div class="form-group">
+                        <label for="tituloEntrevista">Título de entrevista</label>
+                        <input wire:model="tituloEntrevista" type="text" class="form-control" id="tituloEntrevista" placeholder="Ej. Analista de sistemas">@error('tituloEntrevista') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="descripcionEntrevista">Descripción de entrevista</label>
+                        <textarea wire:model="descripcionEntrevista" type="text" class="form-control" id="descripcionEntrevista" placeholder="Ej. Usar vestimenta formal, traer papelería completa">@error('descripcionEntrevista') <span class="error text-danger">{{ $message }}</span> @enderror</textarea>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="FechaEntrevista">Fecha de entrevista</label>
+                        <input wire:model="FechaEntrevista" type="date" class="form-control" id="FechaEntrevista" placeholder="Fechaentrevista">@error('FechaEntrevista') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="horaInicio">Hora de inicio</label>
+                        <input wire:model="horaInicio" type="time" class="form-control" id="horaInicio" placeholder="Hora Inicio">@error('horaInicio') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label for="horaFinal">Hora de finalización</label>
+                        <input wire:model="horaFinal" type="time" class="form-control" id="horaFinal" placeholder="Hora Final">@error('horaFinal') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  close-btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" wire:click.prevent="newEntrevista()" class="btn btn-primary" data-bs-target="#VerPostulacionesModal" style="background-color: #005c35;">Guardar</button>
             </div>
         </div>
     </div>

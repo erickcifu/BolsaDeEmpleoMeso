@@ -24,7 +24,7 @@ class Estudiantes extends Component
     protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $nombre, $apellidos, $carnet, $DPI, $correo, $numero_personal, $numero_domiciliar, $curriculum, $municipio_id, $carrera_id, $user_id;
     public $record2; 
-	public $nombre_municipio, $nombre_carrera;
+	public $nombre_municipio, $nombre_carrera, $nombre_facultad, $nombre_departamento;
 
 	public function render()
     {
@@ -124,7 +124,7 @@ class Estudiantes extends Component
         'correo' => 'required|email|ends_with:@gmail.com',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'required | mimes:pdf',
+        'curriculum' => 'nullable  | mimes:pdf',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',
@@ -163,7 +163,7 @@ class Estudiantes extends Component
 			'correo' => 'required|email|ends_with:@gmail.com',
 			'numero_personal' => 'required | size:8',
 			'numero_domiciliar' => 'required |size:8',
-			
+			'curriculum' => 'nullable  | mimes:pdf',
 			'municipio_id' => 'required',
 			'carrera_id' => 'required',
 			'user_id' => 'required',
@@ -230,5 +230,8 @@ class Estudiantes extends Component
 		$this->curriculum = $record-> curriculum;
 		$this->nombre_municipio = $record-> municipio->nombreMunicipio;
 		$this->nombre_carrera = $record-> carrera->Ncarrera;
+        $this->nombre_facultad = $record-> carrera->facultad->Nfacultad;
+        $this->nombre_departamento= $record-> municipio->departamento->nombreDepartamento;
+        $this->departamento_id= $record-> municipio->departamento->departamentoId;
 	}
 }

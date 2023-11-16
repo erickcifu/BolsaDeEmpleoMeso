@@ -14,6 +14,7 @@ class PostulacionEstudiantes extends Component
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $fechaPostulacion, $oferta_id;
     public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $hora_inicio, $hora_final, $Contratado, $comentarioContratado, $postulacion_id;
+    
 
     public function render()
     {
