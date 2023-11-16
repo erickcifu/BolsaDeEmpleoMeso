@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Postulacion;
 use App\Models\Entrevista;
+use App\Models\Oferta;
 
 class Postulacions extends Component
 {
@@ -14,15 +15,18 @@ class Postulacions extends Component
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $fechaPostulacion, $oferta_id;
     public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $hora_inicio, $hora_final, $Contratado, $comentarioContratado, $postulacion_id;
-
-    public function render()
+    public $postulaciones, $oferta;
+    public function render($ofertaId)
     {
+        $this->oferta = Oferta::findOrFail($ofertaId);
+        $postulaciones = $this->oferta->postulacions;
 		$keyWord = '%'.$this->keyWord .'%';
         return view('livewire.postulacions.view', [
             'postulacions' => Postulacion::latest()
 						->orWhere('fechaPostulacion', 'LIKE', $keyWord)
 						->orWhere('oferta_id', 'LIKE', $keyWord)
 						->paginate(10),
+                        "postulacions"=>$this->postulaciones,
         ]);
     }
 	

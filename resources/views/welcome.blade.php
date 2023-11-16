@@ -39,12 +39,12 @@
                             class="zoom carousel-item @if($loop->index===0) active @endif"
                         >
                             <div class="title-card-home">
-                                <h1
+                                <h3
                                     class="text-center display-5"
                                     style="color: #f0eadc"
                                 >
                                     {{ $facultad }}
-                                </h1>
+                                </h3>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <img
@@ -60,9 +60,9 @@
                                 class="carousel-caption d-none d-md-block"
                                 style="color: #f0eadc"
                             >
-                                <h3>
+                                <h7>
                                     <strong> {{$row->puesto}}</strong>
-                                </h3>
+                                </h7>
                                 <p>{{$row->descripcion}}</p>
                             </div>
                         </div>
