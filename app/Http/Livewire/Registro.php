@@ -70,7 +70,7 @@ class Registro extends Component
             // Ahora puedes usar $userID como el ID del usuario en tu lógica
             // dd("Ahora puedes usar $userID como el ID del usuario en tu lógica");
             $this->validate();
-
+            $nombreDocumento = $this->curriculum->getClientOriginalName();
             Estudiante::create([
                 'nombre' => $this->nombre,
                 'apellidos' => $this->apellidos,
@@ -120,7 +120,7 @@ class Registro extends Component
         'correo' => 'required|email|ends_with:@gmail.com',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'required | mimes:pdf',
+        'curriculum' => 'nullable  | mimes:pdf',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',

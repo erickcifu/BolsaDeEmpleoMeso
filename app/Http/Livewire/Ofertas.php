@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Oferta;
 use App\Models\Empresa;
+use App\Models\Entrevista;
 use App\Models\User;
 use App\Models\Postulacion;
 use App\Models\Facultad;
@@ -23,12 +24,17 @@ class Ofertas extends Component
     public $selected_id, $keyWord, $resumenPuesto, $nombrePuesto,$responsabilidadesPuesto,$requisitosEducativos, $experienciaLaboral, $sueldoMax, $sueldoMinimo, $jornadaLaboral, $condicionesLaborales, $beneficios, $oportunidadesDesarrollo, $fechaMax, $imagenPuesto, $cantVacantes, $modalidadTrabajo, $edadRequerida, $generoRequerido, $comentarioCierre, $empresa_id, $facultad_id;
 	public $fechaPostulacion, $oferta_id;
 	public $ofertaId;
-	public $ofertapost;
+	public $id_postu;
+
+	//Campos de la entrevista
+	public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
+
 	//para el multiformulario
 	public $paso = 1;
 	public $mostrarErrores = false;
 	public $userID,	$empresaAut, $user, $ofertasLaborales;
-	public  $postulaciones;
+	public $postulaciones;
+	public $entrevistapost, $post;
 
 	public function mount()
     {
@@ -72,6 +78,12 @@ class Ofertas extends Component
 		}
 	}
 	
+	/*public function verPostulaciones($ofertaId)
+	{
+		$this->redirect('/postulacions/' . $ofertaId);
+	}*/
+
+
     public function cancel()
     {
         $this->resetInput();
@@ -458,6 +470,35 @@ public function validarPaso1()
 		
     }
 	
+
+	//FUNCION PARA OBETNER EL ID DESDE LA TABLA POSTULACIÓN
+    public function setPostulacionId($postulacionId)
+    {
+        $this->id_postu = $postulacionId;
+    }
+
+    //FUNCION PARA CREAR LA ENTREVISTA
+    public function newEntrevista(){
+        $this->validate([
+            'tituloEntrevista' => 'required',
+            'descripcionEntrevista' => 'required',
+            'FechaEntrevista' => 'required',
+        ]);
+
+        Entrevista::create([ 
+			'tituloEntrevista' => $this->tituloEntrevista,
+			'descripcionEntrevista' => $this->descripcionEntrevista,
+			'FechaEntrevista' => $this->FechaEntrevista,
+			'horaInicio' => $this->horaInicio,
+			'horaFinal' => $this->horaFinal,
+			'Contratado' => "0",
+			'comentarioContratado' => " ",
+			'postulacion_id' => $this->id_postu,
+        ]);
+
+        session()->flash('message', 'Entrevista agendada correctamente!');
+	}
+    
 	
 
 	public function idEliminar($ofertaId)

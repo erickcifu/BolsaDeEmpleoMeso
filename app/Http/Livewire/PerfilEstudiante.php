@@ -13,6 +13,7 @@ use App\Models\Departamento;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Http\UploadedFile;
 use DB;
 
 
@@ -27,6 +28,7 @@ class PerfilEstudiante extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $nombre, $apellidos, $carnet, $DPI, $correo, $numero_personal, $numero_domiciliar, $curriculum, $municipio_id, $carrera_id, $user_id;
+	public $recordcur;
 
     public function render()
     {
@@ -73,7 +75,7 @@ class PerfilEstudiante extends Component
 		'correo' => 'required|email|ends_with:@gmail.com',
 		'numero_personal' => 'required | size:8',
 		'numero_domiciliar' => 'required |size:8',
-		'curriculum' => 'required | mimes:pdf',
+		'curriculum' => 'sometimes|mimes:pdf',
 		'municipio_id' => 'required',
 		'carrera_id' => 'required',
 		'user_id' => 'required',
@@ -128,7 +130,8 @@ class PerfilEstudiante extends Component
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
 		$this->curriculum = $record-> curriculum;
-		// $this->departamentos = $record->departamento_id;
+		$this->departamento_id= $record-> municipio->departamento->departamentoId;
+		$this->facultad_id= $record-> carrera->facultad->id;
 		$this->municipio_id = $record-> municipio_id;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
@@ -144,7 +147,7 @@ class PerfilEstudiante extends Component
 			'correo' => 'required|email|ends_with:@gmail.com',
 			'numero_personal' => 'required | size:8',
 			'numero_domiciliar' => 'required |size:8',
-			
+			'curriculum' => 'sometimes | mimes:pdf',
 			'municipio_id' => 'required',
 			'carrera_id' => 'required',
 			'user_id' => 'required',
@@ -162,7 +165,7 @@ class PerfilEstudiante extends Component
 				'correo' => $this-> correo,
 				'numero_personal' => $this-> numero_personal,
 				'numero_domiciliar' => $this-> numero_domiciliar,
-				'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
+				'curriculum' =>  'storage/'.$this-> curriculum->store('cvs','public'),
 				'municipio_id' => $this-> municipio_id,
 				'carrera_id' => $this-> carrera_id,
 				'user_id' => $userID,
@@ -183,23 +186,21 @@ class PerfilEstudiante extends Component
 // *************************************
 	public function editCurriculum($estudianteId)
 	{
-		$recordcur = Estudiante::findOrFail($estudianteId);
+		$this->recordcur = Estudiante::findOrFail($estudianteId);
 		$this->selected_id = $estudianteId; 
-		$this->nombre = $recordcur-> nombre;
-		$this->curriculum = $recordcur-> curriculum;
+		$this->curriculum = $this->curriculum;
 	 
 	}
 	public function cv(){
+
 		if ($this->selected_id) {
-			$recordcur = Estudiante::find($this->selected_id);
-			$recordcur->update([ 
-			 'nombre' => $this-> nombre,
+			$this->recordcur = Estudiante::find($this->selected_id);
+			$this->recordcur->update([ 
 			 'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
 			]);
-
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'curriculum actualizado Exitosamente!.');
+			session()->flash('message', 'Curriculum actualizado Exitosamente!.');
 		}
 	}
 	//   *************************
