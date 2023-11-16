@@ -1,74 +1,99 @@
-@section('title', __('Estudiantes'))
-<div class="container-fluid">
-	<div class="row justify-content-center">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="card-header">
-					<div class="card-header" style="background-color: #d3d3d3;">
-						<div style="display: flex; justify-content: space-between; align-items: center;">
-							<div class="float-left">
-								<h4>
-								Estudiantes </h4>
-							</div>
-							@if (session()->has('message'))
-							<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
-							@endif
-							<div>
-								<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
-							</div>
-							<div class="btn" style="background-color: #005c35;" data-bs-toggle="modal" data-bs-target="#createDataModal">
-							<i class="fa-solid fa-circle-plus"style="color: #f0eadc;"></i><h8 style="color: #f0eadc;"> Crear</h8>  
-							</div>
-						</div>
-					</div>
-				
-				<div class="card-body">
-						@include('livewire.estudiantes.modals')
-				<div class="table-responsive">
-					<table class="table table-bordered table-sm">
-						<thead class="thead">
-							<tr> 
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Apellidos</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carnet</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Dpi</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Personal</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Domiciliar</th>
-								{{-- <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</th> --}}
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
-							</tr>
-						</thead>
-						<tbody>
-							@forelse($estudiantes as $row)
-							<tr>
-								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->nombre }}</td>
-								<td>{{ $row->apellidos }}</td>
-								<td>{{ $row->carnet }}</td>
-								<td>{{ $row->DPI }}</td>
-								<td>{{ $row->correo }}</td>
-								<td>{{ $row->numero_personal }}</td>
-								<td>{{ $row->numero_domiciliar }}</td>
-								{{-- <td>{{ $row->curriculum }}</td> --}}
-								<td width="125" >
-									<a data-bs-toggle="modal" data-bs-target="#ViewDataModal" class="dropdown-item" wire:click="view({{$row->estudianteId}})"><i class="fa-solid fa-eye"></i> Ver </a>
-									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar </a>
-									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>					
-								</td>
-							</tr>
-							@empty
-							<tr>
-								<td class="text-center" colspan="100%">Sin datos </td>
-							</tr>
-							@endforelse
-						</tbody>
-					</table>						
-					<div class="float-end">{{ $estudiantes->links() }}</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <body style="background-color: #d3d3d3">
+                <div class="float-center align-items-center" style="width: 70%;">
+                    <h2 class="align-items-center" style="color: #005C38; padding-left: 1em;">perfil del estudiante</h2>
+                </div>
+                <div class="card-body" style="background-color: #ffffff">
+                    @include('livewire.perfilEstudiante.modals')
+                    <form class="mx-auto mt-4" style="width: 95%;">
+                        <br/>
+                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                            @forelse($estudiantes as $row)
+                                <div class="col">
+                                    <div class="card mx-auto my-4" style="max-width: 600px; background-color: #ffffff">
+										<div class="card-head" style="inline-block; width: 100%; background-color: #d3d3d3">
+											<div style="display: inline-block; width: 100%;  padding-left: 1em;">
+												<div class="mb-2">
+                                            	<h3 class="card-title text-center"style="color: #005C38;">Nombre Completo <br/> {{ $row->nombre }} {{ $row->apellidos }}</h3>
+												</div>
+											</div>
+										</div>
+                                        <div class="card-body" style="background-color: #ffffff">
+											<div class="hstack gap-3">
+												<div style="display: inline-block; width: 100%;">
+													<div class="mb-2">
+														<p class="card-text fs-5">Carnet: {{ $row->carnet }} </p>
+													</div>
+												</div>
+												<div style="display: inline-block; width: 100%;">
+													<div class="mb-2">
+														<p class="card-text fs-5 ">DPI: {{ $row->DPI }}</p>
+													</div>
+												</div>
+											</div>
+												<p class="card-text fs-5">Correo: {{ $row->correo }}</p>
+											<div class="hstack gap-3">
+												<div style="display: inline-block; width: 100%;">
+													<div class="mb-2">
+														<p class="card-text fs-5">Celular: {{ $row->numero_personal }}</p>
+													</div>
+												</div>
+												<div style="display: inline-block; width: 100%;">
+													<div class="mb-2">
+														<p class="card-text fs-5">otro numero: {{ $row->numero_domiciliar }}</p>
+													</div>
+												</div>
+											</div>		
+												<!-- Agrega más campos según tus necesidades -->
+												<a>Curriculum</a>
+												<a href="{{ $row->curriculum }}" target="_blank" class="btn btn-secondary">Ver archivo</a>
+												<a data-bs-toggle="modal" data-bs-target="#curriculumDataModal" class="dropdown-item" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar curriculum</a> </td>
+												<div class="hstack gap-3">
+													<div style="display: inline-block; width: 100%;">
+														<div class="mb-2">
+															<p class="card-text fs-5">Departamento: {{ $row->municipio->Departamento->nombreDepartamento }}</p>
+														</div>
+													</div>
+													<div style="display: inline-block; width: 100%;">
+														<div class="mb-2">
+															<p class="card-text fs-5">Municipio: {{ $row->municipio->nombreMunicipio }}</p>
+														</div>
+													</div>
+												</div>	
+												<div class="hstack gap-3">
+													<div style="display: inline-block; width: 100%;">
+														<div class="mb-2">
+															<p class="card-text fs-5">Facultad: {{ $row->Carrera->Facultad->Nfacultad }}</p>
+														</div>
+													</div>
+													<div style="display: inline-block; width: 100%;">
+														<div class="mb-2">
+															<p class="card-text fs-5">Carrera: {{ $row->Carrera->Ncarrera }}</p>
+														</div>
+													</div>
+												</div>	
+											<div class="pie">	
+												<div class="modal-footer mt-3">
+													<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="btn btn-secondary"
+													wire:click="edit({{$row->estudianteId}})"style="background-color: #005c35">Editar</a>	
+												</div>
+											</div>
+										</div>
+                                    </div>
+                                </div>
+                            @empty
+                                <div class="col">
+                                    <p class="text-center">Sin datos</p>
+                                </div>
+                            @endforelse
+                        </div>
+                        <br/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    </div>
 </div>

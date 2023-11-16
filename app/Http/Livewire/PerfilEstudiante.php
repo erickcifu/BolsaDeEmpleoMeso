@@ -11,9 +11,10 @@ use App\Models\Facultad;
 use App\Models\Municipio;
 use App\Models\Departamento;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 
 use DB;
-use \Auth;
+
 
 class PerfilEstudiante extends Component
 {
@@ -118,6 +119,7 @@ class PerfilEstudiante extends Component
     {
         $record = Estudiante::findOrFail($estudianteId);
         $this->selected_id = $estudianteId; 
+
 		$this->nombre = $record-> nombre;
 		$this->apellidos = $record-> apellidos;
 		$this->carnet = $record-> carnet;
@@ -126,6 +128,7 @@ class PerfilEstudiante extends Component
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
 		$this->curriculum = $record-> curriculum;
+		// $this->departamentos = $record->departamento_id;
 		$this->municipio_id = $record-> municipio_id;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
@@ -133,30 +136,73 @@ class PerfilEstudiante extends Component
 
     public function update()
     {
-        $this->validate();
-
-        if ($this->selected_id) {
-			$record = Estudiante::find($this->selected_id);
-            $record->update([ 
-			'nombre' => $this-> nombre,
-			'apellidos' => $this-> apellidos,
-			'carnet' => $this-> carnet,
-			'DPI' => $this-> DPI,
-			'correo' => $this-> correo,
-			'numero_personal' => $this-> numero_personal,
-			'numero_domiciliar' => $this-> numero_domiciliar,
-			'curriculum' => $this-> curriculum,
-			'municipio_id' => $this-> municipio_id,
-			'carrera_id' => $this-> carrera_id,
-			'user_id' => $this-> user_id
-            ]);
-
-            $this->resetInput();
-            $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Estudiante Successfully updated.');
+        $this->validate([
+			'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
+			'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
+			'carnet' => 'required|integer',
+			'DPI' => 'required|size:13',
+			'correo' => 'required|email|ends_with:@gmail.com',
+			'numero_personal' => 'required | size:8',
+			'numero_domiciliar' => 'required |size:8',
+			
+			'municipio_id' => 'required',
+			'carrera_id' => 'required',
+			'user_id' => 'required',
+		]);
+		if (Auth::check()){
+			$userID = Auth::id();
+			$this->validate();
+			if ($this->selected_id) {
+				$record = Estudiante::find($this->selected_id);
+				$record->update([ 
+				'nombre' => $this-> nombre,
+				'apellidos' => $this-> apellidos,
+				'carnet' => $this-> carnet,
+				'DPI' => $this-> DPI,
+				'correo' => $this-> correo,
+				'numero_personal' => $this-> numero_personal,
+				'numero_domiciliar' => $this-> numero_domiciliar,
+				'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
+				'municipio_id' => $this-> municipio_id,
+				'carrera_id' => $this-> carrera_id,
+				'user_id' => $userID,
+				]);
+	
+				$this->resetInput();
+				$this->dispatchBrowserEvent('closeModal');
+				session()->flash('message', 'Estudiante Successfully updated.');
+			};
+			$this->resetInput();
+            session()->flash('message', 'Perfil actualizado exitosamente.');
+            return redirect()->route('ofertasestudiantes');
+		}	 else {
+            dd("No hay un usuario autenticado");
         }
-    }
 
+    }
+// *************************************
+	public function editCurriculum($estudianteId)
+	{
+		$recordcur = Estudiante::findOrFail($estudianteId);
+		$this->selected_id = $estudianteId; 
+		$this->nombre = $recordcur-> nombre;
+		$this->curriculum = $recordcur-> curriculum;
+	 
+	}
+	public function cv(){
+		if ($this->selected_id) {
+			$recordcur = Estudiante::find($this->selected_id);
+			$recordcur->update([ 
+			 'nombre' => $this-> nombre,
+			 'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
+			]);
+
+			$this->resetInput();
+			$this->dispatchBrowserEvent('closeModal');
+			session()->flash('message', 'curriculum actualizado Exitosamente!.');
+		}
+	}
+	//   *************************
 	public function eliminar($estudianteId)
 	{
 		$this->selected_id = $estudianteId;
@@ -184,7 +230,7 @@ class PerfilEstudiante extends Component
 		$this->correo = $record-> correo;
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
-		$this->curriculum = $record-> curriculum;
+		
 		$this->municipio_id = $record-> nombreMunicipio;
 		$this->carrera_id = $record-> carrera_id;
 		$this->user_id = $record-> user_id;
