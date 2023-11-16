@@ -45,12 +45,18 @@ class LoginController extends Controller
     {
         if ($user->rol_id == 2) {
 
-            $empresa = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
+            $empresa = Empresa::where('user_id', $user->id)->first();
+            $empresa_creada = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
 
             if (!$empresa) {
-                // Si es un usuario administrador, redirige a la página de administración
+              
                 return redirect('registroempresa');
             }
+            if (!$empresa_creada) {
+              
+                return redirect('empresasIni');
+            }
+
 
             // Redirección predeterminada para otros tipos de usuarios
             return redirect(RouteServiceProvider::HOME);
