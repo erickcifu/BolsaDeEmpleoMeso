@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <body style="background-color: #d3d3d3">
                 <div class="float-center align-items-center" style="width: 70%;">
-                    <h2 class="align-items-center" style="color: #005C38; padding-left: 1em;">perfil del estudiante</h2>
+                    <h2 class="align-items-center" style="color: #005C38; padding-left: 1em;">Perfil del estudiante</h2>
                 </div>
                 <div class="card-body" style="background-color: #ffffff">
                     @include('livewire.perfilEstudiante.modals')
@@ -16,7 +16,7 @@
 										<div class="card-head" style="inline-block; width: 100%; background-color: #d3d3d3">
 											<div style="display: inline-block; width: 100%;  padding-left: 1em;">
 												<div class="mb-2">
-                                            	<h3 class="card-title text-center"style="color: #005C38;">Nombre Completo <br/> {{ $row->nombre }} {{ $row->apellidos }}</h3>
+                                            	<h3 class="card-title text-center"style="color: #005C38;"><br/> {{ $row->nombre }} {{ $row->apellidos }}</h3>
 												</div>
 											</div>
 										</div>
