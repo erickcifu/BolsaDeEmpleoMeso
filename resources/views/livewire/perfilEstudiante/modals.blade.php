@@ -35,13 +35,15 @@
                         <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal">@error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
+            
                         <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
                         <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar">@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-                   
+                     
                     <div class="form-group">
                         <label for="departamento_id"><b style="color: black;">Departamento</b></label>
                         <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento">
+                        <option selected>Seleccionar departamento</option>
                             @foreach ($departamentos as $departamento)
                                 <option value="{{ $departamento->departamentoId }}">{{ $departamento->nombreDepartamento }}</option>
                             @endforeach
@@ -50,7 +52,8 @@
                     <div class="form-group">
                         <label for="municipio_id"><b style="color: black;">Municipio<b></label>
                         <select wire:model="municipio_id"  class="form-control" id="municipio_id" placeholder="Municipio">
-                            @foreach ($municipios as $municipio) <!-- Cambiar $municipios a $municipio -->
+                        <option selected>Seleccionar municipio</option>
+                            @foreach ($municipios as $municipio)
                                 @if ($municipio->departamento_id == $departamento_id)
                                     <option value="{{ $municipio->municipioId }}">{{ $municipio->nombreMunicipio }}</option>
                                 @endif
@@ -60,6 +63,7 @@
                     <div class="form-group">
                         <label for="facultad_id"><b style="color: black;">Facultad</b></label>
                         <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad">
+                        <option selected>Seleccionar facultad</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}">{{ $facultad->Nfacultad }}</option>
                             @endforeach
@@ -68,17 +72,15 @@
                     <div class="form-group">
                         <label for="carrera_id"><b style="color: black;">Carrera</b></label>
                         <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
-                            @foreach ($carreras as $carrera)
+                        <option selected>Seleccionar carrera</option>    
+                        @foreach ($carreras as $carrera)
                                 @if ($carrera->facultad_id == $facultad_id)
                                     <option value="{{ $carrera->id }}">{{ $carrera->Ncarrera }}</option>
                                 @endif
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="user_id"><b style="color: black;"><b>User</label>
-                        <input wire:model="user_id" type="text" class="form-control" id="user_id" placeholder="User Id">@error('user_id') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
+
 
                 </form>
             </div>
