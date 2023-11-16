@@ -147,7 +147,7 @@ class Estudiantes extends Component
 		$this->correo = $record-> correo;
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
-		$this->curriculum = $record ->curriculum;
+	
 		// $this->departamentos = $record->departamento_id;
 		$this->municipio_id = $record-> municipio_id;
 		$this->carrera_id = $record-> carrera_id;
@@ -163,7 +163,7 @@ class Estudiantes extends Component
 			'correo' => 'required|email|ends_with:@gmail.com',
 			'numero_personal' => 'required | size:8',
 			'numero_domiciliar' => 'required |size:8',
-			'curriculum' => 'nullable  | mimes:pdf',
+		
 			'municipio_id' => 'required',
 			'carrera_id' => 'required',
 			'user_id' => 'required',

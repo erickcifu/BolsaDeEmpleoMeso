@@ -75,7 +75,7 @@ class PerfilEstudiante extends Component
 		'correo' => 'required|email|ends_with:@gmail.com',
 		'numero_personal' => 'required | size:8',
 		'numero_domiciliar' => 'required |size:8',
-		'curriculum' => 'sometimes|mimes:pdf',
+	
 		'municipio_id' => 'required',
 		'carrera_id' => 'required',
 		'user_id' => 'required',
@@ -129,7 +129,7 @@ class PerfilEstudiante extends Component
 		$this->correo = $record-> correo;
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
-		$this->curriculum = $record-> curriculum;
+		
 		$this->departamento_id= $record-> municipio->departamento->departamentoId;
 		$this->facultad_id= $record-> carrera->facultad->id;
 		$this->municipio_id = $record-> municipio_id;
@@ -147,7 +147,7 @@ class PerfilEstudiante extends Component
 			'correo' => 'required|email|ends_with:@gmail.com',
 			'numero_personal' => 'required | size:8',
 			'numero_domiciliar' => 'required |size:8',
-			'curriculum' => 'sometimes | mimes:pdf',
+		
 			'municipio_id' => 'required',
 			'carrera_id' => 'required',
 			'user_id' => 'required',
@@ -165,7 +165,7 @@ class PerfilEstudiante extends Component
 				'correo' => $this-> correo,
 				'numero_personal' => $this-> numero_personal,
 				'numero_domiciliar' => $this-> numero_domiciliar,
-				'curriculum' =>  'storage/'.$this-> curriculum->store('cvs','public'),
+			
 				'municipio_id' => $this-> municipio_id,
 				'carrera_id' => $this-> carrera_id,
 				'user_id' => $userID,
@@ -194,8 +194,9 @@ class PerfilEstudiante extends Component
 	public function cv(){
 
 		if ($this->selected_id) {
-			$this->recordcur = Estudiante::find($this->selected_id);
-			$this->recordcur->update([ 
+			$recordcv = Estudiante::find($this->selected_id);
+			$recordcv->update([ 
+			
 			 'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
 			]);
 			$this->resetInput();
