@@ -135,6 +135,57 @@ class Estudiantes extends Component
     {
         $this->validateOnly($propertyEstudiante);
     }
+    public function edit($estudianteId)
+    {
+        $record = Estudiante::findOrFail($estudianteId);
+        $this->selected_id = $estudianteId; 
+
+		$this->nombre = $record-> nombre;
+		$this->apellidos = $record-> apellidos;
+		$this->carnet = $record-> carnet;
+		$this->DPI = $record-> DPI;
+		$this->correo = $record-> correo;
+		$this->numero_personal = $record-> numero_personal;
+		$this->numero_domiciliar = $record-> numero_domiciliar;
+		$this->curriculum = $record ->curriculum;
+		// $this->departamentos = $record->departamento_id;
+		$this->municipio_id = $record-> municipio_id;
+		$this->carrera_id = $record-> carrera_id;
+		$this->user_id = $record-> user_id;
+    }
+    public function update()
+    {
+        $this->validate([
+			'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
+			'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
+			'carnet' => 'required|integer',
+			'DPI' => 'required|size:13',
+			'correo' => 'required|email|ends_with:@gmail.com',
+			'numero_personal' => 'required | size:8',
+			'numero_domiciliar' => 'required |size:8',
+			
+			'municipio_id' => 'required',
+			'carrera_id' => 'required',
+			'user_id' => 'required',
+		]);if ($this->selected_id) {
+            $record = Estudiante::find($this->selected_id);
+            $record->update([ 
+            'nombre' => $this-> nombre,
+            'apellidos' => $this-> apellidos,
+            'carnet' => $this-> carnet,
+            'DPI' => $this-> DPI,
+            'correo' => $this-> correo,
+            'numero_personal' => $this-> numero_personal,
+            'numero_domiciliar' => $this-> numero_domiciliar,
+            'municipio_id' => $this-> municipio_id,
+            'carrera_id' => $this-> carrera_id,
+            ]);
+
+            $this->resetInput();
+            $this->dispatchBrowserEvent('closeModal');
+            session()->flash('message', 'Estudiante Successfully updated.');
+        };
+    }
     public function updatedFacultadId()
     {
         // Actualizar las carreras cuando cambie la facultad seleccionada

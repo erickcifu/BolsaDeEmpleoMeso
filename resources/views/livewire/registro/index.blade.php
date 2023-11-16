@@ -1,4 +1,5 @@
-@extends('layouts.estudianteMenu')
+@extends('layouts.registronavbar')
+@section('title', __('Dashboard')){{-- //ver que hace --}}
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
