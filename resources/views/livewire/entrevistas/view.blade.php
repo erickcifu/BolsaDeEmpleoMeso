@@ -37,7 +37,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->tituloEntrevista }}</td>
-								<td>{{ $row->FechaEntrevista }}</td>
+								<td>{{date('d-m-Y', strtotime($row->FechaEntrevista))   }}</td>
 								<td>{{ $row->horaInicio }}</td>
 								<td>{{ $row->horaFinal }}</td>
 								<td>
