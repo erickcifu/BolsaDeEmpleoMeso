@@ -40,7 +40,7 @@
 							@forelse($cartarecomendacions as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->fechaCarta }}</td>
+								<td>{{date('d-m-Y', strtotime($row->fechaCarta))	}}</td>
 								<td>{{ $row->cargoYTareasRealizadas }}</td>
 								<td>{{ $row->telefonoAutoridad }}</td>
 								

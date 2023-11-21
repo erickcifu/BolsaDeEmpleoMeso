@@ -41,7 +41,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->nombrePuesto }}</td>
-								<td id="fechaRegistrada">{{ $row->fechaMax }}</td>
+							    <td id="fechaRegistrada">{{ date('d-m-Y', strtotime($row->fechaMax)) }}</td>
 								<td>{{ $row->modalidadTrabajo }}</td>
 								<td>{{ $row->jornadaLaboral }}</td>
 								<td>{{ $row->facultad->Nfacultad }}</td>

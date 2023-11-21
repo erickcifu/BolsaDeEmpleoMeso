@@ -34,7 +34,7 @@
 							@forelse($postulacionStudent as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->fechaPostulacion }}</td>
+								<td>{{date('d-m-Y', strtotime($row->fechaPostulacion))}}</td>
 								<td>{{ $row-> oferta -> nombrePuesto }}</td>
 								<td width="90">
 									<a  data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->postulacionId}})"><i class="fa fa-trash"></i> Eliminar </a> 		
