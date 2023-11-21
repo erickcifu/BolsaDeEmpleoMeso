@@ -12,8 +12,9 @@
 						<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
 						@endif
 						<div>
-							<input wire:model='keyWord' type="text" class="form-control float-end" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
+							<input wire:model='keyWord' type="text" class="form-control" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
 						</div>
+						
 					</div>
 				
 				
@@ -24,21 +25,25 @@
 							<div class="card">
 								<h5 class="card-header" style="background-color: #005c35;"><b style="color: #f0eadc;">{{$row->nombrePuesto}}</b></h5>
 								<div class="card-body">
-									<h5 class="card-title"><b>Modalidad: </b>{{ $row->modalidadTrabajo }}</h5>
-										<p class="card-text">{{$row->resumenPuesto}}</p>	
+									<h5 class="card-title"><b>Empresa: {{ $row->empresa->nombreEmpresa }}</b></h5>
+										<h7 class="card-text">{{$row->resumenPuesto}}</h7>	
+										</br>
+										<small class="card-text"> Modalidad: {{ $row->modalidadTrabajo }} - {{ $row->jornadaLaboral }} - {{ $row->cantVacantes }} Vacantes</small>
+										<footer>
 										<a data-bs-toggle="modal" data-bs-target="#createPostDataModal" class="btn float-end" wire:click="setOfertaId({{$row->ofertaId}})" style="background-color: #005c35;"><i class="fa fa-file-lines" style="color: #f0eadc;"></i><h7 style="color: #f0eadc;">Postularme</h7></a>
-										
 										<a data-bs-toggle="modal" data-bs-target="#VerOfertaModal" class="btn float-end" wire:click="mostrarOferta({{$row->ofertaId}})" style="background-color: #d3d3d3;"><i class="fa fa-eye"></i><h7> Ver más</h7></a>
+										</footer>
 									</div>
 								</div>
 								</br>
-							@empty
-								<h5><b>Sin datos</b></h5>
-							
+								@empty
+								<div class="card">
+								<h5 class="card-header text-center"  style="background-color: #005c35;"><b style="color: #f0eadc;">Sin datos</b></h5>
+								</div>
 							@endforelse
 						</div>
 										
-					<div class="float-end">{{ $ofertasestudiantes->links() }}</div>
+					<div class="float-end">{{ $ofertaStudent->links() }}</div>
 					</div>
 				</div>
 			</div>
