@@ -52,8 +52,34 @@
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
                                         <label for="telefonoCv">Número de teléfono personal*</label>
-                                        <input wire:model="telefonoCv" type="text" class="form-control" id="telefonoCv" placeholder="12345678">
+                                        <input wire:model="telefonoCv" type="number" class="form-control" id="telefonoCv" placeholder="12345678">
                                           @error('telefonoCv') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <label for="publicaciones">Enlaces</label>
+                                <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces de github, portafolios, publicaciones de los proyectos que haz realizado.">
+                                </textarea>    
+                                @error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror                         
+                            </div>
+                            <br/>
+                            <div class="hstack gap-3">
+                                <div style="display: inline-block; width: 100%;">
+                                    <div class="mb-2">
+                                        <label for="nombreRef1">Nombre de referencia*</label>
+                                        <textarea wire:model="nombreRef1" type="text" class="form-control" id="nombreRef1" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
+                                        </textarea>
+                                        @error('nombreRef1') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                                <div style="display: inline-block; width: 100%;">
+                                    <div class="mb-2">
+                                        <label for="telRef1">Teléfono de referencia*</label>
+                                        <textarea wire:model="telRef1" type="number" class="form-control" id="telRef1" placeholder="Ingresa el número de teléfono">
+                                        </textarea>
+                                        @error('telRef1') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -61,18 +87,18 @@
                             <div class="hstack gap-3">
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
-                                        <label for="publicaciones">Enlaces*</label>
-                                        <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces de github, portafolios, publicaciones de los proyectos que haz realizado.">
+                                        <label for="nombreRef2">Nombre de referencia*</label>
+                                        <textarea wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
                                         </textarea>
-                                        @error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        @error('nombreRef2') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
-                                        <label for="referencias">Referencias personales*</label>
-                                        <textarea wire:model="referencias" type="text" class="form-control" id="referencias" placeholder="Ingresa referencias personales de la siguiente manera: -Nombre1, Teléfono1. -Nombre2, Teléfono2,">
+                                        <label for="telRef2">Teléfono de referencia*</label>
+                                        <textarea wire:model="telRef2" type="number" class="form-control" id="telRef2" placeholder="Ingresa el número de teléfono">
                                         </textarea>
-                                        @error('referencias') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        @error('telRef2') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -95,9 +121,7 @@
                             </div>
                             <!-- boton siguiente -->
                             <div class="form-group">
-                            <button wire:click="siguientePaso" type="button" class="btn btn-primary" style="background-color: #005c35;"
-                             @if($paso === 2) data-bs-toggle="collapse" data-bs-target="#collapseTwo" @endif
-                             >
+                            <button wire:click="siguientePaso" type="button" class="btn btn-primary" style="background-color: #005c35;" @if($paso === 2) data-bs-toggle="collapse" data-bs-target="#collapseTwo" @endif>
                                 Siguiente
                             </button>
                             </div>
@@ -112,81 +136,95 @@
                         </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
+                            <div class="accordion-body">
+                                <div class="form-group text-end">
+                                    <button type="button" wire:click="addCertificacion" class="btn btn-primary" style="background-color: #005c35;">
+                                        <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Certificación</h8>
+                                    </button>
+                                </div>
+                                @foreach($certificaciones as $indice => $cert)
+                                <div class="row mb-3">
+                                    <div class="col-3">
                                         <label for="nombreCertificacion">Certificado/Diploma*</label>
-                                        <input wire:model="nombreCertificacion" type="text" class="form-control" id="nombreCertificacion" placeholder="Si has obtenido alguna certificación o diploma, ingresalo en este campo" >
-                                        @error('nombreCertificacion') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input type="text" wire:model="certificaciones.{{ $indice }}.nombreCertificacion" class="form-control" placeholder="Si has obtenido alguna certificación o diploma, ingresalo en este campo">
+                                        @error('certificaciones.' . $indice . '.nombreCertificacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="anioCertificacion">Fecha en la que se obtuvo el certificado*</label>
-                                        <input wire:model="anioCertificacion" type="date" class="form-control" id="anioCertificacion" placeholder="Fecha en la que obtuviste el diploma o certificado.">
-                                        @error('anioCertificacion') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <div class="col-3">
+                                        <label for="anioCertificacion">Fecha certificación*</label>
+                                        <input type="date" wire:model="certificaciones.{{ $indice }}.anioCertificacion" class="form-control">
+                                        @error('certificaciones.' . $indice . '.anioCertificacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
+                                    <div class="col-3">
+                                        <label for="institucionCertificadora">Institución Certificadora*</label>
+                                        <input type="text" wire:model="certificaciones.{{ $indice }}.institucionCertificadora" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        @error('certificaciones.' . $indice . '.institucionCertificadora') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-3 d-flex align-items-center">
+                                        <a class="dropdown-item" wire:click="removeCertificacion({{$indice}})"><i class="fa fa-trash"></i> Eliminar </a>
+                                    </div>
+                                </div>            
+                                @endforeach                            
+                                <br/>
+                                <!-- fin requisitos del puesto -->
+                                <!-- boton anterior -->
+                                <div class="form-group">
+                                    <button wire:click="pasoAnterior" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" class="btn btn-primary" style="background-color: #005c35;" >Anterior</button>
+                                <!-- Fin boton anterior -->
+                                <!-- boton siguiente -->
+                                    <button type="button"  wire:click="siguientePaso" style="background-color: #005c35;"class="btn btn-primary"
+                                    @if($paso === 3)
+                                        data-bs-toggle="collapse" data-bs-target="#collapseThree"  @endif>Siguiente</button>
                                 </div>
+                                <!-- Fin boton siguiente -->
                             </div>
-                            <br/>
-                            <!-- fin requisitos del puesto -->
-                            <!-- boton anterior -->
-                            <div class="form-group">
-                                <button wire:click="pasoAnterior" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" class="btn btn-primary" style="background-color: #005c35;" >Anterior</button>
-                            <!-- Fin boton anterior -->
-                            <!-- boton siguiente -->
-                                <button type="button"  wire:click="siguientePaso" style="background-color: #005c35;"class="btn btn-primary"
-                                @if($paso === 3)
-                                    data-bs-toggle="collapse" data-bs-target="#collapseThree"  @endif>Siguiente</button>
-                            </div>
-                            <!-- Fin boton siguiente -->
-                        </div>
                         </div>
                     </div>
                     <div class="accordion-item" id="item3">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"  data-bs-parent="#accordionExample" disabled>
-                        <b> Experiencia Laboral </b>
-                        </button>
+                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"  data-bs-parent="#accordionExample" disabled>
+                                <b> Experiencia Laboral </b>
+                            </button>
+                        </h2>
                         <div id="collapseThree" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <label for="puestoTrabajo" style="font-size: 15px;"><b>Nombre del puesto*</b></label>
-                                <input wire:model="puestoTrabajo" type="text" class="form-control" id="puestoTrabajo" placeholder="Puesto que ocupaste dentro de la empresa." >
-                                @error('puestoTrabajo') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
+                                <div class="form-group text-end">
+                                    <button type="button" wire:click="addExperencia" class="btn btn-primary" style="background-color: #005c35;">
+                                        <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Experiencia</h8>
+                                    </button>
+                                </div>
+                                @foreach($experiencia as $indice => $cert)
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        <label for="puestoTrabajo">Nombre del puesto*</label>
+                                        <input type="text" wire:model="experiencia.{{ $indice }}.puestoTrabajo" class="form-control" placeholder="Si has obtenido alguna certificación o diploma, ingresalo en este campo">
+                                        @error('experiencia.' . $indice . '.puestoTrabajo') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="inicioExperiencia">Fecha de inicio*</label>
+                                        <input type="date" wire:model="experiencia.{{ $indice }}.inicioExperiencia" class="form-control">
+                                        @error('experiencia.' . $indice . '.inicioExperiencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="finExperiencia">Fecha de renuncia/despido*</label>
+                                        <input type="date" wire:model="experiencia.{{ $indice }}.finExperiencia" class="form-control">
+                                        @error('experiencia.' . $indice . '.finExperiencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="lugarTrabajo">Empresa*</label>
+                                        <input type="text" wire:model="experiencia.{{ $indice }}.lugarTrabajo" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        @error('experiencia.' . $indice . '.lugarTrabajo') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="descripcionLaboral">Resumen del puesto laboral*</label>
+                                        <input type="text" wire:model="experiencia.{{ $indice }}.descripcionLaboral" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        @error('experiencia.' . $indice . '.descripcionLaboral') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center">
+                                        <a class="dropdown-item" wire:click="removeExperencia({{$indice}})"><i class="fa fa-trash"></i> Eliminar </a>
+                                    </div>
+                                </div>            
                                 <br/>
-                                <div class="hstack gap-3">
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class="mb-2">
-                                            <label for="finExperiencia" style="font-size: 15px;"><b>Fecha de renuncia/despido*</b></label>
-                                            <input wire:model="finExperiencia" type="date" class="form-control" id="finExperiencia" placeholder="Fecha en la que dejaste de laborar para la empresa." >
-                                            @error('finExperiencia') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class="mb-2">
-                                            <label for="inicioExperiencia" style="font-size: 15px;"><b>Fecha de inicio*</b></label>
-                                            <input wire:model="inicioExperiencia" type="date" class="form-control" id="inicioExperiencia" placeholder="Fecha en la que iniciaste a laborar en la empresa.">@error('condicionesLaborales') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                </div>       
-                                <br/>
-                                <div class="hstack gap-3">
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class=" mb-2">
-                                            <label for="lugarTrabajo" style="font-size: 15px;"><b>Empresa*</b></label>
-                                            <input wire:model="lugarTrabajo" type="text" class="form-control" id="lugarTrabajo" placeholder="Empresa en la que trabajaste.">
-                                            @error('lugarTrabajo') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class="mb-2">
-                                            <label for="descripcionLaboral" style="font-size: 15px;"><b>Resumen del puesto laboral*</b></label>
-                                            <input wire:model="descripcionLaboral" type="text" class="form-control" id="descripcionLaboral" placeholder="Resumen del puesto que ocupaste en la empresa y tus responsabilidades principales.">
-                                            @error('descripcionLaboral') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                </div>   
+                                @endforeach
                                 <!-- Fin inputs Condiciones y beneficios -->
                                 <!-- inicio botones -->
 
@@ -204,55 +242,115 @@
                     </div>
                     <div class="accordion-item" id="item4">
                         <h2 class="accordion-header">
-                        <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"  data-bs-parent="#accordionExample" disabled>
-                        <b> Formación académica</b>
-                        </button>
+                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"  data-bs-parent="#accordionExample" disabled>
+                                <b> Formación académica</b>
+                            </button>
+                        </h2>
                         <div id="collapseFour" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="hstack gap-3">
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class=" mb-2">
-                                            <label for="anioInicioFormacion" style="font-size: 15px;"><b>Fecha de inicio*</b></label>
-                                            <input wire:model="anioInicioFormacion" type="date" class="form-control" id="anioInicioFormacion">
-                                            @error('anioInicioFormacion') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
+                                <div class="form-group text-end">
+                                    <button type="button" wire:click="addFormacion" class="btn btn-primary" style="background-color: #005c35;">
+                                        <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Formación</h8>
+                                    </button>
+                                </div>
+                                @foreach($formacion as $indice => $cert)
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        <label for="anioInicioFormacion">Fecha de inicio*</label>
+                                        <input type="date" wire:model="formacion.{{ $indice }}.anioInicioFormacion" class="form-control">
+                                        @error('formacion.' . $indice . '.anioInicioFormacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class=" mb-2">
-                                            <label for="anioFinFormacion" style="font-size: 15px;"><b>Fecha de fin*</b></label>
-                                            <input wire:model="anioFinFormacion" type="date" class="form-control" id="anioFinFormacion" >
-                                            @error('anioFinFormacion') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
+                                    <div class="col-4">
+                                        <label for="anioFinFormacion">Fecha de fin*</label>
+                                        <input type="date" wire:model="formacion.{{ $indice }}.anioFinFormacion" class="form-control">
+                                        @error('formacion.' . $indice . '.anioFinFormacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
-                                </div>       
-                                <br/>
-                                <div class="hstack gap-3">
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class=" mb-2">
-                                            <label for="institucionFormacion" style="font-size: 15px;"><b>Establecimiento educativo*</b></label>
-                                            <input wire:model="institucionFormacion" type="text" class="form-control" id="institucionFormacion" placeholder="Nombre del establecimiento educativo">
-                                            @error('institucionFormacion') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
+                                    <div class="col-4">
+                                        <label for="institucionFormacion">Establecimiento educativo*</label>
+                                        <input type="text" wire:model="formacion.{{ $indice }}.institucionFormacion" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        @error('formacion.' . $indice . '.institucionFormacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class="mb-2">
-                                            <label for="nivelFormacion" style="font-size: 15px;"><b>Nivel educativo*</b></label>
-                                            <select wire:model="nivelFormacion" type="text" class="form-control" id="nivelFormacion" placeholder="Nivel educativo">
+                                    <div class="col-4">
+                                        <label for="tituloObtenido">Título Obtenido*</label>
+                                        <input type="text" wire:model="formacion.{{ $indice }}.tituloObtenido" class="form-control" placeholder="Título obtenido">
+                                        @error('formacion.' . $indice . '.tituloObtenido') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4">                                        
+                                        <label for="nivelFormacion" style="font-size: 15px;"><b>Nivel educativo*</b></label>
+                                        <select wire:model="formacion.{{ $indice }}.nivelFormacion" type="text" class="form-control" id="nivelFormacion" placeholder="Nivel educativo">
                                             <option selected>Nivel educativo</option>
                                             <option value="Diversificado">Diversificado</option>
                                             <option value="Licenciatura">Licenciatura</option>
                                             <option value="Maestría">Maestría</option>
                                             <option value="Doctorado">Doctorado</option>
                                         </select>
-                                            @error('nivelFormacion') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
+                                        @error('formacion.' . $indice . '.nivelFormacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
-                                </div>   
+                                    <div class="col-4 d-flex align-items-center">
+                                        <a class="dropdown-item" wire:click="removeFormacion({{$indice}})"><i class="fa fa-trash"></i> Eliminar </a>
+                                    </div>
+                                </div>            
+                                <br/>
+                                @endforeach
                                 <!-- Fin inputs Condiciones y beneficios -->
                                 <!-- inicio botones -->
                                 <div class="form-group">
                                 <!-- boton anterior -->
                                     <button type="button" wire:click="pasoAnterior" data-bs-toggle="collapse" data-bs-target="#collapseThree" class="btn btn-primary" style="background-color: #005c35;" >Anterior</button>
+                                    <button type="button"  wire:click="siguientePaso" style="background-color: #005c35;"class="btn btn-primary"
+                                    @if($paso === 5)
+                                        data-bs-toggle="collapse" data-bs-target="#collapseFive"  @endif>Siguiente</button>
+                                </div>
+                                <!-- Fin botones -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item" id="item5">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"  data-bs-parent="#accordionExample" disabled>
+                                <b> Idiomas</b>
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="form-group text-end">
+                                    <button type="button" wire:click="addIdiomas" class="btn btn-primary" style="background-color: #005c35;">
+                                        <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Idioma</h8>
+                                    </button>
+                                </div>
+                                @foreach($idiomas as $indice => $idi)
+                                <div class="row mb-3">
+                                    <div class="col-4">
+                                        <label for="idiomaId" style="font-size: 15px;"><b>Idioma*</b></label>
+                                        <select wire:model="idiomas.{{ $indice }}.idiomaId" type="text" class="form-control" id="idiomas.{{ $indice }}.idiomaId">
+                                            <option selected disabled>Nivel educativo</option>
+                                            @foreach($idiomasTable as $idioma)
+                                            <option value="{{ $idioma->idiomaId }}">{{$idioma->nombreIdioma}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('idiomas.' . $indice . '.idiomaId') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4">                                        
+                                        <label for="nivelIdioma" style="font-size: 15px;"><b>Nivel de Idioma*</b></label>
+                                        <select wire:model="idiomas.{{ $indice }}.nivelIdioma" type="text" class="form-control" id="nivelIdioma" placeholder="Nivel educativo">
+                                            <option selected>Nivel idioma</option>
+                                            <option value="Basico">Básico</option>
+                                            <option value="Intermedio">Intermedio</option>
+                                            <option value="Avanzado">Avanzado</option>
+                                        </select>
+                                        @error('formacion.' . $indice . '.nivelIdioma') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center">
+                                        <a class="dropdown-item" wire:click="removeIdiomas({{$indice}})"><i class="fa fa-trash"></i> Eliminar </a>
+                                    </div>
+                                </div>
+                                <br/>
+                                @endforeach
+                                <!-- Fin inputs Condiciones y beneficios -->
+                                <!-- inicio botones -->
+                                <div class="form-group">
+                                <!-- boton anterior -->
+                                    <button type="button" wire:click="pasoAnterior" data-bs-toggle="collapse" data-bs-target="#collapseFour" class="btn btn-primary" style="background-color: #005c35;" >Anterior</button>
                                 </div>
                                 <!-- Fin botones -->
                             </div>

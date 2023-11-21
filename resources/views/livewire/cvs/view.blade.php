@@ -14,8 +14,13 @@
 						<div>
 							<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
 						</div>
-						<div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
-							<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
+						<div>
+							<div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
+								<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
+							</div>
+							<div class="btn" wire:click="downloadCV()" style="background-color: #005c35;" >
+								<i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -45,7 +50,7 @@
 								<td>{{ $row->telefonoCv }}</td>
 								<td width="90">
 									
-									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Editar </a>
+									<!-- <a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Editar </a> -->
 									<a class="dropdown-item" onclick="confirm('Confirm Delete Cv id {{$row->cvId}}? \nDeleted Cvs cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->cvId}})"><i class="fa fa-trash"></i> Eliminar </a> 						
 								</td>
 							</tr>
