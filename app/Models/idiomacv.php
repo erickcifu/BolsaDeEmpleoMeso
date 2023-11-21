@@ -18,9 +18,7 @@ class idiomacv extends Model
     protected $fillable = [
         'idioma_id',
         'cv_id',
-        'nivelHablado',
-        'nivelEscrito',
-        'nivelLectura'
+        'nivelIdioma',
     ];
 
     /**
