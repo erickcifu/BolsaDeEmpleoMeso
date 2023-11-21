@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Res3Seeder::class);
         $this->call(RolSeeder::class);
         $this->call(UsuarioSeeder::class);
+        $this->call(Idiomas::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Postulacion;
 use App\Models\Entrevista;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PostulacionEstudiantes extends Component
 {
@@ -14,22 +16,36 @@ class PostulacionEstudiantes extends Component
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $fechaPostulacion, $oferta_id;
     public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $hora_inicio, $hora_final, $Contratado, $comentarioContratado, $postulacion_id;
-    
+    public $mensaje, $usuarioAutenticado, $postulacionesEstudiante;
+    public $record2;
 
     public function render()
     {
-		$keyWord = '%'.$this->keyWord .'%';
-        return view('livewire.postulacions.view', [
-            'postulacions' => Postulacion::latest()
-						->orWhere('fechaPostulacion', 'LIKE', $keyWord)
-						->orWhere('oferta_id', 'LIKE', $keyWord)
-						->paginate(10),
-        ]);
+        // Obtén el usuario autenticado
+        $this->usuarioAutenticado = Auth::user();
+
+        // Verifica si el usuario tiene un perfil de estudiante
+        if ($this->usuarioAutenticado->Estudiante) {
+            // Obtén las postulaciones del estudiante
+            $this->postulacionesEstudiante = $this->usuarioAutenticado->postulacionesEstudiante;
+
+            $keyWord = '%'.$this->keyWord .'%';
+            return view('livewire.postulacionestudiantes.postulacionestudiante', [
+                'postulacionStudent' => Postulacion::latest()
+                            ->orWhere('fechaPostulacion', 'LIKE', $keyWord)
+                            ->orWhere('oferta_id', 'LIKE', $keyWord)
+                            ->paginate(10), $this->postulacionesEstudiante
+            ]);
+        } else {
+            // Manejar el caso donde el usuario no tiene un perfil de estudiante
+            $this->mensaje = "No existe el usuario o no es un estudiante";
+        }
     }
-	
+		
+
     public function cancel()
     {
-        $this->resetInput();
+        $this->dispatchBrowserEvent('closeModal');
     }
 	
     private function resetInput()
@@ -78,6 +94,21 @@ class PostulacionEstudiantes extends Component
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Postulación actualizada!.');
+        }
+    }
+
+    //Eliminar
+    public function edit2($postulacionId)
+    {
+        $this->record2 = Postulacion::where('postulacionId', $postulacionId)->first();
+    }
+
+	//Método de eliminación
+	public function destroy()
+    {
+        if ($this->record2) {
+			Postulacion::where('postulacionId', $this->record2->postulacionId)->delete();
+			session()->flash('message', 'Postulación eliminada correctamente');
         }
     }
 

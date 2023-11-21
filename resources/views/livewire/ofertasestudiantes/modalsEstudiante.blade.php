@@ -1,86 +1,84 @@
 <!-- Show Modal -->
-<div wire:ignore.self class="modal fade" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerOfertaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
+            <form>
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Detalles de oferta</h5>
+                <h5 class="modal-title" id="VerOfertaModalLabel" style="color: #f0eadc;"><b>{{ $nombrePuesto }}</b></h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
-                <form>
-					<input type="hidden" wire:model="selected_id">
-                    
-                    <div class="form-group">
-                        <img wire:model="imagen"  src="https://www.marcelomacias.com/data/blog/10395/images/original/273/disenografico.jpg" class="img-fluid" id="imagen" alt="Responsive image">
+                    <div class="object-fit-cover border rounded" >
+                    @if ($imagenPuesto)
+                        <img src="{{ asset($imagenPuesto) }}"  class="img-fluid">
+                    @else
+                        <!-- Mostrar algo cuando la imagen no está disponible -->
+                        <span>Imagen no disponible</span>
+                    @endif
                     </div>
                     <br/>
                     <div class="form-group">
-                        <input wire:model="puesto" type="text" class="form-control" id="puesto" readonly>@error('puesto') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <h5 for="nombre_empresa"><b style="color: black;">{{ $nombre_empresa }}</b></h5>
                     </div>
+                    <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha límite para postulación: {{ $fechaMax }}</small>
+                    <br/>
+                    <small style="color: #373737;"><i class="fa-solid fa-briefcase"></i>  Modalidad: {{ $modalidadTrabajo }} - {{ $jornadaLaboral }} - {{ $cantVacantes }} Vacantes</small>
+                    <br/>
+                    <small style="color: #373737;"><i class="fa-solid fa-money-bill-wave"></i> Sueldo: Q.{{ $sueldoMinimo }} - Q.{{ $sueldoMax }}</small>
+                    <br/>
                     <br/>
                     <div class="form-group">
-                        <label for="sueldoMinimo"><b style="color: black;">Descripción del empleo</b></label>
-                        <textarea wire:model="descripcion" type="text" class="form-control" id="descripcion" readonly>@error('descripcion') <span class="error text-danger">{{ $message }}</span> @enderror </textarea>
+                        <h5 for="resumenPuesto"><b style="color: black;">Acerca del empleo</b></h5>
+                        <p style="color: #373737;">{{ $resumenPuesto }}</p>
                     </div>
                     <br/>
-                    <div class="form-group">
-                        <label for="sueldoMinimo"><b style="color: black;">Sueldo mínimo</b></label>
-                        <input wire:model="sueldoMinimo" type="float" class="form-control" id="sueldoMinimo" readonly>@error('sueldoMinimo') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
+                    <div class="hstack gap-3">
+                            <div style="display: inline-block; width: 100%;">
+                                <div class="mb-2">
+                                    <h5 for="edadRequerida"><b style="color: black;">Edad requerida</b></h5>
+                                    <p style="color: #373737;">{{ $edadRequerida }} Años</p>
+                                </div>
+                            </div>
+                            <div style="display: inline-block; width: 100%;">
+                                <div class="mb-2">
+                                    <h5 for="generoRequerido"><b style="color: black;">Género requerido</b></h5>
+                                    <p style="color: #373737;">{{ $generoRequerido }}</p>
+                                </div>
+                            </div>
+                        </div>
                     <br/>
                     <div class="form-group">
-                        <label for="sueldoMax"><b style="color: black;">Sueldo máximo</b></label>
-                        <input wire:model="sueldoMax" type="float" class="form-control" id="sueldoMax" readonly>@error('sueldoMax') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <h5><b style="color: black;">- Requerimientos -</b></h5>
+                        <h8 for="requisitosEducativos"><b style="color: black;">Formación académica</b></h8>
+                        <p style="color: #373737;">{{ $requisitosEducativos }}</p>
+                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+                        <h8 for="experienciaLaboral"><b style="color: black;">Experiencia laboral</b></h8>
+                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+                        <h8 for="experienciaLaboral"><b style="color: black;">Habilidades requeridas</b></h8>
                     </div>
                     <br/>
-                    <div class="form-group">
-                        <label for="fecha"><b style="color: black;">Fecha límite para postulación</b></label>
-                        <input wire:model="fecha" type="date" class="form-control" id="fecha" readonly>@error('fecha') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
                     <br/>
                     <div class="form-group">
-                        <label for="puestoVacante"><b style="color: black;">Cantidad de vacantes</b></label>
-                        <input wire:model="puestoVacante" type="number" class="form-control" id="puestoVacante" readonly>@error('puestoVacante') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <label for="tipoContratacion"><b style="color: black;">Modalidad</b></label>
-                        <select wire:model="tipoContratacion" type="text" class="form-control" id="tipoContratacion" readonly>@error('tipoContratacion') <span class="error text-danger">{{ $message }}</span> @enderror 
-                            <option selected>Tipo de contratación</option>
-                            <option value="Virtual">Virtual</option>
-                            <option value="Presencial">Presencial</option>
-                            <option value="Híbrido">Híbrido</option>
-                        </select>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <label for="edadRequerida"><b style="color: black;">Edad requerida</b></label>
-                        <input wire:model="edadRequerida" type="number" class="form-control" id="edadRequerida" readonly>@error('edadRequerida') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <label for="genero"><b style="color: black;">Género requerido</b></label>
-                        <select wire:model="genero" type="text" class="form-control" id="genero" readonly>@error('genero') <span class="error text-danger">{{ $message }}</span> @enderror 
-                            <option selected>Género</option>
-                            <option value="Masculino">Masculino</option>
-                            <option value="Femenino">Femenino</option>
-                            <option value="Ambos">Ambos</option>
-                        </select>
-                    </div>
-                    <br/>
-                    <div class="form-group">
-                        <label for="perfil"><b style="color: black;">Habilidades requeridas</b></label>
-                        <input wire:model="perfil" type="text" class="form-control" id="perfil" readonly>@error('perfil') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <h5><b style="color: black;">- Beneficios y oportunidades -</b></h5>
+                        <h8 for="beneficios"><b style="color: black;">Beneficios</b></h8>
+                        <p style="color: #373737;">{{ $beneficios }}</p>
+                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+                        <h8 for="oportunidadesDesarrollo"><b style="color: black;">Oportunidades de crecimiento</b></h8>
+                        <p style="color: #373737;">{{ $oportunidadesDesarrollo }}</p>
+                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+                        <h8 for="experienciaLaboral"><b style="color: black;">Condiciones laborales</b></h8>
+                        <p style="color: #373737;">{{ $condicionesLaborales }}</p>
                     </div>
                     <div class="form-group">
                         <label for="empresa_id"></label>
                         <input wire:model="empresa_id" type="number" class="form-control" id="empresa_id" value="1" hidden>@error('empresa_id') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-
+                    <input type="hidden" wire:model="selected_id"/>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cerrar</b></button>
             </div>
        </div>
     </div>

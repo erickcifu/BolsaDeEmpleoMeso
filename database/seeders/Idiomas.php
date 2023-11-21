@@ -22,7 +22,7 @@ class Idiomas extends Seeder
             'nombreIdioma' => 'Inglés',
         ]);
         $Idioma3 = Idioma::create([
-            'nombreIdioma' => 'Español',
+            'nombreIdioma' => 'Italiano',
         ]);
         $Idioma4 = Idioma::create([
             'nombreIdioma' => 'Chino',

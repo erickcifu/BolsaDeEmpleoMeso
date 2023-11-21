@@ -16,7 +16,7 @@ return new class extends Migration
             $table->bigIncrements('idiomacvId');
             $table->unsignedBigInteger('idioma_id')->nullable();
             $table->unsignedBigInteger('cv_id')->nullable();
-            $table->float('nivelIdioma');
+            $table->string('nivelIdioma');
             $table->foreign('idioma_id')->references('idiomaId')->on('idiomas')->onDelete(null);
             $table->foreign('cv_id')->references('cvId')->on('cvs')->onDelete('cascade');
             $table->timestamps();

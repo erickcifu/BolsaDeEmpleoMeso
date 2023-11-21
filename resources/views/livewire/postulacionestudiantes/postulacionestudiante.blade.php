@@ -1,4 +1,4 @@
-@section('title', __('PostulacionEstudiantes'))
+@section('title', __('PostulacionEstudiante'))
 <div class="container-fluid">
 	<div class="row justify-content-center">
 		<div class="col-md-12">
@@ -19,7 +19,7 @@
 				</div>
 				
 				<div class="card-body">
-						@include('livewire.postulacionestudiante.modalsPostulacionEstudiante')
+						@include('livewire.postulacionestudiantes.modals')
 				<div class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
@@ -31,13 +31,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							@forelse($postulacions as $row)
+							@forelse($postulacionStudent as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $row->fechaPostulacion }}</td>
 								<td>{{ $row-> oferta -> nombrePuesto }}</td>
 								<td width="90">
-									<a class="dropdown-item" onclick="confirm('Confirm Delete Postulacion id {{$row->id}}? \nDeleted Postulacions cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Eliminar </a> 		
+									<a  data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->postulacionId}})"><i class="fa fa-trash"></i> Eliminar </a> 		
 								</td>
 							</tr>
 							@empty
@@ -47,7 +47,7 @@
 							@endforelse
 						</tbody>
 					</table>						
-					<div class="float-end">{{ $postulacionestudiantes->links() }}</div>
+					<div class="float-end">{{ $postulacionStudent->links() }}</div>
 					</div>
 				</div>
 			</div>
