@@ -27,6 +27,9 @@ class OfertasEstudiantes extends Component
 	public $fechaPostulacion, $oferta_id;
 	public $user_id, $user, $mensaje, $estudiante, $ofertas;
 	public $perfil, $postulacionExistente;
+	public $nombre_empresa;
+    public $facultadSeleccionada;
+    public $ofertaFacultad, $facultades;
 
     public function mount()
     {
@@ -36,7 +39,7 @@ class OfertasEstudiantes extends Component
 
     public function render()
     {
-        $this->Postulaciones = Postulacion::all();
+       $this->Postulaciones = Postulacion::all();
 	   $this->user_id = Auth::id();
 	   $this->user = User::find($this->user_id); 
 	   if ($this->user && $this->user->Estudiante){
@@ -45,10 +48,9 @@ class OfertasEstudiantes extends Component
     
 			if ($this->estudiante->Carrera && $this->estudiante->Carrera->Facultad) {
 				$this->ofertas = $this->estudiante->Carrera->Facultad->Ofertas;
-				
-        $keyWord = '%'.$this->keyWord .'%';
-        return view('livewire.ofertasestudiantes.ofertas-estudiantes', [
-            'ofertasestudiantes' => Oferta::latest()
+				$keyWord = '%'.$this->keyWord .'%';
+       	 		return view('livewire.ofertasestudiantes.view', [
+            	'ofertaStudent' => Oferta::latest()
 									->orWhere('resumenPuesto', 'LIKE', $keyWord)
 									->orWhere('nombrePuesto', 'LIKE', $keyWord)
 									->orWhere('imagenPuesto', 'LIKE', $keyWord)
@@ -62,23 +64,19 @@ class OfertasEstudiantes extends Component
 									->orWhere('sueldoMax', 'LIKE', $keyWord)
 									->orWhere('empresa_id', 'LIKE', $keyWord)
 									->orWhere('facultad_id', 'LIKE', $keyWord)
-									->paginate(10),
-									'user_id' => $this->user_id, 'mensaje' => $this->mensaje, 'ofertas' => $this->ofertas] );
-
+									->paginate(10),"user_id"=>$this->user_id, "mensaje"=>$this->mensaje, "ofertas"=>$this->ofertas,
+									]);
 		}
 	   } else {
 		$this->mensaje = "No existe el usuario o no es un estudiante";
-	   };
-		
-    }
-
-   
-	/*
+	   }
+}
 
 	public function mostrarOferta($ofertaId)
     {
         $record = Oferta::findOrFail($ofertaId);
         $this->selected_id = $ofertaId; 
+		$this->imagenPuesto = $record-> imagenPuesto;
 		$this->resumenPuesto = $record-> resumenPuesto;
 		$this->nombrePuesto = $record-> nombrePuesto;
 		$this->responsabilidadesPuesto = $record-> responsabilidadesPuesto;
@@ -97,10 +95,10 @@ class OfertasEstudiantes extends Component
 		$this->edadRequerida = $record-> edadRequerida;
 		$this->generoRequerido = $record-> generoRequerido;
 		$this->comentarioCierre = $record-> comentarioCierre;
-		$this->empresa_id = $record-> empresa_id;
+		$this->nombre_empresa = $record-> empresa->nombreEmpresa;
 		$this->facultad_id = $record-> facultad_id;
     }
-	*/
+	
     
 	//FUNCION PARA OBTNER EL ID DESDE LA TABLA OFERTA
 	public function setOfertaId($ofertaId)
@@ -132,4 +130,9 @@ class OfertasEstudiantes extends Component
 				session()->flash('message', 'No se encontró un perfil asociado al usuario.');
 			}
 	}
+
+	public function cancel()
+    {
+        $this->dispatchBrowserEvent('closeModal');
+    }
 }

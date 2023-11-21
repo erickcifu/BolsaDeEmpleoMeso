@@ -109,3 +109,27 @@
         </div>
     </div>
 </div>
+
+
+<!-- eliminar campo -->
+<div wire:ignore.self class="modal fade" id="DeletDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="DeletDataLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+            <div class="modal-header"style="background-color: #005c35;">
+                <h5 class="modal-title" id="DeletDataModalLabel"style="color: #f0eadc;"> Eliminar</h5>
+                <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+					<input type="hidden" wire:model="selected_id">
+                    <h5 class="modal-title" style="color: black;">¿Desea eliminar este dato?</h5>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #005c35;" data-bs-dismiss="modal"><b style ="color: #d3d3d3;">Cancelar</b></button>
+                <button type="button" wire:click.prevent="destroy()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo eliminarlo<b></button>
+            </div>
+       </div>
+    </div>
+</div>
