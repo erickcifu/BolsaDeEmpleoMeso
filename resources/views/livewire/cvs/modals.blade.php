@@ -69,16 +69,16 @@
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
                                         <label for="nombreRef1">Nombre de referencia*</label>
-                                        <textarea wire:model="nombreRef1" type="text" class="form-control" id="nombreRef1" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
-                                        </textarea>
+                                        <input wire:model="nombreRef1" type="text" class="form-control" id="nombreRef1" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
+                                        </input>
                                         @error('nombreRef1') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
                                         <label for="telRef1">Teléfono de referencia*</label>
-                                        <textarea wire:model="telRef1" type="number" class="form-control" id="telRef1" placeholder="Ingresa el número de teléfono">
-                                        </textarea>
+                                        <input wire:model="telRef1" type="number" class="form-control" id="telRef1" placeholder="Ingresa el número de teléfono">
+                                        </input>
                                         @error('telRef1') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -88,16 +88,16 @@
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
                                         <label for="nombreRef2">Nombre de referencia*</label>
-                                        <textarea wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
-                                        </textarea>
+                                        <input wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
+                                        </input>
                                         @error('nombreRef2') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div style="display: inline-block; width: 100%;">
                                     <div class="mb-2">
                                         <label for="telRef2">Teléfono de referencia*</label>
-                                        <textarea wire:model="telRef2" type="number" class="form-control" id="telRef2" placeholder="Ingresa el número de teléfono">
-                                        </textarea>
+                                        <input wire:model="telRef2" type="number" class="form-control" id="telRef2" placeholder="Ingresa el número de teléfono">
+                                        </input>
                                         @error('telRef2') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>

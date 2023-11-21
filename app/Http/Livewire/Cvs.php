@@ -187,7 +187,7 @@ class Cvs extends Component
 			'correoElectronico' => 'required|email|ends_with:@gmail.com',
 			'telefonoCv' => 'required | size:8',
 			'fotoCv' => ' image | mimes:png,jpg,jpeg',
-			'perfilProfesional' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:500',
+			'perfilProfesional' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
 			'habilidades' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ | max:300',
 			'nombreRef1' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',
 			'telRef1' => 'required | size:8',
@@ -202,9 +202,9 @@ class Cvs extends Component
 		$this->validate([
 			// 'nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
 			// 'anioCertificacion' => 'nullable | date | before_or_equal:today',
-			'certificaciones.*.nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:55',
+			'certificaciones.*.nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
 			'certificaciones.*.anioCertificacion' => 'nullable | date | before_or_equal:today',
-			'certificaciones.*.institucionCertificadora' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:55',
+			'certificaciones.*.institucionCertificadora' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
 		]);
 	}
 	public function ValidarPaso3()
@@ -212,9 +212,9 @@ class Cvs extends Component
 		$this->validate([
 			'experiencia.*.inicioExperiencia' => 'nullable | date | before_or_equal:today',
 			'experiencia.*.finExperiencia' => 'nullable | date | before_or_equal:today',
-			'experiencia.*.puestoTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:55',
-			'experiencia.*.lugarTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:55',
-			'experiencia.*.descripcionLaboral' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:200',
+			'experiencia.*.puestoTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'experiencia.*.lugarTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'experiencia.*.descripcionLaboral' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
 		]);
 	}
 	public function ValidarPaso4()
@@ -222,9 +222,9 @@ class Cvs extends Component
 		$this->validate([
 			'formacion.*.anioInicioFormacion' => 'required | date | before_or_equal:today',
 			'formacion.*.anioFinFormacion' => 'required | date | before_or_equal:today',
-			'formacion.*.institucionFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:55',
-			'formacion.*.tituloObtenido' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:55',
-			'formacion.*.nivelFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:55',
+			'formacion.*.institucionFormacion' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ |max:35',
+			'formacion.*.tituloObtenido' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ |max:35',
+			'formacion.*.nivelFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
 		]);
 	} // fin de validación de cada paso del formulario
 	public function ValidarPaso5()
