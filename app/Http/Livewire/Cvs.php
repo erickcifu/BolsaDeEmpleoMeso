@@ -34,10 +34,6 @@ class Cvs extends Component
 	public $idiomas = [];
 	public $idiomasTable = [];
 
-	public function mount()
-	{
-	}
-
 	public function render()
 	{
 
@@ -222,8 +218,8 @@ class Cvs extends Component
 		$this->validate([
 			'formacion.*.anioInicioFormacion' => 'required | date | before_or_equal:today',
 			'formacion.*.anioFinFormacion' => 'required | date | before_or_equal:today',
-			'formacion.*.institucionFormacion' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ |max:35',
-			'formacion.*.tituloObtenido' => 'required | regex:/^[A-Za-zÁÉÍÓÚáéíóúñÑ0-9\s-]*$/ |max:35',
+			'formacion.*.institucionFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'formacion.*.tituloObtenido' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
 			'formacion.*.nivelFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
 		]);
 	} // fin de validación de cada paso del formulario
@@ -239,16 +235,25 @@ class Cvs extends Component
 	{
 		if ($this->paso === 1) {
 			$this->ValidarPaso1(); // Validar datos del paso 1
-			$this->addCertificacion();
+
+			if(count($this->certificaciones) == 0) {
+				$this->addCertificacion();
+			}
 		} elseif ($this->paso === 2) {
 			$this->ValidarPaso2(); // Validar datos del paso 2
-			$this->addFormacion();
+			if(count($this->formacion) == 0) {
+				$this->addFormacion();
+			}
 		} elseif ($this->paso === 3) {
 			$this->ValidarPaso3(); // Validar datos del paso 3
-			$this->addExperencia();
+			if(count($this->experiencia) == 0) {
+				$this->addExperencia();
+			}
 		} elseif ($this->paso === 4) {
 			$this->ValidarPaso4(); // Validar datos del paso 3
-			$this->addIdiomas();
+			if(count($this->idiomas) == 0) {
+				$this->addIdiomas();
+			}
 		} elseif ($this->paso === 5) {
 			$this->ValidarPaso5(); // Validar datos del paso 3
 		}
@@ -443,6 +448,12 @@ class Cvs extends Component
 				'estudiante' => $estudiante,
 				'perfilProfesional' => $cv->perfilProfesional,
 				'direcionDomiciliar' => $cv->direcionDomiciliar,
+				'ref1' => $cv->nombreRef1,
+				'tel1' => $cv->telRef1,
+				'ref2' => $cv->nombreRef2,
+				'tel2' => $cv->telRef2,
+				'intereses' => $cv->intereses,
+				'publicaciones' => $cv->publicaciones,
 				'habilidades' => $cv->habilidades,
 				'correo' => $cv->correoElectronico,
 				'experiencias' => $experiencias,
