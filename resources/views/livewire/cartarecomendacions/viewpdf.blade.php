@@ -17,7 +17,8 @@
 	@if ( $item->estudiante->user_id==$usuario)
 	<h2 class="text-center">Carta de Recomendacion</h2>
 	<li class="list-unstyled">
-		<h6> {{ $item->fechaCarta }}
+		<h6>
+			{{ date('d-m-Y', strtotime($item->fechaCarta))  }}
 		</h6>
 	</li>
 	<p></p>

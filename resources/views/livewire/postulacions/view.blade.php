@@ -36,7 +36,7 @@
                             @foreach($postulacions as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->fechaPostulacion }}</td>
+								<td>{{ date('d-m-Y', strtotime($row->fechaPostulacion)) }}</td>
 								<td>{{ $row-> estudiante -> nombre }}, {{ $row-> estudiante -> apellidos }}</td>
                                 <td>
                                     @if($row->estudiante  && File::exists($row->estudiante->curriculum))
