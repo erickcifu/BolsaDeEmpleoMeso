@@ -39,4 +39,11 @@ class Facultad extends Model
         return $this->hasMany('App\Models\Oferta', 'facultad_id', 'id');
     }
     
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function habilidades()
+    {
+        return $this->hasMany('App\Models\habilidadTecnica', 'facultad_id', 'id');
+    }
 }
