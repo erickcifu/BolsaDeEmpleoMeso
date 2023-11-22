@@ -93,6 +93,10 @@ Route::view('registro-empresa', 'livewire.registroempresas.index')->middleware('
 Route::get('/homeAdmin', [App\Http\Controllers\HomeAdminController::class, 'index'])->name('homeAdmin');
 Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::class, 'index'])->name('homeAutoridad');
 //Route Hooks - Do not delete//
+	Route::view('habilidadtecnicas', 'livewire.habilidadtecnicas.index')->middleware('auth');
+	Route::view('Interpersonals', 'livewire.Interpersonals.index')->middleware('auth');
+	Route::view('habilidadTecnicas', 'livewire.habilidad-tecnicas.index')->middleware('auth');
+	Route::view('competencias', 'livewire.competencias.index')->middleware('auth');
 
 Route::get('/carta-pdf', [Cartarecomendacions::class, 'downloadPDF']);
 Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middleware('auth');
