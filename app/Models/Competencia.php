@@ -1,29 +1,27 @@
-<?php
+<?php 
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class competencia extends Model
+class Competencia extends Model
 {
-    use HasFactory;
+	use HasFactory;
+    protected $primaryKey = 'competenciaId';
 
     public $timestamps = true;
 
-    protected $primaryKey = 'competenciaId';
-
     protected $table = 'competencias';
 
-    protected $fillable = [
-        'nombreCompetencia',
-    ];
-
+    protected $fillable = ['competenciaId','nombreCompetencia'];
+	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function ofertacompentencias()
+    public function ofertacompetencias()
     {
-        return $this->hasMany('App\Models\ofertaCompetencia', 'competencia_id', 'competenciaId');
+        return $this->hasMany('App\Models\Ofertacompetencia', 'competencia_id', 'competenciaId');
     }
+    
 }
