@@ -17,7 +17,9 @@ return new class extends Migration
             $table->engine="InnoDB";
             $table->bigIncrements('tecnicaId');
             $table->string('nombreTecnica');
+            $table->bigInteger('facultad_id')->unsigned();
             $table->timestamps();
+            $table->foreign('facultad_id')->references('id')->on('facultads')->onDelete("cascade");
         });
     }
 
