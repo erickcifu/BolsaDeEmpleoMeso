@@ -12,6 +12,7 @@ use App\Models\Postulacion;
 use App\Models\Facultad;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -25,6 +26,7 @@ class Ofertas extends Component
 	public $fechaPostulacion, $oferta_id;
 	public $ofertaId;
 	public $id_postu;
+	public $imagenPuestoPath;
 
 	//Campos de la entrevista
 	public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
@@ -118,25 +120,26 @@ class Ofertas extends Component
     }
 
 	protected $rules = [
-		'resumenPuesto' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'nombrePuesto' => 'required|regex:/^[\pL\s]+$/u|max:200',
-		'responsabilidadesPuesto' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'requisitosEducativos' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:200',
-		'experienciaLaboral' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/',
-		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/',
+		'resumenPuesto' => 'required | max:300',
+		'nombrePuesto' => 'required | max:200',
+		'responsabilidadesPuesto' => 'required | max:300',
+		'requisitosEducativos' => 'required | max:200',
+		'experienciaLaboral' => 'required|max:300',
+		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
+		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
 		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
-		'condicionesLaborales' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'beneficios' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'oportunidadesDesarrollo' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
+		'condicionesLaborales' => 'required|max:300',
+		'beneficios' => 'required|max:300',
+		'oportunidadesDesarrollo' => 'required|max:300',
 		'fechaMax' => 'required | date | after:today',
-		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
+		'imagenPuesto' => 'nullable|image|mimes:jpeg,png,jpg',
 		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
-		'edadRequerida' => 'required | integer',
+		'edadRequerida' => 'required|integer|gt:17',
 		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
 		'facultad_id' => 'required | integer',
 	];
+
 	public function updated($propertyOferta){
         $this->validateOnly($propertyOferta);
     }
@@ -144,51 +147,43 @@ class Ofertas extends Component
 //Configuración de mensajes de error
 	protected $messages = [
         'resumenPuesto.required' => 'Este campo no puede estar vacío.',
-        'resumenPuesto' => 'Este campo unicamente acepta letras y números',
 
 		'nombrePuesto.required' => 'Este campo no puede estar vacío.',
-        'nombrePuesto' => 'Este campo unicamente acepta letras',
 
 		'responsabilidadesPuesto.required' => 'Este campo no puede estar vacío.',
-        'responsabilidadesPuesto' => 'Este campo unicamente acepta letras y números',
 
 		'requisitosEducativos.required' => 'Este campo no puede estar vacío.',
-        'requisitosEducativos' => 'Este campo unicamente acepta letras y números',
 
 		'experienciaLaboral.required' => 'Este campo no puede estar vacío.',
-		'experienciaLaboral' => 'Este campo unicamente acepta letras y números',
 
 		'sueldoMax.required' => 'Este campo no puede estar vacío.',
-		'sueldoMax' => 'Este campo unicamente acepta números',
+		'sueldoMax' => 'Este campo unicamente acepta cantidades arriba de 0.',
 
 		'sueldoMinimo.required' => 'Este campo no puede estar vacío.',
-		'sueldoMinimo' => 'Este campo unicamente acepta números',
+		'sueldoMinimo' => 'Este campo unicamente acepta cantidades arriba de 0.',
 
 		'jornadaLaboral.required' => 'Este campo no puede estar vacío.',
 		'jornadaLaboral' => 'Este campo unicamente acepta letras',
 
 		'condicionesLaborales.required' => 'Este campo no puede estar vacío.',
-		'condicionesLaborales' => 'Este campo unicamente acepta letras y números',
 
 		'beneficios.required' => 'Este campo no puede estar vacío.',
-		'beneficios' => 'Este campo unicamente acepta letras y números',
 
 		'oportunidadesDesarrollo.required' => 'Este campo no puede estar vacío.',
-		'oportunidadesDesarrollo' => 'Este campo unicamente acepta letras y números',
 
 		'fechaMax.required' => 'Este campo no puede estar vacío.',
 		'fechaMax' => 'Porfavor ingresa una fecha posterior a la de hoy.',
 
-		'imagenPuesto' => 'Este campo unicamente acepta imágenes formatos png, jpg, jpeg',
+		'imagenPuesto' => 'Este campo unicamente acepta imágenes con formato: png, jpg, jpeg',
 
 		'cantVacantes.required' => 'Este campo no puede estar vacío.',
-		'cantVacantes' => 'Este campo unicamente acepta números',
+		'cantVacantes' => 'Este campo unicamente acepta cantidades arriba de 0.',
 
 		'modalidadTrabajo.required' => 'Este campo no puede estar vacío.',
 		'modalidadTrabajo' => 'Este campo unicamente acepta letras',
 
 		'edadRequerida.required' => 'Este campo no puede estar vacío.',
-		'edadRequerida' => 'Este campo unicamente acepta números',
+		'edadRequerida' => 'Debe ser de 18 años o mayor',
 
 		'generoRequerido.required' => 'Este campo no puede estar vacío.',
 		'generoRequerido' => 'Este campo unicamente acepta letras',
@@ -203,16 +198,16 @@ public function validarPaso1()
 {
 	//Reglas de validación para la información general del empleo
 	     $this->validate([
-        'resumenPuesto' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
- 		'nombrePuesto' => 'required|regex:/^[\pL\s]+$/u|max:200',
- 		'responsabilidadesPuesto' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:300',
- 		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
+        'resumenPuesto' => 'required | max:300',
+ 		'nombrePuesto' => 'required | max:200',
+ 		'responsabilidadesPuesto' => 'required|max:300',
  		'fechaMax' => 'required | date | after:today',
-		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/',
-		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/',
+		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
+		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
 		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
-		'cantVacantes' => 'required | integer',
+		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
+		'imagenPuesto' => 'nullable|image|mimes:jpeg,png,jpg',
     ]);
 	$this->mostrarErrores = true;
  }
@@ -221,9 +216,9 @@ public function validarPaso1()
  {
 	//Reglas de validación para los requerimientos
      $this->validate([
-        'requisitosEducativos' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:200',
- 		'experienciaLaboral' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
- 		'edadRequerida' => 'required | integer',
+        'requisitosEducativos' => 'required | max:200',
+ 		'experienciaLaboral' => 'required | max:300',
+ 		'edadRequerida' => 'required|integer | gt:18',
  		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
 		'facultad_id' => 'required | integer',
      ]);
@@ -233,9 +228,9 @@ public function validarPaso1()
  {
 	//Reglas de validación para las condiciones y beneficios que ofrece la empresa
      $this->validate([
-		'condicionesLaborales' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'beneficios' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
-		'oportunidadesDesarrollo' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
+		'condicionesLaborales' => 'required|max:300',
+		'beneficios' => 'required|max:300',
+		'oportunidadesDesarrollo' => 'required | max:300',
      ]);
 	 $this->mostrarErrores = true;
  }
@@ -277,6 +272,10 @@ public function validarPaso1()
 			$this->empresaAut = $this->user->Empresa->empresaId;
 			$this->validate();
 
+			if ($this->imagenPuesto) {
+				$this->imagenPuestoPath = 'storage/'.$this->imagenPuesto->store('ofertaslab', 'public');
+			}
+
 			Oferta::create([ 
 				'resumenPuesto' => $this-> resumenPuesto,
 				'nombrePuesto' => $this-> nombrePuesto,
@@ -290,7 +289,7 @@ public function validarPaso1()
 				'beneficios' => $this-> beneficios,
 				'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
 				'fechaMax' => $this-> fechaMax,
-				'imagenPuesto' => 'storage/'.$this-> imagenPuesto->store('ofertaslab', 'public'),
+				'imagenPuesto' => $this->imagenPuestoPath,
 				'cantVacantes' => $this-> cantVacantes,
 				'modalidadTrabajo' => $this-> modalidadTrabajo,
 				'edadRequerida' => $this-> edadRequerida,
@@ -367,7 +366,25 @@ public function validarPaso1()
 
     public function update()
     {
-        $this->validate();
+        $this->validate([
+			'resumenPuesto' => 'required | max:300',
+			'nombrePuesto' => 'required | max:200',
+			'responsabilidadesPuesto' => 'required | max:300',
+			'requisitosEducativos' => 'required | max:200',
+			'experienciaLaboral' => 'required|max:300',
+			'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
+			'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
+			'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
+			'condicionesLaborales' => 'required|max:300',
+			'beneficios' => 'required|max:300',
+			'oportunidadesDesarrollo' => 'required|max:300',
+			'fechaMax' => 'required | date | after:today',
+			'cantVacantes' => 'required | numeric | gt:0',
+			'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
+			'edadRequerida' => 'required|integer|gt:17',
+			'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
+			'facultad_id' => 'required | integer',
+		]);
 
         if ($this->selected_id) {
 			$record = Oferta::find($this->selected_id);
@@ -384,7 +401,6 @@ public function validarPaso1()
 				'beneficios' => $this-> beneficios,
 				'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
 				'fechaMax' => $this-> fechaMax,
-				'imagenPuesto' => $this-> imagenPuesto,
 				'cantVacantes' => $this-> cantVacantes,
 				'modalidadTrabajo' => $this-> modalidadTrabajo,
 				'edadRequerida' => $this-> edadRequerida,
@@ -510,4 +526,28 @@ public function validarPaso1()
     {
         Oferta::where('ofertaId', $ofertaId)->delete();
     }
+
+	//EDITAR IMAGEN DEL PUESTO//
+	public function editImagen($ofertaId){
+		
+		$recordImg = Oferta::findOrFail($ofertaId);
+		$this->selected_id = $ofertaId; 
+		$this->nombrePuesto = $recordImg-> nombrePuesto;
+		$this->imagenPuesto = $recordImg->imagenPuesto;
+	 
+	}
+
+	public function GuardarImagen(){
+		if ($this->selected_id) {
+			$recordImg = Oferta::find($this->selected_id);
+	
+			$recordImg->update([ 
+				'nombrePuesto' => $this->nombrePuesto,
+				'imagenPuesto' => 'storage/'.$this->imagenPuesto->store('ofertaslab', 'public'),
+			]);
+			
+			$this->dispatchBrowserEvent('closeModal');
+			session()->flash('message', 'Imagen actualizada exitosamente!');
+		}
+	}
 }
