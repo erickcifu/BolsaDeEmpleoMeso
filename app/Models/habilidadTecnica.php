@@ -17,6 +17,7 @@ class habilidadTecnica extends Model
 
     protected $fillable = [
         'nombreTecnica',
+        'facultad_id',
     ];
 
     /**
@@ -25,5 +26,13 @@ class habilidadTecnica extends Model
     public function ofertatecnicas()
     {
         return $this->hasMany('App\Models\ofertaTecnica', 'tecnica_id', 'tecnicaId');
+    }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function facultad()
+    {
+        return $this->hasMany('App\Models\Facultad', 'id', 'facultad_id');
     }
 }
