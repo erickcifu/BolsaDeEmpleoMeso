@@ -82,10 +82,12 @@
 															
 														<?php endif; ?>
 														</p>
+														<A>------------  DOCUMENTOS DE IDENTIFICACION COMERCIAL  -------------</A>
 
-														<p class="card-text fs-5 ">RTU:<a href="{{ $row->rtu }}" target="_blank" class="btn btn-secondary">Ver archivo</a>
+														<p class="card-text fs-5 ">RTU:<a href="{{ $row->rtu }}" target="_blank"> ver archivo </a>
 															<h6 data-bs-toggle="modal" data-bs-target="#rtuDataModal" class="dropdown-item" wire:click="editrtu({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar RTU</h6>
-															<p class="card-text fs-5 ">Patente de Comercio:<a href="{{  $row->patenteComercio }}" target="_blank" class="btn btn-secondary">Ver archivo</a>
+															
+															<p class="card-text fs-5 ">Patente de Comercio: <a href="{{ $row->patenteComercio }}" target="_blank"> ver archivo </a> 
 															<h6 data-bs-toggle="modal" data-bs-target="#panDataModal" class="dropdown-item" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar PDC </h6>
 														
 														
@@ -99,12 +101,15 @@
 												</div>
 											  </div>
 											</div>
+											<div class="pie">	
+												<div class="modal-footer mt-3">
+													<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="btn btn-secondary"
+													wire:click="edit({{$row->empresaId}})"style="background-color: #005c35">Editar</a>
+												</div>
+											</div>
 
 											
-											<div class="text-left">
-													<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="btn btn-secondary"
-											         wire:click="edit({{$row->empresaId}})"style="background-color: #005c35">Editar</a>	 
-												</div>
+											
 											
 											
 													
