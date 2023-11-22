@@ -1,5 +1,5 @@
 <!-- Show Modal -->
-<div wire:ignore.self class="modal fade" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerOfertaModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerOfertaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <form>
@@ -13,7 +13,7 @@
                         <img src="{{ asset($imagenPuesto) }}"  class="img-fluid">
                     @else
                         <!-- Mostrar algo cuando la imagen no está disponible -->
-                        <span>Imagen no disponible</span>
+                        <img class="d-block w-25" src="{{ asset('storage/Meso/ofertasMeso.png') }}" alt="Sin imagen."/>
                     @endif
                     </div>
                     <br/>

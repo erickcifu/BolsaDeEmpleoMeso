@@ -27,10 +27,9 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</b></td> 
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Imagen</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Fecha límite</b></th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Modalidad</b></th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Jornada Laboral</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Facultad</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado</b></th>
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</b></td>
@@ -40,10 +39,17 @@
 							@forelse($ofertasLaborales as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
+								<td> 
+								@if($row->imagenPuesto != NULL)
+									<img src="{{ asset($row->imagenPuesto) }}" width="50" height="50" class="img-fluid">
+								@else
+									<!-- Muestra algún marcador de posición o mensaje cuando no hay imagen -->
+									<span>Sin imagen</span>
+								@endif
+									<a data-bs-toggle="modal" data-bs-target="#ImagenDataModal" class="dropdown-item" wire:click="editImagen({{$row->ofertaId}})"><i class="fa fa-edit"></i>Editar</a>
+								</td>
 								<td>{{ $row->nombrePuesto }}</td>
 							    <td id="fechaRegistrada">{{ date('d-m-Y', strtotime($row->fechaMax)) }}</td>
-								<td>{{ $row->modalidadTrabajo }}</td>
-								<td>{{ $row->jornadaLaboral }}</td>
 								<td>{{ $row->facultad->Nfacultad }}</td>
 								<td>
 								<?php if ($row->estadoOferta == 1): ?>

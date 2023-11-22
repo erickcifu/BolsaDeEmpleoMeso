@@ -261,13 +261,6 @@
                         <div class="hstack gap-3">
                             <div style="display: inline-block; width: 100%;">
                                 <div class="mb-2">
-                                    <label for="imagenPuesto">Imagen</label>
-                                    <input wire:model="imagenPuesto" type="file" class="form-control" id="imagenPuesto" placeholder="Imagen">
-                                </div>
-                                @error('imagenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
                                     <label for="fechaMax">Fecha límite</label>
                                     <input wire:model="fechaMax" type="date" class="form-control" id="fechaMax" placeholder="Fecha límite">
                                 </div>
@@ -839,6 +832,32 @@
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
                 <button type="button" wire:click.prevent="updateEstado()" class="btn btn-primary" data-bs-dismiss="modal" style="background-color: #005c35;">Cerrar Oferta</button>
+            </div>
+       </div>
+    </div>
+</div>
+
+<!-- Editar Imagen -->
+<div wire:ignore.self class="modal fade" id="ImagenDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ImagenDataModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+            <div class="modal-header"style="background-color: #005c35;">
+                <h5 class="modal-title" id="ImagenDataModal"style="color: #f0eadc;"> Editar imagen</h5>
+                <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+					<div class="form-group">
+                        <label for="imagenPuesto"><b style="color: black;">Seleccione un nuevo archivo de imagen<b></label>
+                        <input wire:model="imagenPuesto" type="file" accept="image/png, image/jpeg, image/jpg" enctype="multipart/form-data" class="form-control" id="imagenPuesto" placeholder="imagenPuesto">@error('imagenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
+                        @error('imagenPuesto') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="GuardarImagen()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>
