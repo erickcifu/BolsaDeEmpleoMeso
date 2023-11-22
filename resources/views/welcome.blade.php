@@ -39,12 +39,9 @@
                             class="zoom carousel-item @if($loop->index===0) active @endif"
                         >
                             <div class="title-card-home">
-                                <h3
-                                    class="text-center display-5"
-                                    style="color: #f0eadc"
-                                >
+                                <p class="text-center display-7" style="color: #f0eadc">
                                     {{ $facultad }}
-                                </h3>
+                                </p>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <img
@@ -52,7 +49,7 @@
                                     src="{{
                                         asset('storage/Meso/ofertasMeso.png')
                                     }}"
-                                    alt="{{$row->descripcion}}"
+                                    alt="{{$row->puesto}}"
                                     style="filter: opacity(0.6)"
                                 />
                             </div>
@@ -60,10 +57,11 @@
                                 class="carousel-caption d-none d-md-block"
                                 style="color: #f0eadc"
                             >
-                                <h7>
+                                <h5>
                                     <strong> {{$row->puesto}}</strong>
-                                </h7>
-                                <p>{{$row->descripcion}}</p>
+                                </h5>
+                                <p>{{ substr($row->descripcion, 0, 50) }}...</p>
+
                             </div>
                         </div>
                         @endforeach
