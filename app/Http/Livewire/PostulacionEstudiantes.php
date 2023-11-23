@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Postulacion;
 use App\Models\Entrevista;
+use App\Models\Estudiante;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,28 +19,27 @@ class PostulacionEstudiantes extends Component
     public $selected_id, $keyWord, $fechaPostulacion, $oferta_id;
     public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $hora_inicio, $hora_final, $Contratado, $comentarioContratado, $postulacion_id;
     public $mensaje, $usuarioAutenticado, $postulacionesEstudiante;
-    public $record2;
+    public $record2, $user;
 
     public function render()
     {
+        if (Auth::check()) {
         // Obtén el usuario autenticado
-        $this->usuarioAutenticado = Auth::user();
+        $this->usuarioAutenticado = Auth::id();
 
-        // Verifica si el usuario tiene un perfil de estudiante
-        if ($this->usuarioAutenticado->Estudiante) {
-            // Obtén las postulaciones del estudiante
-            $this->postulacionesEstudiante = $this->usuarioAutenticado->postulacionesEstudiante;
+        $this->user = User::with('estudiante')->find($this->usuarioAutenticado);
+        
+        // Accede a las postulaciones del estudiante
+    	$this->postulacionesEstudiante = $this->user->Estudiante->postulacions;
 
             $keyWord = '%'.$this->keyWord .'%';
             return view('livewire.postulacionestudiantes.postulacionestudiante', [
                 'postulacionStudent' => Postulacion::latest()
                             ->orWhere('fechaPostulacion', 'LIKE', $keyWord)
                             ->orWhere('oferta_id', 'LIKE', $keyWord)
-                            ->paginate(10), $this->postulacionesEstudiante
+                            ->paginate(10), 
             ]);
-        } else {
-            // Manejar el caso donde el usuario no tiene un perfil de estudiante
-            $this->mensaje = "No existe el usuario o no es un estudiante";
+            
         }
     }
 		

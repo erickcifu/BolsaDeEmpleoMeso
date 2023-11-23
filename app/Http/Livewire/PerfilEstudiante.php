@@ -70,9 +70,9 @@ class PerfilEstudiante extends Component
 	protected $rules = [
 		'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
 		'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
-		'carnet' => 'required|integer',
+		'carnet' => 'required|integer|size:9',
 		'DPI' => 'required|size:13',
-		'correo' => 'required|email|ends_with:@gmail.com',
+		'correo' => 'required|email',
 		'numero_personal' => 'required | size:8',
 		'numero_domiciliar' => 'required |size:8',
 	
@@ -144,7 +144,7 @@ class PerfilEstudiante extends Component
 			'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
 			'carnet' => 'required|integer',
 			'DPI' => 'required|size:13',
-			'correo' => 'required|email|ends_with:@gmail.com',
+			'correo' => 'required|email',
 			'numero_personal' => 'required | size:8',
 			'numero_domiciliar' => 'required |size:8',
 		
