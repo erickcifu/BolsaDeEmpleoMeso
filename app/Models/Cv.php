@@ -12,8 +12,11 @@ class Cv extends Model
     public $timestamps = true;
 
     protected $table = 'cvs';
+    protected $primaryKey = 'cvId';
 
-    protected $fillable = ['cvId','direcionDomiciliar','correoElectronico','telefonoCv','fotoCv','perfilProfesional','habilidades','nombreRef1', 'telRef1', 'nombreRef2', 'telRef2','publicaciones','intereses', 'estudiante_id'];
+    protected $fillable = ['cvId',
+    'direcionDomiciliar',
+    'correoElectronico','telefonoCv','fotoCv','perfilProfesional','habilidades','nombreRef1', 'telRef1', 'nombreRef2', 'telRef2','publicaciones','intereses', 'estudiante_id'];
 	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

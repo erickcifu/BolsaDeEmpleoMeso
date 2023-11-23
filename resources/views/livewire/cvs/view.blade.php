@@ -17,10 +17,10 @@
 						<div>
 							<div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
 								<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
-							</div>
-							<div class="btn" wire:click="downloadCV()" style="background-color: #005c35;" >
+							</div>	
+							{{-- <div class="btn" wire:click="downloadCV()" style="background-color: #005c35;" >
 								<i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8>
-							</div>
+							</div> --}}
 						</div>
 					</div>
 				</div>
@@ -49,9 +49,10 @@
 								<td>{{ $row->correoElectronico }}</td>
 								<td>{{ $row->telefonoCv }}</td>
 								<td width="90">
-									
-									<!-- <a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Editar </a> -->
-									<a class="dropdown-item" onclick="confirm('Confirm Delete Cv id {{$row->cvId}}? \nDeleted Cvs cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->cvId}})"><i class="fa fa-trash"></i> Eliminar </a> 						
+									{{-- <i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8> --}}
+									<a data-bs-toggle="modal" wire:click="downloadCV()" class="dropdown-item" ><i class="fa-solid fa-download"></i> Descargar  </a>
+									<a data-bs-toggle="modal" data-bs-target="#createDataModal" class="dropdown-item" wire:click="edit({{$row->cvId}})"><i class="fa fa-edit"></i> Editar </a>
+									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->cvId}})"><i class="fa fa-trash"></i> Eliminar </a>
 								</td>
 							</tr>
 							@empty
@@ -68,3 +69,14 @@
 		</div>
 	</div>
 </div>
+<style>
+    /* Establece el cursor predeterminado para todos los elementos a */
+    a {
+        cursor: pointer;
+    }
+
+    /* Establece el cursor personalizado para los elementos a con la clase "custom-cursor" */
+    a.custom-cursor {
+        cursor: url('ruta_del_cursor_personalizado.png'), auto;
+    }
+</style>
