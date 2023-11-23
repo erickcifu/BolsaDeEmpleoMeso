@@ -16,7 +16,7 @@ class EntrevistaEstudiantes extends Component
     public function render()
     {
 		$keyWord = '%'.$this->keyWord .'%';
-        return view('livewire.entrevistas.view', [
+        return view('livewire.entrevistaestudiantes.viewentrevista', [
             'entrevistas' => Entrevista::latest()
 						->orWhere('tituloEntrevista', 'LIKE', $keyWord)
 						->orWhere('descripcionEntrevista', 'LIKE', $keyWord)
