@@ -9,11 +9,11 @@
 							<h4>Postulaciones </h4>
 						</div>
 						@if (session()->has('message'))
-						<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
+						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
 						@endif
-						<div>
+						<!-- <div>
 							<input wire:model='keyWord' type="text" class="form-control" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
-						</div>
+						</div> -->
 						
 					</div>
 				</div>
@@ -27,6 +27,7 @@
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</b></td> 
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Fecha de postulación</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Oferta laboral</b></th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Empresa</b></th>
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</b></td>
 							</tr>
 						</thead>
@@ -36,6 +37,7 @@
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{date('d-m-Y', strtotime($row->fechaPostulacion))}}</td>
 								<td>{{ $row-> oferta -> nombrePuesto }}</td>
+								<td>{{ $row-> oferta -> empresa -> nombreEmpresa }}</td>
 								<td width="90">
 									<a  data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->postulacionId}})"><i class="fa fa-trash"></i> Eliminar </a> 		
 								</td>

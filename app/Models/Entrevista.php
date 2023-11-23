@@ -29,7 +29,7 @@ class Entrevista extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function postulacion()
+    public function postulacions()
     {
         return $this->hasOne('App\Models\Postulacion', 'postulacionId', 'postulacion_id');
     }
