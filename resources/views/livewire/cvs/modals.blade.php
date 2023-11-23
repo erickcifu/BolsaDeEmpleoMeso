@@ -3,7 +3,9 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;" >
-                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Generar CV</h5>
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;"> 
+                    {{ $selected_id === null ? 'Generar CV': 'Actualizar CV'  }}
+                </h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
@@ -16,117 +18,120 @@
                         </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" wire:ignore.self   data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                        <div class="hstack gap-3">
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
-                                    <label for="fotoCv">Foto CV*</label>
-                                    <input  wire:model="fotoCv" type="file" class="form-control" id="fotoCv" accept="image/*" placeholder="Fotocv">
-                                </div>
-                                @error('fotoCv') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
-                                    <label for="direcionDomiciliar">Dirección domiciliar*</label>
-                                    <input wire:model="direcionDomiciliar" type="text" class="form-control" id="Dirección domiciliar" placeholder="Quetzaltenango, Guatemala">
-                                </div>
-                                @error('direcionDomiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                            <br/>
-                            <div class="form-group">
-                                <label for="perfilProfesional">Resumen profesional*</label>
-                                <textarea wire:model="perfilProfesional" type="text" class="form-control" id="perfilProfesional" placeholder="Resumen de tus objetivos profesionales y lo que puedes aportar a una empresa.">
-                                </textarea>    
-                                @error('perfilProfesional') <span class="error text-danger">{{ $message }}</span> @enderror                         
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="correoElectronico">Correo electronico*</label>
-                                        <input wire:model="correoElectronico" type="text" class="form-control" id="correoElectronico" placeholder="ejemplo@gmail.com">
-                                        @error('correoElectronico') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <div class="accordion-body">
+                                <div class="hstack gap-3">
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="fotoCv">Foto CV*</label>
+                                            @if($selected_id !== null)
+                                                <img src="{{asset($pathTempPhoto)}}" width="50" height="50" class="img-fluid ml-3" alt="Imagen oferta">
+                                            @endif
+                                            <input  wire:model="fotoCv" type="file" class="form-control" id="upload{{ $iteration }}" accept="image/*" placeholder="Fotocv">
+                                        </div>
+                                        @error('fotoCv') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="direcionDomiciliar">Dirección domiciliar*</label>
+                                            <input wire:model="direcionDomiciliar" type="text" class="form-control" id="Dirección domiciliar" placeholder="Quetzaltenango, Guatemala">
+                                        </div>
+                                        @error('direcionDomiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="telefonoCv">Número de teléfono personal*</label>
-                                        <input wire:model="telefonoCv" type="number" class="form-control" id="telefonoCv" placeholder="12345678">
-                                          @error('telefonoCv') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <br/>
+                                <div class="form-group">
+                                    <label for="perfilProfesional">Resumen profesional*</label>
+                                    <textarea wire:model="perfilProfesional" type="text" class="form-control" id="perfilProfesional" placeholder="Resumen de tus objetivos profesionales y lo que puedes aportar a una empresa.">
+                                    </textarea>    
+                                    @error('perfilProfesional') <span class="error text-danger">{{ $message }}</span> @enderror                         
+                                </div>
+                                <br/>
+                                <div class="hstack gap-3">
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="correoElectronico">Correo electronico*</label>
+                                            <input wire:model="correoElectronico" type="text" class="form-control" id="correoElectronico" placeholder="ejemplo@gmail.com">
+                                            @error('correoElectronico') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="telefonoCv">Número de teléfono personal*</label>
+                                            <input wire:model="telefonoCv" type="number" class="form-control" id="telefonoCv" placeholder="12345678">
+                                            @error('telefonoCv') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br/>
-                            <div class="form-group">
-                                <label for="publicaciones">Enlaces</label>
-                                <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces de github, portafolios, publicaciones de los proyectos que haz realizado.">
-                                </textarea>    
-                                @error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror                         
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="nombreRef1">Nombre de referencia*</label>
-                                        <input wire:model="nombreRef1" type="text" class="form-control" id="nombreRef1" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
-                                        </input>
-                                        @error('nombreRef1') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <br/>
+                                <div class="form-group">
+                                    <label for="publicaciones">Enlaces</label>
+                                    <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces de github, portafolios, publicaciones de los proyectos que haz realizado.">
+                                    </textarea>    
+                                    @error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror                         
+                                </div>
+                                <br/>
+                                <div class="hstack gap-3">
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="nombreRef1">Nombre de referencia*</label>
+                                            <input wire:model="nombreRef1" type="text" class="form-control" id="nombreRef1" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
+                                            </input>
+                                            @error('nombreRef1') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="telRef1">Teléfono de referencia*</label>
+                                            <input wire:model="telRef1" type="number" class="form-control" id="telRef1" placeholder="Ingresa el número de teléfono">
+                                            </input>
+                                            @error('telRef1') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="telRef1">Teléfono de referencia*</label>
-                                        <input wire:model="telRef1" type="number" class="form-control" id="telRef1" placeholder="Ingresa el número de teléfono">
-                                        </input>
-                                        @error('telRef1') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <br/>
+                                <div class="hstack gap-3">
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="nombreRef2">Nombre de referencia*</label>
+                                            <input wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
+                                            </input>
+                                            @error('nombreRef2') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            <label for="telRef2">Teléfono de referencia*</label>
+                                            <input wire:model="telRef2" type="number" class="form-control" id="telRef2" placeholder="Ingresa el número de teléfono">
+                                            </input>
+                                            @error('telRef2') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="nombreRef2">Nombre de referencia*</label>
-                                        <input wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
-                                        </input>
-                                        @error('nombreRef2') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <br/>
+                                <div class="hstack gap-3">
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class=" mb-3">
+                                            <label for="habilidades">Habilidades*</label>
+                                            <textarea wire:model="habilidades" type="text" class="form-control" id="habilidades" placeholder="Enumera tus habilidades relevantes para el trabajo, ya sean habilidades técnicas o habilidades blandas">
+                                            </textarea>
+                                            @error('habilidades') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                        <div class=" mb-3">
+                                            <label for="intereses">Áreas de intéres personal*</label>
+                                            <textarea wire:model="intereses" type="text" class="form-control" id="intereses" placeholder="Escrube tus intereses y actividades extracurricuares">
+                                            </textarea>
+                                            @error('intereses') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="telRef2">Teléfono de referencia*</label>
-                                        <input wire:model="telRef2" type="number" class="form-control" id="telRef2" placeholder="Ingresa el número de teléfono">
-                                        </input>
-                                        @error('telRef2') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
+                                <!-- boton siguiente -->
+                                <div class="form-group">
+                                <button wire:click="siguientePaso" type="button" class="btn btn-primary" style="background-color: #005c35;" @if($paso === 2) data-bs-toggle="collapse" data-bs-target="#collapseTwo" @endif>
+                                    Siguiente
+                                </button>
                                 </div>
+                                <!-- Fin boton siguiente -->
                             </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class=" mb-3">
-                                        <label for="habilidades">Habilidades*</label>
-                                        <textarea wire:model="habilidades" type="text" class="form-control" id="habilidades" placeholder="Enumera tus habilidades relevantes para el trabajo, ya sean habilidades técnicas o habilidades blandas">
-                                        </textarea>
-                                        @error('habilidades') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                    <div class=" mb-3">
-                                        <label for="intereses">Áreas de intéres personal*</label>
-                                        <textarea wire:model="intereses" type="text" class="form-control" id="intereses" placeholder="Escrube tus intereses y actividades extracurricuares">
-                                        </textarea>
-                                        @error('intereses') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- boton siguiente -->
-                            <div class="form-group">
-                            <button wire:click="siguientePaso" type="button" class="btn btn-primary" style="background-color: #005c35;" @if($paso === 2) data-bs-toggle="collapse" data-bs-target="#collapseTwo" @endif>
-                                Siguiente
-                            </button>
-                            </div>
-                            <!-- Fin boton siguiente -->
-                        </div>
                         </div>
                     </div>
                     <div class="accordion-item" id="item2">
@@ -162,8 +167,8 @@
                                     <div class="col-3 d-flex align-items-center">
                                         <a class="dropdown-item" wire:click="removeCertificacion({{$indice}})"><i class="fa fa-trash"></i> Eliminar </a>
                                     </div>
-                                </div>            
-                                @endforeach                            
+                                </div>
+                                @endforeach
                                 <br/>
                                 <!-- fin requisitos del puesto -->
                                 <!-- boton anterior -->
@@ -361,70 +366,31 @@
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="store()" class="btn btn-primary"  data-bs-dismiss="modal" style="background-color: #005c35;">Guardar</button>
+                <button type="button" wire:click.prevent="process()" class="btn btn-primary"  data-bs-dismiss="modal" style="background-color: #005c35;">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Edit Modal -->
-<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+{{-- creamos el modal para eliminar  --}}
+<div wire:ignore.self class="modal fade" id="DeletDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="DeletModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="updateModalLabel">Update Cv</h5>
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="DeletModalLabel">Eliminar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <div class="form-group">
-                        <label for="cvId"></label>
-                        <input wire:model="cvId" type="text" class="form-control" id="cvId" placeholder="Cvid">@error('cvId') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="direcionDomiciliar"></label>
-                        <input wire:model="direcionDomiciliar" type="text" class="form-control" id="direcionDomiciliar" placeholder="Direciondomiciliar">@error('direcionDomiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="correoElectronico"></label>
-                        <input wire:model="correoElectronico" type="text" class="form-control" id="correoElectronico" placeholder="Correoelectronico">@error('correoElectronico') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="telefonoCv"></label>
-                        <input wire:model="telefonoCv" type="text" class="form-control" id="telefonoCv" placeholder="Telefonocv">@error('telefonoCv') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="fotoCv"></label>
-                        <input wire:model="fotoCv" type="text" class="form-control" id="fotoCv" placeholder="Fotocv">@error('fotoCv') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="perfilProfesional"></label>
-                        <input wire:model="perfilProfesional" type="text" class="form-control" id="perfilProfesional" placeholder="Perfilprofesional">@error('perfilProfesional') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="habilidades"></label>
-                        <input wire:model="habilidades" type="text" class="form-control" id="habilidades" placeholder="Habilidades">@error('habilidades') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="referencias"></label>
-                        <input wire:model="referencias" type="text" class="form-control" id="referencias" placeholder="Referencias">@error('referencias') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="publicaciones"></label>
-                        <input wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Publicaciones">@error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="intereses"></label>
-                        <input wire:model="intereses" type="text" class="form-control" id="intereses" placeholder="Intereses">@error('intereses') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" wire:click.prevent="update()" class="btn btn-primary">Save</button>
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #005c35;" data-bs-dismiss="modal"><b style ="color: #d3d3d3;">Cancelar</b></button>
+                <button type="button" wire:click="destroy()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo eliminarlo<b></button>
             </div>
        </div>
     </div>
-</div>
+</div> 
