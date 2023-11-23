@@ -256,11 +256,41 @@
                         <br />
                         @forelse($idiomas as $idioma)
                         <ul>
-                            <li>{{ $idioma->nombreIdioma }} - {{ $idioma->nivelIdioma }}</li>
+                            <li>
+                                {{ $idioma->nombreIdioma }} -
+                                {{ $idioma->nivelIdioma }}
+                            </li>
                         </ul>
                         @empty
                         <p>Sin Idiomas</p>
                         @endforelse
+                    </div>
+
+                    <hr
+                        style="
+                            width: 95%;
+                            background-color: #fff;
+                            border: none;
+                            height: 5px;
+                        "
+                    />
+                    <div class="contenedor">
+                        <div class="elemento-relativo"></div>
+                    </div>
+                    <div style="color: #fff; padding: 8px">
+                        REFERENCIAS
+                        <br />
+                        <br />
+                        <ul>
+                            <li>
+                                {{ $ref1 }} -
+                                {{ $tel1 }}
+                            </li>
+                            <li>
+                                {{ $ref2 }} -
+                                {{ $tel2 }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -321,7 +351,8 @@
 
                     @forelse($experiencias as $experiencia)
                     <p>{{ $experiencia->puestoTrabajo }}</p>
-                    {{ date('Y - M', strtotime($experiencia->inicioExperiencia)) }} /
+                    {{ date('Y - M', strtotime($experiencia->inicioExperiencia)) }}
+                    /
                     {{ date('Y - M', strtotime($experiencia->finExperiencia)) }}
                     <br />
                     <strong> {{ $experiencia->puestoTrabajo }} | </strong>
@@ -359,7 +390,8 @@
                     <h3 style="color: #005c38">FORMACIÓN</h3>
 
                     @forelse($formacions as $formacion)
-                    {{date('Y - M', strtotime($formacion->anioInicioFormacion))}} / 
+                    {{date('Y - M', strtotime($formacion->anioInicioFormacion))}}
+                    /
                     {{date('Y - M', strtotime($formacion->anioFinFormacion))}}
                     <br />
                     {{ $formacion->tituloObtenido }} -
@@ -371,6 +403,66 @@
                     @empty
                     <p>Sin Formación Educativa</p>
                     @endforelse
+                </div>
+
+                <hr
+                    style="
+                        width: 95%;
+                        background-color: #005c38;
+                        border: none;
+                        height: 5px;
+                    "
+                />
+                <div class="contenedor">
+                    <div
+                        class="elemento-relativo"
+                        style="background-color: #005c38; left: 0; width: 50px"
+                    ></div>
+                </div>
+                <div
+                    style="
+                        height: auto;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                    "
+                >
+                    <h3 style="color: #005c38">ENLACES</h3>
+
+                    <ul>
+                        <li>
+                            {{ $publicaciones }}
+                        </li>
+                    </ul>
+                </div>
+
+                <hr
+                    style="
+                        width: 95%;
+                        background-color: #005c38;
+                        border: none;
+                        height: 5px;
+                    "
+                />
+                <div class="contenedor">
+                    <div
+                        class="elemento-relativo"
+                        style="background-color: #005c38; left: 0; width: 50px"
+                    ></div>
+                </div>
+                <div
+                    style="
+                        height: auto;
+                        padding-left: 10px;
+                        padding-right: 10px;
+                    "
+                >
+                    <h3 style="color: #005c38">ÁREAS DE INTERES</h3>
+
+                    <ul>
+                        <li>
+                            {{ $intereses }}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
