@@ -9,66 +9,144 @@
             </div>
             <div class="modal-body" style="color: #f0eadc;">
                     <div class="object-fit-cover border rounded" >
-                    @if ($imagenPuesto)
-                        <img src="{{ asset($imagenPuesto) }}"  class="img-fluid">
-                    @else
-                        <!-- Mostrar algo cuando la imagen no está disponible -->
-                        <img class="d-block w-25" src="{{ asset('storage/Meso/ofertasMeso.png') }}" alt="Sin imagen."/>
-                    @endif
+                        <img src="{{ asset($imagenPuesto) }}"  class="img-fluid w-100">
                     </div>
                     <br/>
                     <div class="form-group">
                         <h5 for="nombre_empresa"><b style="color: black;">{{ $nombre_empresa }}</b></h5>
                     </div>
-                    <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha límite para postulación: {{ $fechaMax }}</small>
-                    <br/>
-                    <small style="color: #373737;"><i class="fa-solid fa-briefcase"></i>  Modalidad: {{ $modalidadTrabajo }} - {{ $jornadaLaboral }} - {{ $cantVacantes }} Vacantes</small>
-                    <br/>
+                    <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                                <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha límite para postulación: {{ $fechaMax }}</small>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                            <small style="color: #373737;"><i class="fa-solid fa-circle-info"></i> Edad miníma: {{ $edadRequerida }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                            <small style="color: #373737;"><i class="fa-solid fa-briefcase"></i>  Modalidad: {{ $modalidadTrabajo }} - {{ $jornadaLaboral }} - {{ $cantVacantes }} Vacantes</small>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                            <small style="color: #373737;"><i class="fa-solid fa-person-half-dress"></i> Género requerido: {{ $generoRequerido }}</small>
+                            </div>
+                        </div>
+                    </div>
                     <small style="color: #373737;"><i class="fa-solid fa-money-bill-wave"></i> Sueldo: Q.{{ $sueldoMinimo }} - Q.{{ $sueldoMax }}</small>
                     <br/>
                     <br/>
-                    <div class="form-group">
-                        <h5 for="resumenPuesto"><b style="color: black;">Acerca del empleo</b></h5>
-                        <p style="color: #373737;">{{ $resumenPuesto }}</p>
-                    </div>
                     <br/>
-                    <div class="hstack gap-3">
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
-                                    <h5 for="edadRequerida"><b style="color: black;">Edad requerida</b></h5>
-                                    <p style="color: #373737;">{{ $edadRequerida }} Años</p>
+                    <div class="d-flex gap-3">
+                                <!-- Acerca del empleo -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class= "fs-6" for="resumenPuesto"><b style="color: black;">Acerca del empleo</b></p>
+                                        <p style="color: #373737;">{{ $resumenPuesto }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Responsabilidades principales -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="responsabilidadesPuesto"><b style="color: black;">Responsabilidades principales</b></p>
+                                        <p style="color: #373737;">{{ $responsabilidadesPuesto }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
-                                    <h5 for="generoRequerido"><b style="color: black;">Género requerido</b></h5>
-                                    <p style="color: #373737;">{{ $generoRequerido }}</p>
+                    <br/>
+                    <form>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <h5><b style="color: #005c35;">- Requerimientos -</b></h5>
+                            </div>
+                            <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+
+                            <div class="d-flex gap-3">
+                                <!-- Formación Académica -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class= "fs-6" for="requisitosEducativos"><b style="color: black;">Formación académica</b></p>
+                                        <p style="color: #373737;">{{ $requisitosEducativos }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Experiencia Laboral -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Experiencia laboral</b></p>
+                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>   
+                            </br>  
+                            <!-- Habilidades -->
+                            <div class="d-flex gap-3">
+                                <!-- Formación Académica -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="requisitosEducativos"><b style="color: black;">Habilidades técnicas</b></p>
+                                        <p style="color: #373737;">{{ $requisitosEducativos }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Experiencia Laboral -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Habilidades Interpersonales</b></p>
+                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Experiencia Laboral -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Competencias comportamentales</b></p>
+                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    <br/>
-                    <div class="form-group">
-                        <h5><b style="color: black;">- Requerimientos -</b></h5>
-                        <h8 for="requisitosEducativos"><b style="color: black;">Formación académica</b></h8>
-                        <p style="color: #373737;">{{ $requisitosEducativos }}</p>
-                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
-                        <h8 for="experienciaLaboral"><b style="color: black;">Experiencia laboral</b></h8>
-                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
-                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
-                        <h8 for="experienciaLaboral"><b style="color: black;">Habilidades requeridas</b></h8>
-                    </div>
+                    </form> 
                     <br/>
                     <br/>
                     <div class="form-group">
-                        <h5><b style="color: black;">- Beneficios y oportunidades -</b></h5>
-                        <h8 for="beneficios"><b style="color: black;">Beneficios</b></h8>
-                        <p style="color: #373737;">{{ $beneficios }}</p>
-                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
-                        <h8 for="oportunidadesDesarrollo"><b style="color: black;">Oportunidades de crecimiento</b></h8>
-                        <p style="color: #373737;">{{ $oportunidadesDesarrollo }}</p>
-                        <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
-                        <h8 for="experienciaLaboral"><b style="color: black;">Condiciones laborales</b></h8>
-                        <p style="color: #373737;">{{ $condicionesLaborales }}</p>
+                            <div class="text-center">
+                                <h5><b style="color: #005c35;">- Beneficios y oportunidades -</b></h5>
+                            </div>
+                            <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+                            <div class="d-flex gap-3">
+                                <!-- Beneficios -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="beneficios"><b style="color: black;">Beneficios</b></p>
+                                        <p style="color: #373737;">{{ $beneficios }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Oportunidades de crecimiento -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="oportunidadesDesarrollo"><b style="color: black;">Oportunidades de crecimiento</b></p>
+                                        <p style="color: #373737;">{{ $oportunidadesDesarrollo }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Condiciones laborales -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Condiciones laborales</b></p>
+                                        <p style="color: #373737;">{{ $condicionesLaborales }}</p>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     <div class="form-group">
                         <label for="empresa_id"></label>
@@ -90,21 +168,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="createPostDataModalLabel" style="color: #f0eadc;">¿Desea Postularse a esta oferta laboral?</h5>
+                <h5 class="modal-title" id="createPostDataModalLabel" style="color: #f0eadc;"></h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
            <div class="modal-body">
 				<form>
                     <div class="form-group">
-                        <label for="fechaPostulacion">Fecha de postulación</label>
-                        <input wire:model="fechaPostulacion" type='text' class="form-control" id="fechaPostulacion" readonly>@error('fecha') <span class="error text-danger" disabled>{{ $message }}</span> @enderror
-                    </div>
-                    <br/>
-                    <div class="form-group">
                         <label for="oferta_id" hidden>Oferta laboral</label>
                         <input wire:model="oferta_id" type="text" class="form-control" id="oferta_id" placeholder="Oferta Id" hidden>@error('oferta_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <h5 class="modal-title" style="color: 005c35;"><b>¿Desea postularse a esta oferta laboral?</b></h5>
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
