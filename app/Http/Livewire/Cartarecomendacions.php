@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Cartarecomendacion;
 use App\Models\Autoridadacademica;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Estudiante;
 use App\Models\Facultad;
 use Livewire\WithFileUploads;
@@ -23,6 +25,15 @@ class Cartarecomendacions extends Component
     public function render()
     {
 		$keyWord = '%'.$this->keyWord .'%';
+		$userID = Auth::id();
+		$facultades = Facultad::all();
+	
+		$autoridadesacademicas=Autoridadacademica::where('user_id',$userID)->get();
+		$estudiantes=Estudiante::join('carreras','carreras.id','=','estudiantes.carrera_id')
+		                        -> join('facultads','facultads.id','=','carreras.facultad_id')
+								-> join('autoridadacademicas','facultads.id','=','autoridadacademicas.facultad_id')
+							    -> where('autoridadacademicas.user_id',$userID)
+								->get();
         return view('livewire.cartarecomendacions.view', [
             'cartarecomendacions' => Cartarecomendacion::latest()
 						->orWhere('cartaId', 'LIKE', $keyWord)
@@ -38,8 +49,9 @@ class Cartarecomendacions extends Component
                         })
 									
 						->paginate(10),
-						'autoridadesacademicas'=>Autoridadacademica::all(),
-						'estudiantes'=>Estudiante::all()
+						
+						'autoridadesacademicas'=>$autoridadesacademicas,
+						'estudiantes'=>$estudiantes,
         ]);
     }
 

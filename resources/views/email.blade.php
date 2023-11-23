@@ -17,5 +17,7 @@
 <body>
 	<h1>Saludos, {{$empresa}}</h1>
 	<p>BIENVENIDO a la bolsa de Empleo UMES.</p>
+	<img src="https://i.ibb.co/k30rYxd/firmamail.jpg" />
+	
 </body>
 </html>

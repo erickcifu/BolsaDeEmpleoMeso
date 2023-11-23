@@ -16,6 +16,8 @@
 </head>
 <body>
 	<h1>Saludos, {{$empresa}}</h1>
-	<p> RRHH a visto su solicitud, su solicitud es en: <B>{{$estadoSolicitud}}</B></p>
+	<p> Recursos Humanos a visto su solicitud, su solicitud es: <B>{{$estadoSolicitud}}</B></p>
+	<img src="https://i.ibb.co/k30rYxd/firmamail.jpg" />
+	
 </body>
 </html>

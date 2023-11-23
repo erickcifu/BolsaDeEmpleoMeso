@@ -31,17 +31,12 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nit</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 								
 							</tr>
 						</thead>
@@ -58,13 +53,7 @@
 								{{--<td>{{ $row->rtu }}</td>--}}
 								<td> <a href="{{ $row->patenteComercio }}" target="_blank"> ver archivo </a> </td>
 								{{--<td>{{ $row->patenteComercio }}</td>--}}
-								<td>{{ $row->descripcionEmpresa }}</td>
-								<td>{{ $row->telefonoEmpresa }}</td>
-								<td>{{ $row->correoEmpresa }}</td>
-								<td>{{ $row->direccionEmpresa }}</td>
-								<td>{{ $row->encargadoEmpresa }}</td>
-								<td>{{ $row->telefonoEncargado }}</td>
-
+								
 								<td>
 									<?php if ($row->estadoEmpresa == 1): ?>
 										<span class="badge" style="background-color: #005c35;"><b>Activo</b></span>
@@ -93,6 +82,14 @@
 								<td>{{ $row->user->name }}</td>
 								<td>{{ $row->municipio->Departamento->nombreDepartamento}}</td>
 								<td>{{ $row->municipio->nombreMunicipio }}</td>
+								<td width="125">
+									<div class="dropdown">
+										
+										
+										<a data-bs-toggle="modal" data-bs-target="#updateDataModal2" class="dropdown-item" wire:click="edit({{$row->empresaId}})"><i class="fa fa-eye"></i><h7> Ver más</h7></a>
+									
+								</div>									
+								</td>
 								
 							</tr>
 							@empty
