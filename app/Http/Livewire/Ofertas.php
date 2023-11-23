@@ -10,6 +10,12 @@ use App\Models\Entrevista;
 use App\Models\User;
 use App\Models\Postulacion;
 use App\Models\Facultad;
+use App\Models\habilidadTecnica;
+use App\Models\ofertaTecnica;
+use App\Models\Interpersonal;
+use App\Models\ofertaInterpersonal;
+use App\Models\competencia;
+use App\Models\ofertaCompetencia;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use DB;
@@ -37,6 +43,12 @@ class Ofertas extends Component
 	public $userID,	$empresaAut, $user, $ofertasLaborales;
 	public $postulaciones;
 	public $entrevistapost, $post;
+	public $habilidadesTecnicas = [];
+	public $tecnicas = [];
+	public $habilidadesInterpersonales = [];
+	public $interpersonales = [];
+	public $competenciasTable = [];
+	public $competencias = [];
 
 	public function mount()
     {
@@ -48,6 +60,9 @@ class Ofertas extends Component
 
 		$this->Postulaciones = Postulacion::all();
 		$facultades = Facultad::all();
+		// $this->habilidadesTecnicas = habilidadTecnica::all();
+		$this->habilidadesInterpersonales = Interpersonal::all();
+		$this->competenciasTable = competencia::all();
 
 		if (Auth::check()) {
 
@@ -85,11 +100,15 @@ class Ofertas extends Component
 		$this->redirect('/postulacions/' . $ofertaId);
 	}*/
 
-
     public function cancel()
     {
         $this->resetInput();
     }
+
+	public function updatedHabiliades()
+	{
+		$this->habilidadesTecnicas = habilidadTecnica::where('facultad_id', $this->facultad_id)->get();
+	}
 
     private function resetInput()
     {		
@@ -218,11 +237,10 @@ public function validarPaso1()
      $this->validate([
         'requisitosEducativos' => 'required | max:200',
  		'experienciaLaboral' => 'required | max:300',
- 		'edadRequerida' => 'required|integer | gt:18',
+ 		'edadRequerida' => 'required|integer | gt:17',
  		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
 		'facultad_id' => 'required | integer',
      ]);
-	 $this->mostrarErrores = true;
  }
  public function validarPaso3()
  {
@@ -232,39 +250,83 @@ public function validarPaso1()
 		'beneficios' => 'required|max:300',
 		'oportunidadesDesarrollo' => 'required | max:300',
      ]);
-	 $this->mostrarErrores = true;
  }
+
+ public function validarPaso4()
+	{
+		//Reglas de validación para las condiciones y beneficios que ofrece la empresa
+		$this->validate([
+			'tecnicas.*.tecnicaId' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
+		]);
+		$this->mostrarErrores = true;
+	}
+
+public function validarPaso5()
+	{
+		//Reglas de validación para las condiciones y beneficios que ofrece la empresa
+		$this->validate([
+			'interpersonales.*.interpersonalId' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
+		]);
+		$this->mostrarErrores = true;
+	}
+
+	public function validarPaso6()
+	{
+		//Reglas de validación para las condiciones y beneficios que ofrece la empresa
+		$this->validate([
+			'competencias.*.competenciaId' => 'required|regex:/^[A-Za-z0-9\s]*$/|max:300',
+		]);
+		$this->mostrarErrores = true;
+	}
  // fin de validación de cada paso del formulario
 
  //Función para validar las reglas, dependiendo del paso en el que esté el formulario
- public function siguientePaso()
+ public function siguientePaso($paso)
  {
-	//if ($this->mostrarErrores) {
-		if ($this->paso === 1) {
-			$this->validarPaso1(); // Validar datos del paso 1
-		} elseif ($this->paso === 2) {
-			$this->validarPaso2(); // Validar datos del paso 2
+	if ($this->paso === 1) {
+		$this->validarPaso1(); // Validar datos del paso 1
+	} elseif ($this->paso === 2) {
+		$this->validarPaso2(); // Validar datos del paso 2
+		$this->updatedHabiliades();
+	} elseif ($this->paso === 3) {
+		$this->validarPaso3(); // Validar datos del paso 3
+		if (count($this->tecnicas) == 0) {
+			$this->addTecnicas();
 		}
-		elseif ($this->paso === 3) {
-			$this->validarPaso3(); // Validar datos del paso 3
+	} elseif ($this->paso === 4) {
+		$this->validarPaso4(); // Validar datos del paso 4
+		if (count($this->interpersonales) == 0) {
+			$this->addInterpersonales();
 		}
-	//}
+	} elseif ($this->paso === 5) {
+		$this->validarPaso5(); // Validar datos del paso 5
+		if (count($this->competencias) == 0) {
+			$this->addCompetencias();
+		}
+	} elseif ($this->paso === 6) {
+		$this->validarPaso6(); // Validar datos del paso 6
+	}
 
-    $this->paso++; //Se suma 1 al paso
+	$this->paso = $paso;
  }
 
- public function pasoAnterior()
+ public function pasoAnterior($paso)
  {
-    $this->paso--; //Para volver se resta 1 al paso
- 	
+    $this->paso = $paso;
  }
  // Fin de función para validar las reglas, dependiendo del paso en el que esté el formulario
 
-
+	public function process()
+	{
+		if ($this->selected_id === null) {
+			$this->store();
+		} else {
+			$this->update();
+		}
+	}
 
     public function store()
     {
-
 		if (Auth::check()) {
             // Obtiene el ID del usuario autenticado
             $this->userID = Auth::id();
@@ -276,7 +338,7 @@ public function validarPaso1()
 				$this->imagenPuestoPath = 'storage/'.$this->imagenPuesto->store('ofertaslab', 'public');
 			}
 
-			Oferta::create([ 
+			$oferta = Oferta::create([ 
 				'resumenPuesto' => $this-> resumenPuesto,
 				'nombrePuesto' => $this-> nombrePuesto,
 				'responsabilidadesPuesto' => $this-> responsabilidadesPuesto,
@@ -298,6 +360,26 @@ public function validarPaso1()
 				'empresa_id' => $this->empresaAut,
 				'facultad_id' => $this-> facultad_id,
 			]);
+
+			$guardarId = $oferta->ofertaId;
+
+			foreach ($this->tecnicas as $tec) {
+				$tec['oferta_id'] = $guardarId;
+				$tec['tecnica_id'] = $tec['tecnicaId'];
+				ofertaTecnica::create($tec);
+			}
+
+			foreach ($this->interpersonales as $inter) {
+				$inter['oferta_id'] = $guardarId;
+				$inter['interpersonal_id'] = $inter['interpersonalId'];
+				ofertaInterpersonal::create($inter);
+			}
+
+			foreach ($this->competencias as $comp) {
+				$comp['oferta_id'] = $guardarId;
+				$comp['competencia_id'] = $comp['competenciaId'];
+				ofertaCompetencia::create($comp);
+			}
 			$this->resetInput();
             session()->flash('message', 'Oferta Creada satisfactoriamente.');
 			}
@@ -361,7 +443,31 @@ public function validarPaso1()
 		$this->comentarioCierre = $record-> comentarioCierre;
 		$this->empresa_id = $record-> empresa_id;
 		$this->facultad_id = $record-> facultad_id;
-		$this->paso=1;
+		
+		$tecnicas = ofertaTecnica::where('oferta_id', $ofertaId)->get();
+		$interpersonales = ofertaInterpersonal::where('oferta_id', $ofertaId)->get();
+		$competencias = ofertaCompetencia::where('oferta_id', $ofertaId)->get();
+
+		foreach ($tecnicas as $tec) {
+			$this->tecnicas[] = [
+				'tecnicaId' => $tec->tecnica_id,
+				'ofertaTecnicaId' => $tec->ofertaTecnicaId,
+			];
+		}
+
+		foreach ($interpersonales as $inter) {
+			$this->interpersonales[] = [
+				'interpersonalId' => $inter->interpersonal_id,
+				'ofertaInterpersonalId' => $inter->ofertaInterpersonalId,
+			];
+		}
+
+		foreach ($competencias as $comp) {
+			$this->competencias[] = [
+				'competenciaId' => $comp->competencia_id,
+				'ofertaCompentenciaId' => $comp->ofertaCompentenciaId,
+			];
+		}
     }
 
     public function update()
@@ -409,6 +515,49 @@ public function validarPaso1()
 				'empresa_id' => "1",
 				'facultad_id' => $this-> facultad_id,
             ]);
+
+			foreach ($this->tecnicas as $tec) {
+
+				if (array_key_exists('ofertaTecnicaId', $tec)) {
+					$record = ofertaTecnica::find($tec['ofertaTecnicaId']);
+					$record->update([
+						'oferta_id' => $this->selected_id,
+						'tecnica_id' => $tec['tecnicaId'],
+					]);
+				} else {
+					$tec['oferta_id'] = $this->selected_id;
+					$tec['tecnica_id'] = $tec['tecnicaId'];
+					ofertaTecnica::create($tec);
+				}
+			}
+
+			foreach ($this->interpersonales as $inter) {
+				if (array_key_exists('ofertaInterpersonalId', $inter)) {
+					$record = ofertaInterpersonal::find($inter['ofertaInterpersonalId']);
+					$record->update([
+						'oferta_id' => $this->selected_id,
+						'interpersonal_id' => $inter['interpersonalId'],
+					]);
+				} else {
+					$inter['oferta_id'] = $this->selected_id;
+					$inter['interpersonal_id'] = $inter['interpersonalId'];
+					ofertaInterpersonal::create($inter);
+				}
+			}
+
+			foreach ($this->competencias as $comp) {
+				if (array_key_exists('ofertaCompentenciaId', $comp)) {
+					$record = ofertaCompetencia::find($comp['ofertaCompentenciaId']);
+					$record->update([
+						'oferta_id' => $this->selected_id,
+						'competencia_id' => $comp['competenciaId'],
+					]);
+				} else {
+					$comp['oferta_id'] = $this->selected_id;
+					$comp['competencia_id'] = $comp['competenciaId'];
+					ofertaCompetencia::create($comp);
+				}
+			}
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
@@ -522,6 +671,59 @@ public function validarPaso1()
         $this->ofertaId = $ofertaId;
     }
 
+	public function addTecnicas()
+	{
+		$this->tecnicas[] = [
+			'tecnicaId' => $this->habilidadesTecnicas[0]->tecnicaId,
+		];
+	}
+
+	public function removeTecnicas($indice)
+	{
+		if (array_key_exists('ofertaTecnicaId', $this->tecnicas[$indice])) {
+			$record = ofertaTecnica::find($this->tecnicas[$indice]['ofertaTecnicaId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado la habilidad técnica correctamente!');
+		}
+
+		unset($this->tecnicas[$indice]);
+		$this->tecnicas = array_values($this->tecnicas);
+	}
+	public function addInterpersonales()
+	{
+		$this->interpersonales[] = [
+			'interpersonalId' => $this->habilidadesInterpersonales[0]->interpersonalId,
+		];
+	}
+
+	public function removeInterpersonales($indice)
+	{
+		if (array_key_exists('ofertaInterpersonalId', $this->interpersonales[$indice])) {
+			$record = ofertaInterpersonal::find($this->interpersonales[$indice]['ofertaInterpersonalId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado la habilidad interpersonal correctamente!');
+		}
+		unset($this->interpersonales[$indice]);
+		$this->interpersonales = array_values($this->interpersonales);
+	}
+	public function addCompetencias()
+	{
+		$this->competencias[] = [
+			'competenciaId' => $this->competenciasTable[0]->competenciaId,
+		];
+	}
+
+	public function removeCompetencias($indice)
+	{
+		if (array_key_exists('ofertaCompentenciaId', $this->competencias[$indice])) {
+			$record = ofertaCompetencia::find($this->competencias[$indice]['ofertaCompentenciaId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado la competencia correctamente!');
+		}
+		unset($this->competencias[$indice]);
+		$this->competencias = array_values($this->competencias);
+	}
+
     public function destroy()
     {
         Oferta::where('ofertaId', $ofertaId)->delete();
@@ -540,7 +742,8 @@ public function validarPaso1()
 	public function GuardarImagen(){
 		if ($this->selected_id) {
 			$recordImg = Oferta::find($this->selected_id);
-	
+		
+		
 			$recordImg->update([ 
 				'nombrePuesto' => $this->nombrePuesto,
 				'imagenPuesto' => 'storage/'.$this->imagenPuesto->store('ofertaslab', 'public'),
@@ -550,4 +753,5 @@ public function validarPaso1()
 			session()->flash('message', 'Imagen actualizada exitosamente!');
 		}
 	}
+
 }
