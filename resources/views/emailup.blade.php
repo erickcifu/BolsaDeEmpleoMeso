@@ -16,6 +16,8 @@
 </head>
 <body>
 	<h1>Saludos, {{$empresa}}</h1>
-	<p> ha  actulizado su informacion de su empresa en la bolsa de Empleo UMES.</p>
+	<p> Ha  actulizado su informacion de su empresa en la bolsa de Empleo UMES.</p>
+	<img src="https://i.ibb.co/k30rYxd/firmamail.jpg" />
+	
 </body>
 </html>
