@@ -23,7 +23,7 @@
                         </div>
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-                            <small style="color: #373737;"><i class="fa-solid fa-circle-info"></i> Edad miníma: {{ $edadRequerida }}</small>
+                            <small style="color: #373737;"><i class="fa-solid fa-circle-info"></i> Edad miníma requerida: {{ $edadRequerida }}</small>
                             </div>
                         </div>
                     </div>
