@@ -25,6 +25,7 @@
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</b></td> 
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Empresa</b></th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Oferta laboral</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Entrevista</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Fecha</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Hora de inicio</b></th>
@@ -34,10 +35,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							@forelse($entrevistas as $row)
+							@forelse($entrevistasEstudiante as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->postulacion->oferta->empresa->nombreEmpresa }}</td>
+								<td>{{ optional($row->postulacions)->oferta->empresa->nombreEmpresa ?? 'N/A'  }}</td>
+								<td>{{ optional($row->postulacions)->oferta->nombrePuesto ?? 'N/A'  }}</td>
 								<td>{{ $row->tituloEntrevista }}</td>
 								<td>{{ date('d-m-Y', strtotime($row->FechaEntrevista))  }}</td>
 								<td>{{ $row->horaInicio }}</td>

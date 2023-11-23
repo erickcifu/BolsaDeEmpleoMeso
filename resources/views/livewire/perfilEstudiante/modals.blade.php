@@ -108,6 +108,7 @@
                         
                         </label>
                         <input wire:model="curriculum" type="file" accept="application/pdf" class="form-control" id="curriculum" placeholder="curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <div wire:loading wire:target="curriculum"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>
                     </div>                    
                 </form>
             </div>

@@ -5,6 +5,10 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Entrevista;
+use App\Models\User;
+use App\Models\Estudiante;
+use App\Models\Postulacion;
+use Illuminate\Support\Facades\Auth;
 
 class EntrevistaEstudiantes extends Component
 {
@@ -12,9 +16,20 @@ class EntrevistaEstudiantes extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
-
+	public $usuarioAutenticado, $entrevistasEstudiante, $user, $nombreEmpresa;
     public function render()
     {
+		if (Auth::check()) {
+			$this->usuarioAutenticado = Auth::id();
+
+       	 	$this->user = User::with('estudiante')->find($this->usuarioAutenticado);
+
+			//Obtener entrevistas del estudiante
+			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) {
+                return $postulacion->entrevistas;
+            });
+        
+		}
 		$keyWord = '%'.$this->keyWord .'%';
         return view('livewire.entrevistaestudiantes.viewentrevista', [
             'entrevistas' => Entrevista::latest()
@@ -26,7 +41,7 @@ class EntrevistaEstudiantes extends Component
 						->orWhere('Contratado', 'LIKE', $keyWord)
 						->orWhere('comentarioContratado', 'LIKE', $keyWord)
 						->orWhere('postulacion_id', 'LIKE', $keyWord)
-						->paginate(10),
+						->paginate(10), 'entrevistasEstudiante' => $this->entrevistasEstudiante,
         ]);
     }
 	
@@ -52,7 +67,7 @@ class EntrevistaEstudiantes extends Component
         $this->validate([
 		'tituloEntrevista' => 'required',
 		'descripcionEntrevista' => 'required',
-		'FechaEntrevista' => 'required',
+		'FechaEntrevista' => 'required | date | after:today',
 		'horaInicio' => 'required',
 		'horaFinal' => 'required',
 		'postulacion_id' => 'required',
