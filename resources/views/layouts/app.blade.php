@@ -43,10 +43,10 @@
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
 						
-						<!-- <li class="nav-item">
+						<li class="nav-item">
                             <a href="{{ url('/entrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
                         </li>
-						<li class="nav-item">
+						<!-- <li class="nav-item">
                             <a href="{{ url('/postulacions') }}" class="nav-link" style="color: #f0eadc;">Postulaciones</a> 
                         </li> -->
 						<li class="nav-item">

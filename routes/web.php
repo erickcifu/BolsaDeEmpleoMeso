@@ -6,6 +6,7 @@ use App\Http\Livewire\OfertasEstudiantes;
 use App\Http\Livewire\PostulacionEstudiantes;
 use App\Http\Livewire\EntrevistasEstudiantes;
 use App\Http\Livewire\PerfilEstudiante;
+use App\Http\Livewire\Entrevista;
 use App\Http\Livewire\Ofertas;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
