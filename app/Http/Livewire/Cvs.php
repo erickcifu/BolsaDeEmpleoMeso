@@ -25,8 +25,10 @@ class Cvs extends Component
 
 	protected $paginationTheme = 'bootstrap';
 	public $selected_id, $keyWord, $cvId, $direcionDomiciliar, $correoElectronico, $telefonoCv, $fotoCv, $perfilProfesional, $habilidades, $nombreRef1, $telRef1, $nombreRef2, $telRef2, $publicaciones, $intereses;
+	public $pathTempPhoto;
 	//para el multiformulario
 	public $paso = 1;
+	public $iteration = 0;
 	public $guardarId = 0;
 	public $certificaciones = [];
 	public $experiencia = [];
@@ -90,7 +92,8 @@ class Cvs extends Component
 		$this->idiomas = [];
 		$this->experiencia = [];
 		$this->paso = 1;
-
+		$this->selected_id = null;
+		$this->iteration++;
 	}
 	protected $rules = [
 		'direcionDomiciliar' => 'required',
@@ -105,18 +108,10 @@ class Cvs extends Component
 		'telRef2' => 'required | size:8',
 		'publicaciones' => 'nullable | url | max:500',
 		'intereses' => 'required | max:300',
-		// 'certificaciones.*.nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		// 'certificaciones.*.anioCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		// 'certificaciones.*.institucionCertificadora' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		// 'inicioExperiencia' => 'nullable | date | before_or_equal:today',
-		// 'finExperiencia' => 'nullable | date | before_or_equal:today',
-		// 'puestoTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		// 'lugarTrabajo' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		// 'descripcionLaboral' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
-		// 'anioInicioFormacion' => 'required | date | before_or_equal:today',
-		// 'anioFinFormacion' => 'required | date | before_or_equal:today',
-		// 'institucionFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
 	];
+
+	protected $rulesCreate = ['fotoCv' => ' image | mimes:png,jpg,jpeg'];
+	protected $rulesUpdate = ['fotoCv' => 'nullable'];
 	public function updated($propertyOferta)
 	{
 		$this->validateOnly($propertyOferta);
@@ -178,20 +173,8 @@ class Cvs extends Component
 
 	public function ValidarPaso1()
 	{
-		$this->validate([
-			'direcionDomiciliar' => 'required',
-			'correoElectronico' => 'required|email',
-			'telefonoCv' => 'required | size:8',
-			'fotoCv' => ' image | mimes:png,jpg,jpeg',
-			'perfilProfesional' => 'required |max:300',
-			'habilidades' => 'required | max:300',
-			'nombreRef1' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',
-			'telRef1' => 'required | size:8',
-			'nombreRef2' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',
-			'telRef2' => 'required | size:8',
-			'publicaciones' => 'nullable | url | max:500',
-			'intereses' => 'required | max:300',
-		]);
+		$rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
+		$this->validate($rules);
 	}
 	public function ValidarPaso2()
 	{
@@ -236,22 +219,22 @@ class Cvs extends Component
 		if ($this->paso === 1) {
 			$this->ValidarPaso1(); // Validar datos del paso 1
 
-			if(count($this->certificaciones) == 0) {
+			if (count($this->certificaciones) == 0) {
 				$this->addCertificacion();
 			}
 		} elseif ($this->paso === 2) {
 			$this->ValidarPaso2(); // Validar datos del paso 2
-			if(count($this->formacion) == 0) {
+			if (count($this->formacion) == 0) {
 				$this->addFormacion();
 			}
 		} elseif ($this->paso === 3) {
 			$this->ValidarPaso3(); // Validar datos del paso 3
-			if(count($this->experiencia) == 0) {
+			if (count($this->experiencia) == 0) {
 				$this->addExperencia();
 			}
 		} elseif ($this->paso === 4) {
 			$this->ValidarPaso4(); // Validar datos del paso 3
-			if(count($this->idiomas) == 0) {
+			if (count($this->idiomas) == 0) {
 				$this->addIdiomas();
 			}
 		} elseif ($this->paso === 5) {
@@ -266,9 +249,18 @@ class Cvs extends Component
 	}
 	// Fin de función para validar las reglas, dependiendo del paso en el que esté el formulario
 
+	public function process()
+	{
+		if ($this->selected_id === null) {
+			$this->store();
+		} else {
+			$this->update();
+		}
+	}
 	public function store()
 	{
-		$this->validate();
+		$rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
+		$this->validate($rules);
 		$estudiante = Estudiante::where('user_id', auth()->user()->id)->first();
 
 		$cv = Cv::create([
@@ -287,7 +279,7 @@ class Cvs extends Component
 			'telRef2' => $this->telRef2,
 			'estudiante_id' => $estudiante->estudianteId,
 		]);
-		$guardarId = $cv->id;
+		$guardarId = $cv->cvId;
 
 		foreach ($this->certificaciones as $cert) {
 			$cert['cv_id'] = $guardarId;
@@ -317,53 +309,195 @@ class Cvs extends Component
 	}
 
 
-	public function edit($id)
+	public function edit($cvId)
 	{
-		$record = Cv::findOrFail($id);
-		$this->selected_id = $id;
+		$this->resetInput();
+		$record = Cv::where('cvId', $cvId)->first();
+		$this->selected_id = $cvId;
 		$this->cvId = $record->cvId;
 		$this->direcionDomiciliar = $record->direcionDomiciliar;
 		$this->correoElectronico = $record->correoElectronico;
 		$this->telefonoCv = $record->telefonoCv;
-		$this->fotoCv = $record->fotoCv;
 		$this->perfilProfesional = $record->perfilProfesional;
 		$this->habilidades = $record->habilidades;
 		$this->referencias = $record->referencias;
 		$this->publicaciones = $record->publicaciones;
 		$this->intereses = $record->intereses;
+		$this->nombreRef1 = $record->nombreRef1;
+		$this->telRef1 = $record->telRef1;
+		$this->nombreRef2 = $record->nombreRef2;
+		$this->telRef2 = $record->telRef2;
+		$this->pathTempPhoto = $record->fotoCv;
+
+		$certificaciones = Certificacion::where('cv_id', $cvId)->get();
+		$experiencia = Experiencia::where('cv_id', $cvId)->get();
+		$formacion = Formacion::where('cv_id', $cvId)->get();
+		$idiomas = Idiomacv::where('cv_id', $cvId)->get();
+
+		foreach ($certificaciones as $cert) {
+			$this->certificaciones[] = [
+				'certificacionId' => $cert->certificacionId,
+				'institucionCertificadora' => $cert->institucionCertificadora,
+				'anioCertificacion' => $cert->anioCertificacion,
+				'nombreCertificacion' => $cert->nombreCertificacion,
+				'cv_id' => $cvId,
+			];
+		}
+
+		foreach ($experiencia as $exp) {
+			$this->experiencia[] = [
+				'experienciaId' => $exp->experienciaId,
+				'inicioExperiencia' => $exp->inicioExperiencia,
+				'finExperiencia' => $exp->finExperiencia,
+				'puestoTrabajo' => $exp->puestoTrabajo,
+				'lugarTrabajo' => $exp->lugarTrabajo,
+				'descripcionLaboral' => $exp->descripcionLaboral,
+				'cv_id' => $cvId,
+			];
+		}
+
+		foreach ($formacion as $form) {
+			$this->formacion[] = [
+				'formacionId' => $form->formacionId,
+				'anioInicioFormacion' => $form->anioInicioFormacion,
+				'anioFinFormacion' => $form->anioFinFormacion,
+				'nivelFormacion' => $form->nivelFormacion,
+				'institucionFormacion' => $form->institucionFormacion,
+				'tituloObtenido' => $form->tituloObtenido,
+				'cv_id' => $cvId,
+			];
+		}
+
+		foreach ($idiomas as $idioma) {
+			$this->idiomas[] = [
+				'idiomacvId' => $idioma->idiomacvId,
+				'idiomaId' => $idioma->idioma_id,
+				'nivelIdioma' => $idioma->nivelIdioma,
+				'cv_id' => $cvId,
+			];
+		}
 	}
 
 	public function update()
 	{
-		$this->validate();
+		$rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
+		$this->validate($rules);
+
+		if ($this->fotoCv !== null) {
+			Storage::disk('public')->delete($this->pathTempPhoto);
+		}
 
 		if ($this->selected_id) {
 			$record = Cv::find($this->selected_id);
 			$record->update([
-				'cvId' => $this->cvId,
 				'direcionDomiciliar' => $this->direcionDomiciliar,
 				'correoElectronico' => $this->correoElectronico,
 				'telefonoCv' => $this->telefonoCv,
-				'fotoCv' => $this->fotoCv,
+				'fotoCv' => $this->fotoCv === null ? $this->pathTempPhoto :
+					('storage/' . $this->fotoCv->store('fotografia', 'public')),
 				'perfilProfesional' => $this->perfilProfesional,
 				'habilidades' => $this->habilidades,
 				'referencias' => $this->referencias,
 				'publicaciones' => $this->publicaciones,
-				'intereses' => $this->intereses
+				'intereses' => $this->intereses,
+				'nombreRef1' => $this->nombreRef1,
+				'telRef1' => $this->telRef1,
+				'nombreRef2' => $this->nombreRef2,
+				'telRef2' => $this->telRef2,
 			]);
+
+
+
+			foreach ($this->certificaciones as $cert) {
+
+				if (array_key_exists('certificacionId', $cert)) {
+					$record = Certificacion::find($cert['certificacionId']);
+					$record->update([
+						'cv_id' => $this->selected_id,
+						'institucionCertificadora' => $cert['institucionCertificadora'],
+						'anioCertificacion' => $cert['anioCertificacion'],
+						'nombreCertificacion' => $cert['nombreCertificacion'],
+					]);
+				} else {
+					$cert['cv_id'] = $this->selected_id;
+					Certificacion::create($cert);
+				}
+			}
+
+			foreach ($this->experiencia as $exp) {
+
+				if (array_key_exists('experienciaId', $exp)) {
+					$record = Experiencia::find($exp['experienciaId']);
+					$record->update([
+						'cv_id' => $this->selected_id,
+						'inicioExperiencia' => $exp['inicioExperiencia'],
+						'finExperiencia' => $exp['finExperiencia'],
+						'puestoTrabajo' => $exp['puestoTrabajo'],
+						'lugarTrabajo' => $exp['lugarTrabajo'],
+						'descripcionLaboral' => $exp['descripcionLaboral'],
+					]);
+				} else {
+					$exp['cv_id'] = $this->selected_id;
+					Experiencia::create($exp);
+				}
+			}
+
+			foreach ($this->formacion as $form) {
+
+				if (array_key_exists('formacionId', $form)) {
+					$record = Formacion::find($form['formacionId']);
+					$record->update([
+						'cv_id' => $this->selected_id,
+						'anioInicioFormacion' => $form['anioInicioFormacion'],
+						'anioFinFormacion' => $form['anioFinFormacion'],
+						'nivelFormacion' => $form['nivelFormacion'],
+						'institucionFormacion' => $form['institucionFormacion'],
+						'tituloObtenido' => $form['tituloObtenido'],
+					]);
+				} else {
+					$form['cv_id'] = $this->selected_id;
+					Formacion::create($form);
+				}
+			}
+
+			foreach ($this->idiomas as $idioma) {
+
+				if (array_key_exists('idiomacvId', $idioma)) {
+					$record = Idiomacv::find($idioma['idiomacvId']);
+					$record->update([
+						'cv_id' => $this->selected_id,
+						'idioma_id' => $idioma['idiomaId'],
+						'nivelIdioma' => $idioma['nivelIdioma'],
+					]);
+				} else {
+					$idioma['cv_id'] = $this->selected_id;
+					$idioma['idioma_id'] = $idioma['idiomaId'];
+					Idiomacv::create($idioma);
+				}
+			}
 
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Cv Successfully updated.');
+			session()->flash('message', 'Cv Actualizado.');
 		}
 	}
 
-	public function destroy($cvId)
+    public function eliminar($cvId)
 	{
-		if ($cvId) {
-			Cv::where('cvId', $cvId)->delete();
-		}
+		$this->selected_id = $cvId;
+		$this->dispatchBrowserEvent('showDeleteConfirmationModal');
 	}
+
+    public function destroy()
+    {
+        if ($this->selected_id) {
+			Cv::where('cvId', $this->selected_id)->delete();
+		}
+	
+		$this->dispatchBrowserEvent('closeModal');
+		session()->flash('message', 'CV eliminado');
+    }
+
 
 	public function addCertificacion()
 	{
@@ -372,6 +506,11 @@ class Cvs extends Component
 
 	public function removeCertificacion($indice)
 	{
+		if (array_key_exists('certificacionId', $this->certificaciones[$indice])) {
+			$record = Certificacion::find($this->certificaciones[$indice]['certificacionId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado la certificación correctamente!');
+		}
 		unset($this->certificaciones[$indice]);
 		$this->certificaciones = array_values($this->certificaciones);
 	}
@@ -388,6 +527,11 @@ class Cvs extends Component
 
 	public function removeExperencia($indice)
 	{
+		if (array_key_exists('experienciaId', $this->experiencia[$indice])) {
+			$record = Experiencia::find($this->experiencia[$indice]['experienciaId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado la experiencia correctamente!');
+		}
 		unset($this->experiencia[$indice]);
 		$this->experiencia = array_values($this->experiencia);
 	}
@@ -398,6 +542,11 @@ class Cvs extends Component
 
 	public function removeIdiomas($indice)
 	{
+		if (array_key_exists('idiomacvId', $this->idiomas[$indice])) {
+			$record = Idiomacv::find($this->idiomas[$indice]['idiomacvId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado el idioma correctamente!');
+		}
 		unset($this->idiomas[$indice]);
 		$this->idiomas = array_values($this->idiomas);
 	}
@@ -413,6 +562,11 @@ class Cvs extends Component
 
 	public function removeFormacion($indice)
 	{
+		if (array_key_exists('formacionId', $this->formacion[$indice])) {
+			$record = Formacion::find($this->formacion[$indice]['formacionId']);
+			$record->delete();
+			session()->flash('message', 'Se ha eliminado la formación correctamente!');
+		}
 		unset($this->formacion[$indice]);
 		$this->formacion = array_values($this->formacion);
 	}

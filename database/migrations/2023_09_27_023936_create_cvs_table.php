@@ -20,7 +20,7 @@ class CreateCvsTable extends Migration
             $table->string('correoElectronico',100);
             $table->integer('telefonoCv');
             $table->string('fotoCv',300);
-            $table->string('perfilProfesional',500);
+            $table->string('perfilProfesional',300);
             $table->string('habilidades',500);
             $table->string('nombreRef1',200);
             $table->integer('telRef1');
