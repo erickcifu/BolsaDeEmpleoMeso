@@ -73,7 +73,7 @@ class Empresas extends Component
 	protected $rules = [
 		'logo' => 'required|mimes:jpeg,png,jpg,gif',
 		'nombreEmpresa' => 'required',
-		'nit' => 'required',
+		'nit' => 'required|size:9',
 		'rtu' => 'required|mimes:pdf',
 		'patenteComercio' => 'required|mimes:pdf',
 		'descripcionEmpresa' => 'required',

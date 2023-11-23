@@ -31,7 +31,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@forelse($postulacionStudent as $row)
+							@forelse($postulacionesEstudiante as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{date('d-m-Y', strtotime($row->fechaPostulacion))}}</td>
