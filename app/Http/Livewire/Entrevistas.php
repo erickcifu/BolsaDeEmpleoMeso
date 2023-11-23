@@ -12,7 +12,8 @@ class Entrevistas extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
-
+	public $record2;
+	
     public function render()
     {
 		$keyWord = '%'.$this->keyWord .'%';
@@ -128,14 +129,65 @@ class Entrevistas extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Entrevista Successfully updated.');
+			session()->flash('message', 'Actualizado correctamente!.');
         }
     }
 
-    public function destroy($entrevistaId)
+
+	public function edit2($entrevistaId)
     {
-        if ($id) {
-            Entrevista::where('entrevistaId', $entrevistaId)->delete();
+        $record = Entrevista::findOrFail($entrevistaId);
+        $this->selected_id = $entrevistaId; 
+		$this->tituloEntrevista = $record-> tituloEntrevista;
+		$this->descripcionEntrevista = $record-> descripcionEntrevista;
+		$this->FechaEntrevista = $record-> FechaEntrevista;
+		$this->horaInicio = $record-> horaInicio;
+		$this->horaFinal = $record-> horaFinal;
+		$this->Contratado = $record-> Contratado;
+		$this->comentarioContratado = $record-> comentarioContratado;
+		$this->postulacion_id = $record-> postulacion_id;
+    }
+
+    public function update2()
+    {
+        $this->validate([
+		'tituloEntrevista' => 'required',
+		'descripcionEntrevista' => 'required',
+		'FechaEntrevista' => 'required',
+		'horaInicio' => 'required',
+		'horaFinal' => 'required',
+		'postulacion_id' => 'required',
+        ]);
+
+        if ($this->selected_id) {
+			$record = Entrevista::find($this->selected_id);
+            $record->update([ 
+			'tituloEntrevista' => $this-> tituloEntrevista,
+			'descripcionEntrevista' => $this-> descripcionEntrevista,
+			'FechaEntrevista' => $this-> FechaEntrevista,
+			'horaInicio' => $this-> horaInicio,
+			'horaFinal' => $this-> horaFinal,
+			'Contratado' => $this-> Contratado,
+			'comentarioContratado' => $this-> comentarioContratado,
+			'postulacion_id' => $this-> postulacion_id
+            ]);
+
+            $this->resetInput();
+            $this->dispatchBrowserEvent('closeModal');
+			session()->flash('message', 'Actualizado correctamente!.');
         }
+    }
+
+	public function buscarId($entrevistaId)
+    {
+        $this->record2 = Entrevista::where('entrevistaId', $entrevistaId)->first();
+    }
+
+    public function destroy()
+    {
+		if ($this->record2) {
+			Entrevista::where('entrevistaId', $this->record2->entrevistaId)->delete();
+        }
+		session()->flash('message', 'Entrevista eliminada correctamente');
     }
 }

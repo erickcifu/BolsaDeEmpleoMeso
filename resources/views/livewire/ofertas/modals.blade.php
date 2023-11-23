@@ -638,7 +638,10 @@
     </div>
 </div>
 
-<!-- Enrevista Modal -->
+<!-- Ver Entrevistas Modal -->
+
+
+<!-- CREAR Entrevista Modal -->
 <div wire:ignore.self class="modal fade" id="createEntrevistaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createEntrevistaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

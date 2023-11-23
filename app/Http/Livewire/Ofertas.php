@@ -42,7 +42,7 @@ class Ofertas extends Component
 	public $mostrarErrores = false;
 	public $userID,	$empresaAut, $user, $ofertasLaborales;
 	public $postulaciones;
-	public $entrevistapost, $post;
+	public $entrevistapost, $post, $ofertaEnt, $postuEnt;
 	public $habilidadesTecnicas = [];
 	public $tecnicas = [];
 	public $habilidadesInterpersonales = [];
@@ -683,6 +683,33 @@ public function validarPaso5()
 	}
     
 	
+	//FUNCION PARA BUSCAR LAS ENTREVISTAS DENTRO DE LA TABLA OFERTAS
+	// public function verEntrevistas($ofertaId)
+    // {
+    //     // Obtener la oferta con las postulaciones y entrevistas asociadas
+	// 	$this->ofertapost = Oferta::with('postulacions.entrevistas')->find($ofertaId);
+
+	// 	// Verificar si la oferta existe
+	// 	if (!$this->ofertapost) {
+	// 		session()->flash('message', 'La oferta no existe.');
+	// 		return;
+	// 	}
+
+	// 	// Obtener el nombre de la oferta
+	// 	$this->nombreOferta = $this->ofertapost->nombrePuesto;
+
+	// 	// Obtener todas las entrevistas asociadas a las postulaciones de la oferta
+	// 	$this->ofertasEnt = $this->ofertapost->postulacions->flatMap(function ($totalEntrevistas) {
+	// 		return $totalEntrevistas->ofertasEnt;
+	// 	});
+
+	// 	// Verificar si hay entrevistas asociadas a las postulaciones de la oferta
+	// 	if ($this->ofertasEnt && $this->ofertasEnt->count() > 0) {
+	// 		$this->dispatchBrowserEvent('showVerEntrevistasModal');
+	// 	} else {
+	// 		session()->flash('message', 'No hay entrevistas para esta oferta.');
+	// 	}
+    // }
 
 	public function idEliminar($ofertaId)
     {
