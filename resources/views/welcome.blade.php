@@ -60,8 +60,6 @@
                                 <h5>
                                     <strong> {{$row->puesto}}</strong>
                                 </h5>
-                                <p>{{ substr($row->descripcion, 0, 50) }}...</p>
-
                             </div>
                         </div>
                         @endforeach
