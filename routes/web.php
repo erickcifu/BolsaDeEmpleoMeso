@@ -98,6 +98,10 @@ Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::clas
 	Route::view('habilidadTecnicas', 'livewire.habilidad-tecnicas.index')->middleware('auth');
 	Route::view('competencias', 'livewire.competencias.index')->middleware('auth');
 
+	Route::get('/evento',[App\Http\Controllers\EventoController::class,'index']);
+	Route::get('/evento/mostrar',[App\Http\Controllers\EventoController::class,'show']);
+	Route::post('/evento/editar/{id}',[App\Http\Controllers\EventoController::class,'edit']);
+
 Route::get('/carta-pdf', [Cartarecomendacions::class, 'downloadPDF']);
 Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middleware('auth');
 Route::view('departamentos', 'livewire.departamentos.index')->middleware('auth');

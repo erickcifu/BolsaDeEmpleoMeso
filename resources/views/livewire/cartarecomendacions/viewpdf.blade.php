@@ -15,28 +15,33 @@
 <body>
   	@foreach ($ccartarecomendacions as $item)
 	@if ( $item->estudiante->user_id==$usuario)
-	<h2 class="text-center">Carta de Recomendacion</h2>
+	<p></p>
+	<p></p>
+	<p></p>
+	
 	<li class="list-unstyled">
 		<h6>
-			{{ date('d-m-Y', strtotime($item->fechaCarta))  }}
+		
 		</h6>
 	</li>
 	<p></p>
 	<p></p>
 	<p></p>
-	
+	<br>
+	<br>
 
-	<h6> A quien Interese </h6>
+	<h5> A quien Interese </h5>
 	<br>
 	<br>
 	<br>
 	<br>
 
 <p class="text-justify">
-El motivo de la presente es para informarle y confirmarle que tengo el gusto de conocer a <b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b>
-con numero de carne <b>{{$item->estudiante->carnet}} </b> con toda seguridad puedo compartirle que su cargo de <b>{{ $item->cargoYTareasRealizadas }} </b> ha demostrado ser una persona con una ética 
-y moral impecable. Puedo asegurarle que se trata de una persona respetuosa, amable, servicial, colaboradora y muy responsable, por
-lo que extiendo a usted esta carta para recomendarlo ampliamente para cualquier actividad, responsabilidad o tarea que a usted le convenga.
+
+Por este medio, hago constar que el portador de la presente,
+El alumno: <b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b> quien se identifica con número 
+de carne, <b>{{$item->estudiante->carnet}} </b> es estudiante de Universidad Mesoamericana, 
+desempeñando <b>{{ $item->cargoYTareasRealizadas }} </b> , Siendo una persona responsable, colaborador y puntual.  
 </p>
 <p></p>
 <p></p>
@@ -44,6 +49,7 @@ lo que extiendo a usted esta carta para recomendarlo ampliamente para cualquier 
 	
 
 <p class="text-justify">
+Y para los usos que al  interesado convenga, extiendo esta carta el día {{ date('d-M-Y', strtotime($item->fechaCarta)) }}. 
 Sin nada más que agregar por el momento, quedo a sus órdenes para cualquier duda respecto mi telefono es <b>{{$item->telefonoAutoridad}}</b>
 </p>
 
