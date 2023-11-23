@@ -95,7 +95,7 @@ class Postulacions extends Component
         $this->validate([
             'tituloEntrevista' => 'required',
             'descripcionEntrevista' => 'required',
-            'FechaEntrevista' => 'required',
+            'FechaEntrevista' => 'required | date | after:today',
             'hora_inicio' => 'required',
             'hora_final' => 'required',
             'postulacion_id' => 'required',

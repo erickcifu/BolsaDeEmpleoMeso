@@ -70,7 +70,7 @@ class PerfilEstudiante extends Component
 	protected $rules = [
 		'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
 		'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
-		'carnet' => 'required|integer|size:9',
+		'carnet' => 'required|size:9',
 		'DPI' => 'required|size:13',
 		'correo' => 'required|email',
 		'numero_personal' => 'required | size:8',

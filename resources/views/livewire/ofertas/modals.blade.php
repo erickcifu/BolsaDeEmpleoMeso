@@ -590,7 +590,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="VerPostulacionesModalLabel" style="color: #f0eadc;">Postulaciones</h5>
+                <h5 class="modal-title" id="VerPostulacionesModalLabel" style="color: #f0eadc;">Postulaciones - {{$nombreOferta}}</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
            <div class="modal-body">
@@ -676,7 +676,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn  close-btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" wire:click.prevent="newEntrevista()" class="btn btn-primary" data-bs-target="#VerPostulacionesModal" style="background-color: #005c35;">Guardar</button>
+                <button type="button" wire:click.prevent="newEntrevista()" class="btn btn-primary" style="background-color: #005c35;">Guardar</button>
             </div>
         </div>
     </div>
@@ -761,3 +761,4 @@
        </div>
     </div>
 </div>
+

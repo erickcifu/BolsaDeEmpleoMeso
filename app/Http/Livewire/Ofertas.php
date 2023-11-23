@@ -31,7 +31,7 @@ class Ofertas extends Component
     public $selected_id, $keyWord, $resumenPuesto, $nombrePuesto,$responsabilidadesPuesto,$requisitosEducativos, $experienciaLaboral, $sueldoMax, $sueldoMinimo, $jornadaLaboral, $condicionesLaborales, $beneficios, $oportunidadesDesarrollo, $fechaMax, $imagenPuesto, $cantVacantes, $modalidadTrabajo, $edadRequerida, $generoRequerido, $comentarioCierre, $empresa_id, $facultad_id;
 	public $fechaPostulacion, $oferta_id;
 	public $ofertaId;
-	public $id_postu;
+	public $id_postu, $nombreOferta;
 	public $imagenPuestoPath;
 
 	//Campos de la entrevista
@@ -622,7 +622,7 @@ public function validarPaso5()
 			session()->flash('message', 'La oferta no existe.');
 			return;
 		}
-		
+		$this->nombreOferta = $this->ofertapost->nombrePuesto;
 		$this->postulaciones = $this->ofertapost->postulacions;
 
 		// Obtener las postulaciones asociadas a la oferta
@@ -642,26 +642,44 @@ public function validarPaso5()
         $this->id_postu = $postulacionId;
     }
 
+	protected $rules2 = [
+		'tituloEntrevista' => 'required',
+        'descripcionEntrevista' => 'required',
+        'FechaEntrevista' => 'required | date | after:today',
+	];
+
     //FUNCION PARA CREAR LA ENTREVISTA
     public function newEntrevista(){
-        $this->validate([
-            'tituloEntrevista' => 'required',
-            'descripcionEntrevista' => 'required',
-            'FechaEntrevista' => 'required',
-        ]);
+        $this->validate($this->rules2);
 
-        Entrevista::create([ 
-			'tituloEntrevista' => $this->tituloEntrevista,
-			'descripcionEntrevista' => $this->descripcionEntrevista,
-			'FechaEntrevista' => $this->FechaEntrevista,
-			'horaInicio' => $this->horaInicio,
-			'horaFinal' => $this->horaFinal,
-			'Contratado' => "0",
-			'comentarioContratado' => " ",
-			'postulacion_id' => $this->id_postu,
-        ]);
+        // Verificar si la postulación ya tiene una entrevista
+    $postulacion = Postulacion::find($this->id_postu);
 
-        session()->flash('message', 'Entrevista agendada correctamente!');
+    if ($postulacion && $postulacion->entrevistas->count() > 0) {
+        // Ya hay una entrevista asociada a esta postulación
+		$this->reset(['tituloEntrevista', 'descripcionEntrevista', 'FechaEntrevista', 'horaInicio', 'horaFinal']);
+		$this->dispatchBrowserEvent('closeModal');
+        session()->flash('message', 'Esta postulación ya tiene una entrevista.');
+
+    } else {
+        // Crear la entrevista solo si no hay una entrevista existente
+        Entrevista::create([
+            'tituloEntrevista' => $this->tituloEntrevista,
+            'descripcionEntrevista' => $this->descripcionEntrevista,
+            'FechaEntrevista' => $this->FechaEntrevista,
+            'horaInicio' => $this->horaInicio,
+            'horaFinal' => $this->horaFinal,
+            'Contratado' => "0",
+            'comentarioContratado' => " ",
+            'postulacion_id' => $this->id_postu,
+        ]);
+		// Cerrar el modal y mostrar el mensaje de éxito
+		$this->reset(['tituloEntrevista', 'descripcionEntrevista', 'FechaEntrevista', 'horaInicio', 'horaFinal']);
+
+	$this->dispatchBrowserEvent('closeModal');
+	session()->flash('message', 'Entrevista agendada correctamente!');
+    }
+	
 	}
     
 	

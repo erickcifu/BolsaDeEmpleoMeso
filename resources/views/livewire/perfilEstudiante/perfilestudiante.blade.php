@@ -5,6 +5,9 @@
                 <div class="float-center align-items-center" style="width: 70%;">
                     <h2 class="align-items-center" style="color: #005C38; padding-left: 1em;">Perfil del estudiante</h2>
                 </div>
+				@if (session()->has('message'))
+						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
+						@endif
                 <div class="card-body" style="background-color: #ffffff">
                     @include('livewire.perfilEstudiante.modals')
                     <form class="mx-auto mt-4" style="width: 95%;">
