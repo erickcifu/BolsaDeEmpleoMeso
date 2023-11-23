@@ -187,7 +187,7 @@ class Entrevistas extends Component
     {
 		if ($this->record2) {
 			Entrevista::where('entrevistaId', $this->record2->entrevistaId)->delete();
-			session()->flash('message', 'Entrevista eliminada correctamente');
         }
+		session()->flash('message', 'Entrevista eliminada correctamente');
     }
 }
