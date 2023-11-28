@@ -24,6 +24,7 @@ class EventoController extends Controller
     public function show()
     {
         $all_events=Entrevista::all();
+      
         $events=[];
         foreach ($all_events as $event) {
            $events[]=[
