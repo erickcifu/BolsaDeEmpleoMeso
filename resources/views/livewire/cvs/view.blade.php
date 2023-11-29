@@ -50,7 +50,7 @@
 								<td>{{ $row->telefonoCv }}</td>
 								<td width="90">
 									{{-- <i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8> --}}
-									<a data-bs-toggle="modal" wire:click="downloadCV()" class="dropdown-item" ><i class="fa-solid fa-download"></i> Descargar  </a>
+									<a data-bs-toggle="modal" wire:click="downloadCV({{$row->cvId}})" class="dropdown-item" ><i class="fa-solid fa-download"></i> Descargar  </a>
 									<a data-bs-toggle="modal" data-bs-target="#createDataModal" class="dropdown-item" wire:click="edit({{$row->cvId}})"><i class="fa fa-edit"></i> Editar </a>
 									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->cvId}})"><i class="fa fa-trash"></i> Eliminar </a>
 								</td>
