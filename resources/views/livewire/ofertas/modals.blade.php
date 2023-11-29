@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;" >
                 <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;"> 
-                    {{ $selected_id === null ? 'Crear oferta': 'Actualizar oferta'  }} 
+                    {{ $selected_id === null ? 'Crear oferta': 'Actualizar oferta'  }}
                 </h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
@@ -20,6 +20,16 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" wire:ignore.self  data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="hstack gap-3">
+                                    <div style="display: inline-block; width: 100%;">
+                                        <div class="mb-2">
+                                            @if($selected_id !== null)
+                                                <img src="{{asset($imagenPuesto)}}" width="50" height="50" class="img-fluid" alt="Imagen oferta">
+                                            @endif
+                                            <label for="imagenPuesto">Imagen</label>
+                                            <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen">
+                                        </div>
+                                        @error('imagenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
                                     <div style="display: inline-block; width: 100%;">
                                         <div class="mb-2">
                                             <label for="fechaMax">Fecha límite</label>
@@ -368,6 +378,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Show Modal -->
 <div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
