@@ -99,7 +99,6 @@ class Cvs extends Component
 		'direcionDomiciliar' => 'required',
 		'correoElectronico' => 'required|email',
 		'telefonoCv' => 'required | size:8',
-		'fotoCv' => ' image | mimes:png,jpg,jpeg',
 		'perfilProfesional' => 'required |max:300',
 		'habilidades' => 'required | max:300',
 		'nombreRef1' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',
@@ -264,7 +263,6 @@ class Cvs extends Component
 		$estudiante = Estudiante::where('user_id', auth()->user()->id)->first();
 
 		$cv = Cv::create([
-			'cvId' => $this->cvId,
 			'direcionDomiciliar' => $this->direcionDomiciliar,
 			'correoElectronico' => $this->correoElectronico,
 			'telefonoCv' => $this->telefonoCv,
@@ -507,9 +505,11 @@ class Cvs extends Component
 	public function removeCertificacion($indice)
 	{
 		if (array_key_exists('certificacionId', $this->certificaciones[$indice])) {
-			$record = Certificacion::find($this->certificaciones[$indice]['certificacionId']);
-			$record->delete();
-			session()->flash('message', 'Se ha eliminado la certificación correctamente!');
+			$record = Certificacion::findOrFail($this->certificaciones[$indice]['certificacionId']);
+			if ($record) {
+				$record->delete();
+				session()->flash('message', 'Se ha eliminado la certificación correctamente!');
+			}
 		}
 		unset($this->certificaciones[$indice]);
 		$this->certificaciones = array_values($this->certificaciones);
@@ -528,9 +528,11 @@ class Cvs extends Component
 	public function removeExperencia($indice)
 	{
 		if (array_key_exists('experienciaId', $this->experiencia[$indice])) {
-			$record = Experiencia::find($this->experiencia[$indice]['experienciaId']);
-			$record->delete();
-			session()->flash('message', 'Se ha eliminado la experiencia correctamente!');
+			$record = Experiencia::findOrFail($this->experiencia[$indice]['experienciaId']);
+			if ($record) {
+				$record->delete();
+				session()->flash('message', 'Se ha eliminado la experiencia correctamente!');
+			}
 		}
 		unset($this->experiencia[$indice]);
 		$this->experiencia = array_values($this->experiencia);
@@ -543,9 +545,11 @@ class Cvs extends Component
 	public function removeIdiomas($indice)
 	{
 		if (array_key_exists('idiomacvId', $this->idiomas[$indice])) {
-			$record = Idiomacv::find($this->idiomas[$indice]['idiomacvId']);
-			$record->delete();
-			session()->flash('message', 'Se ha eliminado el idioma correctamente!');
+			$record = Idiomacv::findOrFail($this->idiomas[$indice]['idiomacvId']);
+			if ($record) {
+				$record->delete();
+				session()->flash('message', 'Se ha eliminado el idioma correctamente!');
+			}
 		}
 		unset($this->idiomas[$indice]);
 		$this->idiomas = array_values($this->idiomas);
@@ -563,9 +567,11 @@ class Cvs extends Component
 	public function removeFormacion($indice)
 	{
 		if (array_key_exists('formacionId', $this->formacion[$indice])) {
-			$record = Formacion::find($this->formacion[$indice]['formacionId']);
-			$record->delete();
-			session()->flash('message', 'Se ha eliminado la formación correctamente!');
+			$record = Formacion::findOrFail($this->formacion[$indice]['formacionId']);
+			if ($record) {
+				$record->delete();
+				session()->flash('message', 'Se ha eliminado la formación correctamente!');
+			}
 		}
 		unset($this->formacion[$indice]);
 		$this->formacion = array_values($this->formacion);
