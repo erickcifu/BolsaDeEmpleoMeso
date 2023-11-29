@@ -111,7 +111,8 @@ class Ofertas extends Component
 	}
 
     private function resetInput()
-    {		
+    {	
+		$this->selected_id = null;
 		$this->resumenPuesto = null;
 		$this->nombrePuesto = null;
 		$this->responsabilidadesPuesto = null;
@@ -131,6 +132,10 @@ class Ofertas extends Component
 		$this->generoRequerido = null;
 		$this->comentarioCierre = null;
 		$this->facultad_id = null;
+		$this->tecnicas = [];
+		$this->interpersonales = [];
+		$this->competencias = [];
+		$this->paso = 1;
     }
 
 	private function resetCierre()
@@ -151,7 +156,7 @@ class Ofertas extends Component
 		'beneficios' => 'required|max:300',
 		'oportunidadesDesarrollo' => 'required|max:300',
 		'fechaMax' => 'required | date | after:today',
-		'imagenPuesto' => 'nullable|image|mimes:jpeg,png,jpg',
+		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
 		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
 		'edadRequerida' => 'required|integer|gt:17',
@@ -226,7 +231,7 @@ public function validarPaso1()
 		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
 		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
-		'imagenPuesto' => 'nullable|image|mimes:jpeg,png,jpg',
+		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
     ]);
 	$this->mostrarErrores = true;
  }
@@ -241,6 +246,7 @@ public function validarPaso1()
  		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
 		'facultad_id' => 'required | integer',
      ]);
+	 $this->mostrarErrores = true;
  }
  public function validarPaso3()
  {
@@ -250,6 +256,7 @@ public function validarPaso1()
 		'beneficios' => 'required|max:300',
 		'oportunidadesDesarrollo' => 'required | max:300',
      ]);
+	 $this->mostrarErrores = true;
  }
 
  public function validarPaso4()
@@ -333,11 +340,6 @@ public function validarPaso5()
 			$this->user = User::with('empresa')->find($this->userID);
 			$this->empresaAut = $this->user->Empresa->empresaId;
 			$this->validate();
-
-			if ($this->imagenPuesto) {
-				$this->imagenPuestoPath = 'storage/'.$this->imagenPuesto->store('ofertaslab', 'public');
-			}
-
 			$oferta = Oferta::create([ 
 				'resumenPuesto' => $this-> resumenPuesto,
 				'nombrePuesto' => $this-> nombrePuesto,
@@ -351,7 +353,7 @@ public function validarPaso5()
 				'beneficios' => $this-> beneficios,
 				'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
 				'fechaMax' => $this-> fechaMax,
-				'imagenPuesto' => $this->imagenPuestoPath,
+				'imagenPuesto' => 'storage/' . $this->imagenPuesto->store('ofertaslab', 'public'),
 				'cantVacantes' => $this-> cantVacantes,
 				'modalidadTrabajo' => $this-> modalidadTrabajo,
 				'edadRequerida' => $this-> edadRequerida,
@@ -421,6 +423,7 @@ public function validarPaso5()
 
     public function edit($ofertaId)
     {
+		$this->resetInput();
         $record = Oferta::findOrFail($ofertaId);
         $this->selected_id = $ofertaId; 
 		$this->resumenPuesto = $record-> resumenPuesto;
@@ -472,25 +475,7 @@ public function validarPaso5()
 
     public function update()
     {
-        $this->validate([
-			'resumenPuesto' => 'required | max:300',
-			'nombrePuesto' => 'required | max:200',
-			'responsabilidadesPuesto' => 'required | max:300',
-			'requisitosEducativos' => 'required | max:200',
-			'experienciaLaboral' => 'required|max:300',
-			'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
-			'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
-			'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
-			'condicionesLaborales' => 'required|max:300',
-			'beneficios' => 'required|max:300',
-			'oportunidadesDesarrollo' => 'required|max:300',
-			'fechaMax' => 'required | date | after:today',
-			'cantVacantes' => 'required | numeric | gt:0',
-			'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
-			'edadRequerida' => 'required|integer|gt:17',
-			'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
-			'facultad_id' => 'required | integer',
-		]);
+        $this->validate();
 
         if ($this->selected_id) {
 			$record = Oferta::find($this->selected_id);
@@ -507,6 +492,7 @@ public function validarPaso5()
 				'beneficios' => $this-> beneficios,
 				'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
 				'fechaMax' => $this-> fechaMax,
+				'imagenPuesto' => $this->imagenPuesto,
 				'cantVacantes' => $this-> cantVacantes,
 				'modalidadTrabajo' => $this-> modalidadTrabajo,
 				'edadRequerida' => $this-> edadRequerida,
