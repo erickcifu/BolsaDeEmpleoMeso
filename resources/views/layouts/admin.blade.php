@@ -62,6 +62,10 @@
                                     <li class="nav-item">
                                         <a href="{{ url('/facultads') }}" class="nav-link" style="color: #f0eadc;"> Facultades</a> 
                                     </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/idiomas') }}" class="nav-link"  style="color: #f0eadc;"> Idiomas</a> 
+                                    </li>
                                 </ul>
                         </li>
                         <li class="nav-item">
