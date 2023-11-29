@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Models;
 
@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Idioma extends Model
 {
-    use HasFactory;
-
-    protected $primaryKey = 'idiomaId';
-
+	use HasFactory;
+	
     public $timestamps = true;
 
     protected $table = 'idiomas';
+    protected $primaryKey = 'idiomaId';
 
-    protected $fillable = ['nombreIdioma'];
+    protected $fillable = ['idiomaId','nombreIdioma'];
 	
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function idiomaCV()
+    public function idiomacvs()
     {
         return $this->hasMany('App\Models\Idiomacv', 'idioma_id', 'idiomaId');
     }
+    
 }
