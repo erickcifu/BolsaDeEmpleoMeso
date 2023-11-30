@@ -57,7 +57,7 @@
                             <a href="{{ url('/evento') }}" class="nav-link" style="color: #f0eadc;"> Agenda</a> 
                             </li> -->
 						<li class="nav-item">
-                            <a href="{{ url('/Misentrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
+                            <a href="{{  url('/evento') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/Mispostulaciones') }}" class="nav-link" style="color: #f0eadc;">Postulaciones</a> 
