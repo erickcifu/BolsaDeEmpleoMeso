@@ -8,11 +8,13 @@ use App\Models\Entrevista;
 use App\Models\Postulacione;
 use App\Models\Estudiante;
 use DB;
-use \Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 class EventoController extends Controller
 {
 
-  
+    public $usuarioAutenticado, $entrevistasEstudiante, $user, $nombreEmpresa;
     public function index()
     {
     
@@ -23,7 +25,20 @@ class EventoController extends Controller
     
     public function show()
     {
-        $all_events=Entrevista::all();
+
+        if (Auth::check()) {
+			$this->usuarioAutenticado = Auth::id();
+
+       	 	$this->user = User::with('estudiante')->find($this->usuarioAutenticado);
+
+			//Obtener entrevistas del estudiante
+			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) {
+                return $postulacion->entrevistas;
+            });
+        
+		}
+       
+        $all_events=$this->entrevistasEstudiante;
       
         $events=[];
         foreach ($all_events as $event) {
