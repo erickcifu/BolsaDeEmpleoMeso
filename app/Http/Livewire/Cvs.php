@@ -579,6 +579,7 @@ class Cvs extends Component
 
 	public function downloadCV()
 	{
+		
 		// Obtiene el ID del usuario autenticado
 		$userID = auth()->user()->id;
 
