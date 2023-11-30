@@ -66,6 +66,18 @@
                                     <li class="nav-item">
                                         <a href="{{ url('/idiomas') }}" class="nav-link"  style="color: #f0eadc;"> Idiomas</a> 
                                     </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/habilidad-tecnicas') }}" class="nav-link" style="color: #f0eadc;">Habilidades técnicas </a> 
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/Interpersonal') }}" class="nav-link" style="color: #f0eadc;">Habilidades interpersonales </a> 
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/competenciasC') }}" class="nav-link" style="color: #f0eadc;">Competencias Comportamentales</a> 
+                                    </li>                                    
                                 </ul>
                         </li>
                         <li class="nav-item">
