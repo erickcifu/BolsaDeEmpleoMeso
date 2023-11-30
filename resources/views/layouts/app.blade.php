@@ -42,7 +42,25 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
-						
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" style="color: #f0eadc;" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Configuraciones generales
+                            </a>
+                                <ul class="dropdown-menu" style="background-color: #005c35;">
+                                    
+                                    <li class="nav-item">
+                                        <a href="{{ url('/habilidadtecnicas') }}" class="nav-link" style="color: #f0eadc;">Habilidades técnicas </a> 
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/Interpersonals') }}" class="nav-link" style="color: #f0eadc;">Habilidades interpersonales </a> 
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/competencias') }}" class="nav-link" style="color: #f0eadc;">Competencias Comportamentales</a> 
+                                    </li>                                    
+                                </ul>
+                        </li>
 						
 						<li class="nav-item">
                             <a href="{{ url('/entrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
