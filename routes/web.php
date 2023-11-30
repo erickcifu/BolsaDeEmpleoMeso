@@ -96,9 +96,11 @@ Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::clas
 //Route Hooks - Do not delete//
 	Route::view('idiomas', 'livewire.idiomas.index')->middleware('auth');
 	Route::view('habilidadtecnicas', 'livewire.habilidadtecnicas.index')->middleware('auth');
+	Route::view('habilidad-tecnicas', 'livewire.habilidadtecnicas.indexRRHH')->middleware('auth');
 	Route::view('Interpersonals', 'livewire.Interpersonals.index')->middleware('auth');
-	Route::view('habilidadTecnicas', 'livewire.habilidad-tecnicas.index')->middleware('auth');
+	Route::view('Interpersonal', 'livewire.Interpersonals.indexRRhh')->middleware('auth');
 	Route::view('competencias', 'livewire.competencias.index')->middleware('auth');
+	Route::view('competenciasC', 'livewire.competencias.indexRrhh')->middleware('auth');
 
 	Route::get('/evento',[App\Http\Controllers\EventoController::class,'index']);
 	Route::get('/evento/mostrar',[App\Http\Controllers\EventoController::class,'show']);
