@@ -10,7 +10,7 @@
     
       <h2>  <a href="{{ url('/estadisticasuper-pdf') }}" class="nav-link" style="color:  #005c35;">Descargar Reporte</a> </h2>
   
- {{--tabla--}}   
+ {{--tablssa--}}   
  <div class="card-body">
         <div class="row w-100 d-flex justify-content-center mb-2"
              style="border: 1px solid gray; padding: 7px; border-radius: 5px">
