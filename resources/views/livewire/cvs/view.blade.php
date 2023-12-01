@@ -62,7 +62,7 @@
 							@endforelse
 						</tbody>
 					</table>						
-					<div class="float-end">{{ $cvs->links() }}</div>
+					<div class="float-end">{{ $cvs2->links() }}</div>
 					</div>
 				</div>
 			</div>
