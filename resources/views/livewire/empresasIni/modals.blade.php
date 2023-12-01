@@ -239,13 +239,14 @@
 					<div class="form-group">
                         <label for="logo"><b style="color: black;">Logo (seleccione un archivo de imagen) <b></label>
                         <input wire:model="logo" type="file" accept="image/*" class="form-control" id="logo" placeholder="Logo">@error('logo') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <div wire:loading wire:target="logo"><h6 style="color: #005c35;"><b>Cargando imagen...</b></h6></div>
                     </div>
                     
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="logo()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="logo" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="logo()" wire:loading.attr="disabled"  wire:target="logo" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>
@@ -296,7 +297,9 @@
                         <label for="patenteComercio"><b style="color: black;">Patente de Comercio (seleccione un archivo pdf)<b><br>
                             <b>!Al modificar su archivo de patente de comercio su estado de la Solicitud regresara a estar en espera!</b></label>
                         <input wire:model="patenteComercio" type="file" accept="application/pdf" class="form-control" id="patenteComercio" placeholder="Patente comercio">@error('patenteComercio') <span class="error text-danger">{{ $message }}</span> @enderror
+                        
                     </div>
+                    
                     <div class="form-group" hidden>
                         <label for="estadoSolicitud"><b style="color: black;">Estado de la Solicitud<b></label>
                         <input wire:model="estadoSolicitud"  value="en Espera" type="text" class="form-control" id="estadoSolicitud" placeholder="Estadosolicitud">@error('estadoSolicitud') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -305,8 +308,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="pan()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()"  class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="pan()"  class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>

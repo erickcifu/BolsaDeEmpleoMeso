@@ -11,9 +11,9 @@
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
 						@endif
-						<!-- <div>
+						<div>
 							<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
-						</div> -->
+						</div>
 						<div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
 						<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
 						</div>
@@ -62,7 +62,7 @@
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#createDataModal" class="dropdown-item" wire:click="edit({{$row->ofertaId}})"><i class="fa fa-edit"></i> Editar </a>
 									<!-- <a data-bs-toggle="modal" data-bs-target="#EliminarOfertaModal" class="dropdown-item" wire:click="idEliminar({{$row->ofertaId}})"><i class="fa fa-trash"></i> Eliminar </a>	 -->
-									<a data-bs-toggle="modal" data-bs-target="#VerOfertaModal" class="dropdown-item" wire:click="mostrarOferta({{$row->ofertaId}})"><i class="fa fa-eye"></i> Ver detalles</a>
+									<a data-bs-toggle="modal" data-bs-target="#VerOfertaModal" class="dropdown-item" wire:click="mostrarOferta({{$row->ofertaId}})"><i class="fa fa-eye"></i> Visualizar</a>
 									<a data-bs-toggle="modal" data-bs-target="#VerPostulacionesModal" wire:click="verPostulaciones({{ $row->ofertaId }})" class="nav-link"><i class="fa fa-pen"></i> Postulaciones </a>	
 									<!-- <a data-bs-toggle="modal" data-bs-target="#VerEntrevistasModal" wire:click="verEntrevistas({{ $row->ofertaId }})" class="nav-link"><i class="fa-regular fa-address-book"></i> Entrevistas </a>			 -->
 								</td>

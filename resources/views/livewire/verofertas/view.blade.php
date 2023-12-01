@@ -1,4 +1,4 @@
-@section('title', __('OfertasEstudiantes'))
+@section('title', __('VerOfertas'))
 <div class="container-fluid">
 	<div class="row justify-content-center">
 		<div class="col-md-12">
@@ -15,38 +15,15 @@
 							<input wire:model='keyWord' type="text" class="form-control" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
 						</div>
 						<div>
-							<a  href="/VerOfertas"><b style="color: #005c35;">Ver todas las ofertas</b></a>
+							<a href="/ofertasestudiantes"><b style="color: #005c35;">Volver a mis ofertas</b></a>
 						</div>
 					</div>
 				
 				
 				<div class="card-body">
-					@include('livewire.ofertasestudiantes.modalsEstudiante')
+					@include('livewire.verofertas.modals')
 						<div>
-						@if($verTodas)
-							{{-- Mostrar todas las ofertas --}}
-							@forelse($ofertas as $oferta)
-								<div class="card">
-									<h5 class="card-header" style="background-color: #005c35;"><b style="color: #f0eadc;">{{$oferta->nombrePuesto}}</b></h5>
-									<div class="card-body">
-										<h5 class="card-title"><b>Empresa: {{ $oferta->empresa->nombreEmpresa }}</b></h5>
-											<h7 class="card-text">{{$oferta->resumenPuesto}}</h7>	
-											</br>
-											<small class="card-text"> Modalidad: {{ $oferta->modalidadTrabajo }} - {{ $oferta->jornadaLaboral }} - {{ $oferta->cantVacantes }} Vacantes</small>
-											<footer>
-											<a data-bs-toggle="modal" data-bs-target="#createPostDataModal" class="btn float-end" wire:click="setOfertaId({{$oferta->ofertaId}})" style="background-color: #005c35;"><i class="fa fa-file-lines" style="color: #f0eadc;"></i><h7 style="color: #f0eadc;">Postularme</h7></a>
-											<a data-bs-toggle="modal" data-bs-target="#VerOfertaModal" class="btn float-end" wire:click="mostrarOferta({{$oferta->ofertaId}})" style="background-color: #d3d3d3;"><i class="fa fa-eye"></i><h7> Ver más</h7></a>
-											</footer>
-										</div>
-									</div>
-									</br>
-									@empty
-									<div class="card">
-									<h5 class="card-header text-center"  style="background-color: #005c35;"><b style="color: #f0eadc;">Sin datos</b></h5>
-								</div>
-							@endforelse
-						@else
-							@forelse($ofertas as $row)
+							@forelse($totalOfertas as $row)
 							<div class="card">
 								<h5 class="card-header" style="background-color: #005c35;"><b style="color: #f0eadc;">{{$row->nombrePuesto}}</b></h5>
 								<div class="card-body">
@@ -66,13 +43,21 @@
 								<h5 class="card-header text-center"  style="background-color: #005c35;"><b style="color: #f0eadc;">Sin datos</b></h5>
 								</div>
 							@endforelse
-						@endif
 						</div>
 										
-					<div class="float-end">{{ $ofertaStudent->links() }}</div>
+					<div class="float-end">{{ $totalOfertas->links() }}</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('ofertasActualizadas', function (totalOfertas) {
+            // Haz lo que necesites con las nuevas ofertas, por ejemplo, actualizar la interfaz de usuario
+            console.log('Ofertas actualizadas:', totalOfertas);
+        });
+    });
+</script>

@@ -40,9 +40,9 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
-						<li class="nav-item">
+						<!-- <li class="nav-item">
                             <a href="{{ url('/Misentrevistas') }}" class="nav-link" style="color: #f0eadc;">Listado de Entrevistas</a> 
-                        </li>
+                        </li> -->
 
                            
                        

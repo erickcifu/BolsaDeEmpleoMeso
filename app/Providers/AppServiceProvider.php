@@ -31,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('PostulacionEstudiantes', \App\Http\Livewire\PostulacionEstudiantes::class);
         Livewire::component('EntrevistaEstudiantes', \App\Http\Livewire\EntrevistaEstudiantes::class);
         Livewire::component('PerfilEstudiante', \App\Http\Livewire\PerfilEstudiante::class);
+        Livewire::component('VerOfertas', \App\Http\Livewire\VerOfertas::class);
     }
 }
