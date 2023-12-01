@@ -24,13 +24,14 @@ class EntrevistaEstudiantes extends Component
 
        	 	$this->user = User::with('estudiante')->find($this->usuarioAutenticado);
 
+			$keyWord = '%'.$this->keyWord .'%';
 			//Obtener entrevistas del estudiante
 			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) {
                 return $postulacion->entrevistas;
             });
         
 		}
-		$keyWord = '%'.$this->keyWord .'%';
+		
         return view('livewire.entrevistaestudiantes.viewentrevista', [
             'entrevistas' => Entrevista::latest()
 						->orWhere('tituloEntrevista', 'LIKE', $keyWord)

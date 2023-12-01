@@ -104,7 +104,7 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="curriculum"><b style="color: black;">curriculum (seleccione un archivo pdf)<b> <br>
+                        <label for="curriculum"><b style="color: black;">Curriculum (seleccione un archivo pdf)<b> <br>
                         
                         </label>
                         <input wire:model="curriculum" type="file" accept="application/pdf" class="form-control" id="curriculum" placeholder="curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -113,8 +113,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="cv()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="curriculum" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="cv()" wire:loading.attr="disabled"  wire:target="curriculum" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>

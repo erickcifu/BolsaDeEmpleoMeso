@@ -381,219 +381,178 @@
 
 
 <!-- Show Modal -->
-<div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerOfertaModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
+            <form>
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Detalle de Oferta</h5>
+                <h5 class="modal-title" id="VerOfertaModalLabel" style="color: #f0eadc;"><b>{{ $nombrePuesto }}</b></h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
-            <div class="accordion" id="accordionExample">
-                    <div class="accordion-item" id="item1">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button" style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" disabled>
-                            <b>---------- Información general de la oferta ----------</b>
-                        </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show"  data-bs-parent="#accordionExample" disabled>
-                        <div class="accordion-body">
-                        <div class="hstack gap-3">
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
-                                    <label for="imagenPuesto">Imagen</label>
-                                    <input wire:model="imagenPuesto" type="file" class="form-control" id="imagenPuesto" placeholder="Imagen" disabled>
-                                </div>
-                                @error('imagenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div style="display: inline-block; width: 100%;">
-                                <div class="mb-2">
-                                    <label for="fechaMax">Fecha límite</label>
-                                    <input wire:model="fechaMax" type="date" class="form-control" id="fechaMax" placeholder="Fecha límite" disabled>
-                                </div>
-                                @error('fechaMax') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                            <br/>
-                            <div class="form-group">
-                                <label for="nombrePuesto"><b style="color: black;">Puesto*<b></label>
-                                <input wire:model="nombrePuesto" type="text" class="form-control" id="nombrePuesto" placeholder="Nombre del puesto" disabled>@error('nombrePuesto') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="resumenPuesto">Resumen del puesto*</label>
-                                        <textarea wire:model="resumenPuesto" class="form-control" id="resumenPuesto" placeholder="Descripcion puesto" disabled></textarea>
-                                        @error('resumenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="responsabilidadesPuesto">Responsabilidades principales*</label>
-                                        <textarea wire:model="responsabilidadesPuesto" class="form-control" id="responsabilidadesPuesto" placeholder="Responsabilidades" disabled></textarea>
-                                        @error('responsabilidadesPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="sueldoMinimo">Sueldo mínimo (Q.)</label>
-                                        <input wire:model="sueldoMinimo" type="number" step="0.01" class="form-control" id="sueldoMinimo" disabled>
-                                        @error('sueldoMinimo') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="sueldoMax">Sueldo máximo (Q.)</label>
-                                        <input wire:model="sueldoMax" type="number" step="0.01" class="form-control" id="sueldoMax" disabled>
-                                        @error('sueldoMax') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class=" mb-3">
-                                        <label for="cantVacantes">Cantidad de vacantes</label>
-                                        <input wire:model="cantVacantes" type="number" class="form-control" id="cantVacantes" placeholder="Puestos vacantes" disabled>
-                                        @error('cantVacantes') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class=" mb-3">
-                                        <label for="modalidadTrabajo">Modalidad de trabajo</label>
-                                        <select wire:model="modalidadTrabajo" type="text" class="form-control" id="modalidadTrabajo" placeholder="Tipo de contratacion" disabled>
-                                            <option selected>Modalidad de trabajo</option>
-                                            <option value="Virtual">Virtual</option>
-                                            <option value="Presencial">Presencial</option>
-                                            <option value="Híbrido">Híbrido</option>
-                                        </select>
-                                        @error('modalidadTrabajo') <span class="error text-danger">{{ $message }}</span> @enderror 
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class=" mb-3">
-                                        <label for="jornadaLaboral">Jornada Laboral</label>
-                                        <select wire:model="jornadaLaboral" type="text" class="form-control" id="jornadaLaboral" placeholder="Tipo de contratacion" disabled>
-                                            <option selected>Modalidad de trabajo</option>
-                                            <option value="Jornada completa">Jornada Completa</option>
-                                            <option value="Jornada Matutina">Jornada Matutina</option>
-                                            <option value="Jornada Vespertina">Jornada Vespertina</option>
-                                            <option value="Jornada Nocturna">Jornada Nocturna</option>
-                                        </select>
-                                        @error('jornadaLaboral') <span class="error text-danger">{{ $message }}</span> @enderror 
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        </div>
+                    <div class="object-fit-cover border rounded" >
+                        <img src="{{ asset($imagenPuesto) }}"  class="img-fluid w-100">
                     </div>
-                    <div class="accordion-item" id="item2">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"  data-bs-parent="#accordionExample" disabled>
-                        <b>---------- Requisitos del puesto ----------</b>
-                        </button>
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionExample" disabled>
-                        <div class="accordion-body">
-                            <!-- Requisitos del puesto -->
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="requisitosEducativos">Requisitos educativos*</label>
-                                        <textarea wire:model="requisitosEducativos" type="text" class="form-control" id="requisitosEducativos" placeholder="Dividir por '-'" disabled ></textarea>
-                                        @error('requisitosEducativos') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-2">
-                                        <label for="experienciaLaboral">Experiencia laboral*</label>
-                                        <textarea wire:model="experienciaLaboral" type="text" class="form-control" id="experienciaLaboral" placeholder="Dividir por '-'" disabled></textarea>
-                                        @error('experienciaLaboral') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <div class="hstack gap-3">
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-3">
-                                        <label for="edadRequerida">Edad requerida</label>
-                                        <input wire:model="edadRequerida" type="number" class="form-control" id="edadRequerida" placeholder="Edad mínima requerida" disabled>
-                                        @error('edadRequerida') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-3">
-                                        <label for="generoRequerido">Género</label>
-                                        <select wire:model="generoRequerido" type="text" class="form-control" id="generoRequerido" placeholder="Genero" disabled>
-                                            <option selected>Género</option>
-                                            <option value="Masculino">Masculino</option>
-                                            <option value="Femenino">Femenino</option>
-                                            <option value="Ambos">Ambos</option>
-                                        </select>
-                                        @error('generoRequerido') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                                <div style="display: inline-block; width: 100%;">
-                                    <div class="mb-3">
-                                        <label for="facultad_id">Facultad*</label>
-                                        <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad" disabled>
-                                            @foreach ($facultades as $facultad)
-                                                <option value="{{ $facultad->id }}">{{ $facultad->Nfacultad }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <br/>
-                            <!-- fin requisitos del puesto -->
-                        </div>
-                        </div>
+                    <br/>
+                    <div class="form-group">
+                        <h5 for="nombre_empresa"><b style="color: black;">{{ $nombre_empresa }}</b></h5>
                     </div>
-                    <div class="accordion-item" id="item3">
-                        <h2 class="accordion-header">
-                        <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"  data-bs-parent="#accordionExample" disabled>
-                        <b>---------- Condiciones y beneficios ---------- </b>
-                        </button>
-                        <div id="collapseThree" class="accordion-collapse collapse show"  wire:ignore.self data-bs-parent="#accordionExample" disabled>
-                            <div class="accordion-body">
-                            <!-- Inputs Condiciones y beneficios -->
-                                <label for="condicionesLaborales" style="font-size: 15px;"><b>Condiciones*</b></label>
-                                <textarea wire:model="condicionesLaborales" type="text" class="form-control" id="condicionesLaborales" placeholder="Dividir por '-'" disabled ></textarea>@error('condicionesLaborales') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                <br/>
-                                <div class="hstack gap-3">
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class=" mb-2">
-                                            <label for="beneficios" style="font-size: 15px;"><b>Beneficios*</b></label>
-                                            <textarea wire:model="beneficios" type="text" class="form-control" id="beneficios" placeholder="Dividir por '-'" disabled></textarea>
-                                            @error('beneficios') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                    <div style="display: inline-block; width: 100%;">
-                                        <div class="mb-2">
-                                            <label for="oportunidadesDesarrollo" style="font-size: 15px;"><b>Oportunidades de desarrollo dentro de la empresa*</b></label>
-                                            <textarea wire:model="oportunidadesDesarrollo" type="text" class="form-control" id="oportunidadesDesarrollo" placeholder="Dividir por '-'" disabled></textarea>
-                                            @error('oportunidadesDesarrollo') <span style="font-size: 15px;" class="error text-danger">{{ $message }}</span> @enderror
-                                        </div>
-                                    </div>
-                                </div>          
-                                <!-- Fin inputs Condiciones y beneficios -->
+                    <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                                <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha límite para postulación: {{ $fechaMax }}</small>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                            <small style="color: #373737;"><i class="fa-solid fa-circle-info"></i> Edad miníma requerida: {{ $edadRequerida }}</small>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                            <small style="color: #373737;"><i class="fa-solid fa-briefcase"></i>  Modalidad: {{ $modalidadTrabajo }} - {{ $jornadaLaboral }} - {{ $cantVacantes }} Vacantes</small>
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="mb-2">
+                            <small style="color: #373737;"><i class="fa-solid fa-person-half-dress"></i> Género requerido: {{ $generoRequerido }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <small style="color: #373737;"><i class="fa-solid fa-money-bill-wave"></i> Sueldo: Q.{{ $sueldoMinimo }} - Q.{{ $sueldoMax }}</small>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="d-flex gap-3">
+                                <!-- Acerca del empleo -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class= "fs-6" for="resumenPuesto"><b style="color: black;">Acerca del empleo</b></p>
+                                        <p style="color: #373737;">{{ $resumenPuesto }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Responsabilidades principales -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="responsabilidadesPuesto"><b style="color: black;">Responsabilidades principales</b></p>
+                                        <p style="color: #373737;">{{ $responsabilidadesPuesto }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                    <br/>
+                    <form>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <h5><b style="color: #005c35;">- Requerimientos -</b></h5>
+                            </div>
+                            <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+
+                            <div class="d-flex gap-3">
+                                <!-- Formación Académica -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class= "fs-6" for="requisitosEducativos"><b style="color: black;">Formación académica</b></p>
+                                        <p style="color: #373737;">{{ $requisitosEducativos }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Experiencia Laboral -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Experiencia laboral</b></p>
+                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </br>   
+                            </br>  
+                            <!-- Habilidades -->
+                            <div class="d-flex gap-3">
+                                <!-- Formación Académica -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="verTecnicas"><b style="color: black;">Habilidades técnicas </b></p>
+                                        
+                                        <ul>
+                                            
+                                        <!-- @forelse($verTecnicas as $row)
+                                            <li>{{$row->ofertaTecnicaId}}</li>
+                                        
+                                        @empty
+                                        <li>Sin datos</li>
+                                        @endforelse -->
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Experiencia Laboral -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Habilidades Interpersonales</b></p>
+                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Experiencia Laboral -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Competencias comportamentales</b></p>
+                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form> 
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                            <div class="text-center">
+                                <h5><b style="color: #005c35;">- Beneficios y oportunidades -</b></h5>
+                            </div>
+                            <hr style=" border: 1px solid #212121; margin: 5px 0;"></hr>
+                            <div class="d-flex gap-3">
+                                <!-- Beneficios -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="beneficios"><b style="color: black;">Beneficios</b></p>
+                                        <p style="color: #373737;">{{ $beneficios }} </p>
+                                    </div>
+                                </div>
+
+                                <!-- Oportunidades de crecimiento -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="oportunidadesDesarrollo"><b style="color: black;">Oportunidades de crecimiento</b></p>
+                                        <p style="color: #373737;">{{ $oportunidadesDesarrollo }}</p>
+                                    </div>
+                                </div>
+
+                                <!-- Condiciones laborales -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Condiciones laborales</b></p>
+                                        <p style="color: #373737;">{{ $condicionesLaborales }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="empresa_id"></label>
+                        <input wire:model="empresa_id" type="number" class="form-control" id="empresa_id" value="1" hidden>@error('empresa_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <input type="hidden" wire:model="selected_id"/>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cerrar</b></button>
             </div>
        </div>
     </div>
 </div>
+
 
 
 <!-- Ver Postulaciones Modal -->
@@ -604,7 +563,9 @@
                 <h5 class="modal-title" id="VerPostulacionesModalLabel" style="color: #f0eadc;">Postulaciones - {{$nombreOferta}}</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
            <div class="modal-body">
+           
            <div class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
@@ -621,7 +582,7 @@
                             @foreach($postulaciones as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->fechaPostulacion }}</td>
+								<td>{{date('d-m-Y', strtotime($row->fechaPostulacion))}}</td>
 								<td>{{ $row-> estudiante -> nombre }}, {{ $row-> estudiante -> apellidos }}</td>
                                 <td>
                                     @if($row->estudiante  && File::exists($row->estudiante->curriculum))
@@ -635,7 +596,7 @@
 								</td>
 							</tr>
 							@endforeach
-                            @else
+                        @else
 							<tr>
 								<td class="text-center" colspan="100%">Sin datos</td>
 							</tr>
@@ -769,10 +730,9 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="GuardarImagen()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="imagenPuesto" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click="GuardarImagen"  wire:loading.attr="disabled"  wire:target="imagenPuesto" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>
 </div>
-
