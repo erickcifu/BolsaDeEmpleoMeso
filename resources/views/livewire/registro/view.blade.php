@@ -9,7 +9,7 @@
            <div class="hstack gap-3">
            <div style="display: inline-block; width: 100%;">
            <div class="mb-2">
-               <label for="nombre"><b style="color: black">Nombres</b></label>
+               <label for="nombre"><b style="color: black">Nombres*</b></label>
                <input
                wire:model="nombre"
                type="text"
@@ -26,7 +26,7 @@
            <div style="display: inline-block; width: 100%;">
            <div class="mb-2">
                <label for="apellidos"
-               ><b style="color: black">Apellidos</b></label
+               ><b style="color: black">Apellidos*</b></label
                >
                <input
                wire:model="apellidos"
@@ -46,7 +46,7 @@
                <div style="display: inline-block; width: 100%;">
                <div class="mb-2">
                    <label for="carnet"
-                   ><b style="color: black">Carnet</b></label
+                   ><b style="color: black">Carnet*</b></label
                    >
                    <input
                    wire:model="carnet"
@@ -61,7 +61,7 @@
                </div>
                <div style="display: inline-block; width: 100%;">
                <div class="mb-2">
-                   <label for="DPI"><b style="color: black">Dpi</b></label>
+                   <label for="DPI"><b style="color: black">Dpi*</b></label>
                    <input
                    wire:model="DPI"
                    type="number"
@@ -79,7 +79,7 @@
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
                        <label for="correo">
-                           <b style="color: black">Correo Electrónico</b>
+                           <b style="color: black">Correo Electrónico*</b>
                        </label>
                        <input
                            wire:model="correo"
@@ -96,7 +96,7 @@
                    <div style="display: inline-block; width: 100%;">                
                    <div class="mb-2">
                        <label for="numero_personal"
-                       ><b style="color: black">Numero Personal</b></label
+                       ><b style="color: black">Numero Personal*</b></label
                        >
                        <input
                        wire:model="numero_personal"
@@ -116,7 +116,7 @@
                <div class="hstack gap-3">
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="numero_domiciliar"><b style="color: black">Otro Numero de Telefono</b></label>
+                       <label for="numero_domiciliar"><b style="color: black">Otro Numero de Telefono*</b></label>
                        <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar"
                            placeholder="otro numero" />@error('numero_domiciliar')
                        <span class="error text-danger">{{ $message }}</span>
@@ -137,7 +137,7 @@
                <div class="hstack gap-3">
                    <div style="display: inline-block; width: 100%">
                    <div class="mb-2">
-                       <label for="departamento_id"><b style="color: black">Departamento </b></label>
+                       <label for="departamento_id"><b style="color: black">Departamento*</b></label>
                        <select wire:model="departamento_id" class="form-control" id="departamento_id"
                        placeholder="Departamento" required>
                            <option value="null" disabled selected>Seleccione una opción</option>
@@ -154,7 +154,7 @@
                    </div>
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="municipio_id"><b style="color: black">Municipio</b></label>
+                       <label for="municipio_id"><b style="color: black">Municipio*</b></label>
                        <select wire:model="municipio_id" class="form-control" id="municipio_id" placeholder="Municipio">
                            <option value="null" disabled selected>Seleccione una opción</option>
                            @foreach ($municipios as $municipio)
@@ -175,7 +175,7 @@
                <div class="hstack gap-3">
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="facultad_id"><b style="color: black">Facultad</b></label>
+                       <label for="facultad_id"><b style="color: black">Facultad*</b></label>
                        <select wire:model="facultad_id" class="form-control" id="facultad_id" placeholder="Facultad">
                            <option value="null" disabled selected>Seleccione una opción</option>
                            @foreach ($facultades as $facultad)
@@ -191,7 +191,7 @@
                    </div>
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="carrera_id"><b style="color: black">Carrera</b></label>
+                       <label for="carrera_id"><b style="color: black">Carrera*</b></label>
                        <select wire:model="carrera_id" class="form-control" id="carrera_id" placeholder="Carrera">
                            <option value="null" disabled selected>Seleccione una opción</option>
                            @foreach ($carreras as $carrera)
