@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Entrevista;
+use App\Models\Oferta;
 
 class Entrevistas extends Component
 {
@@ -13,9 +14,32 @@ class Entrevistas extends Component
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
 	public $record2;
+	public $ofertaId, $ofertasEnt, $nombreOferta, $ofertapost;
+
+	public function mount($ofertaId)
+    {
+        $this->ofertaId = $ofertaId;
+    }
 	
     public function render()
     {
+		 //   Obtener la oferta con las postulaciones y entrevistas asociadas
+	 	$this->ofertapost = Oferta::with('postulacions.entrevistas')->find($this->ofertaId);
+
+	 	// Verificar si la oferta existe
+	 	if (!$this->ofertapost) {
+	 		session()->flash('message', 'La oferta no existe.');
+	 		return;
+	 	}
+
+	 	//  Obtener el nombre de la oferta
+	 	$this->nombreOferta = $this->ofertapost->nombrePuesto;
+
+	 	//  Obtener todas las entrevistas asociadas a las postulaciones de la oferta
+	 	$this->ofertasEnt = $this->ofertapost->postulacions->flatMap(function ($totalEntrevistas) {
+	 		return $totalEntrevistas->entrevistas;
+	 	});
+
 		$keyWord = '%'.$this->keyWord .'%';
         return view('livewire.entrevistas.view', [
             'entrevistas' => Entrevista::latest()
@@ -28,6 +52,7 @@ class Entrevistas extends Component
 						->orWhere('comentarioContratado', 'LIKE', $keyWord)
 						->orWhere('postulacion_id', 'LIKE', $keyWord)
 						->paginate(10),
+						"ofertasEnt" => $this->ofertasEnt,
         ]);
     }
 	
@@ -180,14 +205,16 @@ class Entrevistas extends Component
 
 	public function buscarId($entrevistaId)
     {
-        $this->record2 = Entrevista::where('entrevistaId', $entrevistaId)->first();
+		$this->selected_id = $entrevistaId;
+        $this->dispatchBrowserEvent('showEliminarDataModal');
     }
 
     public function destroy()
     {
-		if ($this->record2) {
-			Entrevista::where('entrevistaId', $this->record2->entrevistaId)->delete();
+		if ($this->selected_id) {
+			Entrevista::where('entrevistaId', $this->selected_id)->delete();
         }
+		$this->dispatchBrowserEvent('closeModal');
 		session()->flash('message', 'Entrevista eliminada correctamente');
     }
 }

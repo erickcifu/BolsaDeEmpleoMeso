@@ -80,7 +80,6 @@ class Ofertas extends Component
 							->orWhere('nombrePuesto', 'LIKE', $keyWord)
 							->orWhere('imagenPuesto', 'LIKE', $keyWord)
 							->orWhere('sueldoMinimo', 'LIKE', $keyWord)
-							->orWhere('fechaMax', 'LIKE', $keyWord)
 							->orWhere('cantVacantes', 'LIKE', $keyWord)
 							->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
 							->orWhere('edadRequerida', 'LIKE', $keyWord)
@@ -164,7 +163,6 @@ class Ofertas extends Component
 		'beneficios' => 'required|max:300',
 		'oportunidadesDesarrollo' => 'required|max:300',
 		'fechaMax' => 'required | date | after:today',
-		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
 		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
 		'edadRequerida' => 'required|integer|gt:17',
@@ -172,6 +170,8 @@ class Ofertas extends Component
 		'facultad_id' => 'required | integer',
 	];
 
+	protected $rulesCreate = ['imagenPuesto' => ' image | mimes:png,jpg,jpeg'];
+	protected $rulesUpdate = ['imagenPuesto' => 'nullable'];
 	public function updated($propertyOferta){
         $this->validateOnly($propertyOferta);
     }
@@ -228,6 +228,7 @@ class Ofertas extends Component
  //Validación de cada paso del formulario
 public function validarPaso1()
 {
+	$rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
 	//Reglas de validación para la información general del empleo
 	     $this->validate([
         'resumenPuesto' => 'required | max:300',
@@ -239,7 +240,6 @@ public function validarPaso1()
 		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
 		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
-		'imagenPuesto' => ' image | mimes:png,jpg,jpeg',
     ]);
 	$this->mostrarErrores = true;
  }
@@ -633,8 +633,11 @@ public function validarPaso5()
 				
 		// Obtener las postulaciones asociadas a la oferta
 		if ($this->postulaciones && $this->postulaciones->count() > 0) {
-			$this->dispatchBrowserEvent('showVerPostulacionesModal');
+			// $this->dispatchBrowserEvent('showVerPostulacionesModal');
+			return redirect()->route('postulacions.index', $ofertaId);
 			
+		} else {
+			session()->flash('message', 'No hay postulaciones para esta oferta.');
 		}
 		
     }
@@ -688,32 +691,32 @@ public function validarPaso5()
     
 	
 	//FUNCION PARA BUSCAR LAS ENTREVISTAS DENTRO DE LA TABLA OFERTAS
-	// public function verEntrevistas($ofertaId)
-    // {
-    //     // Obtener la oferta con las postulaciones y entrevistas asociadas
-	// 	$this->ofertapost = Oferta::with('postulacions.entrevistas')->find($ofertaId);
+	 public function verEntrevistas($ofertaId)
+     {
+        //   Obtener la oferta con las postulaciones y entrevistas asociadas
+	 	$this->ofertapost = Oferta::with('postulacions.entrevistas')->find($ofertaId);
 
-	// 	// Verificar si la oferta existe
-	// 	if (!$this->ofertapost) {
-	// 		session()->flash('message', 'La oferta no existe.');
-	// 		return;
-	// 	}
+	 	// Verificar si la oferta existe
+	 	if (!$this->ofertapost) {
+	 		session()->flash('message', 'La oferta no existe.');
+	 		return;
+	 	}
 
-	// 	// Obtener el nombre de la oferta
-	// 	$this->nombreOferta = $this->ofertapost->nombrePuesto;
+	 	//  Obtener el nombre de la oferta
+	 	$this->nombreOferta = $this->ofertapost->nombrePuesto;
 
-	// 	// Obtener todas las entrevistas asociadas a las postulaciones de la oferta
-	// 	$this->ofertasEnt = $this->ofertapost->postulacions->flatMap(function ($totalEntrevistas) {
-	// 		return $totalEntrevistas->ofertasEnt;
-	// 	});
+	 	//  Obtener todas las entrevistas asociadas a las postulaciones de la oferta
+	 	$this->ofertasEnt = $this->ofertapost->postulacions->flatMap(function ($totalEntrevistas) {
+	 		return $totalEntrevistas->entrevistas;
+	 	});
 
-	// 	// Verificar si hay entrevistas asociadas a las postulaciones de la oferta
-	// 	if ($this->ofertasEnt && $this->ofertasEnt->count() > 0) {
-	// 		$this->dispatchBrowserEvent('showVerEntrevistasModal');
-	// 	} else {
-	// 		session()->flash('message', 'No hay entrevistas para esta oferta.');
-	// 	}
-    // }
+	 	// Verificar si hay entrevistas asociadas a las postulaciones de la oferta
+	 	if ($this->ofertasEnt && $this->ofertasEnt->count() > 0) {
+			return redirect()->route('entrevistas.index', $ofertaId);
+	 	} else {
+	 		session()->flash('message', 'No hay entrevistas para esta oferta.');
+	}
+    }
 
 	public function idEliminar($ofertaId)
     {

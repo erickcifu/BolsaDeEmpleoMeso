@@ -103,7 +103,7 @@
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-                            <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha: {{ $FechaEntrevista }}</small>
+                            <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha: {{date('d-m-Y', strtotime($FechaEntrevista))}} </small>
                             </div>
                         </div>
                         <div style="display: inline-block; width: 100%;">

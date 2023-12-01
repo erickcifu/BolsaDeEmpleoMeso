@@ -86,13 +86,13 @@
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label for="hora_inicio">Hora de inicio</label>
-                        <input wire:model="hora_inicio" type="time" class="form-control" id="hora_inicio" placeholder="Hora Inicio">@error('hora_inicio') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="horaInicio">Hora de inicio</label>
+                        <input wire:model="horaInicio" type="time" class="form-control" id="hora_inicio" placeholder="Hora Inicio">@error('hora_inicio') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <br/>
                     <div class="form-group">
-                        <label for="hora_final">Hora de finalización</label>
-                        <input wire:model="hora_final" type="time" class="form-control" id="hora_final" placeholder="Hora Final">@error('hora_final') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="horaFinal">Hora de finalización</label>
+                        <input wire:model="horaFinal" type="time" class="form-control" id="hora_final" placeholder="Hora Final">@error('hora_final') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <br/>
                     <div class="form-group">
@@ -104,7 +104,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn  close-btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" wire:click.prevent="newEntrevista()" class="btn btn-primary" style="background-color: #005c35;">Guardar</button>
+                <button type="button" wire:click.prevent="newEntrevista()" class="btn btn-primary" style="background-color: #005c35;" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
