@@ -61,10 +61,10 @@
                                     </li>                                    
                                 </ul>
                         </li>
-						
+						<!--
 						<li class="nav-item">
                             <a href="{{ url('/entrevistas') }}" class="nav-link" style="color: #f0eadc;">Entrevistas</a> 
-                        </li>
+                        </li>-->
 						<!-- <li class="nav-item">
                             <a href="{{ url('/postulacions') }}" class="nav-link" style="color: #f0eadc;">Postulaciones</a> 
                         </li> -->
