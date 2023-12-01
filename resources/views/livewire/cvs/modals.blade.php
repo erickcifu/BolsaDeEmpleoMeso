@@ -64,7 +64,7 @@
                                 </div>
                                 <br/>
                                 <div class="form-group">
-                                    <label for="publicaciones">Enlaces</label>
+                                    <label for="publicaciones">Enlace</label>
                                     <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces de github, portafolios, publicaciones de los proyectos que haz realizado.">
                                     </textarea>    
                                     @error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror                         
@@ -93,8 +93,7 @@
                                     <div style="display: inline-block; width: 100%;">
                                         <div class="mb-2">
                                             <label for="nombreRef2">Nombre de referencia*</label>
-                                            <input wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias.">
-                                            </input>
+                                            <input wire:model="nombreRef2" type="text" class="form-control" id="nombreRef2" placeholder="Ingresa el nombre de alguien con quien la empresa pueda comunicarse en caso de necesitar referencias."/>
                                             @error('nombreRef2') <span class="error text-danger">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -210,7 +209,7 @@
                                         @error('experiencia.' . $indice . '.inicioExperiencia') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4">
-                                        <label for="finExperiencia">Fecha de renuncia/despido*</label>
+                                        <label for="finExperiencia">Fecha de renuncia/despido* (Si usted anota la fecha de hoy se guardara como actualmente)</label>
                                         <input type="date" wire:model="experiencia.{{ $indice }}.finExperiencia" class="form-control">
                                         @error('experiencia.' . $indice . '.finExperiencia') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
@@ -266,9 +265,10 @@
                                         @error('formacion.' . $indice . '.anioInicioFormacion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4">
-                                        <label for="anioFinFormacion">Fecha de fin*</label>
+                                        <label for="anioFinFormacion">Fecha de fin* (Si usted anota la fecha de hoy se guardara como actualmente)</label>
                                         <input type="date" wire:model="formacion.{{ $indice }}.anioFinFormacion" class="form-control">
-                                        @error('formacion.' . $indice . '.anioFinFormacion') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        @error('formacion.' . $indice . '.anioFinFormacion')
+                                        <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4">
                                         <label for="institucionFormacion">Establecimiento educativo*</label>

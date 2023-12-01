@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use App\Models\Idioma;
 use App\Models\idiomacv;
 use App\Models\Municipio;
@@ -15,6 +16,7 @@ use App\Models\Departamento;
 use Livewire\WithFileUploads;
 use PDF;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Estudiante;
 use Illuminate\Support\Facades\DB;
 
@@ -35,15 +37,20 @@ class Cvs extends Component
 	public $formacion = [];
 	public $idiomas = [];
 	public $idiomasTable = [];
+	public $user_id, $user,$estudiante,$cvs;
 
 	public function render()
 	{
-
 		$this->idiomasTable = Idioma::get();
-
+		if (Auth::check()) {
+			$this->user_id = Auth::id();
+       	 	$this->user = User::with('estudiante')->find($this->user_id);
+			$keyWord = '%'.$this->keyWord .'%';
+			$this->cvs = $this->user->estudiante->cvs;
+		}
 		$keyWord = '%' . $this->keyWord . '%';
 		return view('livewire.cvs.view', [
-			'cvs' => Cv::latest()
+			'cvs2' => Cv::latest()
 				->orWhere('cvId', 'LIKE', $keyWord)
 				->orWhere('direcionDomiciliar', 'LIKE', $keyWord)
 				->orWhere('correoElectronico', 'LIKE', $keyWord)
@@ -54,6 +61,7 @@ class Cvs extends Component
 				->orWhere('publicaciones', 'LIKE', $keyWord)
 				->orWhere('intereses', 'LIKE', $keyWord)
 				->paginate(10),
+				"cvs" => $this->cvs,
 		]);
 	}
 

@@ -353,7 +353,12 @@
                     <p>{{ $experiencia->puestoTrabajo }}</p>
                     {{ date('Y - M', strtotime($experiencia->inicioExperiencia)) }}
                     /
-                    {{ date('Y - M', strtotime($experiencia->finExperiencia)) }}
+                    @if($experiencia->finExperiencia == now()->format('Y-m-d'))
+                        <p>Actualmente</p>
+                    @else
+                        {{ date('Y - M', strtotime($experiencia->finExperiencia)) }}
+                        <br />
+                    @endif
                     <br />
                     <strong> {{ $experiencia->puestoTrabajo }} | </strong>
                     {{ $experiencia->lugarTrabajo }}
@@ -387,12 +392,19 @@
                         padding-right: 10px;
                     "
                 >
-                    <h3 style="color: #005c38">FORMACIÓN</h3>
+                    <h3 style="color: #005c38">FORMACIÓN ACADÉMICA</h3>
 
                     @forelse($formacions as $formacion)
                     {{date('Y - M', strtotime($formacion->anioInicioFormacion))}}
                     /
-                    {{date('Y - M', strtotime($formacion->anioFinFormacion))}}
+                    {{-- {{date('Y - M', strtotime($formacion->anioFinFormacion))}} --}}
+                    @if($formacion->anioFinFormacion == now()->format('Y - M'))
+                        <p>Actualmente</p>
+                    @else
+                        {{ date('Y - M', strtotime($formacion->anioFinFormacion)) }}
+                        <br />
+                    @endif
+                
                     <br />
                     {{ $formacion->tituloObtenido }} -
                     {{ $formacion->nivelFormacion }}
