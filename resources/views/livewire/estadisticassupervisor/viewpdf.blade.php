@@ -2,7 +2,7 @@
 <div class="row">
     
  
- {{--tabla--}}   
+ {{--tablass--}}   
  <h3  style="text-align: center;">Reporte de Estaditicas para Autoridades Academicas</h3>
  <div class="card-body">
         <div class="row w-100 d-flex justify-content-center mb-2"
