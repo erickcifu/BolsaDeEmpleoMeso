@@ -23,7 +23,7 @@
 				<div class="card-body">
 						@include('livewire.facultads.modals')
 				<div class="table-responsive">
-					<table class="table table-bordered table-sm">
+					<table>
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 

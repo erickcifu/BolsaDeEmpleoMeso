@@ -14,6 +14,7 @@ use App\Models\Estudiante;
 use App\Http\Controllers\SliderController;
 
 use App\Http\Livewire\Cartarecomendacions;
+use App\Http\Livewire\Estadisticassupervisor;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -106,6 +107,7 @@ Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::clas
 	Route::get('/evento/mostrar',[App\Http\Controllers\EventoController::class,'show']);
 	Route::post('/evento/editar/{id}',[App\Http\Controllers\EventoController::class,'edit']);
 
+Route::get('/estadisticasuper-pdf', [Estadisticassupervisor::class, 'downloadPDF']);
 Route::get('/carta-pdf', [Cartarecomendacions::class, 'downloadPDF']);
 Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middleware('auth');
 Route::view('departamentos', 'livewire.departamentos.index')->middleware('auth');

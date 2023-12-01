@@ -6,6 +6,8 @@ use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
+use PDF;
+
 class Estadisticassupervisor extends Component
 {
 
@@ -37,8 +39,28 @@ class Estadisticassupervisor extends Component
     }
     public function render()
     {
+
+
+       $habilidadesT=DB::select('SELECT
+       nombreTecnica,                    COUNT(*) AS total
+                       FROM
+                           (
+                               SELECT
+                                   id
+                               FROM
+                                   users
+                               WHERE
+                                   id = 4
+                                   AND estado = 1
+                                   AND rol_id = 4
+                           ) u
+                           LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                           LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                           LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
+                           LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
+                           GROUP BY nombreTecnica');
         $this->buildDataSup();
-        return view('livewire.estadisticassupervisor.view');
+        return view('livewire.estadisticassupervisor.view', compact('habilidadesT'));
     }
 
     public function buildDataSup()
@@ -187,4 +209,148 @@ class Estadisticassupervisor extends Component
         $this->ofertas = $ofertas[0]->total;
 
     }
+
+    /*genera pdf*/
+
+
+    
+	public function downloadPDF()
+	{ 
+        //-----------
+        $habilidadesT=DB::select('SELECT
+        nombreTecnica,                    COUNT(*) AS total
+                        FROM
+                            (
+                                SELECT
+                                    id
+                                FROM
+                                    users
+                                WHERE
+                                    id = 4
+                                    AND estado = 1
+                                    AND rol_id = 4
+                            ) u
+                            LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                            LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                            LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
+                            LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
+                            GROUP BY nombreTecnica');
+                //---------------
+                    $HabilidadesYear = DB::select( 'SELECT
+                    COUNT(*) AS total
+                    FROM
+                    (
+                        SELECT
+                            id
+                        FROM
+                            users
+                        WHERE
+                            id = 4
+                            AND estado = 1
+                            AND rol_id = 4
+                    ) u
+                    LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                    LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                    LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
+                    LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
+                    ');
+                //-----------------------
+                $ContratadosYear =  DB::select('SELECT
+                COUNT(*) as total
+                FROM
+                (
+                    SELECT
+                        id
+                    FROM
+                        users
+                    WHERE
+                        id = 4
+                        AND estado = 1
+                        AND rol_id = 4
+                ) u
+                LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                LEFT JOIN postulacions p ON o.ofertaId = p.oferta_id
+                LEFT JOIN entrevistas e ON e.postulacion_id = p.postulacionId
+                WHERE
+                                    e.Contratado = 1
+                ');
+                //-------------------------------
+
+                $PostuladosYear = DB::select('SELECT
+                COUNT(*) as total
+                FROM
+                (
+                    SELECT
+                        id
+                    FROM
+                        users
+                    WHERE
+                        id = 4
+                        AND estado = 1
+                        AND rol_id = 4
+                ) u
+                LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                LEFT JOIN postulacions p ON o.ofertaId = p.oferta_id
+                WHERE
+                                    YEAR(p.created_at) = YEAR(CURDATE())
+                ');
+                //--------------
+
+                $RechazadosYear = DB::select('SELECT
+                COUNT(*) as total
+            FROM
+                (
+                    SELECT
+                        id
+                    FROM
+                        users
+                    WHERE
+                        id = 4
+                        AND estado = 1
+                        AND rol_id = 4
+                ) u
+                LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                LEFT JOIN postulacions p ON o.ofertaId = p.oferta_id
+                WHERE
+                                    p.estadoPostulacion = 0
+                                 
+           ');
+
+           //------
+           $OfertasYear = DB::select('SELECT
+           COUNT(*) as total
+       FROM
+           (
+               SELECT
+                   id
+               FROM
+                   users
+               WHERE
+                   id = 4
+                   AND estado = 1
+                   AND rol_id = 4
+           ) u
+           LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+           LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+       WHERE
+           YEAR(o.created_at) = YEAR(CURDATE())');
+
+
+
+
+                          
+         
+         $pdf=Pdf::loadView('livewire.estadisticassupervisor.viewpdf', compact('habilidadesT','HabilidadesYear','ContratadosYear','PostuladosYear','RechazadosYear','OfertasYear'));
+		
+		
+		
+		
+		return $pdf->stream('Reporte.pdf');
+
+	}
+    
+
 }
