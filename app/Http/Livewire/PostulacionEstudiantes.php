@@ -29,15 +29,22 @@ class PostulacionEstudiantes extends Component
 
         $this->user = User::with('estudiante')->find($this->usuarioAutenticado);
         
+        $keyWord = '%'.$this->keyWord .'%';
         // Accede a las postulaciones del estudiante
-    	$this->postulacionesEstudiante = $this->user->Estudiante->postulacions;
+    	$this->postulacionesEstudiante = $this->user->Estudiante->postulacions()
+            ->where(function ($query) use ($keyWord) {
+                $query->orWhere('fechaPostulacion', 'LIKE', $keyWord)
+                ->orWhereHas('oferta', function ($queryOferta) use ($keyWord) {
+                    $queryOferta->where('nombrePuesto', 'LIKE', $keyWord);
+                });
+            })
+            ->get();
 
-            $keyWord = '%'.$this->keyWord .'%';
+           
             return view('livewire.postulacionestudiantes.postulacionestudiante', [
                 'postulacionStudent' => Postulacion::latest()
-                            ->orWhere('fechaPostulacion', 'LIKE', $keyWord)
-                            ->orWhere('oferta_id', 'LIKE', $keyWord)
-                            ->paginate(10), 
+                    ->paginate(10), 
+                    "postulacionesEstudiante" => $this->postulacionesEstudiante,
             ]);
             
         }
@@ -101,16 +108,19 @@ class PostulacionEstudiantes extends Component
     //Eliminar
     public function edit2($postulacionId)
     {
-        $this->record2 = Postulacion::where('postulacionId', $postulacionId)->first();
+        $this->selected_id = $postulacionId;
+        $this->dispatchBrowserEvent('showDeletDataModal');
     }
 
 	//Método de eliminación
 	public function destroy()
     {
-        if ($this->record2) {
-			Postulacion::where('postulacionId', $this->record2->postulacionId)->delete();
-			session()->flash('message', 'Postulación eliminada correctamente');
+        if ($this->selected_id) {
+			Postulacion::where('postulacionId', $this->selected_id)->delete();
+			
         }
+        $this->dispatchBrowserEvent('closeModal');
+        session()->flash('message', 'Postulación eliminada correctamente');
     }
 
 }

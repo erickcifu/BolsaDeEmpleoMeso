@@ -17,7 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 
-class OfertasEstudiantes extends Component
+class VerOfertas extends Component
 {
     use WithPagination;
 	use WithFileUploads;
@@ -30,7 +30,7 @@ class OfertasEstudiantes extends Component
 	public $nombre_empresa;
     public $facultadSeleccionada;
     public $ofertaFacultad, $facultades;
-	public $verTodas = false, $Totalofertas;
+	public $Totalofertas;
 
     public function mount()
     {
@@ -43,45 +43,27 @@ class OfertasEstudiantes extends Component
        $this->Postulaciones = Postulacion::all();
 	   $this->user_id = Auth::id();
 	   $this->user = User::find($this->user_id); 
-	   if ($this->user && $this->user->Estudiante){
-			$this->mensaje = "El usuario si tiene una propiedad Estudiante";
-			$this->estudiante = $this->user->Estudiante;
-
-			$keyWord = '%'.$this->keyWord .'%';
-			if ($this->estudiante->Carrera && $this->estudiante->Carrera->Facultad) {
-				$this->ofertas = $this->estudiante->Carrera->Facultad->Ofertas()
-					->where('estadoOferta', 1)
-					->where(function ($query) use ($keyWord) {
-						$query->where('nombrePuesto', 'LIKE', $keyWord)
-							->orWhere('imagenPuesto', 'LIKE', $keyWord)
-							->orWhere('sueldoMinimo', 'LIKE', $keyWord)
-							->orWhere('fechaMax', 'LIKE', $keyWord)
-							->orWhere('cantVacantes', 'LIKE', $keyWord)
-							->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
-							->orWhere('edadRequerida', 'LIKE', $keyWord)
-							->orWhere('generoRequerido', 'LIKE', $keyWord)
-							->orWhere('comentarioCierre', 'LIKE', $keyWord)
-							->orWhere('sueldoMax', 'LIKE', $keyWord)
-							->orWhereHas('empresa', function ($queryEmpresa) use ($keyWord) {
-								$queryEmpresa->where('nombreEmpresa', 'LIKE', $keyWord);
-							})
-							->orWhere('facultad_id', 'LIKE', $keyWord);
+	   if ($this->user && $this->user->Estudiante){	
+                $keyWord = '%'.$this->keyWord .'%';
+       	 		return view('livewire.verofertas.view', [
+            	'totalOfertas' => Oferta::latest()
+                    ->orWhere('nombrePuesto', 'LIKE', $keyWord)
+					->orWhere('imagenPuesto', 'LIKE', $keyWord)
+					->orWhere('sueldoMinimo', 'LIKE', $keyWord)
+					->orWhere('fechaMax', 'LIKE', $keyWord)
+					->orWhere('cantVacantes', 'LIKE', $keyWord)
+					->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
+					->orWhere('edadRequerida', 'LIKE', $keyWord)
+					->orWhere('generoRequerido', 'LIKE', $keyWord)
+					->orWhere('comentarioCierre', 'LIKE', $keyWord)
+					->orWhere('sueldoMax', 'LIKE', $keyWord)
+					->orWhereHas('empresa', function ($queryEmpresa) use ($keyWord) {
+					$queryEmpresa->where('nombreEmpresa', 'LIKE', $keyWord);
 					})
-					->get();
-					
-				
-       	 		return view('livewire.ofertasestudiantes.view', [
-            	'ofertaStudent' => Oferta::latest()
+					->orWhere('facultad_id', 'LIKE', $keyWord)
 					->paginate(10),
-				"user_id"=>$this->user_id, 
-				"mensaje"=>$this->mensaje, 
-				"ofertas"=>$this->ofertas,
 				]);
-		}
-	   } else {
-		$this->mensaje = "No existe el usuario o no es un estudiante";
-	   }
-	   return view('livewire.ofertasestudiantes.defaultView', ['mensaje' => $this->mensaje]);
+            }
 }
 
 	public function verTodo(){

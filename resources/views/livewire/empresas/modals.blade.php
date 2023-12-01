@@ -240,12 +240,13 @@
                         <label for="logo"><b style="color: black;">Logo (seleccione un archivo de imagen) <b></label>
                         <input wire:model="logo" type="file" accept="image/*" class="form-control" id="logo" placeholder="Logo">@error('logo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-                    
+                    <div wire:loading wire:target="logo"><h6 style="color: #005c35;"><b>Cargando imagen...</b></h6></div>
+                   
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="logo()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="logo" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="logo()" class="btn btn-primary" wire:loading.attr="disabled"  wire:target="logo" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>
@@ -266,6 +267,7 @@
                         <b>!Al modificar su archivo rtu su estado de la Solicitud regresara a estar en espera!</b>
                         </label>
                         <input wire:model="rtu" type="file" accept="application/pdf" class="form-control" id="rtu" placeholder="Rtu">@error('rtu') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <div wire:loading wire:target="rtu"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>
                     </div>
                     <div class="form-group" hidden>
                         <label for="estadoSolicitud"><b style="color: black;">Estado de la Solicitud<b></label>
@@ -275,8 +277,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="rtu()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="rtu" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="rtu()" wire:loading.attr="disabled"  wire:target="rtu" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>
@@ -296,6 +298,7 @@
                         <label for="patenteComercio"><b style="color: black;">Patente de Comercio (seleccione un archivo pdf)<b><br>
                             <b>!Al modificar su archivo de patente de comercio su estado de la Solicitud regresara a estar en espera!</b></label>
                         <input wire:model="patenteComercio" type="file" accept="application/pdf" class="form-control" id="patenteComercio" placeholder="Patente comercio">@error('patenteComercio') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <div wire:loading wire:target="patenteComercio"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>
                     </div>
                     <div class="form-group" hidden>
                         <label for="estadoSolicitud"><b style="color: black;">Estado de la Solicitud<b></label>
@@ -305,8 +308,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="pan()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="patenteComercio" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="pan()" wire:loading.attr="disabled"  wire:target="patenteComercio" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
             </div>
        </div>
     </div>

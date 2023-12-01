@@ -32,7 +32,7 @@ class Ofertas extends Component
 	public $fechaPostulacion, $oferta_id;
 	public $ofertaId;
 	public $id_postu, $nombreOferta;
-	public $imagenPuestoPath;
+	public $imagenPuestoPath, $keyWordTwo;
 
 	//Campos de la entrevista
 	public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
@@ -42,6 +42,7 @@ class Ofertas extends Component
 	public $mostrarErrores = false;
 	public $userID,	$empresaAut, $user, $ofertasLaborales;
 	public $postulaciones;
+	public $nombre_empresa;
 	public $entrevistapost, $post, $ofertaEnt, $postuEnt;
 	public $habilidadesTecnicas = [];
 	public $tecnicas = [];
@@ -49,6 +50,7 @@ class Ofertas extends Component
 	public $interpersonales = [];
 	public $competenciasTable = [];
 	public $competencias = [];
+	public $verTecnicas =[] , $verInterpersonales, $verCompetencias;
 
 	public function mount()
     {
@@ -70,13 +72,11 @@ class Ofertas extends Component
 
     		$this->user = User::with('empresa')->find($this->userID);
 
-    		// Accede a las ofertas laborales de la empresa
-    		$this->ofertasLaborales = $this->user->Empresa->ofertas;
-
 			$keyWord = '%'.$this->keyWord .'%';
-			return view('livewire.ofertas.view', [
-				'ofertas' => Oferta::latest()
-							->orWhere('resumenPuesto', 'LIKE', $keyWord)
+    		// Accede a las ofertas laborales de la empresa
+    		$this->ofertasLaborales = $this->user->Empresa->ofertas()
+				->where(function ($query) use ($keyWord) {
+					$query->where('resumenPuesto', 'LIKE', $keyWord)
 							->orWhere('nombrePuesto', 'LIKE', $keyWord)
 							->orWhere('imagenPuesto', 'LIKE', $keyWord)
 							->orWhere('sueldoMinimo', 'LIKE', $keyWord)
@@ -87,7 +87,15 @@ class Ofertas extends Component
 							->orWhere('generoRequerido', 'LIKE', $keyWord)
 							->orWhere('comentarioCierre', 'LIKE', $keyWord)
 							->orWhere('sueldoMax', 'LIKE', $keyWord)
-							->orWhere('empresa_id', 'LIKE', $keyWord)
+							->orWhereHas('facultad', function ($queryFacultad) use ($keyWord) {
+								$queryFacultad->where('Nfacultad', 'LIKE', $keyWord);
+							});
+				})
+				->get();
+			
+			return view('livewire.ofertas.view', [
+				'ofertas' => Oferta::latest()
+							
 							->paginate(10),
 							'facultades' => $facultades,
 							'ofertasLaborales' => $this->ofertasLaborales,
@@ -417,9 +425,14 @@ public function validarPaso5()
 		$this->edadRequerida = $record-> edadRequerida;
 		$this->generoRequerido = $record-> generoRequerido;
 		$this->comentarioCierre = $record-> comentarioCierre;
-		$this->empresa_id = $record-> empresa_id;
+		$this->nombre_empresa = $record-> empresa->nombreEmpresa;
 		$this->facultad_id = $record-> facultad_id;
-    }
+
+		$verTecnicas = ofertaTecnica::where('oferta_id', $ofertaId)->get();
+		// $verInterpersonales = ofertaInterpersonal::where('oferta_id', $ofertaId)->get();
+		// $verCompetencias = ofertaCompetencia::where('oferta_id', $ofertaId)->get();
+		
+	}
 
     public function edit($ofertaId)
     {
@@ -601,6 +614,7 @@ public function validarPaso5()
 	//FUNCION PARA BUSCAR LAS POSTULACIONES DENTRO DE LA TABLA OFERTAS
 	public function verPostulaciones($ofertaId)
     {
+		$keyWordTwo = '%'.$this->keyWordTwo .'%';
         $this->ofertapost = Oferta::with('postulacions')->find($ofertaId);
 
 		// Verificar si la oferta existe
@@ -609,14 +623,18 @@ public function validarPaso5()
 			return;
 		}
 		$this->nombreOferta = $this->ofertapost->nombrePuesto;
-		$this->postulaciones = $this->ofertapost->postulacions;
-
+		$this->postulaciones = $this->ofertapost->postulacions()
+			->where(function ($queryDos) use ($keyWordTwo) {
+				$queryDos->orWhereHas('estudiante', function ($queryEstudiante) use ($keyWordTwo) {
+						$queryEstudiante->where('nombre', 'LIKE', $keyWordTwo);
+			});
+		})
+		->get();
+				
 		// Obtener las postulaciones asociadas a la oferta
 		if ($this->postulaciones && $this->postulaciones->count() > 0) {
 			$this->dispatchBrowserEvent('showVerPostulacionesModal');
 			
-		} else {
-			session()->flash('message', 'No hay postulaciones para esta oferta.');
 		}
 		
     }
