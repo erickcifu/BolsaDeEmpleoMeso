@@ -15,7 +15,7 @@
 							<input wire:model='keyWord' type="text" class="form-control" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
 						</div>
 						<div>
-							<a href="/ofertasestudiantes"><b style="color: #005c35;">Volver a mis ofertas</b></a>
+							<a href="/ofertasestudiantes"><b style="color: #005c35;">Ver ofertas de mi facultad</b></a>
 						</div>
 					</div>
 				

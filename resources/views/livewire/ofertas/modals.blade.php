@@ -24,9 +24,12 @@
                                         <div class="mb-2">
                                             @if($selected_id !== null)
                                                 <img src="{{asset($imagenPuesto)}}" width="50" height="50" class="img-fluid" alt="Imagen oferta">
-                                            @endif
+                                                <label for="imagenPuesto">Imagen</label>
+                                                <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen" hidden>
+                                            @else
                                             <label for="imagenPuesto">Imagen</label>
                                             <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen">
+                                            @endif
                                         </div>
                                         @error('imagenPuesto') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>

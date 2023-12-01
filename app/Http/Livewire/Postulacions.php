@@ -14,19 +14,38 @@ class Postulacions extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $fechaPostulacion, $oferta_id;
-    public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $hora_inicio, $hora_final, $Contratado, $comentarioContratado, $postulacion_id;
+    public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
     public $postulaciones, $oferta;
-    public function render($ofertaId)
+    public $ofertaId;
+
+    public function mount($ofertaId)
     {
-        $this->oferta = Oferta::findOrFail($ofertaId);
-        $postulaciones = $this->oferta->postulacions;
-		$keyWord = '%'.$this->keyWord .'%';
+        $this->ofertaId = $ofertaId;
+    }
+
+    public function render()
+    {
+        $keyWord = '%'.$this->keyWord .'%';
+        $this->ofertapost = Oferta::with('postulacions')->find($this->ofertaId);
+
+		// Verificar si la oferta existe
+		if (!$this->ofertapost) {
+			session()->flash('message', 'La oferta no existe.');
+			return;
+		}
+		$this->nombreOferta = $this->ofertapost->nombrePuesto;
+		$this->postulaciones = $this->ofertapost->postulacions()
+			->where(function ($queryDos) use ($keyWord) {
+				$queryDos->orWhereHas('estudiante', function ($queryEstudiante) use ($keyWord) {
+						$queryEstudiante->where('nombre', 'LIKE', $keyWord);
+			});
+		})
+		->get();
+        
         return view('livewire.postulacions.view', [
             'postulacions' => Postulacion::latest()
-						->orWhere('fechaPostulacion', 'LIKE', $keyWord)
-						->orWhere('oferta_id', 'LIKE', $keyWord)
 						->paginate(10),
-                        "postulacions"=>$this->postulaciones,
+                        "postulaciones"=>$this->postulaciones,
         ]);
     }
 	
@@ -85,9 +104,9 @@ class Postulacions extends Component
     }
 
     //FUNCION PARA OBETNER EL ID DESDE LA TABLA POSTULACIÓN
-    public function setPostulacionId($id)
+    public function setPostulacionId($postulacionId)
     {
-        $this->postulacion_id = $id;
+        $this->postulacion_id = $postulacionId;
     }
 
     //FUNCION PARA CREAR LA ENTREVISTA
@@ -96,25 +115,33 @@ class Postulacions extends Component
             'tituloEntrevista' => 'required',
             'descripcionEntrevista' => 'required',
             'FechaEntrevista' => 'required | date | after:today',
-            'hora_inicio' => 'required',
-            'hora_final' => 'required',
-            'postulacion_id' => 'required',
         ]);
 
-        Entrevista::create([ 
-			'tituloEntrevista' => $this-> tituloEntrevista,
-			'descripcionEntrevista' => $this-> descripcionEntrevista,
-			'FechaEntrevista' => $this-> FechaEntrevista,
-			'hora_inicio' => $this-> hora_inicio,
-			'hora_final' => $this-> hora_final,
-			'Contratado' => "0",
-			'comentarioContratado' => "Null",
-			'postulacion_id' => $this-> postulacion_id
-        ]);
+        $postulacion = Postulacion::find($this->postulacion_id);
+
+        if ($postulacion && $postulacion->entrevistas->count() > 0) {
+            // Ya hay una entrevista asociada a esta postulación
+            $this->reset(['tituloEntrevista', 'descripcionEntrevista', 'FechaEntrevista', 'horaInicio', 'horaFinal']);
+            $this->dispatchBrowserEvent('closeModal');
+            session()->flash('message', 'Esta postulación ya tiene una entrevista.');
+    
+        } else {
+            // Crear la entrevista solo si no hay una entrevista existente
+            Entrevista::create([
+                'tituloEntrevista' => $this->tituloEntrevista,
+                'descripcionEntrevista' => $this->descripcionEntrevista,
+                'FechaEntrevista' => $this->FechaEntrevista,
+                'horaInicio' => $this->horaInicio,
+                'horaFinal' => $this->horaFinal,
+                'Contratado' => "0",
+                'comentarioContratado' => " ",
+                'postulacion_id' => $this->postulacion_id,
+            ]);
 		
 		$this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Entrevista agendada correctamente!');
 	}
+}
 
     public function destroy($id)
     {

@@ -128,8 +128,8 @@ Route::get('/formulario/create', [Ofertas::class, 'FormularioCreate'])->name('fo
 Route::view('ofertasestudiantes', 'livewire.ofertasestudiantes.index')->middleware('auth')->name('ofertasestudiantes');
 Route::view('NoData', 'livewire.ofertasestudiantes.index')->middleware('auth')->name('defaultView');
 Route::view('VerOfertas', 'livewire.verofertas.index')->middleware('auth')->name('VerOfertas');
-Route::view('entrevistas', 'livewire.entrevistas.index')->middleware('auth');
-Route::view('postulacions/{oferta}', 'livewire.postulacions.index')->middleware('auth');
+Route::view('entrevistas/{ofertaId}', 'livewire.entrevistas.index')->middleware('auth')->name('entrevistas.index');
+Route::view('postulacions/{ofertaId}', 'livewire.postulacions.index')->middleware('auth')->name('postulacions.index');
 Route::view('ofertas', 'livewire.ofertas.index')->name('ofertas')->middleware('auth');
 Route::view('Mispostulaciones', 'livewire.postulacionestudiantes.index')->middleware('auth');
 Route::view('Misentrevistas', 'livewire.entrevistaestudiantes.index')->middleware('auth');
