@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
 use PDF;
-
+//----
 class Estadisticassupervisor extends Component
 {
 

@@ -30,7 +30,7 @@
 	<br>
 	<br>
 
-	<h5> A quien Interese </h5>
+	<h5> A QUIEN INTERECE </h5>
 	<br>
 	<br>
 	<br>
@@ -39,9 +39,9 @@
 <p class="text-justify">
 
 Por este medio, hago constar que el portador de la presente,
-El alumno: <b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b> quien se identifica con número 
-de carne, <b>{{$item->estudiante->carnet}} </b> es estudiante de Universidad Mesoamericana, 
-desempeñando <b>{{ $item->cargoYTareasRealizadas }} </b> , Siendo una persona responsable, colaborador y puntual.  
+<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b> quien se identifica con número 
+de carnet, <b>{{$item->estudiante->carnet}} </b> es estudiante de Universidad Mesoamericana sede Quetzaltenango, 
+ <b>{{ $item->cargoYTareasRealizadas }} </b>.  
 </p>
 <p></p>
 <p></p>
@@ -49,21 +49,21 @@ desempeñando <b>{{ $item->cargoYTareasRealizadas }} </b> , Siendo una persona r
 	
 
 <p class="text-justify">
-Y para los usos que al  interesado convenga, extiendo esta carta el día {{ date('d-M-Y', strtotime($item->fechaCarta)) }}. 
-Sin nada más que agregar por el momento, quedo a sus órdenes para cualquier duda respecto mi telefono es <b>{{$item->telefonoAutoridad}}</b>
+Y para los usos que al  interesado convenga, extiendola presente el día {{ date('d-M-Y', strtotime($item->fechaCarta)) }}. 
+ 
 </p>
 
 <br>
 <br>
 <br>
-<p>Atentamente   </p>
+<p>Atentamente,   </p>
 <br>
 <br>
 <p class="text-center">
 <img src="{{$item->firmaAutoridad}}" alt="" width="100" height="100"/>
 </p>
 <p class="text-center">{{$item->autoridadAcademica->nombreAutoridad}}  {{$item->autoridadAcademica->apellidosAutoridad}}</p>
-<p class="text-center">Decano de la facultad de: {{$item->autoridadAcademica->facultad->Nfacultad}}</p>
+<p class="text-center"> cel: {{$item->telefonoAutoridad}}</p>
 <br>
 <br>
 <br><br>
