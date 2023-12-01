@@ -6,7 +6,47 @@
         <label for="endsOnDate" class="mx-3">Fecha Fin:</label>
         <input wire:model="endsOnDate" type="date" wire:change="actualizarInformacion()" />
     </div>
+    
+    
+      <h2>  <a href="{{ url('/estadisticasuper-pdf') }}" class="nav-link" style="color:  #005c35;">Descargar Reporte</a> </h2>
+  
+ {{--tabla--}}   
+ <div class="card-body">
+        <div class="row w-100 d-flex justify-content-center mb-2"
+             style="border: 1px solid gray; padding: 7px; border-radius: 5px">
+         <div class="text-center">tecnicas</div>
+     
+            <div class="table-responsive">
+             <table class="table table-bordered table-sm"  width="100%">
+                 <thead class="thead">
+                      <tr> 
+                  
+                        <th style="background-color: #005c35;"><b style="color: #f0eadc;">Técnicas </th>
+                        <th style="background-color: #005c35;"><b style="color: #f0eadc;">Veces Requerida </th>
+                   
+                        </tr>
+                 </thead>
+                 <tbody>
 
+                    @foreach ($habilidadesT as $habilidades)
+                    <tr>
+                    <td>{{ $habilidades->nombreTecnica }}</td>
+                    <td>{{ $habilidades->total }}</td>
+                    </tr>
+                     @endforeach
+              
+                 </tbody>
+             </table>	
+            </div>
+         </div>
+        </div> 
+    </div>
+       
+       
+  
+ 
+
+ {{--fin tabla--}}  
 
     <div class="row w-100 d-flex justify-content-center mb-2"
         style="border: 1px solid gray; padding: 3px; border-radius: 5px">
@@ -21,6 +61,9 @@
                 </div>
                 <div class="text-secondary text-center mt-2">
                     <h4>{{ $habilidadestecnicas }}</h4>
+                   
+
+                  
                 </div>
             </div>
         </div>
