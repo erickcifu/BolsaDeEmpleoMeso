@@ -173,11 +173,12 @@ class PerfilEstudiante extends Component
 	
 				$this->resetInput();
 				$this->dispatchBrowserEvent('closeModal');
-				session()->flash('message', 'Estudiante Successfully updated.');
+				session()->flash('message', 'Perfil actualizado exitosamente.');
 			};
 			$this->resetInput();
+            $this->dispatchBrowserEvent('closeModal');
             session()->flash('message', 'Perfil actualizado exitosamente.');
-            return redirect()->route('ofertasestudiantes');
+			// return redirect()->route('MiPerfil');
 		}	 else {
             dd("No hay un usuario autenticado");
         }
