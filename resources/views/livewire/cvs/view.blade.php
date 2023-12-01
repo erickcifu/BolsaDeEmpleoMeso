@@ -12,15 +12,33 @@
 						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
 						@endif
 						<div>
-							<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
+							{{-- <input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;"> --}}
 						</div>
 						<div>
-							<div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
+							{{-- <div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
 								<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
-							</div>	
+							</div>	 --}}
 							{{-- <div class="btn" wire:click="downloadCV()" style="background-color: #005c35;" >
 								<i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8>
 							</div> --}}
+						</div>
+						<div>
+							@if ($cvs->isNotEmpty())
+							<!-- Botón deshabilitado si hay registros -->
+							<div class="btn" style="background-color: #005c35;" hidden>
+								<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
+							</div>
+							<div class="btn" wire:click="downloadCV()" style="background-color: #005c35;" >
+								<i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8>
+							</div>
+						@else
+							<!-- Botón activo si no hay registros -->
+							<div class="btn" data-bs-toggle="modal" data-bs-target="#createDataModal" style="background-color: #005c35;">
+								<i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Crear</h8>
+							</div>
+							
+						@endif
+							<!-- Resto de tu código ... -->
 						</div>
 					</div>
 				</div>
@@ -50,7 +68,7 @@
 								<td>{{ $row->telefonoCv }}</td>
 								<td width="90">
 									{{-- <i class="fa-solid fa-download" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Descargar CV</h8> --}}
-									<a data-bs-toggle="modal" wire:click="downloadCV()" class="dropdown-item" ><i class="fa-solid fa-download"></i> Descargar  </a>
+									{{-- <a data-bs-toggle="modal" wire:click="downloadCV()" class="dropdown-item" ><i class="fa-solid fa-download"></i> Descargar  </a> --}}
 									<a data-bs-toggle="modal" data-bs-target="#createDataModal" class="dropdown-item" wire:click="edit({{$row->cvId}})"><i class="fa fa-edit"></i> Editar </a>
 									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="eliminar({{$row->cvId}})"><i class="fa fa-trash"></i> Eliminar </a>
 								</td>
