@@ -17,7 +17,7 @@
                             </div>
                             <div style="display: inline-block; width: 100vh;"> 
                                 <div class="mb-2">
-                                    <label for="nombreEmpresa"><b style="color: black;">Nombre de la Empresa<b></label>
+                                    <label for="nombreEmpresa"><b style="color: black;">Nombre de la Empresa*<b></label>
                                     <input wire:model="nombreEmpresa" type="text" class="form-control" id="nombreEmpresa" placeholder="Nombre">@error('nombreEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -25,13 +25,13 @@
                         <div class="hstack gap-3">
                        <div style="display: inline-block; width: 100vh;">  
                                 <div class="mb-2">
-                                    <label for="nit"><b style="color: black;">Nit<b></label>
+                                    <label for="nit"><b style="color: black;">Nit*<b></label>
                                     <input wire:model="nit" type="text" class="form-control" id="nit" placeholder="Nit">@error('nit') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div style="display: inline-block; width: 100vh;"> 
                                 <div class="mb-2">
-                                    <label for="rtu"><b style="color: black;">RTU (seleccione un archivo pdf)<b></label>
+                                    <label for="rtu"><b style="color: black;">RTU* (seleccione un archivo pdf)<b></label>
                                     <input wire:model="rtu" type="file" accept="application/pdf" class="form-control" id="rtu" placeholder="Rtu">@error('rtu') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                         <div class="hstack gap-3">
                        <div style="display: inline-block; width: 100vh;">  
                                 <div class="mb-2">  
-                                    <label for="patenteComercio"><b style="color: black;">Patente de Comercio (seleccione un archivo pdf)<b></label>
+                                    <label for="patenteComercio"><b style="color: black;">Patente de Comercio* (seleccione un archivo pdf)<b></label>
                                     <input wire:model="patenteComercio" type="file" accept="application/pdf" class="form-control" id="patenteComercio" placeholder="Patente comercio">@error('patenteComercio') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
