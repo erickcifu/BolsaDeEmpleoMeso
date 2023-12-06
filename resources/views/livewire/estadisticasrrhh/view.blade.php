@@ -171,7 +171,7 @@
             datasets: [{
                 label: 'Estudiantes por facultad',
                 data: labelvalue,
-                // backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                backgroundColor: 'rgba(0, 92, 53, 0.7)',
                 borderWidth: 1
             }]
         },
