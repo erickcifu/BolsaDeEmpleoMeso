@@ -49,7 +49,7 @@ de carnet, <b>{{$item->estudiante->carnet}} </b> es estudiante de Universidad Me
 	
 
 <p class="text-justify">
-Y para los usos que al  interesado convenga, extiendola presente el día {{ date('d-M-Y', strtotime($item->fechaCarta)) }}. 
+Y para los usos que al  interesado convenga, extiendola presente en la fecha {{ date('d/m/Y', strtotime($item->fechaCarta)) }}. 
  
 </p>
 
