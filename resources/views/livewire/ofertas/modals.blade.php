@@ -403,7 +403,7 @@
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-                                <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha límite para postulación: {{ $fechaMax }}</small>
+                                <small style="color: #373737;"><i class="fa-regular fa-calendar"></i> Fecha límite para postulación: {{ date('d-m-Y', strtotime($fechaMax)) }}</small>
                             </div>
                         </div>
                         <div style="display: inline-block; width: 100%;">
