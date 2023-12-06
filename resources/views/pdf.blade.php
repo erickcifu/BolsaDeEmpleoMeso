@@ -231,7 +231,7 @@
                         {{ $certificacion->institucionCertificadora }}
                         <br />
                         <strong>
-                            {{date('Y', strtotime($certificacion->anioCertificacion))}}
+                            {{date('d-m-Y', strtotime($certificacion->anioCertificacion))}}
                         </strong>
                         <br />
                         <br />
@@ -284,11 +284,11 @@
                         <ul>
                             <li>
                                 {{ $ref1 }} -
-                                {{ $tel1 }}
+                                {{ "Tel: ".  $tel1 }}
                             </li>
                             <li>
                                 {{ $ref2 }} -
-                                {{ $tel2 }}
+                                {{ "Tel: ".  $tel2 }}
                             </li>
                         </ul>
                     </div>
@@ -351,8 +351,9 @@
 
                     @forelse($experiencias as $experiencia)
                     <p>{{ $experiencia->puestoTrabajo }}</p>
-                    {{ date('Y - M', strtotime($experiencia->inicioExperiencia)) }}
+                    {{ date('d-m-Y', strtotime($experiencia->inicioExperiencia)) }}
                     /
+                    {{ date('d-m-Y', strtotime($experiencia->finExperiencia)) }}
                     @if($experiencia->finExperiencia == now()->format('Y-m-d'))
                         <p>Actualmente</p>
                     @else
@@ -395,8 +396,9 @@
                     <h3 style="color: #005c38">FORMACIÓN ACADÉMICA</h3>
 
                     @forelse($formacions as $formacion)
-                    {{date('Y - M', strtotime($formacion->anioInicioFormacion))}}
+                    {{date('Y', strtotime($formacion->anioInicioFormacion))}}
                     /
+                    {{date('Y', strtotime($formacion->anioFinFormacion))}}
                     {{-- {{date('Y - M', strtotime($formacion->anioFinFormacion))}} --}}
                     @if($formacion->anioFinFormacion == now()->format('Y - M'))
                         <p>Actualmente</p>
