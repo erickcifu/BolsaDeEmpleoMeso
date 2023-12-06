@@ -42,7 +42,7 @@ class Estadisticassupervisor extends Component
 
 
        $habilidadesT=DB::select('SELECT
-       nombreTecnica,                    COUNT(*) AS total
+       nombreTecnica,                    COUNT(nombreTecnica) AS total
                        FROM
                            (
                                SELECT
