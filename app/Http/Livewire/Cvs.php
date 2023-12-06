@@ -164,18 +164,18 @@ class Cvs extends Component
 
 		'experiencia*.descripcionLaboral.regex' => 'Este campo solo puede contener letras, números y espacios',
 
-		'formacion*.anioInicioFormacion.required' => 'Este campo no puede estar vacío',
-		'formacion*.anioInicioFormacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+		// 'formacion*.anioInicioFormacion.required' => 'Este campo no puede estar vacío',
+		// 'formacion*.anioInicioFormacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
 
-		'formacion*.anioFinFormacion.required' => 'Este campo no puede estar vacío',
-		'formacion*.anioFinFormacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
+		// 'formacion*.anioFinFormacion.required' => 'Este campo no puede estar vacío',
+		// 'formacion*.anioFinFormacion' => 'Ingresa una fecha válida (Hoy o una fecha anterior)',
 
-		'formacion*.institucionFormacion.required' => 'Este campo no puede estar vacío',
-		'formacion*.institucionFormacion.regex' => 'Este campo solo puede contener letras, números y espacios',
+		// 'formacion*.institucionFormacion.required' => 'Este campo no puede estar vacío',
+		// 'formacion*.institucionFormacion.regex' => 'Este campo solo puede contener letras, números y espacios',
 
-		'formacion*.nivelFormacion.required' => 'Este campo no puede estar vacío',
+		// 'formacion*.nivelFormacion.required' => 'Este campo no puede estar vacío',
 
-		'formacion*.tituloObtenido.required' => 'Este campo no puede estar vacío',
+		// 'formacion*.tituloObtenido.required' => 'Este campo no puede estar vacío',
 	];
 
 	public function ValidarPaso1()
