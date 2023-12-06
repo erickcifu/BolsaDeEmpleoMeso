@@ -350,15 +350,13 @@
                     <h3 style="color: #005c38">HISTORIAL LABORAL</h3>
 
                     @forelse($experiencias as $experiencia)
-                    <p>{{ $experiencia->puestoTrabajo }}</p>
+                   
                     {{ date('d-m-Y', strtotime($experiencia->inicioExperiencia)) }}
-                    /
-                    {{ date('d-m-Y', strtotime($experiencia->finExperiencia)) }}
+                    <!-- / {{ date('d-m-Y', strtotime($experiencia->finExperiencia)) }} -->
                     @if($experiencia->finExperiencia == now()->format('Y-m-d'))
-                        <p>Actualmente</p>
+                        / Actualmente 
                     @else
-                        {{ date('Y - M', strtotime($experiencia->finExperiencia)) }}
-                        <br />
+                        / {{ date('d-m-Y', strtotime($experiencia->finExperiencia)) }}
                     @endif
                     <br />
                     <strong> {{ $experiencia->puestoTrabajo }} | </strong>
@@ -397,16 +395,11 @@
 
                     @forelse($formacions as $formacion)
                     {{date('Y', strtotime($formacion->anioInicioFormacion))}}
-                    /
-                    {{date('Y', strtotime($formacion->anioFinFormacion))}}
-                    {{-- {{date('Y - M', strtotime($formacion->anioFinFormacion))}} --}}
-                    @if($formacion->anioFinFormacion == now()->format('Y - M'))
-                        <p>Actualmente</p>
+                    @if($formacion->anioFinFormacion == now()->format('Y-m-d'))
+                        / Actualmente 
                     @else
-                        {{ date('Y - M', strtotime($formacion->anioFinFormacion)) }}
-                        <br />
+                        / {{date('Y', strtotime($formacion->anioFinFormacion))}}
                     @endif
-                
                     <br />
                     {{ $formacion->tituloObtenido }} -
                     {{ $formacion->nivelFormacion }}

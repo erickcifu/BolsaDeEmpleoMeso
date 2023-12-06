@@ -210,7 +210,7 @@ class Cvs extends Component
 			'formacion.*.anioFinFormacion' => 'required | date | before_or_equal:today',
 			'formacion.*.institucionFormacion' => 'required | max:35',
 			'formacion.*.tituloObtenido' => 'required | max:35',
-			'formacion.*.nivelFormacion' => 'required | regex:/^[A-Za-z0-9\s]*$/|max:35',
+			'formacion.*.nivelFormacion' => 'required | max:35',
 		]);
 	} // fin de validación de cada paso del formulario
 	public function ValidarPaso5()
@@ -288,18 +288,37 @@ class Cvs extends Component
 		$guardarId = $cv->cvId;
 
 		foreach ($this->certificaciones as $cert) {
-			$cert['cv_id'] = $guardarId;
-			Certificacion::create($cert);
+			if (
+				$cert['nombreCertificacion'] !== '' && $cert['anioCertificacion'] !== ''
+				&& $cert['institucionCertificadora'] !== ''
+			) {
+				$cert['cv_id'] = $guardarId;
+				Certificacion::create($cert);
+			}
 		}
 
 		foreach ($this->experiencia as $exp) {
-			$exp['cv_id'] = $guardarId;
-			Experiencia::create($exp);
+			if (
+				$exp['inicioExperiencia'] !== '' && $exp['finExperiencia'] !== ''
+				&& $exp['puestoTrabajo'] !== ''
+				&& $exp['lugarTrabajo'] !== ''
+				&& $exp['descripcionLaboral'] !== ''
+			) {
+				$exp['cv_id'] = $guardarId;
+				Experiencia::create($exp);
+			}
 		}
 
 		foreach ($this->formacion as $form) {
-			$form['cv_id'] = $guardarId;
-			Formacion::create($form);
+			if (
+				$form['anioInicioFormacion'] !== '' && $form['anioFinFormacion'] !== ''
+				&& $form['nivelFormacion'] !== ''
+				&& $form['institucionFormacion'] !== ''
+				&& $form['tituloObtenido'] !== ''
+			) {
+				$form['cv_id'] = $guardarId;
+				Formacion::create($form);
+			}
 		}
 
 		foreach ($this->idiomas as $idioma) {
@@ -425,8 +444,13 @@ class Cvs extends Component
 						'nombreCertificacion' => $cert['nombreCertificacion'],
 					]);
 				} else {
-					$cert['cv_id'] = $this->selected_id;
-					Certificacion::create($cert);
+					if (
+						$cert['nombreCertificacion'] !== '' && $cert['anioCertificacion'] !== ''
+						&& $cert['institucionCertificadora'] !== ''
+					) {
+						$cert['cv_id'] = $this->selected_id;
+						Certificacion::create($cert);
+					}
 				}
 			}
 
@@ -443,8 +467,15 @@ class Cvs extends Component
 						'descripcionLaboral' => $exp['descripcionLaboral'],
 					]);
 				} else {
-					$exp['cv_id'] = $this->selected_id;
-					Experiencia::create($exp);
+					if (
+						$exp['inicioExperiencia'] !== '' && $exp['finExperiencia'] !== ''
+						&& $exp['puestoTrabajo'] !== ''
+						&& $exp['lugarTrabajo'] !== ''
+						&& $exp['descripcionLaboral'] !== ''
+					) {
+						$exp['cv_id'] = $this->selected_id;
+						Experiencia::create($exp);
+					}
 				}
 			}
 
@@ -461,8 +492,15 @@ class Cvs extends Component
 						'tituloObtenido' => $form['tituloObtenido'],
 					]);
 				} else {
-					$form['cv_id'] = $this->selected_id;
-					Formacion::create($form);
+					if (
+						$form['anioInicioFormacion'] !== '' && $form['anioFinFormacion'] !== ''
+						&& $form['nivelFormacion'] !== ''
+						&& $form['institucionFormacion'] !== ''
+						&& $form['tituloObtenido'] !== ''
+					) {
+						$form['cv_id'] = $this->selected_id;
+						Formacion::create($form);
+					}
 				}
 			}
 
