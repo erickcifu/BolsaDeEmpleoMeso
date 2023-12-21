@@ -120,7 +120,7 @@ class Registro extends Component
         'correo' => 'required|email',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'nullable  | mimes:pdf',
+        'curriculum' => 'mimes:pdf',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',

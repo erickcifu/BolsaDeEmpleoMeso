@@ -61,7 +61,7 @@
                </div>
                <div style="display: inline-block; width: 100%;">
                <div class="mb-2">
-                   <label for="DPI"><b style="color: black">Dpi*</b></label>
+                   <label for="DPI"><b style="color: black">DPI / CUI*</b></label>
                    <input
                    wire:model="DPI"
                    type="number"
