@@ -124,7 +124,7 @@ class Estudiantes extends Component
         'correo' => 'required|email|ends_with:@gmail.com',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'nullable  | mimes:pdf',
+        'curriculum' => 'mimes:pdf',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',

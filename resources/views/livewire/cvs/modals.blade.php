@@ -195,7 +195,7 @@
                                 <div class="row mb-3">
                                     <div class="col-4">
                                         <label for="puestoTrabajo">Nombre del puesto*</label>
-                                        <input type="text" wire:model="experiencia.{{ $indice }}.puestoTrabajo" class="form-control" placeholder="Si has obtenido alguna certificación o diploma, ingresalo en este campo">
+                                        <input type="text" wire:model="experiencia.{{ $indice }}.puestoTrabajo" class="form-control" placeholder="Si has obtenido alguna experiencia laboral, ingresalo en este campo">
                                         @error('experiencia.' . $indice . '.puestoTrabajo') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4">
@@ -212,12 +212,12 @@
                                     </div>
                                     <div class="col-4">
                                         <label for="lugarTrabajo">Empresa*</label>
-                                        <input type="text" wire:model="experiencia.{{ $indice }}.lugarTrabajo" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        <input type="text" wire:model="experiencia.{{ $indice }}.lugarTrabajo" class="form-control" placeholder="Nombre Institución ">
                                         @error('experiencia.' . $indice . '.lugarTrabajo') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4">
                                         <label for="descripcionLaboral">Resumen del puesto laboral*</label>
-                                        <input type="text" wire:model="experiencia.{{ $indice }}.descripcionLaboral" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        <input type="text" wire:model="experiencia.{{ $indice }}.descripcionLaboral" class="form-control" placeholder="Ingrese lo que en su antiguo puesto de trabajo realizaba">
                                         @error('experiencia.' . $indice . '.descripcionLaboral') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4 d-flex align-items-center">
@@ -275,7 +275,7 @@
                                     </div>
                                     <div class="col-4">
                                         <label for="institucionFormacion">Establecimiento educativo*</label>
-                                        <input type="text" wire:model="formacion.{{ $indice }}.institucionFormacion" class="form-control" placeholder="Nombre Institución Certificadora">
+                                        <input type="text" wire:model="formacion.{{ $indice }}.institucionFormacion" class="form-control" placeholder="Nombre Institución educativa">
                                         @error('formacion.' . $indice . '.institucionFormacion')
                                         <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>

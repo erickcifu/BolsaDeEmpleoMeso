@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Jenssegers\Date\Date;
+// use Jenssegers\Date\Date;
 
 class Cartarecomendacion extends Model
 {
@@ -32,8 +32,8 @@ class Cartarecomendacion extends Model
         return $this->hasOne('App\Models\Estudiante', 'estudianteId', 'estudiante_id');
     }
 
-    public function gerCreatedAtAttributes($date){
+    // public function gerCreatedAtAttributes($date){
 
-        return new Date($date);
-    }
+    //     return new Date($date);
+    // }
 }
