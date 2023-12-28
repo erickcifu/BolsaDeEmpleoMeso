@@ -30,7 +30,7 @@
 	<br>
 	<br>
 
-	<h5> A QUIEN INTERECE </h5>
+	<h5> A QUIEN INTERESE </h5>
 	<br>
 	<br>
 	<br>
@@ -73,12 +73,6 @@ Y para los usos que al  interesado convenga, extiendola presente en la fecha {{ 
 	<h2 class="text-center">no existe carta</h2>
 		
 	@endif
-
-	
-                          
-
-  
-		
 	@endforeach
 
 </body>
