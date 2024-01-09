@@ -128,7 +128,7 @@ class EmpresasIni extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Empresa Successfully created.');
+		session()->flash('message', 'Empresa creado exitosamente.');
     }
 
     public function edit($empresaId)
@@ -194,7 +194,7 @@ class EmpresasIni extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Empresa Successfully updated.');
+			session()->flash('message', 'actualizado correctamente.');
         }
     }
 

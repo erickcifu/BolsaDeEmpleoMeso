@@ -55,7 +55,7 @@ class Facultads extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Facultad Successfully created.');
+		session()->flash('message', 'Facultad creado exitosamente.');
     }
 
     public function edit($id)
@@ -79,7 +79,7 @@ class Facultads extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Facultad Successfully updated.');
+			session()->flash('message', 'Facultad actualizado correctamente.');
         }
     }
     // Para poder cambiar de estado o ver lo del eliminar con un modal

@@ -522,7 +522,7 @@ class Cvs extends Component
 
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Cv Actualizado.');
+			session()->flash('message', 'Cv actualizado correctamente.');
 		}
 	}
 
@@ -539,7 +539,7 @@ class Cvs extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'CV eliminado');
+		session()->flash('message', 'CV Eliminado.');
     }
 
 

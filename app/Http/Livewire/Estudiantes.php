@@ -183,7 +183,7 @@ class Estudiantes extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-            session()->flash('message', 'Estudiante Successfully updated.');
+            session()->flash('message', 'Estudiante actualizado correctamente.');
         };
     }
     public function updatedFacultadId()

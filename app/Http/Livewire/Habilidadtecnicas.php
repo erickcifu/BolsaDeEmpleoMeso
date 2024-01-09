@@ -55,7 +55,7 @@ class Habilidadtecnicas extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Habilidadtecnica Creado.');
+		session()->flash('message', 'Habilidad tecnica creado exitosamente.');
     }
 
     public function edit($tecnicaId)
@@ -82,7 +82,7 @@ class Habilidadtecnicas extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Habilidad tecnica Actualizado.');
+			session()->flash('message', 'Habilidad tecnica actualizado correctamente.');
         }
     }
 
@@ -99,7 +99,7 @@ class Habilidadtecnicas extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Departamento eliminado');
+		session()->flash('message', 'Departamento eliminado.');
     }
 
 }
