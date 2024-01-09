@@ -26,9 +26,9 @@
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
-								<td>#</td> 
-								<th>Idioma</th>
-								<td>ACTIONS</td>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Idioma</th>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
 							</tr>
 						</thead>
 						<tbody>
