@@ -64,7 +64,7 @@ class Municipios extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Municipio .');
+		session()->flash('message', 'Municipio creado exitosamente.');
     }
 
     public function edit($municipioId)
@@ -93,7 +93,7 @@ class Municipios extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Municipio Actalizado.');
+			session()->flash('message', 'Municipio actualizado correctamente.');
         }
     }
 
@@ -110,6 +110,6 @@ class Municipios extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Municipio Eliminado');
+		session()->flash('message', 'Municipio Eliminado.');
 	}
 }

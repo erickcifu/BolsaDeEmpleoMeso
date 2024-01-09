@@ -138,7 +138,7 @@ class Empresasrrhh extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Empresa Successfully created.');
+		session()->flash('message', 'Empresa creado exitosamente.');
     }
 
     public function edit($empresaId)

@@ -73,7 +73,7 @@ class Postulacions extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Postulacion Successfully created.');
+		session()->flash('message', 'Postulacion creado exitosamente.');
     }
 
     public function edit($id)
@@ -99,7 +99,7 @@ class Postulacions extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Postulación actualizada!.');
+			session()->flash('message', 'Postulación actualizado correctamente.');
         }
     }
 

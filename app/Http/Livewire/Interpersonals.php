@@ -49,7 +49,7 @@ class Interpersonals extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Interpersonal Creado.');
+		session()->flash('message', 'Habilidad interpersonal creado exitosamente.');
     }
 
     public function edit($interpersonalId)
@@ -74,7 +74,7 @@ class Interpersonals extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Interpersonal Actualizado.');
+			session()->flash('message', 'Habilidad interpersonal actualizado correctamente.');
         }
     }
 
@@ -91,6 +91,6 @@ class Interpersonals extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'interpersonal eliminado');
+		session()->flash('message', 'interpersonal eliminado.');
     }
 }

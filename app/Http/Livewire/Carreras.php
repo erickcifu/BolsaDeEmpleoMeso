@@ -64,7 +64,7 @@ class Carreras extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Carrera Successfully created.');
+		session()->flash('message', 'Carrera creado exitosamente.');
     }
 
     public function edit($id)
@@ -90,7 +90,7 @@ class Carreras extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Carrera Successfully updated.');
+			session()->flash('message', 'Carrera actualizado correctamente.');
         }
     }
     public function edit2($id)

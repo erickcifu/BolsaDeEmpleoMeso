@@ -51,7 +51,7 @@ class Competencias extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Competencia Creado.');
+		session()->flash('message', 'Competencia creado exitosamente.');
     }
 
     public function edit($competenciaId)
@@ -75,7 +75,7 @@ class Competencias extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Competencia actualizado.');
+			session()->flash('message', 'Competencia actualizado correctamente.');
         }
     }
     public function eliminar($competenciaId)
@@ -91,6 +91,6 @@ class Competencias extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'competencia eliminado');
+		session()->flash('message', 'competencia Eliminado.');
     }
 }
