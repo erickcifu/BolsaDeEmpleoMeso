@@ -57,7 +57,7 @@ class Departamentos extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Departamento Creado');
+		session()->flash('message', 'Departamento creado exitosamente.');
     }
 
     public function edit($departamentoId)
@@ -84,7 +84,7 @@ class Departamentos extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Departamento Actualizado');
+			session()->flash('message', 'Departamento actualizado correctamente.');
         }
     }
 
@@ -101,7 +101,7 @@ class Departamentos extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Departamento eliminado');
+		session()->flash('message', 'Departamento Eliminado.');
     }
 
     

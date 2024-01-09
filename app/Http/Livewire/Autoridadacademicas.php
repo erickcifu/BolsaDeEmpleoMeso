@@ -89,7 +89,7 @@ class Autoridadacademicas extends Component
         $this->sendResetLinkEmail($request->merge(['email'=> $this->email]));
         $this->resetInput();
         $this->dispatchBrowserEvent('closeModal');
-        session()->flash('message', 'Usuario creado exitosamente');
+        session()->flash('message', 'Usuario creado exitosamente.');
         session()->flash('message', 'Se ha enviado un correo para restablecer la contraseña del nuevo usuario');
     }
 
@@ -181,7 +181,7 @@ class Autoridadacademicas extends Component
         }
 
         $this->dispatchBrowserEvent('closeModal');
-        session()->flash('message', 'Usuario Eliminado');
+        session()->flash('message', 'Usuario Eliminado.');
     }
     
     

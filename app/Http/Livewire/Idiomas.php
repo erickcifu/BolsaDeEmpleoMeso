@@ -49,7 +49,7 @@ class Idiomas extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Idioma Successfully created.');
+		session()->flash('message', 'Idioma creado exitosamente.');
     }
 
     public function edit($idiomaId)
@@ -76,7 +76,7 @@ class Idiomas extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Idioma Successfully updated.');
+			session()->flash('message', 'Idioma actualizado correctamente.');
         }
     }
 
@@ -94,7 +94,7 @@ class Idiomas extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Idioma eliminado');
+		session()->flash('message', 'Idioma eliminado.');
 
        
         
