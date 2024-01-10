@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Autoridadacademica;
+use App\Models\AutoridadAcademica;
 use App\Models\facultad;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +24,7 @@ class Autoridadacademicas extends Component
 		$keyWord = '%'.$this->keyWord .'%';
    
         return view('livewire.autoridadacademicas.view', [
-            'autoridadacademicas' => Autoridadacademica::latest()
+            'autoridadacademicas' => AutoridadAcademica::latest()
 						->orWhere('autoridadId', 'LIKE', $keyWord)
 						->orWhere('nombreAutoridad', 'LIKE', $keyWord)
 						->orWhere('apellidosAutoridad', 'LIKE', $keyWord)
@@ -77,7 +77,7 @@ class Autoridadacademicas extends Component
             'rol_id' => 4,
         ]);
 
-        Autoridadacademica::create([
+        AutoridadAcademica::create([
             'nombreAutoridad' => $this->nombreAutoridad,
             'apellidosAutoridad' => $this->apellidosAutoridad,
             'estadoAutoridad' => "1",
@@ -95,7 +95,7 @@ class Autoridadacademicas extends Component
 
     public function edit($autoridadId)
     {
-        $record = Autoridadacademica::findOrFail($autoridadId);
+        $record = AutoridadAcademica::findOrFail($autoridadId);
         $this->selected_id = $autoridadId;
         $this->nombreAutoridad = $record->nombreAutoridad;
         $this->apellidosAutoridad = $record->apellidosAutoridad;
@@ -113,7 +113,7 @@ class Autoridadacademicas extends Component
         ]);
 
         if ($this->selected_id) {
-            $record = Autoridadacademica::find($this->selected_id);
+            $record = AutoridadAcademica::find($this->selected_id);
             $record->update([
                 'nombreAutoridad' => $this->nombreAutoridad,
                 'apellidosAutoridad' => $this->apellidosAutoridad,
@@ -135,14 +135,14 @@ class Autoridadacademicas extends Component
    // Para poder cambiar de estado o ver lo del eliminar con un modal
    public function edit2($autoridadId)
    {
-        $record2 = Autoridadacademica::findOrFail($autoridadId);
+        $record2 = AutoridadAcademica::findOrFail($autoridadId);
         $this->selected_id = $autoridadId;
         $this->nombreAutoridad = $record2->nombreAutoridad;
         $this->estadoAutoridad = $record2->estadoAutoridad;
    }
    public function Desc(){
         if ($this->selected_id) {
-            $record2 = Autoridadacademica::find($this->selected_id);
+            $record2 = AutoridadAcademica::find($this->selected_id);
             $record2->update([
                 'nombreAutoridad' => $this->nombreAutoridad,
                 'estadoAutoridad' => '0',
@@ -155,7 +155,7 @@ class Autoridadacademicas extends Component
    }
    public function Act(){
         if ($this->selected_id) {
-            $record2 = Autoridadacademica::find($this->selected_id);
+            $record2 = AutoridadAcademica::find($this->selected_id);
             $record2->update([
                 'nombreAutoridad' => $this->nombreAutoridad,
                 'estadoAutoridad' => '1',
@@ -177,7 +177,7 @@ class Autoridadacademicas extends Component
     public function destroy()
     {
         if ($this->selected_id) {
-            Autoridadacademica::where('autoridadId', $this->selected_id)->delete();
+            AutoridadAcademica::where('autoridadId', $this->selected_id)->delete();
         }
 
         $this->dispatchBrowserEvent('closeModal');
