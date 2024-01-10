@@ -114,7 +114,7 @@ class PerfilEstudiante extends Component
         
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Estudiante Successfully created.');
+		session()->flash('message', 'Estudiante creado exitosamente.');
     }
 
     public function edit($estudianteId)
@@ -173,11 +173,11 @@ class PerfilEstudiante extends Component
 	
 				$this->resetInput();
 				$this->dispatchBrowserEvent('closeModal');
-				session()->flash('message', 'Perfil actualizado exitosamente.');
+				session()->flash('message', 'Perfil actualizado correctamente.');
 			};
 			$this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-            session()->flash('message', 'Perfil actualizado exitosamente.');
+            session()->flash('message', 'Perfil actualizado correctamente.');
 			// return redirect()->route('MiPerfil');
 			return redirect('MiPerfil');
 		}	 else {
@@ -203,7 +203,7 @@ class PerfilEstudiante extends Component
 			]);
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Curriculum actualizado Exitosamente!.');
+			session()->flash('message', 'Curriculum actualizado correctamente.');
 		}
 	}
 	//   *************************

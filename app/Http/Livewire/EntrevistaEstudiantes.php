@@ -144,7 +144,7 @@ class EntrevistaEstudiantes extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Entrevista Successfully updated.');
+			session()->flash('message', 'Entrevista actualizado correctamente.');
         }
     }
 
