@@ -51,11 +51,11 @@ class Registroempresas extends Component
     }
 
     protected $rules = [
-        'logo' => 'required|mimes:jpeg,png,jpg,gif',
+        'logo' => 'required|mimes:jpeg,png,jpg,gif|max:200',
         'nombreEmpresa' => 'required',
-        'nit' => 'required|size:9',
-        'rtu' => 'required|mimes:pdf',
-        'patenteComercio' => 'required|mimes:pdf',
+        'nit' => 'required',
+        'rtu' => 'required|mimes:pdf|max:100',
+        'patenteComercio' => 'required|mimes:pdf|max:250',
         'descripcionEmpresa' => 'required',
         'telefonoEmpresa' => 'required|size:8',
         'correoEmpresa' => 'required|email',
