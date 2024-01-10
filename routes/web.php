@@ -100,7 +100,7 @@ Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::clas
 	Route::view('habilidadtecnicas', 'livewire.habilidadtecnicas.index')->middleware('auth');
 	Route::view('habilidad-tecnicas', 'livewire.habilidadtecnicas.indexRRHH')->middleware('auth');
 	Route::view('Interpersonals', 'livewire.Interpersonals.index')->middleware('auth');
-	Route::view('Interpersonal', 'livewire.Interpersonals.indexRRhh')->middleware('auth');
+	Route::view('Interpersonals', 'livewire.Interpersonals.indexRRhh')->middleware('auth');
 	Route::view('competencias', 'livewire.competencias.index')->middleware('auth');
 	Route::view('competenciasC', 'livewire.competencias.indexRrhh')->middleware('auth');
 
