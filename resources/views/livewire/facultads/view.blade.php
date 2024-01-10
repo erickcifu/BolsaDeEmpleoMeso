@@ -21,9 +21,9 @@
 				</div>
 				
 				<div class="card-body">
-						@include('livewire.facultads.modals')
+						@include('livewire.carreras.modals')
 				<div class="table-responsive">
-					<table>
+					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
@@ -33,7 +33,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@forelse($facultads as $facultades)
+							@forelse($carreras as $carrera)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ $facultades->Nfacultad }}</td>
@@ -43,8 +43,7 @@
 									<?php else: ?>
 										<span class="badge" style="background-color: #d3d3d3;"><b style="color: black;">Inactivo</b></span>
 										<a data-bs-toggle="modal" data-bs-target="#ActivarDataModal" class="dropdown-item" wire:click="edit2({{$facultades->id}})"><i class="fa fa-edit"></i> Activar </a>
-									<?php endif; ?>
-										
+									<?php endif; ?>		
 								</td>
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$facultades->id}})"><i class="fa fa-edit"></i> Editar </a>
@@ -59,7 +58,7 @@
 							@endforelse
 						</tbody>
 					</table>						
-					<div class="float-end">{{ $facultads->links() }}</div>
+					<div class="float-end">{{ $carreras->links() }}</div>
 					</div>
 				</div>
 			</div>
