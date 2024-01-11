@@ -14,7 +14,7 @@ use App\Models\habilidadTecnica;
 use App\Models\ofertaTecnica;
 use App\Models\Interpersonal;
 use App\Models\ofertaInterpersonal;
-use App\Models\competencia;
+use App\Models\Competencia;
 use App\Models\ofertaCompetencia;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
@@ -64,7 +64,7 @@ class Ofertas extends Component
 		$facultades = Facultad::all();
 		// $this->habilidadesTecnicas = habilidadTecnica::all();
 		$this->habilidadesInterpersonales = Interpersonal::all();
-		$this->competenciasTable = competencia::all();
+		$this->competenciasTable = Competencia::all();
 
 		if (Auth::check()) {
 
@@ -770,7 +770,7 @@ public function validarPaso5()
 		if (array_key_exists('ofertaCompentenciaId', $this->competencias[$indice])) {
 			$record = ofertaCompetencia::find($this->competencias[$indice]['ofertaCompentenciaId']);
 			$record->delete();
-			session()->flash('message', 'Se ha eliminado la competencia correctamente!');
+			session()->flash('message', 'Se ha eliminado la Competencia correctamente!');
 		}
 		unset($this->competencias[$indice]);
 		$this->competencias = array_values($this->competencias);
