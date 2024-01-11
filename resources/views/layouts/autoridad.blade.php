@@ -24,12 +24,12 @@
             <div class="container">
                 @guest
                     <a class="navbar-brand" href="{{ url('/') }}" style="color: #f0eadc;">
-                    <img src="{{ asset('storage/Meso/Logo-Meso.png') }}" width="50px" />
+                    <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @else
                 <a class="navbar-brand" href="{{ url('/homeAutoridad') }}" style="color: #f0eadc;">
-                <img src="{{ asset('storage/Meso/Logo-Meso.png') }}" width="50px" />
+                <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
                 @endguest
