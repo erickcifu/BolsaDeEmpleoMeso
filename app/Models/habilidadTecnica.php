@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Habilidadtecnica extends Model
+class habilidadTecnica extends Model
 {
 	use HasFactory;
     protected $primaryKey = 'tecnicaId';
