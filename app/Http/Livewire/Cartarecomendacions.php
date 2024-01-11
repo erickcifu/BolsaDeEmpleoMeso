@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Cartarecomendacion;
-use App\Models\Autoridadacademica;
+use App\Models\AutoridadAcademica;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Estudiante;
@@ -28,7 +28,7 @@ class Cartarecomendacions extends Component
 		$userID = Auth::id();
 		$facultades = Facultad::all();
 	
-		$autoridadesacademicas=Autoridadacademica::where('user_id',$userID)->get();
+		$autoridadesacademicas=AutoridadAcademica::where('user_id',$userID)->get();
 		$estudiantes=Estudiante::join('carreras','carreras.id','=','estudiantes.carrera_id')
 		                        -> join('facultads','facultads.id','=','carreras.facultad_id')
 								-> join('autoridadacademicas','facultads.id','=','autoridadacademicas.facultad_id')
@@ -41,7 +41,7 @@ class Cartarecomendacions extends Component
 						->orWhere('cargoYTareasRealizadas', 'LIKE', $keyWord)
 						->orWhere('telefonoAutoridad', 'LIKE', $keyWord)
 						->orWhere('firmaAutoridad', 'LIKE', $keyWord)
-						->orWhereHas('Autoridadacademica', function ($query) use ($keyWord) {
+						->orWhereHas('AutoridadAcademica', function ($query) use ($keyWord) {
                             $query->where('nombreAutoridad', 'LIKE', $keyWord);
                         })
 						->orWhereHas('Estudiante', function ($query) use ($keyWord) {
