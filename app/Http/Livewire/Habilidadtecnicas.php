@@ -95,7 +95,7 @@ class Habilidadtecnicas extends Component
     public function destroy()
     {
         if ($this->selected_id) {
-			Habilidadtecnica::where('tecnicaId', $this->selected_id)->delete();
+			habilidadTecnica::where('tecnicaId', $this->selected_id)->delete();
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
