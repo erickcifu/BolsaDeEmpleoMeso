@@ -36,7 +36,7 @@ class Facultads extends Component
     }
     protected $rules = [ //esta funcion nos realizara las validaciones
 		'Nfacultad' => 'required|regex:/^[\pL\s]+$/u|max:40',//validar campos.
-		'EstadoFacultad' => 'required',
+		'EstadoFacultad' => 'boolean',
     ];
     //validaciones en tiempo real para que se marquen cuando en los input.
     public function updated($propertyFacultad){
@@ -50,7 +50,7 @@ class Facultads extends Component
 
         Facultad::create([ 
 			'Nfacultad' => $this-> Nfacultad,
-			'EstadoFacultad' => $this-> EstadoFacultad
+			'EstadoFacultad' => "1"
         ]);
         
         $this->resetInput();
@@ -74,12 +74,12 @@ class Facultads extends Component
 			$record = Facultad::find($this->selected_id);
             $record->update([ 
 			'Nfacultad' => $this-> Nfacultad,
-			'EstadoFacultad' => $this-> EstadoFacultad
+			'EstadoFacultad' => "1"
             ]);
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Facultad actualizado correctamente.');
+			session()->flash('message', 'Facultad actualizada correctamente.');
         }
     }
     // Para poder cambiar de estado o ver lo del eliminar con un modal

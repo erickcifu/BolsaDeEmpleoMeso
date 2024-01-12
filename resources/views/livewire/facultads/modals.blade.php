@@ -3,18 +3,18 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="createDataModalLabel">Crear</h5>
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
            <div class="modal-body">
 				<form>
                     <div class="form-group">
                         <label for="Nfacultad"><b style="color: black;">Facultad<b></label>
-                        <input wire:model="Nfacultad" type="text" class="form-control" id="Nfacultad" placeholder="Nfacultad">@error('Nfacultad') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="Nfacultad" type="text" class="form-control" id="Nfacultad" placeholder="Nombre de la facultad">@error('Nfacultad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         @if (!$EstadoFacultad)
-                            <input wire:model="EstadoFacultad" type="checkbox" checked id="EstadoFacultad" placeholder="EstadoFacultad" disabled>
+                            <input wire:model="EstadoFacultad" type="checkbox" checked id="EstadoFacultad" placeholder="EstadoFacultad" hidden>
                             @error('EstadoFacultad')
                             <span class="error text-danger">{{ $message }}</span>
                             @enderror
@@ -35,7 +35,7 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="updateModalLabel"style="color: #f0eadc;">Actulizar Facultad</h5>
+                <h5 class="modal-title" id="updateModalLabel"style="color: #f0eadc;">Actualizar Facultad</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -46,7 +46,7 @@
                         <input wire:model="Nfacultad" type="text" class="form-control" id="Nfacultad" placeholder="Nfacultad">@error('Nfacultad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <input wire:model="EstadoFacultad" type="checkbox" checked  id="EstadoFacultad" placeholder="Estadofacultad" disabled>
+                        <input wire:model="EstadoFacultad" type="checkbox" checked  id="EstadoFacultad" placeholder="Estadofacultad" hidden>
                         @error('EstadoFacultad')
                         <span class="error text-danger">{{ $message }}</span> 
                         @enderror
@@ -66,19 +66,19 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="EliminarModalLabel"style="color: #f0eadc;"> Eliminar</h5>
+                <h5 class="modal-title" id="EliminarModalLabel"style="color: #f0eadc;">Desactivar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea desactivar este dato?</h5>
                     
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #005c35;" data-bs-dismiss="modal"><b style ="color: #d3d3d3;">Cancelar</b></button>
-                <button type="button" wire:click.prevent="Desc()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo eliminarlo<b></button>
+                <button type="button" wire:click.prevent="Desc()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo desactivarlo<b></button>
             </div>
        </div>
     </div>
@@ -94,13 +94,13 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea Activar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea activar este dato?</h5>
                     
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="Act()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Sí, deseo Activar</button>
+                <button type="button" wire:click.prevent="Act()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Sí, deseo activarlo</button>
             </div>
        </div>
     </div>
