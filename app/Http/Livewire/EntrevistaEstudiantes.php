@@ -26,23 +26,22 @@ class EntrevistaEstudiantes extends Component
 
 			$keyWord = '%'.$this->keyWord .'%';
 			//Obtener entrevistas del estudiante
-			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) use ($keyWord) {
-				return $postulacion->entrevistas->where(function ($query) use ($keyWord) {
-					$query->orWhere('tituloEntrevista', 'LIKE', $keyWord)
-						->orWhere('descripcionEntrevista', 'LIKE', $keyWord)
-						->orWhere('FechaEntrevista', 'LIKE', $keyWord)
-						->orWhere('horaInicio', 'LIKE', $keyWord)
-						->orWhere('horaFinal', 'LIKE', $keyWord)
-						->orWhere('Contratado', 'LIKE', $keyWord);
-				})->get();
+			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) {
+                return $postulacion->entrevistas;
             });
-			
         
 		}
 		
         return view('livewire.entrevistaestudiantes.viewentrevista', [
             'entrevistas' => Entrevista::latest()
-						
+						->orWhere('tituloEntrevista', 'LIKE', $keyWord)
+						->orWhere('descripcionEntrevista', 'LIKE', $keyWord)
+						->orWhere('FechaEntrevista', 'LIKE', $keyWord)
+						->orWhere('horaInicio', 'LIKE', $keyWord)
+						->orWhere('horaFinal', 'LIKE', $keyWord)
+						->orWhere('Contratado', 'LIKE', $keyWord)
+						->orWhere('comentarioContratado', 'LIKE', $keyWord)
+						->orWhere('postulacion_id', 'LIKE', $keyWord)
 						->paginate(10), 'entrevistasEstudiante' => $this->entrevistasEstudiante,
         ]);
     }
