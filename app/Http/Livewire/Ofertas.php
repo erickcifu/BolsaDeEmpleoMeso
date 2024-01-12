@@ -18,9 +18,9 @@ use App\Models\Competencia;
 use App\Models\ofertaCompetencia;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
-use DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class Ofertas extends Component
 {
@@ -46,10 +46,13 @@ class Ofertas extends Component
 	public $entrevistapost, $post, $ofertaEnt, $postuEnt;
 	public $habilidadesTecnicas = [];
 	public $tecnicas = [];
+	public $tecnicasShow = [];
 	public $habilidadesInterpersonales = [];
 	public $interpersonales = [];
+	public $interpersonalesShow = [];
 	public $competenciasTable = [];
 	public $competencias = [];
+	public $competenciasShow = [];
 	public $verTecnicas =[] , $verInterpersonales, $verCompetencias;
 
 	public function mount()
@@ -142,6 +145,9 @@ class Ofertas extends Component
 		$this->tecnicas = [];
 		$this->interpersonales = [];
 		$this->competencias = [];
+		$this->tecnicasShow = [];
+		$this->interpersonalesShow = [];
+		$this->competenciasShow = [];
 		$this->paso = 1;
     }
 
@@ -154,20 +160,12 @@ class Ofertas extends Component
 		'resumenPuesto' => 'required | max:300',
 		'nombrePuesto' => 'required | max:200',
 		'responsabilidadesPuesto' => 'required | max:300',
-		'requisitosEducativos' => 'required | max:200',
-		'experienciaLaboral' => 'required|max:300',
-		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
-		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
-		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
-		'condicionesLaborales' => 'required|max:300',
-		'beneficios' => 'required|max:300',
-		'oportunidadesDesarrollo' => 'required|max:300',
 		'fechaMax' => 'required | date | after:today',
+		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
+		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
+		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
 		'cantVacantes' => 'required | numeric | gt:0',
 		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
-		'edadRequerida' => 'required|integer|gt:17',
-		'generoRequerido' => 'required | regex:/^[\pL\s]+$/u|max:50',
-		'facultad_id' => 'required | integer',
 	];
 
 	protected $rulesCreate = ['imagenPuesto' => ' image | mimes:png,jpg,jpeg'];
@@ -228,21 +226,11 @@ class Ofertas extends Component
  //Validación de cada paso del formulario
 public function validarPaso1()
 {
-	$rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
 	//Reglas de validación para la información general del empleo
-	     $this->validate([
-        'resumenPuesto' => 'required | max:300',
- 		'nombrePuesto' => 'required | max:200',
- 		'responsabilidadesPuesto' => 'required|max:300',
- 		'fechaMax' => 'required | date | after:today',
-		'sueldoMinimo' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
-		'sueldoMax' => 'required | regex:/^\d+(\.\d+)?$/ | min:0',
-		'jornadaLaboral' => 'required|regex:/^[\pL\s]+$/u|max:20',
-		'cantVacantes' => 'required | numeric | gt:0',
-		'modalidadTrabajo' => 'required	| regex:/^[\pL\s]+$/u|max:15',
-    ]);
+	$rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
+	$this->validate($rules);
 	$this->mostrarErrores = true;
- }
+}
 
  public function validarPaso2()
  {
@@ -373,7 +361,7 @@ public function validarPaso5()
 
 			$guardarId = $oferta->ofertaId;
 
-			foreach ($this->tecnicas as $tec) {
+			foreach($this->tecnicas as $tec) {
 				$tec['oferta_id'] = $guardarId;
 				$tec['tecnica_id'] = $tec['tecnicaId'];
 				ofertaTecnica::create($tec);
@@ -405,6 +393,7 @@ public function validarPaso5()
 
 	public function mostrarOferta($ofertaId)
     {
+		$this->resetInput();
         $record = Oferta::findOrFail($ofertaId);
         $this->selected_id = $ofertaId; 
 		$this->resumenPuesto = $record-> resumenPuesto;
@@ -428,10 +417,37 @@ public function validarPaso5()
 		$this->nombre_empresa = $record-> empresa->nombreEmpresa;
 		$this->facultad_id = $record-> facultad_id;
 
-		$verTecnicas = ofertaTecnica::where('oferta_id', $ofertaId)->get();
-		// $verInterpersonales = ofertaInterpersonal::where('oferta_id', $ofertaId)->get();
-		// $verCompetencias = ofertaCompetencia::where('oferta_id', $ofertaId)->get();
-		
+		//Consultas para listar las habilidades
+		$queryComp = "SELECT
+						c.competenciaId,
+						c.nombreCompetencia
+					FROM
+						ofertacompetencias oc
+						LEFT JOIN competencias c ON oc.competencia_id = c.competenciaId
+					WHERE
+						oferta_id = ".$ofertaId;
+
+		$queryTec = "SELECT
+						ht.tecnicaId,
+						ht.nombreTecnica
+					FROM
+						ofertatecnicas ot
+						LEFT JOIN habilidadtecnicas ht ON ot.tecnica_id = ht.tecnicaId
+					WHERE
+						oferta_id = ".$ofertaId;
+
+		$queryInt = "SELECT
+						i.interpersonalId,
+						i.nombreInterpersonal
+					FROM
+						ofertainterpersonals oi
+						LEFT JOIN interpersonals i ON oi.interpersonal_id = i.interpersonalId
+					WHERE
+						oferta_id = ".$ofertaId;
+
+		$this->competenciasShow = DB::select($queryComp);
+		$this->tecnicasShow = DB::select($queryTec);
+		$this->interpersonalesShow = DB::select($queryInt);
 	}
 
     public function edit($ofertaId)
@@ -464,7 +480,7 @@ public function validarPaso5()
 		$interpersonales = ofertaInterpersonal::where('oferta_id', $ofertaId)->get();
 		$competencias = ofertaCompetencia::where('oferta_id', $ofertaId)->get();
 
-		foreach ($tecnicas as $tec) {
+		foreach($tecnicas as $tec) {
 			$this->tecnicas[] = [
 				'tecnicaId' => $tec->tecnica_id,
 				'ofertaTecnicaId' => $tec->ofertaTecnicaId,
@@ -511,13 +527,13 @@ public function validarPaso5()
 				'edadRequerida' => $this-> edadRequerida,
 				'generoRequerido' => $this-> generoRequerido,
 				'comentarioCierre' => '',
-				'empresa_id' => "1",
+				'empresa_id' => $this->empresa_id,
 				'facultad_id' => $this-> facultad_id,
             ]);
 
-			foreach ($this->tecnicas as $tec) {
+			foreach($this->tecnicas as $tec) {
 
-				if (array_key_exists('ofertaTecnicaId', $tec)) {
+				if(array_key_exists('ofertaTecnicaId', $tec)) {
 					$record = ofertaTecnica::find($tec['ofertaTecnicaId']);
 					$record->update([
 						'oferta_id' => $this->selected_id,
@@ -723,19 +739,19 @@ public function validarPaso5()
         $this->ofertaId = $ofertaId;
     }
 
-	public function addTecnicas()
-	{
+	public function addTecnicas() {
 		$this->tecnicas[] = [
 			'tecnicaId' => $this->habilidadesTecnicas[0]->tecnicaId,
 		];
 	}
 
-	public function removeTecnicas($indice)
-	{
-		if (array_key_exists('ofertaTecnicaId', $this->tecnicas[$indice])) {
-			$record = ofertaTecnica::find($this->tecnicas[$indice]['ofertaTecnicaId']);
-			$record->delete();
-			session()->flash('message', 'Se ha eliminado la habilidad técnica correctamente!');
+	public function removeTecnicas($indice) {
+		if(array_key_exists('ofertaTecnicaId', $this->tecnicas[$indice])) {
+			$record = ofertaTecnica::findOrFail($this->tecnicas[$indice]['ofertaTecnicaId']);
+			if($record) {
+				$record->delete();
+				session()->flash('message', 'Se ha eliminado la habilidad técnica correctamente!');
+			}
 		}
 
 		unset($this->tecnicas[$indice]);
