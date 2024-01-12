@@ -43,15 +43,9 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
-                        @if ($cartarecomendacions->isNotEmpty())
                         <li class="nav-item">
                             <a href="{{ url('/carta-pdf') }}" class="nav-link" style="color: #f0eadc;">Carta de recomendación</a> 
                         </li>
-                        @else
-                        <li class="nav-item">
-                            <a href="{{ url('/carta-pdf') }}" class="nav-link" style="color: #f0eadc;" disabled>Carta de recomendación</a> 
-                        </li>
-                        @endif
                         <li class="nav-item">
                             <a href="{{ url('/cvs') }}" class="nav-link" style="color: #f0eadc;"> Generar CV</a> 
                         </li>
