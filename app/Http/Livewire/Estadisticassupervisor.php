@@ -50,7 +50,7 @@ class Estadisticassupervisor extends Component
                                FROM
                                    users
                                WHERE
-                                 
+                                   
                                    estado = 1
                                    AND rol_id = 4
                            ) u
@@ -78,7 +78,7 @@ class Estadisticassupervisor extends Component
                         FROM
                             users
                         WHERE
-                            
+                         
                             estado = 1
                             AND rol_id = 4
                     ) u
