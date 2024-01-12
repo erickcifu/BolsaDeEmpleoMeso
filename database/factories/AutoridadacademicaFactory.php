@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Autoridadacademica;
+use App\Models\AutoridadAcademica;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 class AutoridadacademicaFactory extends Factory
 {
-    protected $model = Autoridadacademica::class;
+    protected $model = AutoridadAcademica::class;
 
     public function definition()
     {
