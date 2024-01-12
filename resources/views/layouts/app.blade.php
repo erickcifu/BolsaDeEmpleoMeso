@@ -27,7 +27,15 @@
                     <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
                     </a>
+                    @if(Request::is('tutoriales'))
+                    <div><a href="{{ url('/') }}" class="nav-link" style="color: #f0eadc;"><i class="fa-solid fa-house"></i> Página principal</a></div>  
+                    @else
+                    <div><a href="{{ url('tutoriales') }}" class="nav-link" style="color: #f0eadc;"><i class="fa-solid fa-circle-info"></i> Información</a></div>
+                    @endif
+
+                    
                 @else
+                
                 <a class="navbar-brand" href="{{ url('/home') }}" style="color: #f0eadc;">
                 <img src="{{ asset('storage/Meso/LogoBlanco.png') }}" width="50px" />
                     <b> {{ config('app.name', 'Bolsa de Empleo') }} <b>
