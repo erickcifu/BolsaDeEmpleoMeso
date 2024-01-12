@@ -28,7 +28,7 @@
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Idioma</th>
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -51,7 +51,7 @@
 							</tr>
 							@empty
 							<tr>
-								<td class="text-center" colspan="100%">No data Found </td>
+								<td class="text-center" colspan="100%">Sin datos</td>
 							</tr>
 							@endforelse
 						</tbody>

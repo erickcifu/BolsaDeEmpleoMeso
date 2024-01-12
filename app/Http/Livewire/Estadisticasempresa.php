@@ -103,7 +103,7 @@ class Estadisticasempresa extends Component
         $this->postulados = $postulados[0]->postulados;
         $this->contradados = $contratados[0]->contratados;
 
-        session()->flash('message', 'Se actualizó la información correctamente');
+        // session()->flash('message', 'Se actualizó la información correctamente');
     }
 
 }

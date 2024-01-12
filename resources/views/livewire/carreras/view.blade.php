@@ -6,7 +6,7 @@
 				<div class="card-header" style="background-color: #d3d3d3;">
 					<div style="display: flex; justify-content: space-between; align-items: left;">
 						<div class="float-left">
-							<h4>Carrera</h4>
+							<h4>Carreras</h4>
 						</div>
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
@@ -27,10 +27,10 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Ncarrera</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estadocarrera</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Facultad Id</th>
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carrera</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Facultad</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado</th>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,7 +49,7 @@
 								</td>
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$carrera->id}})"><i class="fa fa-edit"></i> Editar </a>
-									<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$carrera->id}})"><i class="fa fa-trash"></i> Eliminar </a>								
+									<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$carrera->id}})"><i class="fa fa-trash"></i> Desactivar </a>								
 								</td>
 							</tr>
 							@empty
