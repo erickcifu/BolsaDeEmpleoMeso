@@ -27,9 +27,9 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">facultad</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Facultad</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado de facultad</th>
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,7 +49,7 @@
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#updateDataModal" class="dropdown-item" wire:click="edit({{$facultades->id}})"><i class="fa fa-edit"></i> Editar </a>
 									{{-- boton que cambie para que no usemos el destroy --}}
-									<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$facultades->id}})"><i class="fa fa-trash"></i> Eliminar </a>							
+									<a data-bs-toggle="modal" data-bs-target="#EliminarDataModal" class="dropdown-item" wire:click="edit2({{$facultades->id}})"><i class="fa fa-trash"></i> Desactivar </a>							
 								</td>
 							</tr>
 							@empty

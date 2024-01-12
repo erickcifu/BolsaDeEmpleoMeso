@@ -204,7 +204,7 @@ class Ofertas extends Component
 		'oportunidadesDesarrollo.required' => 'Este campo no puede estar vacío.',
 
 		'fechaMax.required' => 'Este campo no puede estar vacío.',
-		'fechaMax' => 'Porfavor ingresa una fecha posterior a la de hoy.',
+		'fechaMax' => 'Por favor ingresa una fecha posterior a la de hoy.',
 
 		'imagenPuesto' => 'Este campo unicamente acepta imágenes con formato: png, jpg, jpeg',
 
