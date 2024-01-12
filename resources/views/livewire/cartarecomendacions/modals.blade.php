@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="autoridadAcademica_id"><b style="color: black;">Autoridad<b></label>
-                        <select wire:model="autoridadAcademica_id" type="text" class="form-control" id="autoridadAcademica_id" placeholder="Autoridadacademica Id">@error('autoridadAcademica_id') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <select wire:model="autoridadAcademica_id" type="text" class="form-control" id="autoridadAcademica_id" placeholder="AutoridadAcademica Id">@error('autoridadAcademica_id') <span class="error text-danger">{{ $message }}</span> @enderror
                             <option value="">Autoridad</option>
                             @foreach ($autoridadesacademicas as $autoridad)
                                   <option value="{{$autoridad->autoridadId}}"> {{$autoridad->nombreAutoridad}}</option>      

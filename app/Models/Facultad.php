@@ -20,7 +20,7 @@ class Facultad extends Model
      */
     public function autoridadacademicas()
     {
-        return $this->hasMany('App\Models\Autoridadacademica', 'facultad_id', 'id');
+        return $this->hasMany('App\Models\AutoridadAcademica', 'facultad_id', 'id');
     }
     
     /**
