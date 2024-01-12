@@ -21,7 +21,7 @@ class Cartarecomendacion extends Model
      */
     public function autoridadacademica()
     {
-        return $this->hasOne('App\Models\Autoridadacademica', 'autoridadId', 'autoridadAcademica_id');
+        return $this->hasOne('App\Models\AutoridadAcademica', 'autoridadId', 'autoridadAcademica_id');
     }
     
     /**
