@@ -100,8 +100,8 @@ class Estadisticassupervisor extends Component
                                         FROM
                                             users
                                         WHERE
-                                            id = 4
-                                            AND estado = 1
+                                            
+                                            estado = 1
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -124,8 +124,8 @@ class Estadisticassupervisor extends Component
                                         FROM
                                             users
                                         WHERE
-                                            id = 4
-                                            AND estado = 1
+                                            
+                                            estado = 1
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -145,8 +145,8 @@ class Estadisticassupervisor extends Component
                                         FROM
                                             users
                                         WHERE
-                                            id = 4
-                                            AND estado = 1
+                                            
+                                            estado = 1
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -167,8 +167,8 @@ class Estadisticassupervisor extends Component
                                         FROM
                                             users
                                         WHERE
-                                            id = 4
-                                            AND estado = 1
+                                            
+                                            estado = 1
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -226,8 +226,8 @@ class Estadisticassupervisor extends Component
                                 FROM
                                     users
                                 WHERE
-                                    id = 4
-                                    AND estado = 1
+                                    
+                                    estado = 1
                                     AND rol_id = 4
                             ) u
                             LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -245,8 +245,8 @@ class Estadisticassupervisor extends Component
                         FROM
                             users
                         WHERE
-                            id = 4
-                            AND estado = 1
+                            
+                            estado = 1
                             AND rol_id = 4
                     ) u
                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -264,8 +264,8 @@ class Estadisticassupervisor extends Component
                     FROM
                         users
                     WHERE
-                        id = 4
-                        AND estado = 1
+                        
+                        estado = 1
                         AND rol_id = 4
                 ) u
                 LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -286,8 +286,8 @@ class Estadisticassupervisor extends Component
                     FROM
                         users
                     WHERE
-                        id = 4
-                        AND estado = 1
+                    
+                        estado = 1
                         AND rol_id = 4
                 ) u
                 LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -307,8 +307,8 @@ class Estadisticassupervisor extends Component
                     FROM
                         users
                     WHERE
-                        id = 4
-                        AND estado = 1
+                        
+                        estado = 1
                         AND rol_id = 4
                 ) u
                 LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -329,8 +329,8 @@ class Estadisticassupervisor extends Component
                FROM
                    users
                WHERE
-                   id = 4
-                   AND estado = 1
+                   
+                   estado = 1
                    AND rol_id = 4
            ) u
            LEFT JOIN autoridadacademicas au ON u.id = au.user_id

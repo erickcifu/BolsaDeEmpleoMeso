@@ -71,19 +71,22 @@ class Empresas extends Component
     }
 
 	protected $rules = [
-		'logo' => 'required|mimes:jpeg,png,jpg,gif',
-		'nombreEmpresa' => 'required',
-		'nit' => 'required | ^[a-zA-Z0-9]+$',
-		'rtu' => 'required|mimes:pdf',
-		'patenteComercio' => 'required|mimes:pdf',
-		'descripcionEmpresa' => 'required',
-		'telefonoEmpresa' => 'required|size:8',
-		'correoEmpresa' => 'required|email',
-		'direccionEmpresa' => 'required',
-		'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
-		'telefonoEncargado' => 'required|size:8',
-		
-		'residencia_id' => 'required',
+
+		'logo' => 'required|mimes:jpeg,png,jpg,gif|max:200',
+        'nombreEmpresa' => 'required',
+        'nit' => 'required',
+        'rtu' => 'required|mimes:pdf|max:100',
+        'patenteComercio' => 'required|mimes:pdf|max:250',
+        'descripcionEmpresa' => 'required',
+        'telefonoEmpresa' => 'required|size:8',
+        'correoEmpresa' => 'required|email',
+        'direccionEmpresa' => 'required',
+        'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
+        'telefonoEncargado' => 'required|size:8',
+        'residencia_id' => 'required',
+        'departamento' => 'required',
+
+
 
 	];
      //funcion para hacer la consulta de 
@@ -156,18 +159,22 @@ class Empresas extends Component
     public function update()
     {
         $this->validate([
+
+
+		
+			'nombreEmpresa' => 'required',
+			'nit' => 'required',
+		    'descripcionEmpresa' => 'required',
+			'telefonoEmpresa' => 'required|size:8',
+			'correoEmpresa' => 'required|email',
+			'direccionEmpresa' => 'required',
+			'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
+			'telefonoEncargado' => 'required|size:8',
+			'residencia_id' => 'required',
+			'departamento' => 'required',
+		
 			
-		'nombreEmpresa' => 'required',
-		'nit' => 'required',
 		
-		'descripcionEmpresa' => 'required',
-		'telefonoEmpresa' => 'required|size:8',
-		'correoEmpresa' => 'required|email',
-		'direccionEmpresa' => 'required',
-		'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
-		'telefonoEncargado' => 'required|size:8',
-		
-		'residencia_id' => 'required',
 			
         ]);
 		Mail::to($this->correoEmpresa)->send(new ActualizaEmpresa($this-> nombreEmpresa));
