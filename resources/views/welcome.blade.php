@@ -8,6 +8,7 @@
 @extends('layouts.app') @section('title', __('Welcome')) @section('content')
 
 <body background="{{ asset('storage/Meso/Meso.png') }}">
+
     @if (Session::has('message'))
     <div id="message" class="alert alert-danger">
         {{ Session::get('message') }}

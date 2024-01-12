@@ -27,9 +27,9 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombretecnica</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Facultad Id</th>
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Habilidad</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Facultad</th>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
