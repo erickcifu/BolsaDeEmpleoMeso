@@ -11,7 +11,7 @@
                    
                     <div class="form-group">
                         <label for="nombreIdioma"><b style="color: black;">Idioma<b></label>
-                        <input wire:model="nombreIdioma" type="text" class="form-control" id="" placeholder="Nombreidioma">@error('nombreIdioma') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="nombreIdioma" type="text" class="form-control" id="" placeholder="Nombre idioma">@error('nombreIdioma') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
 
                 </form>
@@ -29,7 +29,7 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
         <div class="modal-header" style="background-color: #005c35;">
-            <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar Idioma</h5>
+            <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -56,13 +56,13 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="DeletModalLabel">Eliminar</h5>
+                <h5 class="modal-title" id="DeletModalLabel" style="color: #f0eadc;">Eliminar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
 
                 </form>
             </div>
