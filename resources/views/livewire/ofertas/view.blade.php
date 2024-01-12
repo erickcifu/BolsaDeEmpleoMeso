@@ -64,7 +64,7 @@
 									<!-- <a data-bs-toggle="modal" data-bs-target="#EliminarOfertaModal" class="dropdown-item" wire:click="idEliminar({{$row->ofertaId}})"><i class="fa fa-trash"></i> Eliminar </a>	 -->
 									<a data-bs-toggle="modal" data-bs-target="#VerOfertaModal" class="dropdown-item" style="cursor: pointer;" wire:click="mostrarOferta({{$row->ofertaId}})"><i class="fa fa-eye"></i> Visualizar</a>
 									<a wire:click="verPostulaciones({{ $row->ofertaId }})" style="cursor: pointer;" class="nav-link"><i class="fa fa-pen"></i> Postulaciones </a>	
-									<a data-bs-toggle="modal" data-bs-target="#VerEntrevistasModal" style="cursor: pointer;" wire:click="verEntrevistas({{ $row->ofertaId }})" class="nav-link"><i class="fa-regular fa-address-book"></i> Entrevistas </a>			
+									<a wire:click="verEntrevistas({{ $row->ofertaId }})" style="cursor: pointer;" class="nav-link"><i class="fa-regular fa-address-book"></i> Entrevistas </a>			
 								</td>
 							</tr>
 							@empty
