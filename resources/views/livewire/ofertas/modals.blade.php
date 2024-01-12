@@ -252,7 +252,7 @@
                                         <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Habilidad</h8>
                                     </button>
                                 </div>
-                            <!-- Inputs Condiciones y beneficios -->
+                                <!-- Inputs Condiciones y beneficios -->
                                 @foreach($tecnicas as $indice => $tec)
                                 <div class="row mb-3">
                                     <div class="col-6">
@@ -474,36 +474,59 @@
                             </br>  
                             <!-- Habilidades -->
                             <div class="d-flex gap-3">
-                                <!-- Formación Académica -->
+                                <!-- Habilidades técnicas -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6" for="verTecnicas"><b style="color: black;">Habilidades técnicas </b></p>
-                                        
-                                        <ul>
-                                            
-                                        <!-- @forelse($verTecnicas as $row)
-                                            <li>{{$row->ofertaTecnicaId}}</li>
-                                        
+                                        <p class="fs-6"><b style="color: black;">Habilidades técnicas </b></p>
+                                         <!-- Inputs Habilidades Técnicas -->
+                                            @forelse($tecnicasShow as $tecnica)
+                                            <ul class="ul-check">
+                                                <li class="li-check" style="color: #373737;">
+                                                    {{ $tecnica->nombreTecnica }}
+                                                </li>
+                                            </ul>
+                                            @empty
+                                            <p>Sin Habilidades Técnicas requeridas</p>
+                                            @endforelse 
+                                        <!-- Fin inputs Habilidades Técnicas -->
+                                    </div>
+                                </div>
+
+                                <!-- Habilidades interpersonales -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6"><b style="color: black;">Habilidades Interpersonales</b></p>
+                                        <!-- Inputs Habilidades Interpersonales -->                          
+                                            @forelse($interpersonalesShow as $interpersonal)
+                                                <div>
+                                                    <ul class="ul-check">
+                                                        <li class="li-check" style="color: #373737;">
+                                                            {{ $interpersonal->nombreInterpersonal }}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @empty
+                                                <p>Sin Habilidades Interpersonales requeridas</p>
+                                            @endforelse                           
+                                        <!-- Fin inputs Habilidades Interpersonales -->
+                                    </div>
+                                </div>
+
+                                <!-- Competencias comportamentales -->
+                                <div style="flex: 1;">
+                                    <div class="mb-2">
+                                        <p class="fs-6"><b style="color: black;">Competencias comportamentales</b></p>
+                                        <!-- Inputs Competencias -->
+                                        @forelse($competenciasShow as $competencia)
+                                            <ul class="ul-check">
+                                                <li class="li-check" style="color: #373737;">
+                                                    {{ $competencia->nombreCompetencia }}
+                                                </li>
+                                            </ul>
                                         @empty
-                                        <li>Sin datos</li>
-                                        @endforelse -->
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Experiencia Laboral -->
-                                <div style="flex: 1;">
-                                    <div class="mb-2">
-                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Habilidades Interpersonales</b></p>
-                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
-                                    </div>
-                                </div>
-
-                                <!-- Experiencia Laboral -->
-                                <div style="flex: 1;">
-                                    <div class="mb-2">
-                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Competencias comportamentales</b></p>
-                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                            <p>Sin Competencias requeridas</p>
+                                        @endforelse
+                                        <!-- Fin inputs Competencias -->
                                     </div>
                                 </div>
                             </div>
