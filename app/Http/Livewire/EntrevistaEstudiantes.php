@@ -26,7 +26,7 @@ class EntrevistaEstudiantes extends Component
 
 			$keyWord = '%'.$this->keyWord .'%';
 			//Obtener entrevistas del estudiante
-			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) {
+			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) use ($keyWord) {
 				return $postulacion->entrevistas->where(function ($query) use ($keyWord) {
 					$query->orWhere('tituloEntrevista', 'LIKE', $keyWord)
 						->orWhere('descripcionEntrevista', 'LIKE', $keyWord)
