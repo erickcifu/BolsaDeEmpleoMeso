@@ -119,12 +119,12 @@ class Estudiantes extends Component
     protected $rules = [
         'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
         'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
-        'carnet' => 'required|integer',
+        'carnet' => 'required|size:9',
         'DPI' => 'required|size:13',
-        'correo' => 'required|email|ends_with:@gmail.com',
+        'correo' => 'required|email',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'mimes:pdf',
+        'curriculum' => 'mimes:pdf|max:800',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',
@@ -156,13 +156,17 @@ class Estudiantes extends Component
     public function update()
     {
         $this->validate([
-			'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
-			'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
-			'carnet' => 'required|integer',
-			'DPI' => 'required|size:13',
-			'correo' => 'required|email|ends_with:@gmail.com',
-			'numero_personal' => 'required | size:8',
-			'numero_domiciliar' => 'required |size:8',
+
+           
+          
+
+            'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
+            'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
+            'carnet' => 'required|size:9',
+            'DPI' => 'required|size:13',
+            'correo' => 'required|email',
+            'numero_personal' => 'required | size:8',
+            'numero_domiciliar' => 'required |size:8',
 		
 			'municipio_id' => 'required',
 			'carrera_id' => 'required',
