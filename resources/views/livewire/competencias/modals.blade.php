@@ -10,7 +10,7 @@
 				<form>
                     <div class="form-group">
                         <label for="nombreCompetencia"><b style="color: black;">Nombre Competencia<b></label>
-                        <input wire:model="nombreCompetencia" type="text" class="form-control" id="nombreCompetencia" placeholder="Nombrecompetencia">@error('nombreCompetencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="nombreCompetencia" type="text" class="form-control" id="nombreCompetencia" placeholder="Nombre de competencia">@error('nombreCompetencia') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </form>
             </div>
