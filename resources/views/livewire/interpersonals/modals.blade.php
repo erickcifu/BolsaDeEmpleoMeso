@@ -35,7 +35,7 @@
 					<input type="hidden" wire:model="selected_id">
                     <div class="form-group">
                         <label for="nombreInterpersonal"><b style="color: black;">nombre Interpersonal<b></label>
-                        <input wire:model="nombreInterpersonal" type="text" class="form-control" id="nombreInterpersonal" placeholder="Nombreinterpersonal">@error('nombreInterpersonal') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="nombreInterpersonal" type="text" class="form-control" id="nombre de Interpersonal" placeholder="Nombreinterpersonal">@error('nombreInterpersonal') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </form>
             </div>
