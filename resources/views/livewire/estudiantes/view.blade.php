@@ -29,12 +29,12 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Apellidos</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carnet</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Dpi</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">DPI</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Personal</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Numero Domiciliar</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Número Personal</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Número Domiciliar</th>
 								{{-- <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</th> --}}
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
