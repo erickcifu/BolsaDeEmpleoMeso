@@ -67,6 +67,12 @@ class Autoridadacademicas extends Component
     public function store()
     {
         $this->validate();
+        // Verifica si el correo ya existe
+        $existingUser = User::where('email', $this->email)->first();
+        if ($existingUser) {
+            session()->flash('message', 'El correo ya está registrado.');
+            return;
+        }
         $request = new Request();
 
         $user = User::create([
