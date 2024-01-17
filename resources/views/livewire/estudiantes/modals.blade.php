@@ -200,20 +200,12 @@
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-                        <div style="display: inline-block; width: 50%;">
-                            <div class="form-group">
-
                                 <label for="nombre"><b style="color: black;">Nombres<b></label>
                                 <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" readOnly>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-
-                        <div style="display: inline-block; width: 50%;">
-                            <div class="form-group">
-                        <div style="display: inline-block; width: 50%;">
-                            <div class="form-group">
                                 <label for="apellidos"><b style="color: black;"><b>Apellidos</label>
                                 <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos" readOnly>@error('apellidos') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -222,16 +214,12 @@
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-                        <div style="display: inline-block; width: 50%;">
-                            <div class="form-group">
                                 <label for="carnet"><b style="color: black;">Carnet<b></label>
                                 <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet" readOnly>@error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div style="display: inline-block; width: 100%;">
-                            <div class="mb-2"
-                        <div style="display: inline-block; width: 50%;">
-                            <div class="form-group">
+                            <div class="mb-2">
                                 <label for="DPI"><b style="color: black;">DPI<b></label>
                                 <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi" readOnly>@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -244,16 +232,12 @@
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100%;">
                             <div class="mb-2">
-                        <div style="display: inline-block; width: 50%;">
-                            <div class="form-group">
                                 <label for="numero_personal"><b style="color: black;">Numero Personal<b></label>
                                 <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal" readOnly>@error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div style="display: inline-block; width: 100%;">    
                             <div class="mb-2">
-                        <div style="display: inline-block; width: 50%;">    
-                            <div class="form-group">
                                 <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
                                 <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar" readOnly>@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
