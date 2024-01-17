@@ -197,20 +197,22 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <div class="hstack gap-3">
-                        <div style="display: inline-block; width: 100%;">
+                    <div class="row">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nombre"><b style="color: black;">Nombres<b></label>
-                                <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" readOnly>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre" readOnly>
+                                @error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div style="display: inline-block; width: 100%;">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="apellidos"><b style="color: black;"><b>Apellidos</label>
-                                <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos" readOnly>@error('apellidos') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos" readOnly>
+                                @error('apellidos') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                    </div>   
+                    </div>                     
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100%;">
                             <div class="form-group">
