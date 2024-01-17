@@ -236,7 +236,7 @@
                                 <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal" readOnly>@error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                        <div style="display: inline-block; width: 50vw;">    
+                        <div style="display: inline-block; width: 50vw;">
                             <div class="mb-2">
                                 <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
                                 <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar" readOnly>@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
