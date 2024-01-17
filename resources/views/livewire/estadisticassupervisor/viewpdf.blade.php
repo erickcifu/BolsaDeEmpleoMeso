@@ -3,7 +3,7 @@
     
  
  {{--tablass--}}   
- <h3  style="text-align: center;">Reporte de Estaditicas para Autoridades Academicas</h3>
+ <h3  style="text-align: center;">Reporte de Estádisticas para Autoridades Academicas</h3>
  <div class="card-body">
         <div class="row w-100 d-flex justify-content-center mb-2"
              style="border: 1px solid gray; padding: 7px; border-radius: 5px">

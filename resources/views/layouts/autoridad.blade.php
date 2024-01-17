@@ -46,6 +46,9 @@
 						<li class="nav-item">
                             <a href="{{ url('/cartarecomendacions') }}" class="nav-link" style="color: #f0eadc;"> Generar carta de recomendación</a> 
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/estudiantes1') }}" class="nav-link" style="color: #f0eadc;">estudiantes</a> 
+                        </li>
 						{{-- <li class="nav-item">
                             <a href="#" class="nav-link" style="color: #f0eadc;">Perfil</a> 
                         </li> --}}

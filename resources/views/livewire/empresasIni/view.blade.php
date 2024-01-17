@@ -29,7 +29,7 @@
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Logo</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nit</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">NIT</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
