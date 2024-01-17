@@ -187,7 +187,7 @@
 </div>
 
 <!-- Vista Modal -->
-<div wire:ignore.self class="modal fade" id="ViewDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="ViewDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
@@ -211,14 +211,19 @@
                             </div>
                         </div>
                     </div>   
-
-                    <div class="form-group">
-                        <label for="carnet"><b style="color: black;">Carnet<b></label>
-                        <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet" readOnly>@error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="DPI"><b style="color: black;">DPI<b></label>
-                        <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi" readOnly>@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <div class="hstack gap-3">
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="form-group">
+                                <label for="carnet"><b style="color: black;">Carnet<b></label>
+                                <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet" readOnly>@error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div style="display: inline-block; width: 100%;">
+                            <div class="form-group">
+                                <label for="DPI"><b style="color: black;">DPI<b></label>
+                                <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi" readOnly>@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="correo"><b style="color: black;">Correo Electronico<b></label>
