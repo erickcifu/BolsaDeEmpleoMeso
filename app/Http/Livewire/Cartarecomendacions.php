@@ -21,6 +21,7 @@ class Cartarecomendacions extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $cartaId, $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
+	protected $cartaEncontrada = false;
 
     public function render()
     {
@@ -52,6 +53,7 @@ class Cartarecomendacions extends Component
 						
 						'autoridadesacademicas'=>$autoridadesacademicas,
 						'estudiantes'=>$estudiantes,
+						'cartaEncontrada' => $this->cartaEncontrada,
         ]);
     }
 
