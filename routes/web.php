@@ -122,6 +122,7 @@ Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middle
 Route::view('cvs', 'livewire.cvs.index')->middleware('auth');
 
 Route::view('estudiantes', 'livewire.estudiantes.index')->middleware('auth');
+Route::view('estudiantes1', 'livewire.estudiantes1.index')->middleware('auth');
 Route::view('carreras', 'livewire.carreras.index')->middleware('auth');
 Route::view('facultads', 'livewire.facultads.index')->middleware('auth');
 Route::get('/formulario/create', [Ofertas::class, 'FormularioCreate'])->name('formulario.create')->middleware('auth');
