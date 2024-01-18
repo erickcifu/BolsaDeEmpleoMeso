@@ -10,7 +10,7 @@ use PDF;
 //----
 class Estadisticassupervisor extends Component
 {
-
+    public $anioActual;
     public $endsOnDate;
     public $reminder;
     protected $casts = [
@@ -40,7 +40,7 @@ class Estadisticassupervisor extends Component
     public function render()
     {
 
-
+       $this->anioActual = date("Y");
        $habilidadesT=DB::select('SELECT
        nombreTecnica,                    COUNT(nombreTecnica) AS total
                        FROM
