@@ -53,8 +53,8 @@ class Autoridadacademicas extends Component
     }
 
     protected $rules = [
-        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
+        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u | max:60',
+        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u |max:60',
         'email' => 'required',
         'password' => 'required',
         'facultad_id' => 'required',
