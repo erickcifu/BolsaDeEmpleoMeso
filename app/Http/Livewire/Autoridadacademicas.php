@@ -71,6 +71,7 @@ class Autoridadacademicas extends Component
         $existingUser = User::where('email', $this->email)->first();
         if ($existingUser) {
             $this->dispatchBrowserEvent('closeModal');
+            $this->resetInput();
             session()->flash('message', 'El correo ya está registrado.');
             return;
         }
