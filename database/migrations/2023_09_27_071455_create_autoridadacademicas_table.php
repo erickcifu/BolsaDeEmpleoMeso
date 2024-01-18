@@ -34,6 +34,11 @@ class CreateAutoridadAcademicasTable extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         Schema::dropIfExists('autoridadacademicas');
+
+        // Después de la eliminación
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };
