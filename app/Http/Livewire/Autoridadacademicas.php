@@ -70,6 +70,8 @@ class Autoridadacademicas extends Component
         // Verifica si el correo ya existe
         $existingUser = User::where('email', $this->email)->first();
         if ($existingUser) {
+            $this->dispatchBrowserEvent('closeModal');
+            $this->resetInput();
             session()->flash('message', 'El correo ya está registrado.');
             return;
         }
