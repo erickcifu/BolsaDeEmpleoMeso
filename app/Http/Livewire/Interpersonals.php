@@ -87,14 +87,10 @@ class Interpersonals extends Component
     public function destroy()
     {
         if ($this->selected_id) {
-            // Eliminar registros relacionados en la tabla 'ofertainterpersonals'
-            Interpersonal::table('ofertainterpersonals')->where('interpersonal_id', $this->selected_id)->delete();
-    
-            // Eliminar el registro principal en la tabla 'Interpersonal'
-            Interpersonal::where('interpersonalId', $this->selected_id)->delete();
-        }
-    
-        $this->dispatchBrowserEvent('closeModal');
-        session()->flash('message', 'Interpersonal eliminado.');
+			Interpersonal::where('interpersonalId', $this->selected_id)->delete();
+		}
+	
+		$this->dispatchBrowserEvent('closeModal');
+		session()->flash('message', 'interpersonal eliminado.');
     }
 }
