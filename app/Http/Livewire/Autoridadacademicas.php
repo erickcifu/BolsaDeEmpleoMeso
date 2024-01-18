@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\AutoridadAcademica;
-use App\Models\facultad;
+use App\Models\Facultad;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -33,7 +33,7 @@ class Autoridadacademicas extends Component
                             $query->where('Nfacultad', 'LIKE', $keyWord);
                         })
 						->paginate(10),
-                        'facultades'=>facultad::all()
+                        'facultades'=>Facultad::all()
         ]);
     }
 	
