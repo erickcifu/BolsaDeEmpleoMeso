@@ -113,12 +113,7 @@ class Autoridadacademicas extends Component
 
     public function update()
     {
-        $this->validate([
-            'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-            'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-            'estadoAutoridad' => 'required',
-            'facultad_id' => 'required',
-        ]);
+        $this->validate();
 
         if ($this->selected_id) {
             $record = AutoridadAcademica::find($this->selected_id);
