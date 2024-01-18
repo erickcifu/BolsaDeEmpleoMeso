@@ -70,6 +70,7 @@
 		<br><br>
 		<br>
 		<br>
+		@endif
 	@endforeach
 	@if (!$cartaEncontrada)
         <h2 class="text-center">No existe carta</h2>
