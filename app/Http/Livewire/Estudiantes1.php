@@ -51,29 +51,22 @@ class Estudiantes1 extends Component
         $userID = Auth::id();
         $this->autoridad=AutoridadAcademica::where('user_id',$userID)->first();
 
-        $carreras = Carrera::where('facultad_id', $this->facultad_id)->get();
-        $departamentos = Departamento::all();
-        $municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
-        
-        $keyWord = '%' . $this->keyWord . '%';
-        // Obtener todos los estudiantes asociados a la misma facultad de la autoridad académica
-    $estudiantes = Estudiante::whereIn('carrera_id', function ($query) use ($userID) {
-        $query->select('carreras.id')
-            ->from('carreras')
-            ->join('facultads', 'facultads.id', '=', 'carreras.facultad_id')
-            ->join('autoridadacademicas', 'facultads.id', '=', 'autoridadacademicas.facultad_id')
-            ->where('autoridadacademicas.user_id', $userID);
+        $facultad_id = $this->autoridad->facultad_id;
+
+        $estudiantes = Estudiante::whereHas('carrera.facultad', function ($query) use ($facultad_id) {
+                $query->where('id', $facultad_id);
             })
             ->orWhere('nombre', 'LIKE', '%' . $this->keyWord . '%')
             ->orWhere('apellidos', 'LIKE', '%' . $this->keyWord . '%')
             ->orWhere('carnet', 'LIKE', '%' . $this->keyWord . '%')
             ->orWhere('DPI', 'LIKE', '%' . $this->keyWord . '%')
             ->paginate(10);
-
-        $carreras = $this->getCarreras();
-        $departamentos = $this->getDepartamentos();
-        $municipios = $this->getMunicipios();
-
+    
+        $carreras = Carrera::where('facultad_id', $facultad_id)->get();
+        $facultades = Facultad::all();
+        $departamentos = Departamento::all();
+        $municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
+    
         return view('livewire.estudiantes1.view', [
             'estudiantes' => $estudiantes,
             'carreras' => $carreras,
