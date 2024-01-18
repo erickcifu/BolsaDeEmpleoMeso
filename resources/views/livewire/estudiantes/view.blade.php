@@ -26,14 +26,12 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombre</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Apellidos</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carnet</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombres y apellidos</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carné</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">DPI</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Número Personal</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Número Domiciliar</th>
-								{{-- <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</th> --}}
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carrera</th> 
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Currículum</th> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
@@ -41,14 +39,18 @@
 							@forelse($estudiantes as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td>{{ $row->nombre }}</td>
-								<td>{{ $row->apellidos }}</td>
+								<td>{{ $row->nombre }} {{ $row->apellidos }}</td>
 								<td>{{ $row->carnet }}</td>
 								<td>{{ $row->DPI }}</td>
-								<td>{{ $row->correo }}</td>
 								<td>{{ $row->numero_personal }}</td>
-								<td>{{ $row->numero_domiciliar }}</td>
-								{{-- <td>{{ $row->curriculum }}</td> --}}
+								<td>{{ $row->Carrera->Ncarrera}}</td> 
+								<td>
+                                    @if(File::exists($row->curriculum))
+                                        <a href="{{ asset($row->curriculum) }}" target="_blank"> Ver archivo </a>
+                                    @else
+                                        Sin currículum disponible
+                                    @endif
+                                </td>
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#ViewDataModal" class="dropdown-item" wire:click="view({{$row->estudianteId}})"><i class="fa-solid fa-eye"></i> Ver </a>
 									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>					

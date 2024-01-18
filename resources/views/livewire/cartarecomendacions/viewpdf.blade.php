@@ -25,27 +25,25 @@
 		</h6>
 	</li>
 	<p></p>
+	<p>Quetzaltenango, Guatemala. {{ $item->fechaCarta }} </p>
+	<p></p>
+	<br>
+	<br>
+	
+	<br>
+	<br>
+	<br>
+	<p><b>A quién pueda interesar: </b></p>
+	<br>
+	<p class="text-justify">
+
+	A través de la presente, extiendo mi recomendación personal en apoyo del estudiante
+	<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b>, quién se identifica con número 
+	de carné <b>{{$item->estudiante->carnet}} </b>, que se destaca por <b>{{ $item->cargoYTareasRealizadas }} </b>.  
+	</p>
 	<p></p>
 	<p></p>
-	<br>
-	<br>
-
-	<h5> A QUIEN INTERESE </h5>
-	<br>
-	<br>
-	<br>
-	<br>
-
-<p class="text-justify">
-
-Por este medio, hago constar que el portador de la presente,
-<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b> quien se identifica con número 
-de carnet, <b>{{$item->estudiante->carnet}} </b> es estudiante de Universidad Mesoamericana sede Quetzaltenango, 
- <b>{{ $item->cargoYTareasRealizadas }} </b>.  
-</p>
-<p></p>
-<p></p>
-<p></p>
+	<p></p>
 	
 
 <p class="text-justify">
