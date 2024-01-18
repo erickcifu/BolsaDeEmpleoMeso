@@ -39,7 +39,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn close-btn" data-bs-dismiss="modal" style="background-color: #d3d3d3;">Cancelar</button>
-                <button type="button" wire:click.prevent="newCarta()" class="btn btn-primary" style="background-color: #005c35;">Guardar</button>
+                <button type="button" wire:click.prevent="newCarta()" class="btn btn-primary close" style="background-color: #005c35;">Guardar</button>
             </div>
         </div>
     </div>
