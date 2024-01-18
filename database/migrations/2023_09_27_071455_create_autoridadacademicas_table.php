@@ -22,6 +22,7 @@ class CreateAutoridadAcademicasTable extends Migration
             $table->bigInteger('facultad_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
+            $table->foreign('facultad_id')->references('id')->on('facultads')->onDelete("cascade");
             $table->timestamps();
         });
     }
@@ -33,6 +34,11 @@ class CreateAutoridadAcademicasTable extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         Schema::dropIfExists('autoridadacademicas');
+
+        // Después de la eliminación
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 };

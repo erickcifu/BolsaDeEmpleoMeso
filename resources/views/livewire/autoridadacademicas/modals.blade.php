@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear Autoridad</h5>
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
@@ -18,7 +18,7 @@
                         <input wire:model="apellidosAutoridad" type="text" class="form-control" id="apellidosAutoridad" placeholder="Apellidos autoridad">@error('apellidosAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
-                        <label for="email"><b style="color: black;">Correo<b></label>
+                        <label for="email"><b style="color: black;">Correo electrónico<b></label>
                         <input wire:model="email" type="text" class="form-control" id="email" placeholder="Correo autoridad">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
@@ -31,7 +31,7 @@
                             
                     </div>
                     <div class="form-group">                        
-                        <label for="facultad_id"><b style="color: black;">facultad<b></label>
+                        <label for="facultad_id"><b style="color: black;">Facultad<b></label>
                         <select wire:model="facultad_id" type="text" class="form-control" id="facultad_id" placeholder="facultad">@error('facultad_id') <span class="error text-danger">{{ $message }}</span> @enderror
                             <option value="">Facultad</option>
                             @foreach ($facultades as $facultad)
@@ -55,11 +55,11 @@
 </div>
 
 <!-- Edit Modal -->
-<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
         <div class="modal-header" style="background-color: #005c35;">
-            <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar Autoridad Academica</h5>
+            <h5 class="modal-title" id="updateDataModalLabel" style="color: #f0eadc;">Actualizar Autoridad Academica</h5>
             <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" style="color: #f0eadc;">

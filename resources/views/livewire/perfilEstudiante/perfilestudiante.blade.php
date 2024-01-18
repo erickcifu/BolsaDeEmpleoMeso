@@ -27,7 +27,7 @@
 											<div class="hstack gap-3">
 												<div style="display: inline-block; width: 100%;">
 													<div class="mb-2">
-														<p class="card-text fs-5">Carnet: {{ $row->carnet }} </p>
+														<p class="card-text fs-5">Carné: {{ $row->carnet }} </p>
 													</div>
 												</div>
 												<div style="display: inline-block; width: 100%;">
@@ -36,7 +36,7 @@
 													</div>
 												</div>
 											</div>
-												<p class="card-text fs-5">Correo: {{ $row->correo }}</p>
+												<p class="card-text fs-5">Correo electrónico: {{ $row->correo }}</p>
 											<div class="hstack gap-3">
 												<div style="display: inline-block; width: 100%;">
 													<div class="mb-2">
@@ -45,7 +45,7 @@
 												</div>
 												<div style="display: inline-block; width: 100%;">
 													<div class="mb-2">
-														<p class="card-text fs-5">otro numero: {{ $row->numero_domiciliar }}</p>
+														<p class="card-text fs-5">Otro número: {{ $row->numero_domiciliar }}</p>
 													</div>
 												</div>
 											</div>		
