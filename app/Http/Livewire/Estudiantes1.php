@@ -35,6 +35,8 @@ class Estudiantes1 extends Component
     public $id_estu;
     public $autoridad, $user;
     public $id_autoridad;
+    public $showModal = false;
+
 
     // campos para la Carta
 
@@ -89,9 +91,9 @@ class Estudiantes1 extends Component
 
     protected $rules = [
         'fechaCarta' => 'date',
-        'cargoYTareasRealizadas' => 'required|regex:/^[\pL\s\-]+$/u',
+        'cargoYTareasRealizadas' => 'required|regex:/^[\pL\s\-,;:.]+$/u|max:300',
 		'telefonoAutoridad' => 'required|size:8',
-		'firmaAutoridad' => 'required|mimes:jpeg,png,jpg,gif',
+		'firmaAutoridad' => 'required|mimes:jpeg,png,jpg,gif | max:200',
     ];
 
     public function updated($propertyCartarecomendacion){  
@@ -103,13 +105,13 @@ class Estudiantes1 extends Component
         'facultad_id' => 'Este campo debe ser una fecha',
 
 		'cargoYTareasRealizadas.required' => 'Este campo no puede estar vacío.',
-        'cargoYTareasRealizadas' => 'Este campo no acepta caracteres especiales.',
+        'cargoYTareasRealizadas' => 'Este campo no acepta caracteres especiales. El máximo de caracteres es de 300',
 
 		'telefonoAutoridad.required' => 'Este campo no puede estar vacío.',
         'telefonoAutoridad' => 'El número de teléfono debe contener 8 dígitos.',
 
 		'firmaAutoridad.required' => 'Este campo no puede estar vacío.',
-        'firmaAutoridad' => 'Este campo únicamente acepta archivos: jpeg, png, jpg, gif.',
+        'firmaAutoridad' => 'Este campo únicamente acepta archivos: jpeg, png, jpg, gif. Con máximo de 100Kb',
 
 	];
 
@@ -135,6 +137,7 @@ class Estudiantes1 extends Component
                 'estudiante_id' => $this->id_estu,
             ]);
             // Emitir un evento para cerrar el modal desde el navegador
+            $this->showModal = false;
             $this->dispatchBrowserEvent('closeModal');
             $this->resetInput();
             // Mostrar un mensaje de éxito
