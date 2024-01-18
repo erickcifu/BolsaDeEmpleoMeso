@@ -18,7 +18,7 @@
                         <input wire:model="nombreEmpresa" type="text" class="form-control" id="nombreEmpresa" placeholder="Nombre">@error('nombreEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="nit"><b style="color: black;">Nit<b></label>
+                        <label for="nit"><b style="color: black;">NIT<b></label>
                         <input wire:model="nit" type="text" class="form-control" id="nit" placeholder="Nit">@error('nit') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -30,11 +30,11 @@
                         <input wire:model="patenteComercio" type="file" accept="application/pdf" class="form-control" id="patenteComercio" placeholder="Patente comercio">@error('patenteComercio') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="descripcionEmpresa"><b style="color: black;">Descripcion de la Empresa<b></label>
+                        <label for="descripcionEmpresa"><b style="color: black;">Descripción de la Empresa<b></label>
                         <input wire:model="descripcionEmpresa" type="text" class="form-control" id="descripcionEmpresa" placeholder="Descripcion empresa">@error('descripcionEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefonoEmpresa"><b style="color: black;">Telefono de la Empresa<b></label>
+                        <label for="telefonoEmpresa"><b style="color: black;">Teléfono de la Empresa<b></label>
                         <input wire:model="telefonoEmpresa" type="text" class="form-control" id="telefonoEmpresa" placeholder="Telefono empresa">@error('telefonoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -42,7 +42,7 @@
                         <input wire:model="correoEmpresa" type="text" class="form-control" id="correoEmpresa" placeholder="Correo empresa">@error('correoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="direccionEmpresa"><b style="color: black;">Direccion de la Empresa<b></label>
+                        <label for="direccionEmpresa"><b style="color: black;">Dirección de la Empresa<b></label>
                         <input wire:model="direccionEmpresa" type="text" class="form-control" id="direccionEmpresa" placeholder="Direccion empresa">@error('direccionEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -50,7 +50,7 @@
                         <input wire:model="encargadoEmpresa" type="text" class="form-control" id="encargadoEmpresa" placeholder="Encargado empresa">@error('encargadoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefonoEncargado"><b style="color: black;">Telefono del Encargado<b></label>
+                        <label for="telefonoEncargado"><b style="color: black;">Teléfono del Encargado<b></label>
                         <input wire:model="telefonoEncargado" type="text" class="form-control" id="telefonoEncargado" placeholder="Telefono encargado">@error('telefonoEncargado') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group"hidden>
@@ -115,16 +115,16 @@
                         <input wire:model="nombreEmpresa" type="text" class="form-control" id="nombreEmpresa" placeholder="Nombre empresa">@error('nombreEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="nit"><b style="color: black;">Nit<b></label>
+                        <label for="nit"><b style="color: black;">NIT<b></label>
                         <input wire:model="nit" type="text" class="form-control" id="nit" placeholder="Nit">@error('nit') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                   
                     <div class="form-group">
-                        <label for="descripcionEmpresa"><b style="color: black;">Descripcion de la Empresa<b></label>
+                        <label for="descripcionEmpresa"><b style="color: black;">Descripción de la Empresa<b></label>
                         <input wire:model="descripcionEmpresa" type="text" class="form-control" id="descripcionEmpresa" placeholder="Descripcion empresa">@error('descripcionEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefonoEmpresa"><b style="color: black;">Telefono de la Empresa<b></label>
+                        <label for="telefonoEmpresa"><b style="color: black;">Teléfono de la Empresa<b></label>
                         <input wire:model="telefonoEmpresa" type="text" class="form-control" id="telefonoEmpresa" placeholder="Telefono empresa">@error('telefonoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -140,7 +140,7 @@
                         <input wire:model="encargadoEmpresa" type="text" class="form-control" id="encargadoEmpresa" placeholder="Encargado empresa">@error('encargadoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="telefonoEncargado"><b style="color: black;">Telefono del Encargado<b></label>
+                        <label for="telefonoEncargado"><b style="color: black;">Teléfono del Encargado<b></label>
                         <input wire:model="telefonoEncargado" type="text" class="form-control" id="telefonoEncargado" placeholder="Telefono encargado">@error('telefonoEncargado') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                   
@@ -192,7 +192,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
                     
                 </form>
             </div>
