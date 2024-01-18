@@ -6,7 +6,7 @@
 				<div class="card-header" style="background-color: #d3d3d3;">
 					<div style="display: flex; justify-content: space-between; align-items: left;">
 						<div class="float-left">
-							<h4>Habilidad Interpersonal</h4>
+							<h4>Habilidades Interpersonales</h4>
 						</div>
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
@@ -27,8 +27,8 @@
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</td> 
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombreinterpersonal</th>
-								<td style="background-color: #005c35;"><b style="color: #f0eadc;">ACTIONS</td>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Habilidad</th>
+								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -45,7 +45,7 @@
 							</tr>
 							@empty
 							<tr>
-								<td class="text-center" colspan="100%">No existen datos </td>
+								<td class="text-center" colspan="100%">Sin datos</td>
 							</tr>
 							@endforelse
 						</tbody>

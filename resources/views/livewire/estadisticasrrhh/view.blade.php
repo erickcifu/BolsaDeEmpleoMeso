@@ -6,7 +6,7 @@
         <label for="endsOnDate" class="mx-3">Fecha Fin:</label>
         <input wire:model="endsOnDate" type="date" wire:change="actualizarInformacion()" />
     </div>
-    <div class="text-center"><h2>Estadisiticas Generales</h2></div>
+    <div class="text-center"><h2>Estadísticas Generales</h2></div>
     <div class="text-center">Total Usuarios</div>
     <div class="row w-100 d-flex justify-content-center mb-2">
         {{-- @foreach ($usuarios as $item) --}}
@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="text-center"><h2>Estadisiticas por año actual</h2></div>
+    <div class="text-center"><h2>Estadísticas por año actual</h2></div>
     <div class="text-center">Total usuarios este año</div>
     <div class="row w-100 d-flex justify-content-center mb-2">
 
