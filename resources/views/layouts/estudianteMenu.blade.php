@@ -43,7 +43,14 @@
 					@auth()
                     <ul class="navbar-nav mr-auto">
 						<!--Nav Bar Hooks - Do not delete!!-->
-
+                       <!-- Verificar si hay cartas y mostrar el botón correspondiente -->
+                    @if($cartasPdf->isNotEmpty())
+                    <li class="nav-item">
+                        <a href="{{ url('/carta-pdf') }}" class="nav-link" style="color: #f0eadc;">Carta de recomendación</a> 
+                    </li>
+                    @else
+                    <a href="{{ url('') }}" class="nav-link" style="color: #f0eadc;">Carta de recomendación</a> 
+                    @endif                        
                         <li class="nav-item">
                             <a href="{{ url('/cvs') }}" class="nav-link" style="color: #f0eadc;"> Generar CV</a> 
                         </li>
