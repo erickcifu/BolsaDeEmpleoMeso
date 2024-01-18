@@ -39,14 +39,14 @@
 											<div class="col-sm-6">
 											  <div class="card">
 												<div class="card-body">
-													<p class="card-text fs-5">Nit: {{ $row->nit }}</p>
-													<p class="card-text fs-5">Direccion: {{ $row->direccionEmpresa }}</p>
-													<p class="card-text fs-5">Numero de Telefono: {{ $row->telefonoEmpresa }}</p>
+													<p class="card-text fs-5">NIT: {{ $row->nit }}</p>
+													<p class="card-text fs-5">Dirección: {{ $row->direccionEmpresa }}</p>
+													<p class="card-text fs-5">Número de Teléfono: {{ $row->telefonoEmpresa }}</p>
 													<p class="card-text fs-5">Correo: {{ $row->correoEmpresa }}</p>
 													<p class="card-text fs-5">Departamento: {{ $row->municipio->Departamento->nombreDepartamento}}</p>
 													<p class="card-text fs-5">Municipio: {{ $row->municipio->nombreMunicipio }}</p>
 													<p class="card-text fs-5">Descripcion: {{ $row->descripcionEmpresa }}</p>
-													<p class="card-text fs-5">Usiario: {{ $row->user->name }}</p>
+													<p class="card-text fs-5">Usuario: {{ $row->user->name }}</p>
 													
 												</div>
 											  </div>
@@ -57,7 +57,7 @@
 												  <div class="card-body">
 													<div class="mb-2">
 														<p class="card-text fs-5">Encargado: {{ $row->encargadoEmpresa }}</p>
-														<p class="card-text fs-5">Telefono del encargado: {{ $row->telefonoEncargado }}</p>
+														<p class="card-text fs-5">Teléfono del encargado: {{ $row->telefonoEncargado }}</p>
 														
 													    <p class="card-text fs-5"> Estado de la Empresa:
 															<?php if ($row->estadoEmpresa == 1): ?>
