@@ -73,7 +73,7 @@
 		@endif
 	@endforeach
 	@if (!$cartaEncontrada)
-        <h2 class="text-center">No existe carta</h2>
+	<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> No existe carta </div>				
     @endif
 	
 
