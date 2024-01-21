@@ -53,8 +53,8 @@ class Autoridadacademicas extends Component
     }
 
     protected $rules = [
-        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
+        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u | max:50',
+        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u |max:40',
         'email' => 'required',
         'password' => 'required',
         'facultad_id' => 'required',
@@ -113,12 +113,7 @@ class Autoridadacademicas extends Component
 
     public function update()
     {
-        $this->validate([
-            'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-            'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-            'estadoAutoridad' => 'required',
-            'facultad_id' => 'required',
-        ]);
+        $this->validate();
 
         if ($this->selected_id) {
             $record = AutoridadAcademica::find($this->selected_id);
