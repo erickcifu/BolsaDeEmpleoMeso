@@ -31,7 +31,7 @@ class RRHHEmpresa extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Respuesta de RRHH umes',
+            subject: 'Seguimiento a solicitud: Bolsa de empleo Universidad Mesoamericana',
         );
     }
 

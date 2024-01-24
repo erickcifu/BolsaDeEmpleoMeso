@@ -29,7 +29,7 @@ class AltaEmpresa extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Alta Empresa',
+            subject: 'Solicitud de alta de usuario: Bolsa de empleo Universidad Mesoamericana',
         );
     }
 
