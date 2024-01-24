@@ -63,18 +63,6 @@
 			<p class="text-center">
 			<img src="{{$item->firmaAutoridad}}" alt="" width="100" height="100"/>
 			</p>
-			<p class="text-center">{{$item->autoridadAcademica->nombreAutoridad}}  {{$item->autoridadAcademica->apellidosAutoridad}}</p>
-			<p class="text-center"> cel: {{$item->telefonoAutoridad}}</p>
-			<br>
-			<br>
-			<br><br>
-			<br>
-			<br>
-			@endif
-		@endforeach
-	@else
-		<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> No existe carta </div>				
-    @endif
 	
 
 </body>
