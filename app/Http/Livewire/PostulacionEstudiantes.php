@@ -49,7 +49,9 @@ class PostulacionEstudiantes extends Component
             
         }
     }
-		
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
 
     public function cancel()
     {

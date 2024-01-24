@@ -53,7 +53,9 @@ class Estadisticasempresa extends Component
             return redirect()->route('ofertasestudiantes');
         }
     }
-
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function buildData()
     {
         $empresa = Empresa::where('user_id', $this->usuario)->first();

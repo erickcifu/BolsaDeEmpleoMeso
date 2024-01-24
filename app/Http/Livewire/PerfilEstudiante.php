@@ -12,6 +12,7 @@ use App\Models\Municipio;
 use App\Models\Departamento;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Http\UploadedFile;
 use DB;
@@ -193,19 +194,41 @@ class PerfilEstudiante extends Component
 		$this->curriculum = $this->curriculum;
 	 
 	}
-	public function cv(){
 
+	public function cv()
+	{
 		if ($this->selected_id) {
 			$recordcv = Estudiante::find($this->selected_id);
-			$recordcv->update([ 
-			
-			 'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
-			]);
+	
+			// Verifica si hay un currículum existente
+			if ($recordcv->curriculum) {
+				// Elimina el currículum anterior antes de cargar el nuevo
+				Storage::delete('public/'.$recordcv->curriculum);
+				
+			}
+	
+			// Guarda el nuevo currículum
+			$curriculumPath = $this->curriculum->store('cvs', 'public');
+			$recordcv->update(['curriculum' => 'storage/' . $curriculumPath]);
+	
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Curriculum actualizado correctamente.');
+			session()->flash('message', 'Currículum actualizado correctamente.');
 		}
 	}
+	
+	// public function cv(){
+
+	// 	if ($this->selected_id) {
+	// 		$recordcv = Estudiante::find($this->selected_id);
+	// 		$recordcv->update([ 			
+	// 		 'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'), 
+	// 		]);
+	// 		$this->resetInput();
+	// 		$this->dispatchBrowserEvent('closeModal');
+	// 		session()->flash('message', 'Curriculum actualizado correctamente.');
+	// 	}
+	// }
 	//   *************************
 	public function eliminar($estudianteId)
 	{
