@@ -31,7 +31,7 @@ class ActualizaEmpresa extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Actualiza Empresa',
+            subject: 'Actualización de datos: Bolsa de empleo Universidad Mesoamericana',
         );
     }
 
