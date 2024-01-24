@@ -159,9 +159,6 @@ class Estudiantes extends Component
     {
         $this->validate([
 
-           
-          
-
             'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
             'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',
             'carnet' => 'required|size:9',

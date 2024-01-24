@@ -72,9 +72,29 @@
 		<br>
 		@endif
 	@endforeach
-	@if (!$cartaEncontrada)
-	<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> No existe carta </div>				
-    @endif
+	<!-- Otras partes de tu HTML -->
+
+@foreach ($ccartarecomendacions as $item)
+@if ($item->estudiante->user_id == $usuario)
+	@php
+		$cartaEncontrada = true;
+	@endphp
+	<!-- Contenido del bucle... -->
+@endif
+@endforeach
+
+@if (!isset($cartaEncontrada) || !$cartaEncontrada)
+@php
+// Redirigir a la página de error 404
+abort(404, 'No existe carta');
+session()->flash('message', 'No existe Carta');
+
+// return;
+@endphp
+@endif
+
+<!-- Otras partes de tu HTML -->
+
 	
 
 </body>
