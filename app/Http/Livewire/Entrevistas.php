@@ -55,7 +55,9 @@ class Entrevistas extends Component
 						"ofertasEnt" => $this->ofertasEnt,
         ]);
     }
-	
+	public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function cancel()
     {
         $this->resetInput();

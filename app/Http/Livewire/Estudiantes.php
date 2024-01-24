@@ -63,7 +63,9 @@ class Estudiantes extends Component
             'departamentos' => $departamentos,
         ]);
     }
-
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function store()
     {
 

@@ -56,6 +56,9 @@ class Cartarecomendacions extends Component
 						'cartaEncontrada' => $this->cartaEncontrada,
         ]);
     }
+	public function updatingKeyWord(){
+        $this->resetPage();
+    }
 
 	/*genera la  carta en pdf*/
 	public function downloadPDF()
