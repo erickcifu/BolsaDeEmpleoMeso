@@ -23,7 +23,9 @@ class Idiomas extends Component
 						->paginate(10),
         ]);
     }
-	
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function cancel()
     {
         $this->resetInput();

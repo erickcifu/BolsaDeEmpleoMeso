@@ -58,8 +58,10 @@
 							</tr>
 							@endforelse
 						</tbody>
-					</table>						
+					</table>	
+					@if($carreras->hasPages())						
 					<div class="float-end">{{ $carreras->links() }}</div>
+					@endif
 					</div>
 				</div>
 			</div>

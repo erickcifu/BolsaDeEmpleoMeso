@@ -36,6 +36,9 @@ class Autoridadacademicas extends Component
                         'facultades'=>Facultad::all()
         ]);
     }
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
 	
     public function cancel()
     {

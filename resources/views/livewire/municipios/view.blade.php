@@ -52,12 +52,14 @@
 							</tr>
 							@empty
 							<tr>
-								<td class="text-center" colspan="100%">No data Found </td>
+								<td class="text-center" colspan="100%">Sin datos </td>
 							</tr>
 							@endforelse
 						</tbody>
-					</table>						
+					</table>	
+					@if( $municipios->hasPages())
 					<div class="float-end">{{ $municipios->links() }}</div>
+					@endif					
 					</div>
 				</div>
 			</div>

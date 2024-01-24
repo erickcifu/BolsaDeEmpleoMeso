@@ -1,31 +1,37 @@
 <?php
 
 namespace App\Http\Livewire;
-
 use Livewire\Component;
-use Livewire\WithPagination;
 use App\Models\Municipio;
 use App\Models\Departamento;
+use Livewire\WithPagination;
 
 class Municipios extends Component
 {
     use WithPagination;
-
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $municipioId, $nombreMunicipio, $departamento_id;
 
     public function render()
     {
-		$keyWord = '%'.$this->keyWord .'%';
-        return view('livewire.municipios.view', [
-            'municipios' => Municipio::latest()
-						->orWhere('municipioId', 'LIKE', $keyWord)
-						->orWhere('nombreMunicipio', 'LIKE', $keyWord)
-						->orWhere('departamento_id', 'LIKE', $keyWord)
-						->paginate(10),
-                        'Departamentos'=>Departamento::all()
-        ]);
+        $Departamentos = Departamento::all();
+        $keyWord = '%' . $this->keyWord . '%';
+         return view('livewire.municipios.view',[
+             'municipios' => Municipio::latest()
+                             ->orWhere('municipioId', 'LIKE', $keyWord)
+                             ->orWhere('nombreMunicipio', 'LIKE', $keyWord)
+                             ->orWhereHas('departamento', function ($query) use ($keyWord) {
+                                $query->where('nombreDepartamento', 'LIKE', $keyWord);
+                            })
+                             ->paginate(10),
+                            'Departamentos' => $Departamentos,
+         ]
+    );
     }
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
+
 	
     public function cancel()
     {
@@ -42,8 +48,6 @@ class Municipios extends Component
     protected $rules = [
         'nombreMunicipio' => 'required|regex:/^[\pL\s\-]+$/u',
 		'departamento_id' => 'required',
-		
-		
     ];
     public function updated($propertyMunicipio){
         $this->validateOnly($propertyMunicipio);
