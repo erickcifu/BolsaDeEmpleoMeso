@@ -1,3 +1,10 @@
+<style>
+        /* Estilo personalizado para ocultar la flecha del acordeón */
+        .accordion-button::after {
+            display: none; /* Oculta la flecha */
+        }
+    </style>
+
 <!-- Add Modal -->
 <div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -13,8 +20,8 @@
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item" id="item1">
                         <h2 class="accordion-header">
-                            <button class="accordion-button" style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" disabled>
-                                <b>Información general de la oferta</b>
+                            <button class="accordion-button" style="background-color: #d3d3d3;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" disabled>
+                                <b style="color: #005c35;">Información general de la oferta</b>
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" wire:ignore.self  data-bs-parent="#accordionExample">
@@ -125,10 +132,11 @@
                             </div>
                         </div>
                     </div>
+              
                     <div class="accordion-item" id="item2">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"  data-bs-parent="#accordionExample" disabled>
-                                <b> Requisitos del puesto </b>
+                            <button class="accordion-button collapsed" style="background-color: #d3d3d3;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"  data-bs-parent="#accordionExample" disabled>
+                                <b style="color: #005c35;"> Requisitos del puesto </b>
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
@@ -198,10 +206,11 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="accordion-item" id="item3">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"  data-bs-parent="#accordionExample" disabled>
-                                <b> Condiciones y beneficios </b>
+                            <button class="accordion-button collapsed"  style="background-color: #d3d3d3;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"  data-bs-parent="#accordionExample" disabled>
+                                <b style="color: #005c35;"> Condiciones y beneficios </b>
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
@@ -239,10 +248,11 @@
                             </div>
                         </div>
                     </div>
+                
                     <div class="accordion-item" id="item4">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"  data-bs-parent="#accordionExample" disabled>
-                                <b> Habilidades Técnicas </b>
+                            <button class="accordion-button collapsed"  style="background-color: #d3d3d3;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"  data-bs-parent="#accordionExample" disabled>
+                                <b style="color: #005c35;"> Habilidades Técnicas </b>
                             </button>
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
@@ -258,7 +268,7 @@
                                     <div class="col-6">
                                         <label for="tecnicaId">Habilidad Técnica*</label>
                                         <select wire:model="tecnicas.{{ $indice }}.tecnicaId" type="text" class="form-control" id="tecnicas.{{ $indice }}.tecnicaId">
-                                            <option selected disabled>Seleccione habilidades tecnicas</option>
+                                            <option selected>- Selecciona habilidades técnicas -</option>
                                             @foreach($habilidadesTecnicas as $tecnica)
                                             <option value="{{ $tecnica->tecnicaId }}">{{$tecnica->nombreTecnica}}</option>
                                             @endforeach
@@ -284,10 +294,11 @@
                             </div>
                         </div>
                     </div>
+               
                     <div class="accordion-item" id="item5">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"  data-bs-parent="#accordionExample" disabled>
-                                <b> Habilidades Interpersonales </b>
+                            <button class="accordion-button collapsed" style="background-color: #d3d3d3;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"  data-bs-parent="#accordionExample" disabled>
+                                <b style="color: #005c35;"> Habilidades Interpersonales </b>
                             </button>
                         </h2>
                         <div id="collapseFive" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
@@ -303,7 +314,7 @@
                                     <div class="col-6">
                                         <label for="interpersonalId">Habilidad Interpersonal*</label>
                                         <select wire:model="interpersonales.{{ $indice }}.interpersonalId" type="text" class="form-control" id="interpersonales.{{ $indice }}.interpersonalId">
-                                            <option selected disabled>Seleccione habilidades interpersonales</option>
+                                            <option selected>- Selecciona habilidades interpersonales -</option>
                                             @foreach($habilidadesInterpersonales as $interpersonal)
                                             <option value="{{ $interpersonal->interpersonalId }}">{{$interpersonal->nombreInterpersonal}}</option>
                                             @endforeach
@@ -329,10 +340,11 @@
                             </div>
                         </div>
                     </div>
+                
                     <div class="accordion-item" id="item6">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"  data-bs-parent="#accordionExample" disabled>
-                                <b> Competencias </b>
+                            <button class="accordion-button collapsed"  style="background-color: #d3d3d3;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"  data-bs-parent="#accordionExample" disabled>
+                                <b style="color: #005c35;"> Competencias </b>
                             </button>
                         </h2>
                         <div id="collapseSix" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
@@ -348,7 +360,7 @@
                                     <div class="col-6">
                                         <label for="competenciaId">Habilidad Interpersonal*</label>
                                         <select wire:model="competencias.{{ $indice }}.competenciaId" type="text" class="form-control" id="competencias.{{ $indice }}.competenciaId">
-                                            <option selected disabled>Seleccione Comptencias</option>
+                                            <option selected>- Selecciona Comptencias -</option>
                                             @foreach($competenciasTable as $competencia)
                                             <option value="{{ $competencia->competenciaId }}">{{$competencia->nombreCompetencia}}</option>
                                             @endforeach
@@ -371,6 +383,7 @@
                             </div>
                         </div>
                     </div>
+                
                 </div>
                 <!-- fin acordeon -->
             </div>
@@ -486,7 +499,7 @@
                                                 </li>
                                             </ul>
                                             @empty
-                                            <p>Sin Habilidades Técnicas requeridas</p>
+                                            <p style="color: #373737;">Sin habilidades técnicas requeridas</p>
                                             @endforelse 
                                         <!-- Fin inputs Habilidades Técnicas -->
                                     </div>
@@ -506,7 +519,7 @@
                                                     </ul>
                                                 </div>
                                             @empty
-                                                <p>Sin Habilidades Interpersonales requeridas</p>
+                                                <p style="color: #373737;">Sin habilidades interpersonales requeridas</p>
                                             @endforelse                           
                                         <!-- Fin inputs Habilidades Interpersonales -->
                                     </div>
@@ -524,7 +537,7 @@
                                                 </li>
                                             </ul>
                                         @empty
-                                            <p>Sin Competencias requeridas</p>
+                                            <p style="color: #373737;">Sin competencias requeridas</p>
                                         @endforelse
                                         <!-- Fin inputs Competencias -->
                                     </div>
@@ -762,3 +775,15 @@
        </div>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('recargarComponente', function () {
+            // Recarga la página después de un breve tiempo
+            setTimeout(function () {
+                location.reload();
+            }); // Ajusta el tiempo según sea necesario
+        });
+    });
+</script>

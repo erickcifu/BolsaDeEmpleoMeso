@@ -10,7 +10,7 @@ use App\Models\Postulacion;
 use App\Models\Estudiante;
 use App\Models\Facultad;
 use App\Models\Carrera;
-
+use Illuminate\Support\Facades\DB;
 
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
@@ -31,6 +31,9 @@ class VerOfertas extends Component
     public $facultadSeleccionada;
     public $ofertaFacultad, $facultades;
 	public $Totalofertas;
+	public $tecnicas = [];
+	public $interpersonales = [];
+	public $competencias = [];
 
     public function mount()
     {
@@ -105,6 +108,37 @@ class VerOfertas extends Component
 		$this->comentarioCierre = $record-> comentarioCierre;
 		$this->nombre_empresa = $record-> empresa->nombreEmpresa;
 		$this->facultad_id = $record-> facultad_id;
+
+		$queryComp = "SELECT
+						c.competenciaId,
+						c.nombreCompetencia
+					FROM
+						ofertacompetencias oc
+						LEFT JOIN competencias c ON oc.competencia_id = c.competenciaId
+					WHERE
+						oferta_id = " . $ofertaId;
+
+		$queryTec = "SELECT
+						ht.tecnicaId,
+						ht.nombreTecnica
+					FROM
+						ofertatecnicas ot
+						LEFT JOIN habilidadtecnicas ht ON ot.tecnica_id = ht.tecnicaId
+					WHERE
+						oferta_id = " . $ofertaId;
+
+		$queryInt = "SELECT
+						i.interpersonalId,
+						i.nombreInterpersonal
+					FROM
+						ofertainterpersonals oi
+						LEFT JOIN interpersonals i ON oi.interpersonal_id = i.interpersonalId
+					WHERE
+						oferta_id = " . $ofertaId;
+
+		$this->competencias = DB::select($queryComp);
+		$this->tecnicas = DB::select($queryTec);
+		$this->interpersonales = DB::select($queryInt);
     }
 	
     
@@ -142,5 +176,34 @@ class VerOfertas extends Component
 	public function cancel()
     {
         $this->dispatchBrowserEvent('closeModal');
+		$this->resetInput();
     }
+
+	private function resetInput()
+	{
+		$this->selected_id = null;
+		$this->resumenPuesto = null;
+		$this->nombrePuesto = null;
+		$this->responsabilidadesPuesto = null;
+		$this->requisitosEducativos = null;
+		$this->experienciaLaboral = null;
+		$this->sueldoMax = null;
+		$this->sueldoMinimo = null;
+		$this->jornadaLaboral = null;
+		$this->condicionesLaborales = null;
+		$this->beneficios = null;
+		$this->oportunidadesDesarrollo = null;
+		$this->fechaMax = null;
+		$this->imagenPuesto = null;
+		$this->cantVacantes = null;
+		$this->modalidadTrabajo = null;
+		$this->edadRequerida = null;
+		$this->generoRequerido = null;
+		$this->comentarioCierre = null;
+		$this->facultad_id = null;
+		$this->tecnicas = [];
+		$this->interpersonales = [];
+		$this->competencias = [];
+		$this->paso = 1;
+	}
 }
