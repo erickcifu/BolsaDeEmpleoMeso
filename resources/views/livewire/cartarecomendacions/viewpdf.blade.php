@@ -54,6 +54,7 @@
 			
 			</p>
 
+<<<<<<< HEAD
 		<br>
 		<br>
 		<br>
@@ -75,6 +76,17 @@
 	@if (!$cartaEncontrada)
 	<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> No existe carta </div>				
     @endif
+=======
+			<br>
+			<br>
+			<br>
+			<p>Atentamente,   </p>
+			<br>
+			<br>
+			<p class="text-center">
+			<img src="{{$item->firmaAutoridad}}" alt="" width="100" height="100"/>
+			</p>
+>>>>>>> 02dad3a19f57495922761bf41373ac59ea310875
 	
 
 </body>
