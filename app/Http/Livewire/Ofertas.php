@@ -58,6 +58,7 @@ class Ofertas extends Component
 	public function mount()
     {
         $this->fechaPostulacion = Carbon::now()->toDate()->format('Y-m-d');
+		
     }
 
     public function render()
@@ -74,6 +75,7 @@ class Ofertas extends Component
 			$this->userID = Auth::id();
 
     		$this->user = User::with('empresa')->find($this->userID);
+			
 
 			$keyWord = '%'.$this->keyWord .'%';
     		// Accede a las ofertas laborales de la empresa
@@ -113,6 +115,7 @@ class Ofertas extends Component
     public function cancel()
     {
         $this->resetInput();
+		$this->emit('recargarComponente');
     }
 
 	public function updatedHabiliades()
@@ -384,8 +387,8 @@ public function validarPaso5()
 			else {
 				dd("No hay un usuario autenticado");
 			}
-        
-        
+		
+		$this->emit('recargarComponente');
         $this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
 		session()->flash('message', 'Oferta creada correctamente!');
@@ -445,13 +448,16 @@ public function validarPaso5()
 					WHERE
 						oferta_id = ".$ofertaId;
 
-		$this->competenciasShow = DB::select($queryComp);
-		$this->tecnicasShow = DB::select($queryTec);
-		$this->interpersonalesShow = DB::select($queryInt);
+		$this->tecnicasShow = collect(DB::select($queryTec));
+		$this->interpersonalesShow = collect(DB::select($queryInt));
+		$this->competenciasShow = collect(DB::select($queryComp));
+		
+		
 	}
 
     public function edit($ofertaId)
     {
+		$this->paso = 1;
 		$this->resetInput();
         $record = Oferta::findOrFail($ofertaId);
         $this->selected_id = $ofertaId; 
@@ -505,7 +511,7 @@ public function validarPaso5()
     public function update()
     {
         $this->validate();
-
+		$this->paso = 1;
         if ($this->selected_id) {
 			$record = Oferta::find($this->selected_id);
             $record->update([ 
@@ -573,7 +579,8 @@ public function validarPaso5()
 					ofertaCompetencia::create($comp);
 				}
 			}
-
+			$this->emit('recargarComponente');
+			$this->render();
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Oferta actualizada correctamente!');
@@ -795,6 +802,7 @@ public function validarPaso5()
     public function destroy()
     {
         Oferta::where('ofertaId', $ofertaId)->delete();
+		
     }
 
 	//EDITAR IMAGEN DEL PUESTO//

@@ -89,27 +89,59 @@
                             </br>  
                             <!-- Habilidades -->
                             <div class="d-flex gap-3">
-                                <!-- Formación Académica -->
+                                <!-- Habilidades técnicas -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6" for="requisitosEducativos"><b style="color: black;">Habilidades técnicas</b></p>
-                                        <p style="color: #373737;">{{ $requisitosEducativos }} </p>
+                                        <p class="fs-6"><b style="color: black;">Habilidades técnicas</b></p>
+                                        <!-- Inputs Habilidades Técnicas -->
+                                            @forelse($tecnicas as $tecnica)
+                                            <ul style="color: #373737;" class="ul-check">
+                                                <li class="li-check">
+                                                    {{ $tecnica->nombreTecnica }}
+                                                </li>
+                                            </ul>
+                                            @empty
+                                                <p>Sin Habilidades Técnicas requeridas</p>
+                                            @endforelse 
+                                        <!-- Fin inputs Habilidades Técnicas -->
                                     </div>
                                 </div>
 
-                                <!-- Experiencia Laboral -->
+                                <!-- Habilidades interpersonales -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Habilidades Interpersonales</b></p>
-                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                        <p class="fs-6"><b style="color: black;">Habilidades Interpersonales</b></p>
+                                         <!-- Inputs Habilidades Interpersonales -->                          
+                                            @forelse($interpersonales as $interpersonal)
+                                            <div>
+                                                <ul style="color: #373737;" class="ul-check">
+                                                    <li class="li-check">
+                                                        {{ $interpersonal->nombreInterpersonal }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            @empty
+                                            <p>Sin Habilidades Interpersonales requeridas</p>
+                                            @endforelse                           
+                                        <!-- Fin inputs Habilidades Interpersonales -->
                                     </div>
                                 </div>
 
-                                <!-- Experiencia Laboral -->
+                                <!-- Competencias comportamentales -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
                                         <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Competencias comportamentales</b></p>
-                                        <p style="color: #373737;">{{ $experienciaLaboral }}</p>
+                                        <!-- Inputs Competencias -->
+                                            @forelse($competencias as $competencia)
+                                            <ul style="color: #373737;" class="ul-check">
+                                                <li class="li-check">
+                                                    {{ $competencia->nombreCompetencia }}
+                                                </li>
+                                            </ul>
+                                            @empty
+                                            <p>Sin Competencias requeridas</p>
+                                            @endforelse
+                                        <!-- Fin inputs Competencias -->
                                     </div>
                                 </div>
                             </div>
