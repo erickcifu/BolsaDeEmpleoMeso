@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
     public const SUBJECT_RECORDATORIO = 'Recordatorio de Ofertas por Vencer';
     public const DEFAULT_TYPE = 'vencidas';
     public const TYPE_RECORDATORIO = 'recordatorio';
-    public const URL_APP = 'http://127.0.0.1:8000/home';
+    public const URL_APP = 'https://bolsatrabajo.umes.edu.gt/login';
     /**
      * Register any application services.
      */
