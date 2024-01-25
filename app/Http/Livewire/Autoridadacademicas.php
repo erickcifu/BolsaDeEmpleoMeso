@@ -43,6 +43,7 @@ class Autoridadacademicas extends Component
     public function cancel()
     {
         $this->resetInput();
+        return redirect('autoridadacademicas');
     }
 	
     private function resetInput()
@@ -135,6 +136,7 @@ class Autoridadacademicas extends Component
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
             session()->flash('message', 'Usuario actualizado correctamente.');
+            return redirect('autoridadacademicas');
         }
     }
 
