@@ -77,7 +77,7 @@
                             <a href="{{ url('/postulacions') }}" class="nav-link" style="color: #f0eadc;">Postulaciones</a> 
                         </li> -->
 						<li class="nav-item">
-                            <a href="{{ url('/ofertas') }}" class="nav-link" style="color: #f0eadc;">Ofertas</a> 
+                            <a href="{{ url('/ofertas') }}" class="nav-link" style="color: #f0eadc;">Ofertas laborales</a> 
                         </li>
 						<li class="nav-item">
                             <a href="{{ url('/estadisticasempresa') }}" class="nav-link" style="color: #f0eadc;">Estadísticas</a> 

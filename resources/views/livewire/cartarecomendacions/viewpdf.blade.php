@@ -27,22 +27,16 @@
 				
 				</h6>
 			</li>
-			<p></p>
-			<p>Quetzaltenango, Guatemala. </p>
-			<p></p>
-			<br>
-			<br>
-			
 			<br>
 			<br>
 			<br>
-			<p><b>A quién pueda interesar: </b></p>
+			<p><b>A quién interese: </b></p>
 			<br>
 			<p class="text-justify">
 
-			A través de la presente, extiendo mi recomendación personal en apoyo del estudiante
+			A través de la presente, extiendo la presente recomendación en apoyo del estudiante
 			<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b>, quién se identifica con número 
-			de carné <b>{{$item->estudiante->carnet}}</b>, que se destaca por <b>{{ $item->cargoYTareasRealizadas }} </b>.  
+			de DPI <b>{{$item->estudiante->carnet}}</b>, quién se ha destacado por <b>{{ $item->cargoYTareasRealizadas }} </b>.  
 			</p>
 			<p></p>
 			<p></p>
@@ -50,7 +44,7 @@
 			
 
 		<p class="text-justify">
-		Y para los usos que al  interesado convenga, extiendola presente en la fecha {{ date('d/m/Y', strtotime($item->fechaCarta)) }}. 
+		Y para los usos legales que al interesado convenga, extiendo y firmo la presente en la ciudad de Quetzaltenango, a los __ dias del mes de ____ del año {{ date('d/m/Y', strtotime($item->fechaCarta)) }}. 
 		
 		</p>
 

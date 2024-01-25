@@ -7,7 +7,7 @@
 
 <!-- Add Modal -->
 <div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;" >
                 <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;"> 
@@ -398,18 +398,19 @@
 
 <!-- Show Modal -->
 <div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerOfertaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
        <div class="modal-content">
-            <form>
+            
             <div class="modal-header" style="background-color: #005c35;">
                 <h5 class="modal-title" id="VerOfertaModalLabel" style="color: #f0eadc;"><b>{{ $nombrePuesto }}</b></h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
-                    <div class="object-fit-cover border rounded" >
-                        <img src="{{ asset($imagenPuesto) }}"  class="img-fluid w-100">
-                    </div>
+                <div style="display: flex; justify-content: center; align-items: center; max-height: 300px; overflow: hidden;">
+                    <img src="{{ asset($imagenPuesto) }}" style="object-fit: cover; object-position: center;" alt="Imagen de Puesto">
+                </div>
                     <br/>
+                    <form>
                     <div class="form-group">
                         <h5 for="nombre_empresa"><b style="color: black;">{{ $nombre_empresa }}</b></h5>
                     </div>
@@ -458,6 +459,7 @@
                                     </div>
                                 </div>
                             </div>
+                    </form> 
                     <br/>
                     <form>
                         <div class="form-group">
@@ -775,3 +777,13 @@
        </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('recargarComponente', function () {
+             setTimeout(function () {
+                location.reload();
+            });
+        });
+    });
+</script>
