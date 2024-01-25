@@ -63,17 +63,21 @@ class Estudiantes1 extends Component
         $departamentos = Departamento::all();
         $municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
         $keyWord = '%' . $this->keyWord . '%';
+        $estudiantes = Estudiante::where(function ($query) use ($keyWord) {
+            $query->orWhere('nombre', 'LIKE', $keyWord)
+                ->orWhere('apellidos', 'LIKE', $keyWord)
+                ->orWhere('carnet', 'LIKE', $keyWord)
+                ->orWhere('DPI', 'LIKE', $keyWord);
+        })
+        ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
+        ->join('facultads', 'facultads.id', '=', 'carreras.facultad_id')
+        ->join('autoridadacademicas', 'facultads.id', '=', 'autoridadacademicas.facultad_id')
+        ->where('autoridadacademicas.user_id', $userID)
+        ->distinct()
+        ->paginate(10);
+        
         return view('livewire.estudiantes1.view', [
-            'estudiantes' => Estudiante::orWhere('nombre', 'LIKE', $keyWord)
-            ->orWhere('apellidos', 'LIKE', $keyWord)
-            ->orWhere('carnet', 'LIKE', $keyWord)
-            ->orWhere('DPI', 'LIKE', $keyWord)
-            ->join('carreras','carreras.id','=','estudiantes.carrera_id')
-            -> join('facultads','facultads.id','=','carreras.facultad_id')
-            -> join('autoridadacademicas','facultads.id','=','autoridadacademicas.facultad_id')
-            -> where('autoridadacademicas.user_id',$userID)
-         
-            ->paginate(10),
+            'estudiantes' => $estudiantes,
             'carreras' => $carreras,
             'facultades' => $facultades,
             'municipios' => $municipios,
