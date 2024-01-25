@@ -129,14 +129,14 @@ class Estudiantes1 extends Component
     {
         $this->id_estu = $estudianteId;
 
-        $atributos = Estudiante::find($estudianteId);
-        if ($atributos) {
-            $this->nombre = $atributos->nombre ?? '';
-            $this->apellidos = $atributos->apellidos ?? '';
-            $this->carnet = $atributos->carnet ?? '';
-            $this->DPI = $atributos->DPI ?? '';
+        $this->atributos = Estudiante::find($estudianteId);
+
+        if ($this->atributos) {
+            $this->nombre = $this->atributos->nombre ?? '';
+            $this->apellidos = $this->atributos->apellidos ?? '';
+            $this->carnet = $this->atributos->carnet ?? '';
+            $this->DPI = $this->atributos->DPI ?? '';
         } else {
-            // Si no se encuentra el estudiante, reinicia los valores
             $this->nombre = '';
             $this->apellidos = '';
             $this->carnet = '';
