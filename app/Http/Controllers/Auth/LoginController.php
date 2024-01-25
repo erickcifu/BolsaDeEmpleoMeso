@@ -47,15 +47,22 @@ class LoginController extends Controller
 
             $empresa = Empresa::where('user_id', $user->id)->first();
             $empresa_creada = Empresa::where('user_id', $user->id)->where('estadoSolicitud', 'Aceptado')->first();
+            $empresa_dengada = Empresa::where('user_id', $user->id)->where('estadoEmpresa', '1')->first();
 
             if (!$empresa) {
               
                 return redirect('registroempresa');
             }
+            if (!$empresa_dengada) {
+              
+                return redirect('empresas1');
+            }
             if (!$empresa_creada) {
               
                 return redirect('empresasIni');
             }
+          
+            
 
 
             // Redirección predeterminada para otros tipos de usuarios
