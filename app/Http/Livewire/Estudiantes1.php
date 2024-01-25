@@ -36,6 +36,11 @@ class Estudiantes1 extends Component
     public $autoridad, $user;
     public $id_autoridad;
     public $showModal = false;
+    public $tieneCarta;
+    public $pathTempPhoto;
+    public $iteration = 0;
+    public $atributos = [];
+
 
 
     // campos para la Carta
@@ -44,7 +49,9 @@ class Estudiantes1 extends Component
 
 	public function mount()
     {
-        $this->fechaCarta = Carbon::now()->toDate()->format('Y-m-d');	
+        $this->fechaCarta = Carbon::now()->toDate()->format('Y-m-d');
+        $this->tieneCarta = Estudiante::with('cartarecomendacions')->get();
+        
     }
     
     public function render()
@@ -79,6 +86,7 @@ class Estudiantes1 extends Component
     public function cancel()
     {
         $this->resetInput();
+        return redirect('estudiantes1');
     }
 	
     private function resetInput()
@@ -89,62 +97,145 @@ class Estudiantes1 extends Component
 		$this->firmaAutoridad = null;
 		$this->autoridadAcademica_id = null;
 		$this->estudiante_id = null;
+        $this->iteration++;
     }
 
     protected $rules = [
         'fechaCarta' => 'date',
         'cargoYTareasRealizadas' => 'required|regex:/^[\pL\s\-,;:.]+$/u|max:300',
 		'telefonoAutoridad' => 'required|size:8',
-		'firmaAutoridad' => 'required|mimes:jpeg,png,jpg,gif | max:200',
     ];
-
+    protected $rulesCreate = ['firmaAutoridad' => 'mimes:jpeg,png,jpg,gif|max:200'];
+	protected $rulesUpdate = ['firmaAutoridad' => 'nullable'];
     public function updated($propertyCartarecomendacion){  
         $this->validateOnly($propertyCartarecomendacion);
     }
 
     protected $messages = [
         'fechaCarta.required' => 'Este campo no puede estar vacío.',
-        'facultad_id' => 'Este campo debe ser una fecha',
-
-		'cargoYTareasRealizadas.required' => 'Este campo no puede estar vacío.',
-        'cargoYTareasRealizadas' => 'Este campo no acepta caracteres especiales. El máximo de caracteres es de 300',
-
-		'telefonoAutoridad.required' => 'Este campo no puede estar vacío.',
-        'telefonoAutoridad' => 'El número de teléfono debe contener 8 dígitos.',
-
-		'firmaAutoridad.required' => 'Este campo no puede estar vacío.',
-        'firmaAutoridad' => 'Este campo únicamente acepta archivos: jpeg, png, jpg, gif. Con máximo de 100Kb',
-
-	];
+        'fechaCarta.date' => 'Este campo debe ser una fecha válida.',
+        'cargoYTareasRealizadas.required' => 'Este campo no puede estar vacío.',
+        'cargoYTareasRealizadas.regex' => 'Este campo no acepta caracteres especiales. El máximo de caracteres es de 300.',
+        'telefonoAutoridad.required' => 'Este campo no puede estar vacío.',
+        'telefonoAutoridad.size' => 'El número de teléfono debe contener 8 dígitos.',
+    ];
 
     //FUNCION PARA OBETNER EL ID DE  ESTUDIANTE
     public function setEstudianteId($estudianteId)
     {
         $this->id_estu = $estudianteId;
+
+        $atributos = Estudiante::find($estudianteId);
+        if ($atributos) {
+            $this->nombre = $atributos->nombre ?? '';
+            $this->apellidos = $atributos->apellidos ?? '';
+            $this->carnet = $atributos->carnet ?? '';
+            $this->DPI = $atributos->DPI ?? '';
+        } else {
+            // Si no se encuentra el estudiante, reinicia los valores
+            $this->nombre = '';
+            $this->apellidos = '';
+            $this->carnet = '';
+            $this->DPI = '';
+        }
     }
     
+    public function process()
+	{
+		if ($this->selected_id === null) {
+			$this->newCarta();
+		} else {
+			$this->editCarta();
+		}
+	}
+
     //FUNCION PARA CREAR La carta
     public function newCarta()
     {
         /// Validar los campos utilizando las reglas definidas en $rules
-        $this->validate();
+        $rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
+		$this->validate($rules);
+
+        Cartarecomendacion::create([ 
+            'fechaCarta' => $this->fechaCarta,
+            'cargoYTareasRealizadas' => $this->cargoYTareasRealizadas,
+            'telefonoAutoridad' => $this->telefonoAutoridad,
+            'firmaAutoridad' => 'storage/' . $this->firmaAutoridad->store('firmas', 'public'),
+            'autoridadAcademica_id' => $this->autoridad->autoridadId,   
+            'estudiante_id' => $this->id_estu,
+        ]);
+            
+        $this->dispatchBrowserEvent('closeModal');
+        $this->resetInput();
+        // Mostrar un mensaje de éxito
+        session()->flash('message', 'Carta generada correctamente!');
+        return redirect('estudiantes1');
+    }
+
+    public function obtenerEstudianteId($estudianteId)
+    {
+        $this->resetInput();
+        $this->id_estu = $estudianteId;
+        // Encuentra la carta asociada al estudiante
+        $carta = Cartarecomendacion::where('estudiante_id', $estudianteId)->first();
+        if ($carta) {
+            $this->selected_id = $estudianteId;
+            // Llena los campos del formulario con los valores de la carta existente
+            $this->fechaCarta = $carta->fechaCarta;
+            $this->cargoYTareasRealizadas = $carta->cargoYTareasRealizadas;
+            $this->telefonoAutoridad = $carta->telefonoAutoridad;
+            // Asegúrate de cargar la firma existente si ya existe
+            $this->pathTempPhoto = $carta->firmaAutoridad;
+        }
 
         
-            Cartarecomendacion::create([ 
+        $this->atributos = Estudiante::find($estudianteId);
+
+        if ($this->atributos) {
+            $this->nombre = $this->atributos->nombre ?? '';
+            $this->apellidos = $this->atributos->apellidos ?? '';
+            $this->carnet = $this->atributos->carnet ?? '';
+            $this->DPI = $this->atributos->DPI ?? '';
+        } else {
+            $this->nombre = '';
+            $this->apellidos = '';
+            $this->carnet = '';
+            $this->DPI = '';
+        }
+    
+    }
+
+
+    //Editar carta
+    public function editCarta()
+    {
+        // Validar los campos utilizando las reglas definidas en $rules
+        $rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
+		$this->validate($rules);
+
+        if ($this->firmaAutoridad !== null) {
+			Storage::disk('public')->delete($this->pathTempPhoto);
+		}
+
+        // Encuentra la carta asociada al estudiante
+        $carta = Cartarecomendacion::where('estudiante_id', $this->id_estu)->first();
+
+        if ($carta) {
+            // Si existe, actualiza los campos de la carta existente
+            $carta->update([
                 'fechaCarta' => $this->fechaCarta,
                 'cargoYTareasRealizadas' => $this->cargoYTareasRealizadas,
                 'telefonoAutoridad' => $this->telefonoAutoridad,
-                'firmaAutoridad' => 'storage/' . $this->firmaAutoridad->store('firmas', 'public'),
-                'autoridadAcademica_id' => $this->autoridad->autoridadId,   
-                'estudiante_id' => $this->id_estu,
+                // Actualizar la firma solo si se proporciona una nueva
+                'firmaAutoridad' => $this->firmaAutoridad === null ? $this->pathTempPhoto :
+					('storage/' . $this->firmaAutoridad->store('firmas', 'public')),
             ]);
+        }
             // Emitir un evento para cerrar el modal desde el navegador
-            $this->showModal = false;
             $this->dispatchBrowserEvent('closeModal');
             $this->resetInput();
-            // Mostrar un mensaje de éxito
-            $this->dispatchBrowserEvent('cartaCreatedSuccessfully');
-            session()->flash('message', 'Carta generada correctamente!');
+            session()->flash('message', 'Carta actualizada correctamente!');
+            return redirect('estudiantes1');
         
     }
 }

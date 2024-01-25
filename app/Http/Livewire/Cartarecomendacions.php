@@ -59,7 +59,7 @@ class Cartarecomendacions extends Component
 							}
 						}
 						if (!$cartaEncontrada) {
-							abort(404, 'No existe carta');
+							session()->flash('message', 'No existe Carta');
 						}
 
 						return view('livewire.cartarecomendacions.view', [

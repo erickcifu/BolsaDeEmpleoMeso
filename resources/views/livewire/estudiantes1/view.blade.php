@@ -46,9 +46,15 @@
 								<td>{{ $row->Carrera->Ncarrera}}</td> 
 								{{-- <td>{{ $row->curriculum }}</td> --}}
 								<td width="125" >
-									<a data-bs-toggle="modal" data-bs-target="#createCartaDataModal" class="dropdown-item" style="cursor: pointer;" wire:click="setEstudianteId({{$row->estudianteId}})"><i class="fa-solid fa-file-circle-plus"></i> Generar carta </a>
-									
-													
+								@if ($row->cartarecomendacions && $row->cartarecomendacions->isNotEmpty())
+									<a data-bs-toggle="modal" data-bs-target="#createCartaDataModal" class="dropdown-item" style="cursor: pointer;" wire:click="obtenerEstudianteId({{$row->estudianteId}})">
+										<i class="fa-solid fa-file-circle-plus"></i> Editar Carta
+									</a>
+								@else
+									<a data-bs-toggle="modal" data-bs-target="#createCartaDataModal" class="dropdown-item" style="cursor: pointer;" wire:click="setEstudianteId({{$row->estudianteId}})">
+										<i class="fa-solid fa-file-circle-plus"></i> Generar carta
+									</a>
+								@endif			
 								</td>
 							</tr>
 							@empty
