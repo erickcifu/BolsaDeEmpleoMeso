@@ -15,14 +15,13 @@ class UsuarioSeeder extends Seeder
     {
         $crearUsuario = User::create([
         'name' => 'RRHH',
-        'email'=> 'rrhh@umes.edu.gt',
-        'password' => '12345678',
+        'email'=> 'bolsaempleoquetzaltenango@umes.edu.gt',
+        'password' => 'B0ls4Um3s',
         'estado' => 1,
         'avatar' => null,
         'external_id' => null,
         'external_auth' => null,
         'rol_id' => 3,
-
         ]);
     }
 }
