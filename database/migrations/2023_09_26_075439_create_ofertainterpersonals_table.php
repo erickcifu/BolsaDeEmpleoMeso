@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('oferta_id')->nullable();
             $table->unsignedBigInteger('interpersonal_id')->nullable();
             $table->foreign('oferta_id')->references('ofertaId')->on('ofertas')->onDelete("cascade");
-            $table->foreign('interpersonal_id')->references('interpersonalId')->on('interpersonals')->onDelete(null);
+            $table->foreign('interpersonal_id')->references('interpersonalId')->on('interpersonals')->onDelete('cascade');
             $table->timestamps();
         });
     }

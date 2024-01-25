@@ -110,7 +110,7 @@
 								<div class="btn" style="background-color: #005c35;"  data-bs-toggle="modal" data-bs-target="#createDataModal">
 									<i class="fa-solid fa-circle-plus" style="color: #f0eadc;" ></i> <h8 style="color: #f0eadc;">Crear</h8>
 								</div>
-								<td class="text-center" colspan="100%">No data Found </td>
+								<td class="text-center" colspan="100%">Sin datos </td>
 							</tr>
 							@endforelse
 						</tbody>

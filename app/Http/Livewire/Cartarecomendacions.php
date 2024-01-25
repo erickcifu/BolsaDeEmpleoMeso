@@ -13,6 +13,8 @@ use App\Models\Facultad;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Adapter\PDFLib;
+use Illuminate\Support\Facades\Abort;
+
 
 class Cartarecomendacions extends Component
 {
@@ -21,6 +23,7 @@ class Cartarecomendacions extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $cartaId, $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
+	protected $cartaEncontrada = false;
 
     public function render()
     {
@@ -28,31 +31,46 @@ class Cartarecomendacions extends Component
 		$userID = Auth::id();
 		$facultades = Facultad::all();
 	
-		$autoridadesacademicas=AutoridadAcademica::where('user_id',$userID)->get();
-		$estudiantes=Estudiante::join('carreras','carreras.id','=','estudiantes.carrera_id')
-		                        -> join('facultads','facultads.id','=','carreras.facultad_id')
-								-> join('autoridadacademicas','facultads.id','=','autoridadacademicas.facultad_id')
-							    -> where('autoridadacademicas.user_id',$userID)
+		$autoridadesacademicas = AutoridadAcademica::where('user_id', $userID)->get();
+		$estudiantes = Estudiante::join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
+								->join('facultads', 'facultads.id', '=', 'carreras.facultad_id')
+								->join('autoridadacademicas', 'facultads.id', '=', 'autoridadacademicas.facultad_id')
+								->where('autoridadacademicas.user_id', $userID)
 								->get();
-        return view('livewire.cartarecomendacions.view', [
-            'cartarecomendacions' => Cartarecomendacion::latest()
-						->orWhere('cartaId', 'LIKE', $keyWord)
-						->orWhere('fechaCarta', 'LIKE', $keyWord)
-						->orWhere('cargoYTareasRealizadas', 'LIKE', $keyWord)
-						->orWhere('telefonoAutoridad', 'LIKE', $keyWord)
-						->orWhere('firmaAutoridad', 'LIKE', $keyWord)
-						->orWhereHas('AutoridadAcademica', function ($query) use ($keyWord) {
-                            $query->where('nombreAutoridad', 'LIKE', $keyWord);
-                        })
-						->orWhereHas('Estudiante', function ($query) use ($keyWord) {
-                            $query->where('nombre', 'LIKE', $keyWord);
-                        })
-									
-						->paginate(10),
-						
-						'autoridadesacademicas'=>$autoridadesacademicas,
-						'estudiantes'=>$estudiantes,
-        ]);
+								$ccartarecomendacions = Cartarecomendacion::latest()
+								->orWhere('cartaId', 'LIKE', $keyWord)
+								->orWhere('fechaCarta', 'LIKE', $keyWord)
+								->orWhere('cargoYTareasRealizadas', 'LIKE', $keyWord)
+								->orWhere('telefonoAutoridad', 'LIKE', $keyWord)
+								->orWhere('firmaAutoridad', 'LIKE', $keyWord)
+								->orWhereHas('AutoridadAcademica', function ($query) use ($keyWord) {
+									$query->where('nombreAutoridad', 'LIKE', $keyWord);
+								})
+								->orWhereHas('Estudiante', function ($query) use ($keyWord) {
+									$query->where('nombre', 'LIKE', $keyWord);
+								})
+								->paginate(10);
+						$cartaEncontrada = false; 
+
+						foreach ($ccartarecomendacions as $item) {
+							if ($item->estudiante->user_id == $userID) {
+								$cartaEncontrada = true;
+								break;
+							}
+						}
+						if (!$cartaEncontrada) {
+							session()->flash('message', 'No existe Carta');
+						}
+
+						return view('livewire.cartarecomendacions.view', [
+							'cartarecomendacions' => $ccartarecomendacions,
+							'autoridadesacademicas' => $autoridadesacademicas,
+							'estudiantes' => $estudiantes,
+							'cartaEncontrada' => $cartaEncontrada,
+						]);
+    }
+	public function updatingKeyWord(){
+        $this->resetPage();
     }
 
 	/*genera la  carta en pdf*/

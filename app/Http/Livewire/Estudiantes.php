@@ -63,7 +63,9 @@ class Estudiantes extends Component
             'departamentos' => $departamentos,
         ]);
     }
-
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function store()
     {
 
@@ -156,9 +158,6 @@ class Estudiantes extends Component
     public function update()
     {
         $this->validate([
-
-           
-          
 
             'nombre' => 'required|regex:/^[\pL\s]+$/u|max:30',
             'apellidos' => 'required|regex:/^[\pL\s]+$/u|max:30',

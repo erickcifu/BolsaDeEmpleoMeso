@@ -71,4 +71,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Empresa', 'user_id', 'id'); 
     }
+
+    /**
+    * @return \Illuminate\Database\Eloquent\Relations\HasOne
+    */
+    public function AutoridadAcademica()
+    {
+        return $this->hasOne('App\Models\AutoridadAcademica', 'user_id', 'id');
+    }
 }

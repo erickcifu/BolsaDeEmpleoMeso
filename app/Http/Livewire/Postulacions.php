@@ -48,7 +48,9 @@ class Postulacions extends Component
                         "postulaciones"=>$this->postulaciones,
         ]);
     }
-	
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function cancel()
     {
         $this->resetInput();

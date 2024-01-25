@@ -214,7 +214,7 @@
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 50vh;">
                             <div class="mb-2">
-                                <label for="carnet"><b style="color: black;">Carnet<b></label>
+                                <label for="carnet"><b style="color: black;">No. Carné<b></label>
                                 <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet" readOnly>@error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -226,19 +226,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="correo"><b style="color: black;">Correo Electronico<b></label>
+                        <label for="correo"><b style="color: black;">Correo Electrónico<b></label>
                         <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo" readOnly>@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 50vh;">
                             <div class="mb-2">
-                                <label for="numero_personal"><b style="color: black;">Numero Personal<b></label>
+                                <label for="numero_personal"><b style="color: black;">Número personal<b></label>
                                 <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal" readOnly>@error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div style="display: inline-block; width: 50vh;">    
                             <div class="mb-2">
-                                <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
+                                <label for="numero_domiciliar"><b style="color: black;"><b>Otro número de télefono</label>
                                 <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar" readOnly>@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -267,7 +267,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cerrar</b></button>
             </div>
        </div>
     </div>

@@ -49,6 +49,18 @@ Route::get('/google-callback', function () {
 		return redirect('/');
 	}
 
+	 // Validar si el correo ya está registrado excluyendo usuarios con rol id igual a 1
+	$existingMail = User::where('email', $email)
+	->where('estado', 1)
+	->where('rol_id', '<>', 1) // Excluir usuarios con rol id igual a 1
+	->first();
+
+	if ($existingMail) {
+	// Mostrar notificación o redirigir indicando que el correo ya está registrado
+	Session::flash('message', 'Este correo ya está registrado');
+	return redirect('/');
+	}
+
 	$userExist = User::where('external_id', $user->id)->where('email', $user->email)->where('estado', 1)->first();
 
 	$routeLogin = '/ofertasestudiantes';

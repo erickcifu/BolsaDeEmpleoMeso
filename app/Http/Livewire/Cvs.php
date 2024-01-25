@@ -64,7 +64,9 @@ class Cvs extends Component
 				"cvs" => $this->cvs,
 		]);
 	}
-
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
 	public function cancel()
 	{
 		$this->resetInput();
@@ -104,11 +106,11 @@ class Cvs extends Component
 		$this->iteration++;
 	}
 	protected $rules = [
-		'direcionDomiciliar' => 'required',
+		'direcionDomiciliar' => 'required | max:200',
 		'correoElectronico' => 'required|email',
 		'telefonoCv' => 'required | size:8',
 		'perfilProfesional' => 'required |max:300',
-		'habilidades' => 'required | max:300',
+		'habilidades' => 'required | max:212',
 		'nombreRef1' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',
 		'telRef1' => 'required | size:8',
 		'nombreRef2' => 'required|regex:/^[A-Za-záéíóúüÁÉÍÓÚÜ0-9\s, -]*$/|max:300',

@@ -45,7 +45,9 @@ class EntrevistaEstudiantes extends Component
 						->paginate(10), 'entrevistasEstudiante' => $this->entrevistasEstudiante,
         ]);
     }
-	
+	public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function cancel()
     {
         $this->resetInput();

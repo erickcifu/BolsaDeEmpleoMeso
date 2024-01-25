@@ -54,7 +54,7 @@ class Registroempresas extends Component
         'logo' => 'required|mimes:jpeg,png,jpg,gif|max:200',
         'nombreEmpresa' => 'required',
         'nit' => 'required',
-        'rtu' => 'required|mimes:pdf|max:100',
+        'rtu' => 'required|mimes:pdf|max:250',
         'patenteComercio' => 'required|mimes:pdf|max:250',
         'descripcionEmpresa' => 'required',
         'telefonoEmpresa' => 'required|size:8',

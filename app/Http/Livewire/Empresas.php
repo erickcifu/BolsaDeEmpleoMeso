@@ -40,7 +40,9 @@ class Empresas extends Component
 						'Departamentos'=>Departamento::all()
         ]);
     }
-
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
 	
 	
 

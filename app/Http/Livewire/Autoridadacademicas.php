@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\AutoridadAcademica;
-use App\Models\facultad;
+use App\Models\Facultad;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -33,8 +33,11 @@ class Autoridadacademicas extends Component
                             $query->where('Nfacultad', 'LIKE', $keyWord);
                         })
 						->paginate(10),
-                        'facultades'=>facultad::all()
+                        'facultades'=>Facultad::all()
         ]);
+    }
+    public function updatingKeyWord(){
+        $this->resetPage();
     }
 	
     public function cancel()
@@ -53,8 +56,8 @@ class Autoridadacademicas extends Component
     }
 
     protected $rules = [
-        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
+        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u | max:50',
+        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u |max:40',
         'email' => 'required',
         'password' => 'required',
         'facultad_id' => 'required',
@@ -113,12 +116,7 @@ class Autoridadacademicas extends Component
 
     public function update()
     {
-        $this->validate([
-            'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-            'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u',
-            'estadoAutoridad' => 'required',
-            'facultad_id' => 'required',
-        ]);
+        $this->validate();
 
         if ($this->selected_id) {
             $record = AutoridadAcademica::find($this->selected_id);

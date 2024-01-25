@@ -30,7 +30,9 @@ class Carreras extends Component
                         'facultades' => $facultades,
         ]);
     }
-	
+    public function updatingKeyWord(){
+        $this->resetPage();
+    }
     public function cancel()
     {
         $this->resetInput();

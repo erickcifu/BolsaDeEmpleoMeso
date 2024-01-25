@@ -10,7 +10,7 @@ use App\Models\Postulacion;
 use App\Models\Estudiante;
 use App\Models\Facultad;
 use App\Models\Carrera;
-
+use Illuminate\Support\Facades\DB;
 
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
@@ -31,6 +31,9 @@ class OfertasEstudiantes extends Component
     public $facultadSeleccionada;
     public $ofertaFacultad, $facultades;
 	public $verTodas = false, $Totalofertas;
+	public $tecnicas = [];
+	public $interpersonales = [];
+	public $competencias = [];
 
     public function mount()
     {
@@ -43,6 +46,7 @@ class OfertasEstudiantes extends Component
        $this->Postulaciones = Postulacion::all();
 	   $this->user_id = Auth::id();
 	   $this->user = User::find($this->user_id); 
+	   $facultades = Facultad::all();
 	   if ($this->user && $this->user->Estudiante){
 			$this->mensaje = "El usuario si tiene una propiedad Estudiante";
 			$this->estudiante = $this->user->Estudiante;
@@ -76,6 +80,7 @@ class OfertasEstudiantes extends Component
 				"user_id"=>$this->user_id, 
 				"mensaje"=>$this->mensaje, 
 				"ofertas"=>$this->ofertas,
+				'facultades' => $facultades,
 				]);
 		}
 	   } else {
@@ -102,27 +107,58 @@ class OfertasEstudiantes extends Component
     {
         $record = Oferta::findOrFail($ofertaId);
         $this->selected_id = $ofertaId; 
-		$this->imagenPuesto = $record-> imagenPuesto;
-		$this->resumenPuesto = $record-> resumenPuesto;
-		$this->nombrePuesto = $record-> nombrePuesto;
-		$this->responsabilidadesPuesto = $record-> responsabilidadesPuesto;
-		$this->requisitosEducativos = $record-> requisitosEducativos;
-		$this->experienciaLaboral = $record-> experienciaLaboral;
-		$this->sueldoMax = $record-> sueldoMax;
-		$this->sueldoMinimo = $record-> sueldoMinimo;
-		$this->jornadaLaboral = $record-> jornadaLaboral;
-		$this->condicionesLaborales = $record -> condicionesLaborales;
-		$this->beneficios = $record -> beneficios;
-		$this->oportunidadesDesarrollo = $record -> oportunidadesDesarrollo;
-		$this->fechaMax = $record-> fechaMax;
-		$this->imagenPuesto = $record-> imagenPuesto;
-		$this->cantVacantes = $record-> cantVacantes;
-		$this->modalidadTrabajo = $record-> modalidadTrabajo;
-		$this->edadRequerida = $record-> edadRequerida;
-		$this->generoRequerido = $record-> generoRequerido;
-		$this->comentarioCierre = $record-> comentarioCierre;
-		$this->nombre_empresa = $record-> empresa->nombreEmpresa;
-		$this->facultad_id = $record-> facultad_id;
+		$this->imagenPuesto = $record->imagenPuesto;
+		$this->resumenPuesto = $record->resumenPuesto;
+		$this->nombrePuesto = $record->nombrePuesto;
+		$this->responsabilidadesPuesto = $record->responsabilidadesPuesto;
+		$this->requisitosEducativos = $record->requisitosEducativos;
+		$this->experienciaLaboral = $record->experienciaLaboral;
+		$this->sueldoMax = $record->sueldoMax;
+		$this->sueldoMinimo = $record->sueldoMinimo;
+		$this->jornadaLaboral = $record->jornadaLaboral;
+		$this->condicionesLaborales = $record->condicionesLaborales;
+		$this->beneficios = $record->beneficios;
+		$this->oportunidadesDesarrollo = $record->oportunidadesDesarrollo;
+		$this->fechaMax = $record->fechaMax;
+		$this->imagenPuesto = $record->imagenPuesto;
+		$this->cantVacantes = $record->cantVacantes;
+		$this->modalidadTrabajo = $record->modalidadTrabajo;
+		$this->edadRequerida = $record->edadRequerida;
+		$this->generoRequerido = $record->generoRequerido;
+		$this->comentarioCierre = $record->comentarioCierre;
+		$this->nombre_empresa = $record->empresa->nombreEmpresa;
+		$this->facultad_id = $record->facultad_id;
+
+		$queryComp = "SELECT
+						c.competenciaId,
+						c.nombreCompetencia
+					FROM
+						ofertacompetencias oc
+						LEFT JOIN competencias c ON oc.competencia_id = c.competenciaId
+					WHERE
+						oferta_id = " . $ofertaId;
+
+		$queryTec = "SELECT
+						ht.tecnicaId,
+						ht.nombreTecnica
+					FROM
+						ofertatecnicas ot
+						LEFT JOIN habilidadtecnicas ht ON ot.tecnica_id = ht.tecnicaId
+					WHERE
+						oferta_id = " . $ofertaId;
+
+		$queryInt = "SELECT
+						i.interpersonalId,
+						i.nombreInterpersonal
+					FROM
+						ofertainterpersonals oi
+						LEFT JOIN interpersonals i ON oi.interpersonal_id = i.interpersonalId
+					WHERE
+						oferta_id = " . $ofertaId;
+
+		$this->competencias = DB::select($queryComp);
+		$this->tecnicas = DB::select($queryTec);
+		$this->interpersonales = DB::select($queryInt);
     }
 	
     
@@ -160,5 +196,35 @@ class OfertasEstudiantes extends Component
 	public function cancel()
     {
         $this->dispatchBrowserEvent('closeModal');
+		$this->resetInput();
     }
+
+	
+	private function resetInput()
+	{
+		$this->selected_id = null;
+		$this->resumenPuesto = null;
+		$this->nombrePuesto = null;
+		$this->responsabilidadesPuesto = null;
+		$this->requisitosEducativos = null;
+		$this->experienciaLaboral = null;
+		$this->sueldoMax = null;
+		$this->sueldoMinimo = null;
+		$this->jornadaLaboral = null;
+		$this->condicionesLaborales = null;
+		$this->beneficios = null;
+		$this->oportunidadesDesarrollo = null;
+		$this->fechaMax = null;
+		$this->imagenPuesto = null;
+		$this->cantVacantes = null;
+		$this->modalidadTrabajo = null;
+		$this->edadRequerida = null;
+		$this->generoRequerido = null;
+		$this->comentarioCierre = null;
+		$this->facultad_id = null;
+		$this->tecnicas = [];
+		$this->interpersonales = [];
+		$this->competencias = [];
+		$this->paso = 1;
+	}
 }
