@@ -227,7 +227,7 @@ class Estudiantes1 extends Component
         if ($carta) {
             // Si existe, actualiza los campos de la carta existente
             $carta->update([
-                'fechaCarta' => $this->fechaCarta,
+                'fechaCarta' => now(),
                 'cargoYTareasRealizadas' => $this->cargoYTareasRealizadas,
                 'telefonoAutoridad' => $this->telefonoAutoridad,
                 // Actualizar la firma solo si se proporciona una nueva
