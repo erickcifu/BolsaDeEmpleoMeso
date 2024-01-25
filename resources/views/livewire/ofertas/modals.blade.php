@@ -775,15 +775,3 @@
        </div>
     </div>
 </div>
-
-
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('recargarComponente', function () {
-            // Recarga la página después de un breve tiempo
-            setTimeout(function () {
-                location.reload();
-            }); // Ajusta el tiempo según sea necesario
-        });
-    });
-</script>
