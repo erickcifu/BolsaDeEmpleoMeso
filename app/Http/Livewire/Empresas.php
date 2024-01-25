@@ -164,12 +164,12 @@ class Empresas extends Component
 
 
 		
-			'nombreEmpresa' => 'required',
-			'nit' => 'required',
+			'nombreEmpresa' => 'required|max:100',
+			'nit' => 'required|max:10',
 		    'descripcionEmpresa' => 'required',
 			'telefonoEmpresa' => 'required|size:8',
 			'correoEmpresa' => 'required|email',
-			'direccionEmpresa' => 'required',
+			'direccionEmpresa' => 'required|max:200',
 			'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
 			'telefonoEncargado' => 'required|size:8',
 			'residencia_id' => 'required',
