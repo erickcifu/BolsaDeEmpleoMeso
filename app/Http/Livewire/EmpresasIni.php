@@ -74,14 +74,14 @@ class EmpresasIni extends Component
 
 	protected $rules = [
 		'logo' => 'required|mimes:jpeg,png,jpg,gif',
-		'nombreEmpresa' => 'required',
-		'nit' => 'required',
+		'nombreEmpresa' => 'required|max:100',
+		'nit' => 'required|max:10',
 		'rtu' => 'required|mimes:pdf',
 		'patenteComercio' => 'required|mimes:pdf',
 		'descripcionEmpresa' => 'required',
 		'telefonoEmpresa' => 'required|size:8',
 		'correoEmpresa' => 'required|email',
-		'direccionEmpresa' => 'required',
+		'direccionEmpresa' => 'required|max:200',
 		'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
 		'telefonoEncargado' => 'required|size:8',
 		
@@ -159,17 +159,17 @@ class EmpresasIni extends Component
     {
         $this->validate([
 			
-		'nombreEmpresa' => 'required',
-		'nit' => 'required',
-		
-		'descripcionEmpresa' => 'required',
-		'telefonoEmpresa' => 'required|size:8',
-		'correoEmpresa' => 'required|email',
-		'direccionEmpresa' => 'required',
-		'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
-		'telefonoEncargado' => 'required|size:8',
-		
-		'residencia_id' => 'required',
+
+			'nombreEmpresa' => 'required|max:100',
+			'nit' => 'required|max:10',
+		    'descripcionEmpresa' => 'required',
+			'telefonoEmpresa' => 'required|size:8',
+			'correoEmpresa' => 'required|email',
+			'direccionEmpresa' => 'required|max:200',
+			'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
+			'telefonoEncargado' => 'required|size:8',
+			'residencia_id' => 'required',
+			
 			
         ]);
 		Mail::to($this->correoEmpresa)->send(new ActualizaEmpresa($this-> nombreEmpresa));
