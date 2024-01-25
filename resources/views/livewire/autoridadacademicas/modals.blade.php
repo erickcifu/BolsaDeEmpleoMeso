@@ -53,13 +53,12 @@
         </div>
     </div>
 </div>
-
 <!-- Edit Modal -->
-<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateDataModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
         <div class="modal-header" style="background-color: #005c35;">
-            <h5 class="modal-title" id="updateDataModalLabel" style="color: #f0eadc;">Actualizar Autoridad Academica</h5>
+            <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar Autoridad Academica</h5>
             <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body" style="color: #f0eadc;">
@@ -104,6 +103,7 @@
        </div>
     </div>
 </div>
+
 
 {{-- creamos el modal para eliminar  --}}
 <div wire:ignore.self class="modal fade" id="DeletDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="DeletModalLabel" aria-hidden="true">
