@@ -76,7 +76,7 @@ class PerfilEstudiante extends Component
 		'correo' => 'required|email',
 		'numero_personal' => 'required | size:8',
 		'numero_domiciliar' => 'required |size:8',
-	
+		// 'curriculum' => 'sometimes | nullable | mimes:pdf | max:30KB',
 		'municipio_id' => 'required',
 		'carrera_id' => 'required',
 		'user_id' => 'required',
@@ -203,14 +203,18 @@ class PerfilEstudiante extends Component
 			// Verifica si hay un currículum existente
 			if ($recordcv->curriculum) {
 				// Elimina el currículum anterior antes de cargar el nuevo
-				Storage::delete('public/'.$recordcv->curriculum);
-				
+				//dd($recordcv->curriculum);
+				Storage::disk('public')->delete('cvs/' . $recordcv->curriculum);
 			}
 	
 			// Guarda el nuevo currículum
-			$curriculumPath = $this->curriculum->store('cvs', 'public');
-			$recordcv->update(['curriculum' => 'storage/' . $curriculumPath]);
-	
+			//$curriculumPath = $this->curriculum->store('cvs', 'public');
+			
+			//dd($this->curriculum);
+			$nuevoNombre = uniqid() . '.' . $this->curriculum->getClientOriginalExtension();
+			$this->curriculum->storeAs('public/cvs', $nuevoNombre, 'local');
+			$recordcv->update(['curriculum' => $nuevoNombre]);
+
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Currículum actualizado correctamente.');

@@ -23,7 +23,7 @@ class CreateEstudiantesTable extends Migration
             $table->string('correo', 100);
             $table->integer('numero_personal');
             $table->integer('numero_domiciliar');
-            $table->string('curriculum', 300);
+            $table->string('curriculum', 300)->nullable();
             $table->bigInteger('municipio_id')->unsigned();
             $table->bigInteger('carrera_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();

@@ -1,6 +1,6 @@
 <!-- Add Modal -->
 <div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;" >
                 <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;"> 
