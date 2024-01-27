@@ -18,6 +18,7 @@ class Registro extends Component
     public $facultad_id;
     public $municipio;
     public $departamento_id;
+    public $nuevoNombre=null;
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
@@ -72,7 +73,11 @@ class Registro extends Component
             // Ahora puedes usar $userID como el ID del usuario en tu lógica
             // dd("Ahora puedes usar $userID como el ID del usuario en tu lógica");
             $this->validate();
-            $nombreDocumento = $this->curriculum->getClientOriginalName();
+            // $nombreDocumento = $this->curriculum->getClientOriginalName();
+            if ($this->curriculum!=null) {
+                $this->nuevoNombre = uniqid() . '.' . $this->curriculum->getClientOriginalExtension();
+			    $this->curriculum->storeAs('public/cvs', $this->nuevoNombre, 'local');
+            }
             Estudiante::create([
                 'nombre' => $this->nombre,
                 'apellidos' => $this->apellidos,
@@ -81,7 +86,7 @@ class Registro extends Component
                 'correo' => $this->correo,
                 'numero_personal' => $this->numero_personal,
                 'numero_domiciliar' => $this->numero_domiciliar,
-                'curriculum' => 'storage/'.$this-> curriculum->store('cvs','public'),
+                'curriculum' => $this->nuevoNombre,//Verificar si $this->curriculum tiene algun proceso
                 'municipio_id' => $this->municipio_id,
                 'carrera_id' => $this->carrera_id,
                 'user_id' => $userID,
@@ -122,7 +127,7 @@ class Registro extends Component
         'correo' => 'required|email',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'mimes:pdf|max:800',
+        'curriculum' => 'sometimes | nullable | mimes:pdf | max:30KB',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',

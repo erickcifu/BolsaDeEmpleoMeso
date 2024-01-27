@@ -51,7 +51,8 @@
 											</div>		
 												<!-- Agrega más campos según tus necesidades -->
 												<a>Curriculum</a>
-												<a href="{{ $row->curriculum }}" target="_blank" class="btn btn-secondary">Ver archivo</a>
+												<h1>Variable: {{  $row->curriculum }}</h1>
+												<a href="{{ Storage::url('cvs/'. $row->curriculum) }}" target="_blank" class="btn btn-secondary">Ver archivo</a>
 												<a data-bs-toggle="modal" data-bs-target="#curriculumDataModal" class="dropdown-item" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i>Editar</a> </td>
 												<div class="hstack gap-3">
 													<div style="display: inline-block; width: 100%;">
