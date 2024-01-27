@@ -215,6 +215,7 @@ class PerfilEstudiante extends Component
 			$this->curriculum->storeAs('public/cvs', $nuevoNombre, 'local');
 			$recordcv->update(['curriculum' => $nuevoNombre]);
 
+			$this->emit('curriculumActualizado');
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Currículum actualizado correctamente.');

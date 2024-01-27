@@ -183,9 +183,9 @@
                         <select wire:model="estadoSolicitud"   type="text" class="form-control" id="estadoSolicitud" placeholder="Estado solicitud">@error('estadoSolicitud') <span class="error text-danger">{{ $message }}</span> @enderror
                             <option selected>Estado</option>
                             <option value="Aceptado">Aceptado</option>
-                            <option value="Verificar rtu">Verificar rtu</option>
-                            <option value="Verificar Patente">Verificar Patente</option>
-                            <option value="Verificar Patente y rtu">Verificar Patente y rtu</option>
+                            <option value="Verificar RTU">Verificar RTU</option>
+                            <option value="Verificar Patente de comercio">Verificar Patente de comercio</option>
+                            <option value="Verificar Patente de comercio y RTU">Verificar Patente de comercio y RTU</option>
                             <option value="Denegado">Denegado</option>
                         </select>
                     </div>
@@ -207,19 +207,19 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="EliminarModalLabel"style="color: #f0eadc;"> Eliminar</h5>
+                <h5 class="modal-title" id="EliminarModalLabel"style="color: #f0eadc;"> Desactivar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea desactivar el usuario de empresa?</h5>
                     
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #005c35;" data-bs-dismiss="modal"><b style ="color: #d3d3d3;">Cancelar</b></button>
-                <button type="button" wire:click.prevent="Desc()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo eliminarlo<b></button>
+                <button type="button" wire:click.prevent="Desc()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo desactivarlo<b></button>
             </div>
        </div>
     </div>
@@ -235,13 +235,13 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea Activar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea activar el usuario de empresa?</h5>
                     
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click.prevent="Act()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Sí, deseo Activar</button>
+                <button type="button" wire:click.prevent="Act()" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Sí, deseo activarlo</button>
             </div>
        </div>
     </div>

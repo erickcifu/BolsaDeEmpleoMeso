@@ -199,7 +199,7 @@ class Empresasrrhh extends Component
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Empresa cambio de solicitud.');
+			session()->flash('message', 'Estado de solicitud actualizado exitosamente!.');
         }
     }
 
@@ -220,7 +220,7 @@ class Empresasrrhh extends Component
 
            $this->resetInput();
            $this->dispatchBrowserEvent('closeModal');
-           session()->flash('message', 'Autoridad Se Deshabilitó Exitosamente!.');
+           session()->flash('message', 'El usuario de empresa se desactivó correctamente!.');
        }
    }
    public function Act(){
@@ -233,7 +233,7 @@ class Empresasrrhh extends Component
 
            $this->resetInput();
            $this->dispatchBrowserEvent('closeModal');
-           session()->flash('message', 'Autoridad Se Activo Exitosamente!.');
+           session()->flash('message', 'El usuario de empresa se activó correctamente!.');
        }
    }
 

@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear</h5>
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear usuario</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
             <div class="modal-body" style="color: #f0eadc;">
@@ -54,18 +54,17 @@
     </div>
 </div>
 <!-- Edit Modal -->
-<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
-        <div class="modal-header" style="background-color: #005c35;">
-            <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar Autoridad Academica</h5>
-            <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" style="color: #f0eadc;">
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="updateDataModalLabel" style="color: #f0eadc;">Actualizar usuario</h5>
+                <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: #f0eadc;">
                 <form>
 					<input type="hidden" wire:model="selected_id">
                     
-                    <input type="hidden" wire:model="selected_id">
                     <div class="form-group">
                         <label for="nombreAutoridad"><b style="color: black;">Nombre</b></label>
                         <input wire:model="nombreAutoridad" type="text" class="form-control" id="nombreAutoridad" placeholder="Nombre autoridad">@error('nombreAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -90,17 +89,15 @@
                             @foreach ($facultades as $facultad)
                                   <option value="{{$facultad->id}}"> {{$facultad->Nfacultad}}</option>
                             @endforeach
-                      
                         </select>
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
                 <button type="button" wire:click.prevent="update()" class="btn btn-primary" style="background-color: #005c35;">Guardar</button>
             </div>
-       </div>
+        </div>
     </div>
 </div>
 
@@ -110,13 +107,13 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="DeletModalLabel">Eliminar</h5>
+                <h5 class="modal-title" id="DeletModalLabel" style="color: #f0eadc;">Eliminar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este usuario?</h5>
 
                 </form>
             </div>
@@ -133,19 +130,19 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="EliminarModalLabel"style="color: #f0eadc;"> Eliminar</h5>
+                <h5 class="modal-title" id="EliminarModalLabel" style="color: #f0eadc;">Desactivar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea desactivar este usuario?</h5>
                     
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #005c35;" data-bs-dismiss="modal"><b style ="color: #d3d3d3;">Cancelar</b></button>
-                <button type="button" wire:click.prevent="Desc()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo eliminarlo<b></button>
+                <button type="button" wire:click.prevent="Desc()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo desactivarlo<b></button>
             </div>
        </div>
     </div>
@@ -155,13 +152,13 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="ActivarModalLabel"style="color: #f0eadc;"> Activar</h5>
+                <h5 class="modal-title" id="ActivarModalLabel"style="color: #f0eadc;">Activar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea Activar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea activar este usuario?</h5>
                     
                 </form>
             </div>

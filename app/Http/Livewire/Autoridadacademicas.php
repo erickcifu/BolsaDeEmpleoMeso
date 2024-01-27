@@ -18,6 +18,7 @@ class Autoridadacademicas extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $autoridadId, $nombreAutoridad, $apellidosAutoridad, $estadoAutoridad, $facultad_id, $email, $password;
+    public $findAutoridad;
 
     public function render()
     {
@@ -57,8 +58,8 @@ class Autoridadacademicas extends Component
     }
 
     protected $rules = [
-        'nombreAutoridad' => 'required|regex:/^[\pL\s\-]+$/u | max:50',
-        'apellidosAutoridad' => 'required|regex:/^[\pL\s\-]+$/u |max:40',
+        'nombreAutoridad' => 'required| max:50',
+        'apellidosAutoridad' => 'required|max:40',
         'email' => 'required',
         'password' => 'required',
         'facultad_id' => 'required',
@@ -67,6 +68,22 @@ class Autoridadacademicas extends Component
   public function updated($propertyAutoridadacademica){
      $this->validateOnly($propertyAutoridadacademica);
    }
+
+   protected $messages = [
+    'nombreAutoridad.required' => 'Este campo es obligatorio.',
+    'nombreAutoridad.max' => 'Este campo no debe exceder los 50 caracteres.',
+    
+    'apellidosAutoridad.required' => 'Este campo es obligatorio.',
+    'apellidosAutoridad.max' => 'Este campo no debe exceder los 40 caracteres.',
+    
+    'email.required' => 'Este campo es obligatorio.',
+    'email.email' => 'Este campo debe ser una dirección de correo válida.',
+    'email.unique' => 'Ya existe un usuario con este correo electrónico.',
+    
+    'password.required' => 'Este campo es obligatorio.',
+    
+    'facultad_id.required' => 'Este campo es obligatorio.',
+];
 
     public function store()
     {
@@ -109,18 +126,56 @@ class Autoridadacademicas extends Component
     {
         $record = AutoridadAcademica::findOrFail($autoridadId);
         $this->selected_id = $autoridadId;
-        $this->nombreAutoridad = $record->nombreAutoridad;
-        $this->apellidosAutoridad = $record->apellidosAutoridad;
-        $this->estadoAutoridad = $record->estadoAutoridad;
-        $this->facultad_id = $record->facultad_id;
+        $this->nombreAutoridad = $record-> nombreAutoridad;
+        $this->apellidosAutoridad = $record-> apellidosAutoridad;
+        $this->estadoAutoridad = $record-> estadoAutoridad;
+        $this->facultad_id = $record-> facultad_id;
     }
 
-    public function update()
-    {
-        $this->validate();
+    // public function update()
+    // {
+    //     $this->validate();
 
-        if ($this->selected_id) {
-            $record = AutoridadAcademica::find($this->selected_id);
+    //     if ($this->selected_id) {
+    //         $record = AutoridadAcademica::find($this->selected_id);
+    //         $record->update([
+    //             'nombreAutoridad' => $this->nombreAutoridad,
+    //             'apellidosAutoridad' => $this->apellidosAutoridad,
+    //             'estadoAutoridad' => $this->estadoAutoridad,
+    //             'facultad_id' => $this->facultad_id
+    //         ]);
+
+    //         $user = User::find($record->user_id);
+    //         $user->update([
+    //             'name' => $this->nombreAutoridad . " ". $this->apellidosAutoridad,
+    //         ]);
+
+    //         $this->resetInput();
+    //         $this->dispatchBrowserEvent('closeModal');
+    //         session()->flash('message', 'Usuario actualizado correctamente.');
+    //         return redirect('autoridadacademicas');
+    //     }
+    // }
+
+
+    public function update()
+{
+    $this->validate([
+        'nombreAutoridad' => 'required| max:50',
+        'apellidosAutoridad' => 'required|max:40',
+        'facultad_id' => 'required',
+    ]);
+
+    if ($this->selected_id) {
+        $record = AutoridadAcademica::find($this->selected_id);
+
+        if (!$record) {
+            // Manejar el caso en que no se encuentre el registro
+            session()->flash('message', 'No se encontró el registro para actualizar.');
+            return;
+        }
+
+        try {
             $record->update([
                 'nombreAutoridad' => $this->nombreAutoridad,
                 'apellidosAutoridad' => $this->apellidosAutoridad,
@@ -130,15 +185,21 @@ class Autoridadacademicas extends Component
 
             $user = User::find($record->user_id);
             $user->update([
-                'name' => $this->nombreAutoridad . " ". $this->apellidosAutoridad,
+                'name' => $this->nombreAutoridad . " " . $this->apellidosAutoridad,
             ]);
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
             session()->flash('message', 'Usuario actualizado correctamente.');
-            return redirect('autoridadacademicas');
+        } catch (\Exception $e) {
+            // Manejar errores en la actualización
+            session()->flash('message', 'Error al actualizar el usuario: ' . $e->getMessage());
         }
+
+        return redirect('autoridadacademicas');
     }
+}
+
 
    // Para poder cambiar de estado o ver lo del eliminar con un modal
    public function edit2($autoridadId)
@@ -178,6 +239,7 @@ class Autoridadacademicas extends Component
 
     public function eliminar($autoridadId)
 	{
+        $this->findAutoridad = AutoridadAcademica::where('autoridadId', $autoridadId)->first();
 		$this->selected_id = $autoridadId;
         $this->dispatchBrowserEvent('showDeleteConfirmationModal');
 	}
@@ -185,11 +247,15 @@ class Autoridadacademicas extends Component
     public function destroy()
     {
         if ($this->selected_id) {
+            $userId = $this->findAutoridad->user_id;
+
             AutoridadAcademica::where('autoridadId', $this->selected_id)->delete();
+            User::where('id', $userId)->delete();
         }
 
         $this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Usuario Eliminado.');
+        return redirect('autoridadacademicas');
     }
     
     

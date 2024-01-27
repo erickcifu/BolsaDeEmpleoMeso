@@ -11,6 +11,10 @@ use App\Models\Departamento;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Http\UploadedFile;
+use DB;
 
 class Registro extends Component
 {
@@ -127,7 +131,7 @@ class Registro extends Component
         'correo' => 'required|email',
         'numero_personal' => 'required | size:8',
         'numero_domiciliar' => 'required |size:8',
-        'curriculum' => 'sometimes | nullable | mimes:pdf | max:30KB',
+        'curriculum' => 'sometimes|nullable|mimes:pdf|max:30720',
         'carrera_id' => 'required',
         'municipio_id' => 'required',
         'departamento_id' => 'required',
@@ -138,6 +142,12 @@ class Registro extends Component
     {
         $this->validateOnly($propertyEstudiante);
     }
+
+    protected $messages = [
+        'curriculum.mimes' => 'El currículum debe ser un archivo PDF.',
+        'curriculum.max' => 'El tamaño máximo permitido para el currículum es 30 KB.',
+    ];
+
     public function updatedFacultadId()
     {
         // Actualizar las carreras cuando cambie la facultad seleccionada

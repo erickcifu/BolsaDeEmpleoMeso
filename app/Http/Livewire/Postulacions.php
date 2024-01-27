@@ -18,6 +18,8 @@ class Postulacions extends Component
     public $postulaciones, $oferta;
     public $ofertaId;
 
+    protected $listeners = ['curriculumActualizado'];
+
     public function mount($ofertaId)
     {
         $this->ofertaId = $ofertaId;
@@ -60,6 +62,16 @@ class Postulacions extends Component
     {		
 		$this->fechaPostulacion = null;
 		$this->oferta_id = null;
+    }
+
+    private function resetInputEntrevista()
+    {		
+		$this->tituloEntrevista = null;
+		$this->descripcionEntrevista = null;
+		$this->FechaEntrevista = null;
+		$this->horaInicio = null;
+		$this->horaFinal = null;
+		$this->Contratado = null;
     }
 
     public function store()
@@ -139,7 +151,7 @@ class Postulacions extends Component
                 'comentarioContratado' => " ",
                 'postulacion_id' => $this->postulacion_id,
             ]);
-		
+        $this->resetInputEntrevista();
 		$this->dispatchBrowserEvent('closeModal');
         session()->flash('message', 'Entrevista agendada correctamente!');
 	}
@@ -150,5 +162,30 @@ class Postulacions extends Component
         if ($id) {
             Postulacion::where('id', $id)->delete();
         }
+    }
+
+    public function refreshTable(){
+        $keyWord = '%'.$this->keyWord .'%';
+        $this->ofertapost = Oferta::with('postulacions')->find($this->ofertaId);
+
+		// Verificar si la oferta existe
+		if (!$this->ofertapost) {
+			session()->flash('message', 'La oferta no existe.');
+			return;
+		}
+		$this->nombreOferta = $this->ofertapost->nombrePuesto;
+		$this->postulaciones = $this->ofertapost->postulacions()
+			->where(function ($queryDos) use ($keyWord) {
+				$queryDos->orWhereHas('estudiante', function ($queryEstudiante) use ($keyWord) {
+						$queryEstudiante->where('nombre', 'LIKE', $keyWord);
+			});
+		})
+		->get();
+        
+        return view('livewire.postulacions.view', [
+            'postulacions' => Postulacion::latest()
+						->paginate(10),
+                        "postulaciones"=>$this->postulaciones,
+        ]);
     }
 }

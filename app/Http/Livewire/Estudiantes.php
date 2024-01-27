@@ -26,6 +26,8 @@ class Estudiantes extends Component
     public $record2; 
 	public $nombre_municipio, $nombre_carrera, $nombre_facultad, $nombre_departamento;
 
+    protected $listeners = ['curriculumActualizado'];
+
 	public function render()
     {
         $facultades = Facultad::all();
@@ -42,7 +44,6 @@ class Estudiantes extends Component
                 ->orWhere('correo', 'LIKE', $keyWord)
                 ->orWhere('numero_personal', 'LIKE', $keyWord)
                 ->orWhere('numero_domiciliar', 'LIKE', $keyWord)
-                ->orWhere('curriculum', 'LIKE', $keyWord)
                 ->orWhereHas('municipio', function ($query) use ($keyWord) {
                     $query->where('nombreMunicipio', 'LIKE', $keyWord);
                     if ($this->departamento_id) {
@@ -66,6 +67,8 @@ class Estudiantes extends Component
     public function updatingKeyWord(){
         $this->resetPage();
     }
+
+
     public function store()
     {
 
@@ -204,19 +207,21 @@ class Estudiantes extends Component
 	public function edit2($estudianteId)
     {
         $this->record2 = Estudiante::where('estudianteId', $estudianteId)->first();
+        $this->selected_id = $estudianteId;
     }
 
 	//Método de eliminación
 	public function destroy()
     {
-        if ($this->record2) {
+        if ($this->selected_id) {
 			$userId = $this->record2->user_id;
 
-            Estudiante::where('estudianteId', $this->record2->estudianteId)->delete();
+            Estudiante::where('estudianteId', $this->selected_id)->delete();
 
 			User::where('id', $userId)->delete();
-			session()->flash('message', 'Estudiante eliminado correctamente');
         }
+        session()->flash('message', 'Estudiante eliminado correctamente');
+        return redirect('estudiantes');
     }
 
 	public function view($estudianteId)
@@ -230,11 +235,48 @@ class Estudiantes extends Component
 		$this->correo = $record-> correo;
 		$this->numero_personal = $record-> numero_personal;
 		$this->numero_domiciliar = $record-> numero_domiciliar;
-		$this->curriculum = $record-> curriculum;
+
 		$this->nombre_municipio = $record-> municipio->nombreMunicipio;
 		$this->nombre_carrera = $record-> carrera->Ncarrera;
         $this->nombre_facultad = $record-> carrera->facultad->Nfacultad;
         $this->nombre_departamento= $record-> municipio->departamento->nombreDepartamento;
         $this->departamento_id= $record-> municipio->departamento->departamentoId;
 	}
+
+    public function refreshTable()
+    {
+        $facultades = Facultad::all();
+        $carreras = Carrera::where('facultad_id', $this->facultad_id)->get();
+        $departamentos = Departamento::all();
+        $municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
+        $keyWord = '%' . $this->keyWord . '%';
+        return view('livewire.estudiantes.view', [
+            'estudiantes' => Estudiante::with('Municipio')
+                ->orWhere('nombre', 'LIKE', $keyWord)
+                ->orWhere('apellidos', 'LIKE', $keyWord)
+                ->orWhere('carnet', 'LIKE', $keyWord)
+                ->orWhere('DPI', 'LIKE', $keyWord)
+                ->orWhere('correo', 'LIKE', $keyWord)
+                ->orWhere('numero_personal', 'LIKE', $keyWord)
+                ->orWhere('numero_domiciliar', 'LIKE', $keyWord)
+                ->orWhereHas('municipio', function ($query) use ($keyWord) {
+                    $query->where('nombreMunicipio', 'LIKE', $keyWord);
+                    if ($this->departamento_id) {
+                        $query->where('departamento_id', $this->departamento_id);
+                    }
+                })
+                ->orWhereHas('carrera', function ($query) use ($keyWord) {
+                    $query->where('Ncarrera', 'LIKE', $keyWord);
+                    if ($this->facultad_id) {
+                        $query->where('facultad_id', $this->facultad_id);
+                    }
+                })
+                ->orWhere('user_id', 'LIKE', $keyWord)
+                ->paginate(10),
+            'carreras' => $carreras,
+            'facultades' => $facultades,
+            'municipios' => $municipios,
+            'departamentos' => $departamentos,
+        ]);
+    }
 }

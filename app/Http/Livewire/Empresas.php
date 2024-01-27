@@ -165,7 +165,7 @@ class Empresas extends Component
 
 		
 			'nombreEmpresa' => 'required|max:100',
-			'nit' => 'required|max:10',
+			'nit' => 'required',
 		    'descripcionEmpresa' => 'required',
 			'telefonoEmpresa' => 'required|size:8',
 			'correoEmpresa' => 'required|email',

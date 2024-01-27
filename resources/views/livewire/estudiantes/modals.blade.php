@@ -188,7 +188,7 @@
 
 <!-- Vista Modal -->
 <div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="ViewDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ViewModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
                 <h5 class="modal-title" id="ViewModalLabel" style="color: #f0eadc;">Información del estudiante</h5>
@@ -284,7 +284,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
                     
                 </form>
             </div>

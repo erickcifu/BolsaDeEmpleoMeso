@@ -12,10 +12,9 @@
                     @include('livewire.perfilEstudiante.modals')
                     <form class="mx-auto mt-4" style="width: 95%;">
                         <br/>
-                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="container">
                             @forelse($estudiantes as $row)
-                                <div class="col">
-                                    <div class="card mx-auto my-4" style="max-width: 600px; background-color: #ffffff">
+							<div class="card mx-auto my-4" style="max-width: 200vh; background-color: #ffffff;">
 										<div class="card-head" style="inline-block; width: 100%; background-color: #d3d3d3">
 											<div style="display: inline-block; width: 100%;  padding-left: 1em;">
 												<div class="mb-2">
@@ -27,12 +26,12 @@
 											<div class="hstack gap-3">
 												<div style="display: inline-block; width: 100%;">
 													<div class="mb-2">
-														<p class="card-text fs-5">Carné: {{ $row->carnet }} </p>
+														<p class="card-text fs-5">No. Carné: {{ $row->carnet }} </p>
 													</div>
 												</div>
 												<div style="display: inline-block; width: 100%;">
 													<div class="mb-2">
-														<p class="card-text fs-5 ">DPI: {{ $row->DPI }}</p>
+														<p class="card-text fs-5 ">No. DPI/CUI: {{ $row->DPI }}</p>
 													</div>
 												</div>
 											</div>
@@ -40,7 +39,7 @@
 											<div class="hstack gap-3">
 												<div style="display: inline-block; width: 100%;">
 													<div class="mb-2">
-														<p class="card-text fs-5">Celular: {{ $row->numero_personal }}</p>
+														<p class="card-text fs-5">Teléfono: {{ $row->numero_personal }}</p>
 													</div>
 												</div>
 												<div style="display: inline-block; width: 100%;">
@@ -49,11 +48,25 @@
 													</div>
 												</div>
 											</div>		
-												<!-- Agrega más campos según tus necesidades -->
-												<a>Curriculum</a>
-												<h1>Variable: {{  $row->curriculum }}</h1>
-												<a href="{{ Storage::url('cvs/'. $row->curriculum) }}" target="_blank" class="btn btn-secondary">Ver archivo</a>
-												<a data-bs-toggle="modal" data-bs-target="#curriculumDataModal" class="dropdown-item" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i>Editar</a> </td>
+											<div class="mb-2 d-flex align-items-center">
+												<p class="m-0 card-text fs-5">Currículum:</p>
+												<div class="ms-2">
+													@if ( $row->curriculum )
+													<a style="text-decoration: none; color: inherit;" class="p-0" href="{{ Storage::url('cvs/'. $row->curriculum) }}" target="_blank"><i class="fa fa-eye"></i> Ver archivo</a>
+													<span class="text-muted">|</span>
+													<a style="text-decoration: none; color: inherit;" class="p-0" data-bs-toggle="modal" data-bs-target="#curriculumDataModal" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar</a>
+													@else
+														Sin currículum
+														<a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Cargar un currículum" data-bs-content="En caso de no tener un currículum, puede generarlo desde la pestaña 'Generar CV' y subirlo en la opción 'Editar'">
+														<i class="fa-solid fa-circle-info"></i>
+														</a>
+														<span class="text-muted">|</span>
+														<a style="text-decoration: none; color: inherit;" class="p-0" data-bs-toggle="modal" data-bs-target="#curriculumDataModal" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar</a>
+													@endif
+													
+												</div>
+											</div>
+
 												<div class="hstack gap-3">
 													<div style="display: inline-block; width: 100%;">
 														<div class="mb-2">
@@ -86,11 +99,8 @@
 											</div>
 										</div>
                                     </div>
-                                </div>
                             @empty
-                                <div class="col">
                                     <p class="text-center">Sin datos</p>
-                                </div>
                             @endforelse
                         </div>
                         <br/>
@@ -101,3 +111,10 @@
     </body>
     </div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Inicializar el popover después de que se carga Livewire
+        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
+    });
+</script>

@@ -280,7 +280,7 @@
                                         <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                     <div class="col-4">
-                                        <label for="tituloObtenido">Título Obtenido*</label>
+                                        <label for="tituloObtenido">Título Obtenido/Carrera que cursa*</label>
                                         <input type="text" wire:model="formacion.{{ $indice }}.tituloObtenido" class="form-control" placeholder="Título obtenido">
                                         @error('formacion.' . $indice . '.tituloObtenido') 
                                         <span class="error text-danger">{{ $message }}</span> @enderror
@@ -389,13 +389,13 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="DeletModalLabel">Eliminar</h5>
+                <h5 class="modal-title" id="DeletModalLabel" style="color: #f0eadc;">Eliminar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminara este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
 
                 </form>
             </div>

@@ -130,6 +130,7 @@
                            placeholder="Curriculum" />@error('curriculum')
                        <span class="error text-danger">{{ $message }}</span>
                        @enderror
+                       <div wire:loading wire:target="curriculum"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>
                    </div>
                    </div>
                </div>
@@ -211,7 +212,7 @@
             </div>
             <div class="modal-footer mt-3">
                 <button type="button" wire:click.prevent="store()" class="btn btn-primary"
-                    style="background-color: #005c35">
+                    style="background-color: #005c35" wire:loading.attr="disabled"  wire:target="curriculum">
                     Guardar
                 </button>
             </div>

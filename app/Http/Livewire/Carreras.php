@@ -46,7 +46,7 @@ class Carreras extends Component
     }
 
     protected $rules = [
-        'Ncarrera' => 'required|regex:/^[\pL\s]+$/u|max:45',
+        'Ncarrera' => 'required|max:150',
 		'facultad_id' => 'required',
         'EstadoCarrera' => 'required',
     ];
@@ -54,6 +54,13 @@ class Carreras extends Component
     public function updated($propertyCarrera){
         $this->validateOnly($propertyCarrera);
     }
+
+    protected $messages = [
+        'Ncarrera.required' => 'Este campo es obligatorio.',
+        'Ncarrera.max' => 'Este campo no puede tener más de :max caracteres.',
+        'facultad_id.required' => 'El campo Facultad es obligatorio.',
+    ];
+
     public function store()
     {
         $this->validate();

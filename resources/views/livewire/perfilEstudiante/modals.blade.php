@@ -1,60 +1,55 @@
 
 <!-- Edit Modal -->
 <div wire:ignore.self class="modal fade modal-xl modal-dialog-scrollable" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="updateModalLabel">Editar Estudiante</h5>
+                <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Editar perfil</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <div class="hstack gap-3">
-                        <div style="display: inline-block; width: 500px;">
-                            <div class="mb-2">
-                                <label for="nombre"><b style="color: black;">Nombres<b></label>
-                                <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombre">@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>   
-                        <div style="display: inline-block; width: 500px;">
-                            <div class="mb-2">
-                                <label for="apellidos"><b style="color: black;"><b>Apellidos</label>
-                                <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">@error('apellidos') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nombre" class="form-label"><b style="color: black;">Nombres</b></label>
+                            <input wire:model="nombre" type="text" class="form-control" id="nombre" placeholder="Nombres">
+                            @error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="apellidos" class="form-label"><b style="color: black;">Apellidos</b></label>
+                            <input wire:model="apellidos" type="text" class="form-control" id="apellidos" placeholder="Apellidos">
+                            @error('apellidos') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="hstack gap-3">
-                        <div style="display: inline-block; width: 500px;">
-                            <div class="mb-2">
-                                <label for="carnet"><b style="color: black;">Carnet<b></label>
-                                <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Carnet">@error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>    
-                        <div style="display: inline-block; width: 500px;">
-                            <div class="mb-2">
-                                <label for="DPI"><b style="color: black;">DPI<b></label>
-                                <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi">@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="carnet" class="form-label"><b style="color: black;">No. Carné</b></label>
+                            <input wire:model="carnet" type="number" class="form-control" id="carnet" placeholder="Número de carné">
+                            @error('carnet') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
-                    </div>  
-                    <div class="hstack gap-3">
-                        <div style="display: inline-block; width: 500px;">          
-                            <div class="mb-2">
-                                <label for="numero_domiciliar"><b style="color: black;"><b>Otro Numero de Telefono</label>
-                                <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar">@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="DPI" class="form-label"><b style="color: black;">No. DPI/CUI</b></label>
+                            <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="No. DPI/CUI">
+                            @error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
-                        <div style="display: inline-block; width: 500px;"> 
-                            <div class="mb-2">
-                                <label for="numero_personal"><b style="color: black;">Numero Personal<b></label>
-                                <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal">@error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="numero_domiciliar" class="form-label"><b style="color: black;">Otro número de teléfono</b></label>
+                            <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar">
+                            @error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
-                    </div>            
+                        <div class="col-md-6 mb-3">
+                            <label for="numero_personal" class="form-label"><b style="color: black;">Número personal</b></label>
+                            <input wire:model="numero_personal" type="number" class="form-control" id="numero_personal" placeholder="Numero Personal">
+                            @error('numero_personal') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+           
                     <div class="mb-2">
-                        <label for="correo"><b style="color: black;">Correo Electronico<b></label>
-                        <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo">@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="correo"><b style="color: black;">Correo electrónico<b></label>
+                        <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo electrónico">@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="hstack gap-3">
                         <div style="display: inline-block; width: 100vh;"> 
@@ -124,13 +119,13 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header"style="background-color: #005c35;">
-                <h5 class="modal-title" id="curriculumModalLabel"style="color: #f0eadc;"> Editar curriculum</h5>
+                <h5 class="modal-title" id="curriculumModalLabel"style="color: #f0eadc;"> Editar currículum</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-2">
-                        <label for="curriculum"><b style="color: black;">Curriculum (seleccione un archivo pdf)<b> <br>
+                        <label for="curriculum"><b style="color: black;">Currículum (seleccione un archivo pdf)<b> <br>
                         
                         </label>
                         <input wire:model="curriculum" type="file" accept="application/pdf" class="form-control" id="curriculum" placeholder="curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
