@@ -52,7 +52,7 @@
 								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">ID</td> 
 								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">Fotografía</td> 
 								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Dirección domiciliar</th>
-								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Correo electronico</th>
+								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Correo electrónico</th>
 								<th  style="background-color: #005c35;"><b style="color: #f0eadc;">Teléfono</th>
 								<td  style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
 							</tr>

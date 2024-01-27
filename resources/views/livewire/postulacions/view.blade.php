@@ -20,14 +20,16 @@
 				
 				<div class="card-body">
 						@include('livewire.postulacions.modals')
-				<div class="table-responsive">
+				<div wire:poll.10s="refreshTable" class="table-responsive">
 				<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">#</b></td> 
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Fecha de postulación</b></th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Postulante</b></th>
-                                <th style="background-color: #005c35;"><b style="color: #f0eadc;">Curriculum</b></th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo electrónico</b></th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">No. de Teléfono</b></th>
+                                <th style="background-color: #005c35;"><b style="color: #f0eadc;">Currículum</b></th>
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</b></td>
 							</tr>
 						</thead>
@@ -38,9 +40,11 @@
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ date('d-m-Y', strtotime($row->fechaPostulacion)) }}</td>
 								<td>{{ $row-> estudiante -> nombre }}, {{ $row-> estudiante -> apellidos }}</td>
+								<td>{{ $row-> estudiante -> correo }}</td>
+								<td>{{ $row-> estudiante -> numero_personal }}</td>
                                 <td>
-                                    @if($row->estudiante  && File::exists($row->estudiante->curriculum))
-                                        <a href="{{ asset($row->estudiante->curriculum) }}" target="_blank"> Ver archivo </a>
+                                    @if($row->estudiante  && $row->estudiante->curriculum)
+                                        <a href="{{ Storage::url('cvs/' . $row->estudiante->curriculum) }}" target="_blank"> Ver archivo </a>
                                     @else
                                         Sin currículum disponible
                                     @endif

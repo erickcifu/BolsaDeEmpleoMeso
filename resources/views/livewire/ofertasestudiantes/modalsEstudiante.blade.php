@@ -2,7 +2,7 @@
 <div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="VerOfertaModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="VerOfertaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
        <div class="modal-content">
-            <form>
+            
             <div class="modal-header" style="background-color: #005c35;">
                 <h5 class="modal-title" id="VerOfertaModalLabel" style="color: #f0eadc;"><b>{{ $nombrePuesto }}</b></h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -12,6 +12,7 @@
                         <img src="{{ asset($imagenPuesto) }}" style="object-fit: cover; object-position: center;" alt="Imagen de Puesto">
                     </div>
                     <br/>
+                    <form>
                     <div class="form-group">
                         <h5 for="nombre_empresa"><b style="color: black;">{{ $nombre_empresa }}</b></h5>
                     </div>
@@ -60,6 +61,7 @@
                                     </div>
                                 </div>
                             </div>
+                    </form>
                     <br/>
                     <form>
                         <div class="form-group">
@@ -149,6 +151,7 @@
                     </form> 
                     <br/>
                     <br/>
+                    <form>
                     <div class="form-group">
                             <div class="text-center">
                                 <h5><b style="color: #005c35;">- Beneficios y oportunidades -</b></h5>
@@ -180,6 +183,8 @@
                                 </div>
                             </div>
                     </div>
+                </form>
+                <form>
                     <div class="form-group">
                         <label for="empresa_id"></label>
                         <input wire:model="empresa_id" type="number" class="form-control" id="empresa_id" value="1" hidden>@error('empresa_id') <span class="error text-danger">{{ $message }}</span> @enderror

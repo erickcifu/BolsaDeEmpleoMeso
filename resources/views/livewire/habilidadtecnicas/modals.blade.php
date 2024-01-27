@@ -3,14 +3,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear Habilidades técnicas</h5>
+                <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear habilidad técnica</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: #f0eadc;"></button>
             </div>
            <div class="modal-body">
 				<form>
                     <div class="form-group">
                         <label for="nombreTecnica"><b style="color: black;">Nombre de habilidad técnica<b></label>
-                        <input wire:model="nombreTecnica" type="text" class="form-control" id="nombre de Técnica" placeholder="Nombretecnica">@error('nombreTecnica') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="nombreTecnica" type="text" class="form-control" id="nombre de Técnica" placeholder="Nombre de la habilidad">@error('nombreTecnica') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label for="facultad_id"><b style="color: black;">Facultad<b></label>
@@ -39,7 +39,7 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
         <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar habilidad tecnica</h5>
+                <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar habilidad técnica</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -76,7 +76,7 @@
     <div class="modal-dialog" role="document">
        <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
-                <h5 class="modal-title" id="DeletModalLabel">Eliminar</h5>
+                <h5 class="modal-title" id="DeletModalLabel" style="color: #f0eadc;">Eliminar</h5>
                 <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

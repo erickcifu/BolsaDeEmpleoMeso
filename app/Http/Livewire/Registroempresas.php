@@ -11,6 +11,11 @@ use Livewire\WithFileUploads;
 use App\Mail\AltaEmpresa;
 use App\Mail\ActualizaEmpresa;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Http\UploadedFile;
+use DB;
+
 
 class Registroempresas extends Component
 {

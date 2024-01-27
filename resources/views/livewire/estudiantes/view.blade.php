@@ -11,7 +11,7 @@
 								Estudiantes </h4>
 							</div>
 							@if (session()->has('message'))
-							<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
+							<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
 							@endif
 							<div>
 								<input wire:model='keyWord' type="text" class="form-control float-left" name="search" id="search" placeholder="Buscar..." style="background-color: #d3d3d3;">
@@ -21,7 +21,7 @@
 				
 				<div class="card-body">
 						@include('livewire.estudiantes.modals')
-				<div class="table-responsive">
+				<div  wire:poll.10s="refreshTable" class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
@@ -45,12 +45,12 @@
 								<td>{{ $row->numero_personal }}</td>
 								<td>{{ $row->Carrera->Ncarrera}}</td> 
 								<td>
-                                    @if(File::exists($row->curriculum))
-                                        <a href="{{ asset($row->curriculum) }}" target="_blank"> Ver archivo </a>
-                                    @else
-                                        Sin currículum disponible
-                                    @endif
-                                </td>
+								@if ( $row->curriculum )
+								<a href="{{ Storage::url('cvs/' . $row->curriculum) }}" target="_blank"> Ver archivo </a>
+								@else
+									Sin curriculum disponible
+								@endif
+								</td>
 								<td width="125" >
 									<a data-bs-toggle="modal" data-bs-target="#ViewDataModal" class="dropdown-item" wire:click="view({{$row->estudianteId}})"><i class="fa-solid fa-eye"></i> Ver </a>
 									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>					
@@ -70,3 +70,5 @@
 		</div>
 	</div>
 </div>
+
+
