@@ -33,14 +33,14 @@
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Rtu</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Patente de comercio</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Descripcion</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono empresa</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo empresa</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Teléfono empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Correo eléctrónico</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Dirección de la empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado de la empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Teléfono del encargado</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado de la empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado de solicitud</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Usuario</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>

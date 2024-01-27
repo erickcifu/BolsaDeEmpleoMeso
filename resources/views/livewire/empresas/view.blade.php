@@ -41,11 +41,11 @@
 												<div class="card-body">
 													<p class="card-text fs-5">NIT: {{ $row->nit }}</p>
 													<p class="card-text fs-5">Dirección: {{ $row->direccionEmpresa }}</p>
-													<p class="card-text fs-5">Número de Teléfono: {{ $row->telefonoEmpresa }}</p>
-													<p class="card-text fs-5">Correo: {{ $row->correoEmpresa }}</p>
+													<p class="card-text fs-5">Número de teléfono: {{ $row->telefonoEmpresa }}</p>
+													<p class="card-text fs-5">Correo electrónico: {{ $row->correoEmpresa }}</p>
 													<p class="card-text fs-5">Departamento: {{ $row->municipio->Departamento->nombreDepartamento}}</p>
 													<p class="card-text fs-5">Municipio: {{ $row->municipio->nombreMunicipio }}</p>
-													<p class="card-text fs-5">Descripcion: {{ $row->descripcionEmpresa }}</p>
+													<p class="card-text fs-5">Descripción: {{ $row->descripcionEmpresa }}</p>
 													<p class="card-text fs-5">Usuario: {{ $row->user->name }}</p>
 													
 												</div>
@@ -82,19 +82,35 @@
 															
 														<?php endif; ?>
 														</p>
-														<A>------------  DOCUMENTOS DE IDENTIFICACION COMERCIAL  -------------</A>
-
-														<p class="card-text fs-5 ">RTU:<a href="{{ $row->rtu }}" target="_blank"> ver archivo </a>
-															<h6 data-bs-toggle="modal" data-bs-target="#rtuDataModal" class="dropdown-item" wire:click="editrtu({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar RTU</h6>
-															
-															<p class="card-text fs-5 ">Patente de Comercio: <a href="{{ $row->patenteComercio }}" target="_blank"> ver archivo </a> 
-															<h6 data-bs-toggle="modal" data-bs-target="#panDataModal" class="dropdown-item" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar PDC </h6>
-														
-														
-
-
-													
-													
+														<div class="text-center">
+															<hr class="w-100" style="border: 1px solid #212121; margin: 0 auto;">
+															<p class="mb-3 card-text fs-5">- Documentos de identificación comercial -</p>
+														</div>
+														<br/>
+														<div class="mb-2 d-flex align-items-center">
+															<p class="m-0 card-text fs-5">RTU:</p>
+															<div class="ms-2">
+																<a style="text-decoration: none; color: inherit;" class="p-0 me-2"  href="{{ $row->rtu }}" target="_blank">
+																	<i class="fa fa-eye"></i>Ver archivo</a>
+																<span class="text-muted">|</span>
+																<a style="text-decoration: none; color: inherit; cursor:pointer" class="p-0 ms-2" data-bs-toggle="modal" data-bs-target="#rtuDataModal"  wire:click="editrtu({{$row->empresaId}})">
+																	<i class="fa fa-edit"></i>
+																	Editar RTU
+																</a>
+															</div>
+														</div>
+														<!-- Actualización patente de comercio -->
+														<div class="mb-2 d-flex align-items-center">
+															<p class="m-0 card-text fs-5">Patente de Comercio:</p>
+															<div class="ms-2">
+																<a style="text-decoration: none; color: inherit; " class="p-0 me-2"  href="{{ $row->patenteComercio }}" target="_blank">
+																	<i class="fa fa-eye"></i>Ver archivo</a>
+																<span class="text-muted">|</span>
+																<a style="text-decoration: none; color: inherit; cursor:pointer" data-bs-toggle="modal" data-bs-target="#panDataModal" class="p-0 ms-2" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i>
+																	Editar PDC
+																</a>
+															</div>
+														</div>
 													</div>
 																										
 												  </div>
@@ -107,23 +123,6 @@
 													wire:click="edit({{$row->empresaId}})"style="background-color: #005c35">Editar</a>
 												</div>
 											</div>
-
-											
-											
-											
-											
-													
-											
-
-
-
-										
-										
-                                      	
-													
-											
-												
-											
 										</div>
                                     </div>
                                 </div>

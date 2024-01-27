@@ -37,6 +37,20 @@ class Habilidadtecnicas extends Component
         $this->resetInput();
     }
 	
+    protected $rules = [
+        'nombreTecnica' => 'required',
+		'facultad_id' => 'required',
+    ];
+
+    protected $messages = [
+        'nombreTecnica.required' => 'Este campo es obligatorio.',
+        'facultad_id.required' => 'El campo Facultad es obligatorio.',
+    ];
+
+    public function updated($propertyhabilidadTecnica)
+    {
+        $this->validateOnly($propertyhabilidadTecnica);
+    }
     private function resetInput()
     {		
 		$this->nombreTecnica = null;
@@ -45,10 +59,7 @@ class Habilidadtecnicas extends Component
 
     public function store()
     {
-        $this->validate([
-		'nombreTecnica' => 'required|regex:/^[\pL\s\-]+$/u',
-		'facultad_id' => 'required',
-        ]);
+        $this->validate();
 
         habilidadTecnica::create([ 
 			'nombreTecnica' => $this-> nombreTecnica,
@@ -101,7 +112,7 @@ class Habilidadtecnicas extends Component
 		}
 	
 		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'Departamento eliminado.');
+		session()->flash('message', 'Habilidad técnica eliminada.');
     }
 
 }

@@ -70,6 +70,7 @@ class Cvs extends Component
 	public function cancel()
 	{
 		$this->resetInput();
+		return redirect('cvs');
 	}
 
 	private function resetInput()
@@ -190,9 +191,9 @@ class Cvs extends Component
 		$this->validate([
 			// 'nombreCertificacion' => 'nullable | regex:/^[A-Za-z0-9\s]*$/|max:35',
 			// 'anioCertificacion' => 'nullable | date | before_or_equal:today',
-			'certificaciones.*.nombreCertificacion' => 'nullable|max:35',
+			'certificaciones.*.nombreCertificacion' => 'nullable|max:225',
 			'certificaciones.*.anioCertificacion' => 'nullable | date | before_or_equal:today',
-			'certificaciones.*.institucionCertificadora' => 'nullable |max:35',
+			'certificaciones.*.institucionCertificadora' => 'nullable |max:225',
 		]);
 	}
 	public function ValidarPaso3()
@@ -200,9 +201,9 @@ class Cvs extends Component
 		$this->validate([
 			'experiencia.*.inicioExperiencia' => 'nullable | date | before_or_equal:today',
 			'experiencia.*.finExperiencia' => 'nullable | date | before_or_equal:today',
-			'experiencia.*.puestoTrabajo' => 'nullable| max:35',
-			'experiencia.*.lugarTrabajo' => 'nullable | max:35',
-			'experiencia.*.descripcionLaboral' => 'nullable | max:35',
+			'experiencia.*.puestoTrabajo' => 'nullable| max:200',
+			'experiencia.*.lugarTrabajo' => 'nullable | max:275',
+			'experiencia.*.descripcionLaboral' => 'nullable | max:275',
 		]);
 	}
 	public function ValidarPaso4()
@@ -210,9 +211,9 @@ class Cvs extends Component
 		$this->validate([
 			'formacion.*.anioInicioFormacion' => 'required | date | before_or_equal:today',
 			'formacion.*.anioFinFormacion' => 'required | date | before_or_equal:today',
-			'formacion.*.institucionFormacion' => 'required | max:35',
-			'formacion.*.tituloObtenido' => 'required | max:35',
-			'formacion.*.nivelFormacion' => 'required | max:35',
+			'formacion.*.institucionFormacion' => 'required | max:225',
+			'formacion.*.tituloObtenido' => 'required | max:225',
+			'formacion.*.nivelFormacion' => 'required | max:90',
 		]);
 	} // fin de validación de cada paso del formulario
 	public function ValidarPaso5()
@@ -332,7 +333,7 @@ class Cvs extends Component
 		$this->resetInput();
 		$this->dispatchBrowserEvent('closeModal');
 		session()->flash('message', 'CV generado correctamente!.');
-
+		return redirect('cvs');
 	}
 
 
@@ -525,6 +526,7 @@ class Cvs extends Component
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Cv actualizado correctamente.');
+			return redirect('cvs');
 		}
 	}
 
@@ -542,6 +544,7 @@ class Cvs extends Component
 	
 		$this->dispatchBrowserEvent('closeModal');
 		session()->flash('message', 'CV Eliminado.');
+		return redirect('cvs');
     }
 
 
