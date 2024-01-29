@@ -151,7 +151,7 @@ class Estadisticasrrhh extends Component
         $contratados = DB::select($queryContrataciones);
 
         $this->postulados = $post[0]->total;
-        $this->contradados = $contratados[0]->contratados;
+        $this->contratados = $contratados[0]->contratados;
 
         $this->facultades = Facultad::count();
         $this->carreras = Carrera::count();
