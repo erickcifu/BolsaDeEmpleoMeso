@@ -57,10 +57,10 @@
                     <span class="text-center fa-solid fa-file-signature" aria-hidden="true"></span>
                 </div>
                 <div class="text-success text-center mt-3">
-                    <p>Contradados</p>
+                    <p>Contratados</p>
                 </div>
                 <div class="text-success text-center mt-2">
-                    <h4>{{ $contradados }}</h4>
+                    <h4>{{ $contratados }}</h4>
                 </div>
             </div>
         </div>
