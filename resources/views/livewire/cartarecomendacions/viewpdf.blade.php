@@ -44,7 +44,7 @@
 			
 
 		<p class="text-justify">
-		Y para los usos legales que al interesado convenga, extiendo y firmo la presente en la ciudad de Quetzaltenango, a los __ dias del mes de ____ del año {{ date('d/m/Y', strtotime($item->fechaCarta)) }}. 
+		Y para los usos legales que al interesado convenga, extiendo y firmo la presente en la ciudad de Quetzaltenango, a los {{ \Carbon\Carbon::parse($item->fechaCarta)->locale('es')->format('d') }} dias del mes de {{ \Carbon\Carbon::parse($item->fechaCarta)->format('F') }} del año {{ \Carbon\Carbon::parse($item->fechaCarta)->format('Y') }}. 
 		
 		</p>
 
@@ -55,7 +55,7 @@
 		<br>
 		<br>
 		<p class="text-center">
-		<img src="{{$item->firmaAutoridad}}" alt="" width="100" height="100"/>
+		<img src="{{ Storage::url('firmas/' . $item->firmaAutoridad) }}" alt="" width="100" height="100"/>
 		</p>
 		<p class="text-center">{{$item->autoridadAcademica->nombreAutoridad}}  {{$item->autoridadAcademica->apellidosAutoridad}}</p>
 		<p class="text-center"> cel: {{$item->telefonoAutoridad}}</p>

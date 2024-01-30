@@ -15,6 +15,7 @@ use App\Models\AutoridadAcademica;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -46,12 +47,13 @@ class Estudiantes1 extends Component
     // campos para la Carta
 
     public $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
-
+    public $newFirma;
 	public function mount()
     {
+
         $this->fechaCarta = Carbon::now()->toDate()->format('Y-m-d');
         $this->tieneCarta = Estudiante::with('cartarecomendacions')->get();
-        
+        echo $fechaCarta->format('F'); 
     }
     
     public function render()
@@ -160,11 +162,16 @@ class Estudiantes1 extends Component
         $rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
 		$this->validate($rules);
 
+        if ($this->firmaAutoridad!=null) {
+			$this->newFirma = uniqid() . '.' . $this->firmaAutoridad->getClientOriginalExtension();
+			$this->firmaAutoridad->storeAs('public/firmas', $this->newFirma, 'local');
+		}
+
         Cartarecomendacion::create([ 
             'fechaCarta' => $this->fechaCarta,
             'cargoYTareasRealizadas' => $this->cargoYTareasRealizadas,
             'telefonoAutoridad' => $this->telefonoAutoridad,
-            'firmaAutoridad' => 'storage/' . $this->firmaAutoridad->store('firmas', 'public'),
+            'firmaAutoridad' => $this->newFirma,
             'autoridadAcademica_id' => $this->autoridad->autoridadId,   
             'estudiante_id' => $this->id_estu,
         ]);
