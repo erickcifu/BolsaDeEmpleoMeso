@@ -1,9 +1,9 @@
-@extends('layouts.appini')
+@extends('layouts.app')
 @section('title', __('Dashboard'))
 @section('content')
 <div class="container-fluid">
 <div class="row justify-content-center">			
-	@livewire('empresas')
+	@livewire('ofertas')
 </div>
 </div>
 @endsection

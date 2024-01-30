@@ -130,7 +130,7 @@
             @foreach ($logos as $logo)
             <img
                 class="w-5"
-                src="{{ asset($logo) }}"
+                src="{{ Storage::url('logos/'. $logo) }}"
                 height="90"
                 alt="Ejemplo"
             />

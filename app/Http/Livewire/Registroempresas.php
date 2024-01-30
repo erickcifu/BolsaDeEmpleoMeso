@@ -26,6 +26,10 @@ class Registroempresas extends Component
     public $selected_id, $keyWord, $empresaId, $logo, $nombreEmpresa, $nit, $rtu, $patenteComercio, $descripcionEmpresa, $telefonoEmpresa, $correoEmpresa, $direccionEmpresa, $encargadoEmpresa, $telefonoEncargado, $estadoEmpresa, $estadoSolicitud, $user_id, $residencia_id;
     public $departamento=null, $municipio=null;
 	public $departamentos=null, $municipios=null; 
+    public $newLogo;
+    public $newRTU;
+    public $newPatente;
+
     public function render()
     {
         return view('livewire.registroempresas.view', ['Departamentos'=>Departamento::all()]);
@@ -58,7 +62,7 @@ class Registroempresas extends Component
     protected $rules = [
         'logo' => 'required|mimes:jpeg,png,jpg,gif|max:200',
         'nombreEmpresa' => 'required',
-        'nit' => 'required',
+        'nit' => 'required |numeric',
         'rtu' => 'required|mimes:pdf|max:250',
         'patenteComercio' => 'required|mimes:pdf|max:250',
         'descripcionEmpresa' => 'required',
@@ -91,13 +95,28 @@ class Registroempresas extends Component
         $this->validate();
         Mail::to($this->correoEmpresa)->send(new AltaEmpresa($this-> nombreEmpresa));
 
+        if ($this->logo!=null) {
+            $this->newLogo = uniqid() . '.' . $this->logo->getClientOriginalExtension();
+            $this->logo->storeAs('public/logos', $this->newLogo, 'local');
+        }
+
+        if ($this->rtu!=null) {
+            $this->newRTU = uniqid() . '.' . $this->rtu->getClientOriginalExtension();
+            $this->rtu->storeAs('public/rtus', $this->newRTU, 'local');
+        }
+
+        if ($this->patenteComercio!=null) {
+            $this->newPatente = uniqid() . '.' . $this->patenteComercio->getClientOriginalExtension();
+            $this->patenteComercio->storeAs('public/patentes', $this->newPatente, 'local');
+        }
+
         Empresa::create([
 
-            'logo' => 'storage/' . $this->logo->store('logos', 'public'),
+            'logo' => $this->newLogo,
             'nombreEmpresa' => $this->nombreEmpresa,
             'nit' => $this->nit,
-            'rtu' => 'storage/' . $this->rtu->store('rtus', 'public'),
-            'patenteComercio' => 'storage/' . $this->patenteComercio->store('patentes', 'public'),
+            'rtu' => $this->newRTU,
+            'patenteComercio' => $this->newPatente,
             'descripcionEmpresa' => $this->descripcionEmpresa,
             'telefonoEmpresa' => $this->telefonoEmpresa,
             'correoEmpresa' => $this->correoEmpresa,

@@ -12,8 +12,10 @@ use Livewire\WithFileUploads;
 use App\Mail\AltaEmpresa;
 use App\Mail\ActualizaEmpresa;
 use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use DB;
-use \Auth;
 
 class Empresas extends Component
 {
@@ -22,22 +24,26 @@ class Empresas extends Component
 
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $empresaId, $logo, $nombreEmpresa, $nit, $rtu, $patenteComercio, $descripcionEmpresa, $telefonoEmpresa, $correoEmpresa, $direccionEmpresa, $encargadoEmpresa, $telefonoEncargado, $estadoEmpresa, $estadoSolicitud, $user_id, $residencia_id;
-    public $departamento=null, $municipio=null;
-	public $departamentos=null, $municipios=null; 
+    // public $departamento=null, $municipio=null;
+	// public $departamentos, $municipios; 
+	public $departamento_id;
+	public $recordlog;
+	public $recordrtu;
+	public $recordpan;
    
 	
 	
 	public function render()
     {
 		$usuario=auth()->user()->id;
+		$departamentos = Departamento::all();
+		$municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
 		//$keyWord = '%'.$this->keyWord .'%';
         return view('livewire.empresas.view', [
             'empresas' => Empresa::where('user_id',$usuario)
-						
 						->paginate(10),
-						
-						
-						'Departamentos'=>Departamento::all()
+						'Departamentos'=> $departamentos,
+						'municipios'=> $municipios,
         ]);
     }
     public function updatingKeyWord(){
@@ -86,23 +92,22 @@ class Empresas extends Component
         'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
         'telefonoEncargado' => 'required|size:8',
         'residencia_id' => 'required',
-        'departamento' => 'required',
-
-
-
 	];
-     //funcion para hacer la consulta de 
-	public function updateddepartamento($departamento_id)
-	{
-	  $municipios=Municipio::join('departamentos','municipios.departamento_id','=','departamentos.departamentoId')
-									->where('departamentos.departamentoId',$departamento_id)->get();
-	   $this->municipios=$municipios;
 
-	}
 	public function updated($propertyEmpresa,){
 		$this->validateOnly($propertyEmpresa);
      
-	  }
+	}
+
+     //funcion para hacer la consulta de 
+	public function updateddepartamento()
+	{
+	//   $municipios=Municipio::join('departamentos','municipios.departamento_id','=','departamentos.departamentoId')
+	// 								->where('departamentos.departamentoId',$departamento_id)->get();
+	//    $this->municipios=$municipios;
+		$this->residencia_id = null;
+	}
+	
 
 
 
@@ -154,16 +159,15 @@ class Empresas extends Component
 		$this->telefonoEncargado = $record-> telefonoEncargado;
 		$this->estadoEmpresa = $record-> estadoEmpresa;
 		$this->estadoSolicitud = $record-> estadoSolicitud;
+		$this->departamento_id= $record-> municipio->departamento->departamentoId;
 		$this->user_id = $record-> user_id;
+		$this->residencia_id = $record-> residencia_id;
 		$this->residencia_id = $record-> residencia_id;
     }
 
     public function update()
     {
         $this->validate([
-
-
-		
 			'nombreEmpresa' => 'required|max:100',
 			'nit' => 'required',
 		    'descripcionEmpresa' => 'required',
@@ -173,37 +177,27 @@ class Empresas extends Component
 			'encargadoEmpresa' => 'required|regex:/^[\pL\s\-]+$/u',
 			'telefonoEncargado' => 'required|size:8',
 			'residencia_id' => 'required',
-			'departamento' => 'required',
-		
-			
-		
-			
         ]);
 		Mail::to($this->correoEmpresa)->send(new ActualizaEmpresa($this-> nombreEmpresa));
 
         if ($this->selected_id) {
 			$record = Empresa::find($this->selected_id);
             $record->update([ 
-			
-				
-				'nombreEmpresa' => $this-> nombreEmpresa,
-				'nit' => $this-> nit,
-				
-				'descripcionEmpresa' => $this-> descripcionEmpresa,
-				'telefonoEmpresa' => $this-> telefonoEmpresa,
-				'correoEmpresa' => $this-> correoEmpresa,
-				'direccionEmpresa' => $this-> direccionEmpresa,
-				'encargadoEmpresa' => $this-> encargadoEmpresa,
-				'telefonoEncargado' => $this-> telefonoEncargado,
-				'estadoEmpresa' => $this-> estadoEmpresa,
-				
-				
-				'residencia_id' => $this-> residencia_id
+				'nombreEmpresa' => $this->nombreEmpresa,
+				'nit' => $this->nit,
+				'descripcionEmpresa' => $this->descripcionEmpresa,
+				'telefonoEmpresa' => $this->telefonoEmpresa,
+				'correoEmpresa' => $this->correoEmpresa,
+				'direccionEmpresa' => $this->direccionEmpresa,
+				'encargadoEmpresa' => $this->encargadoEmpresa,
+				'telefonoEncargado' => $this->telefonoEncargado,
+				'estadoEmpresa' => $this->estadoEmpresa,
+				'residencia_id' => $this->residencia_id,
             ]);
 
             $this->resetInput();
             $this->dispatchBrowserEvent('closeModal');
-			session()->flash('message', 'Empresa actualizado correctamente.');
+			session()->flash('message', 'Empresa actualizada correctamente.');
         }
     }
 
@@ -243,21 +237,31 @@ class Empresas extends Component
 //****************************************************** editar logo */
    public function editlog($empresaId)
    {
-       $recordlog = Empresa::findOrFail($empresaId);
+       $this->recordlog = Empresa::findOrFail($empresaId);
 	   $this->selected_id = $empresaId; 
-       $this->nombreEmpresa = $recordlog-> nombreEmpresa;
-       $this->logo = $recordlog-> logo;
+       $this->nombreEmpresa = $this->recordlog-> nombreEmpresa;
+       $this->logo = $this->logo;
     
    }
    public function logo(){
        if ($this->selected_id) {
-           $recordlog = Empresa::find($this->selected_id);
+           $recordlogos = Empresa::find($this->selected_id);
 
-           $recordlog->update([ 
+		   // Verifica si hay un logotipo existente
+			if ($recordlogos->logo) {
+				// Elimina el logotipo anterior antes de cargar el nuevo
+				Storage::disk('public')->delete('logos/' . $recordlogos->logo);
+			}
+
+
+		   // Guarda el nuevo logotipo
+		   $nuevoLogo = uniqid() . '.' . $this->logo->getClientOriginalExtension();
+		   $this->logo->storeAs('public/logos', $nuevoLogo, 'local');
+           $recordlogos->update([ 
 			'nombreEmpresa' => $this-> nombreEmpresa,
-			'logo' => 'storage/'.$this-> logo->store('logos','public'),
-                 
+			'logo' => $nuevoLogo,
            ]);
+
 
            $this->resetInput();
            $this->dispatchBrowserEvent('closeModal');
@@ -269,47 +273,63 @@ class Empresas extends Component
   //****************************************************** editar rtu */
   public function editrtu($empresaId)
   {
-	  $recordrtu = Empresa::findOrFail($empresaId);
+	  $this->recordrtu = Empresa::findOrFail($empresaId);
 	  $this->selected_id = $empresaId; 
-	  $this->nombreEmpresa = $recordrtu-> nombreEmpresa;
-	  $this->rtu = $recordrtu-> rtu;
+	  $this->nombreEmpresa = $this->recordrtu->nombreEmpresa;
+	  $this->rtu = $this->rtu;
    
   }
   public function rtu(){
 	  if ($this->selected_id) {
-		  $recordrtu = Empresa::find($this->selected_id);
-		  $recordrtu->update([ 
-		   'nombreEmpresa' => $this-> nombreEmpresa,
-		   'rtu' => 'storage/'.$this-> rtu->store('rtus','public'),
-		   'estadoSolicitud' => "en Espera",
-	   
-		 
-		  ]);
+		  $recordRtus = Empresa::find($this->selected_id);
+
+		    // Verifica si hay un RTU existente
+			if ($recordRtus->rtu) {
+				// Elimina el RTU anterior antes de cargar el nuevo
+				Storage::disk('public')->delete('rtus/' . $recordRtus->rtu);
+			}
+
+			// Guarda el nuevo RTU
+			$nuevoRTU = uniqid() . '.' . $this->rtu->getClientOriginalExtension();
+			$this->rtu->storeAs('public/rtus', $nuevoRTU, 'local');
+		  	$recordRtus->update([ 
+				'nombreEmpresa' => $this->nombreEmpresa,
+		   		'rtu' => $nuevoRTU,
+		   		'estadoSolicitud' => "en Espera",
+		  	]);
 
 		  $this->resetInput();
 		  $this->dispatchBrowserEvent('closeModal');
-		  session()->flash('message', 'rtu actualizado Exitosamente!.');
+		  session()->flash('message', 'RTU actualizado exitosamente!.');
 	  }
   }
 
   //****************************************************** editar patente */
   public function editpan($empresaId)
   {
-	  $recordpan = Empresa::findOrFail($empresaId);
+	  $this->recordpan = Empresa::findOrFail($empresaId);
 	  $this->selected_id = $empresaId; 
-	  $this->nombreEmpresa = $recordpan-> nombreEmpresa;
-	  $this->patenteComercio = $recordpan-> patenteComercio;
-   
+	  $this->nombreEmpresa = $this->recordpan-> nombreEmpresa;
+	  $this->patenteComercio = $this->patenteComercio;
   }
+
   public function pan(){
 	  if ($this->selected_id) {
-		  $recordpan = Empresa::find($this->selected_id);
-		  $recordpan->update([ 
-		   'nombreEmpresa' => $this-> nombreEmpresa,
-		   'patenteComercio' =>'storage/'. $this-> patenteComercio->store('patentes','public'),
-		   'estadoSolicitud' => "en Espera",
-	   
-		  ]);
+		  $recordPatente = Empresa::find($this->selected_id);
+		  // Verifica si hay una Patente de Comercio existente
+			if ($recordPatente->patenteComercio) {
+				// Elimina la Patente de Comercio anterior antes de cargar el nuevo
+				Storage::disk('public')->delete('patentes/' . $recordPatente->patenteComercio);
+			}
+
+			// Guarda la nueva Patente
+			$nuevaPatente = uniqid() . '.' . $this->patenteComercio->getClientOriginalExtension();
+			$this->patenteComercio->storeAs('public/patentes', $nuevaPatente, 'local');
+		  	$recordPatente->update([ 
+		   		'nombreEmpresa' => $this-> nombreEmpresa,
+		   		'patenteComercio' => $nuevaPatente,
+		   		'estadoSolicitud' => "en Espera",
+		  	]);
 
 		  $this->resetInput();
 		  $this->dispatchBrowserEvent('closeModal');

@@ -51,14 +51,54 @@
 							@forelse($empresas as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td> <img src="{{asset($row->logo)}}" width="50" height="50" class="img-fluid"><a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar logo </a>
+									@if( $row->logo )
+										<img src="{{ Storage::url('logos/'. $row->logo) }}" width="75" height="75" class="img-fluid"/>
+										<a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})" style="cursor: pointer;"><i class="fa fa-edit"></i>Editar logotipo</a>
+										@else
+											Logotipo no disponible
+											<a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})" style="cursor: pointer;"><i class="fa fa-edit"></i> Editar logotipo </a>
+										@endif
 								</td>
 								
 								<td>{{ $row->nombreEmpresa }}</td>
 								<td>{{ $row->nit }}</td>
-								<td> <a href="{{ $row->rtu }}" target="_blank"> ver archivo </a> <a data-bs-toggle="modal" data-bs-target="#rtuDataModal" class="dropdown-item" wire:click="editrtu({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar RTU</a> </td>
+								<td>
+									@if ( $row->rtu )
+										<a style="text-decoration: none; color: inherit;" class="p-0" href="{{ Storage::url('rtus/'. $row->rtu) }}" target="_blank"><i class="fa fa-eye"></i> Ver archivo</a>
+										<span class="text-muted">|</span>
+										<a style="text-decoration: none; color: inherit; cursor:pointer" class="p-0 ms-2" data-bs-toggle="modal" data-bs-target="#rtuDataModal"  wire:click="editrtu({{$row->empresaId}})">
+										<i class="fa fa-edit"></i>
+										Editar RTU
+										</a>
+									@else
+										No disponible
+										<a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Cargar un RTU" data-bs-content="En caso de que el RTU no esté disponible, puede subirlo nuevamente desde el botón 'Editar RTU'.">
+										<i class="fa-solid fa-circle-info"></i>
+										</a>
+										<span class="text-muted">|</span>
+										<a style="text-decoration: none; color: inherit; cursor:pointer" class="p-0 ms-2" data-bs-toggle="modal" data-bs-target="#rtuDataModal"  wire:click="editrtu({{$row->empresaId}})">
+										<i class="fa fa-edit"></i>
+										Editar RTU
+										</a>
+									@endif
+								
+								
 								{{--<td>{{ $row->rtu }}</td>--}}
-								<td> <a href="{{ $row->patenteComercio }}" target="_blank"> ver archivo </a>  <a data-bs-toggle="modal" data-bs-target="#panDataModal" class="dropdown-item" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar PDC </a> </td></td>
+								<td> 
+									@if ( $row->patenteComercio )
+										<a style="text-decoration: none; color: inherit;" class="p-0" href="{{ Storage::url('patentes/'. $row->patenteComercio) }}" target="_blank"><i class="fa fa-eye"></i> Ver archivo</a>
+										<span class="text-muted">|</span>
+										<a style="text-decoration: none; color: inherit; cursor:pointer" data-bs-toggle="modal" data-bs-target="#panDataModal" class="p-0 ms-2" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i>
+										Editar PDC
+										</a>
+									@else
+										No disponible
+										<span class="text-muted">|</span>
+										<a style="text-decoration: none; color: inherit; cursor:pointer" data-bs-toggle="modal" data-bs-target="#panDataModal" class="p-0 ms-2" wire:click="editpan({{$row->empresaId}})"><i class="fa fa-edit"></i>
+										Editar PDC
+										</a>
+									@endif
+								</td>
 								{{--<td>{{ $row->patenteComercio }}</td>--}}
 								<td>{{ $row->descripcionEmpresa }}</td>
 								<td>{{ $row->telefonoEmpresa }}</td>
@@ -122,3 +162,10 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Inicializar el popover después de que se carga Livewire
+        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
+    });
+</script>

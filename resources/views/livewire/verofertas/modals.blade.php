@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body" style="color: #f0eadc;">
                     <div style="display: flex; justify-content: center; align-items: center; max-height: 300px; overflow: hidden;">
-                        <img src="{{ asset($imagenPuesto) }}" style="object-fit: cover; object-position: center;" alt="Imagen de Puesto">
+                        <img src="{{ Storage::url('ofertaslab/'. $imagenPuesto) }}" style="object-fit: cover; object-position: center;" alt="Imagen de Puesto">
                     </div>
                     <br/>
                     <form>
