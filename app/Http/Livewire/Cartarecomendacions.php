@@ -24,6 +24,7 @@ class Cartarecomendacions extends Component
 	protected $paginationTheme = 'bootstrap';
     public $selected_id, $keyWord, $cartaId, $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
 	protected $cartaEncontrada = false;
+	public $newFirma;
 
     public function render()
     {
@@ -121,13 +122,17 @@ class Cartarecomendacions extends Component
     {
         $this->validate();
 
+		if ($this->firmaAutoridad!=null) {
+			$this->newFirma = uniqid() . '.' . $this->firmaAutoridad->getClientOriginalExtension();
+			$this->firmaAutoridad->storeAs('public/firmas', $this->newFirma, 'local');
+		}
         Cartarecomendacion::create([ 
 			
 			'fechaCarta' => $this-> fechaCarta,
 			'cargoYTareasRealizadas' => $this-> cargoYTareasRealizadas,
 			'telefonoAutoridad' => $this-> telefonoAutoridad,
 			//'storage/' . $this-> firma ->store('firmas','public'),
-			'firmaAutoridad' => 'storage/' . $this-> firmaAutoridad->store('firmas','public'),
+			'firmaAutoridad' => $this->newFirma,
 			'autoridadAcademica_id' => $this-> autoridadAcademica_id,
 			'estudiante_id' => $this-> estudiante_id
         ]);

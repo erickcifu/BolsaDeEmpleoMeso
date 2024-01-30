@@ -40,11 +40,11 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td> 
-								@if($row->imagenPuesto != NULL)
-									<img src="{{ asset($row->imagenPuesto) }}" width="50" height="50" class="img-fluid">
+								@if($row->imagenPuesto)
+									<img src="{{ Storage::url('ofertaslab/'. $row->imagenPuesto) }}" width="50" height="50" class="img-fluid">
 								@else
 									<!-- Muestra algún marcador de posición o mensaje cuando no hay imagen -->
-									<span>Sin imagen</span>
+									Sin imagen
 								@endif
 									<a data-bs-toggle="modal" data-bs-target="#ImagenDataModal" class="dropdown-item" wire:click="editImagen({{$row->ofertaId}})"><i class="fa fa-edit"></i>Editar</a>
 								</td>

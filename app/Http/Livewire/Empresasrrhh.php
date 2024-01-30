@@ -243,4 +243,31 @@ class Empresasrrhh extends Component
             Empresa::where('empresaId', $empresaId)->delete();
         }
     }
+
+	public function refreshTable(){
+		$keyWord = '%'.$this->keyWord .'%';
+        return view('livewire.empresasrrhh.view', [
+            'empresas' => Empresa::latest()
+						->orWhere('empresaId', 'LIKE', $keyWord)
+						->orWhere('logo', 'LIKE', $keyWord)
+						->orWhere('nombreEmpresa', 'LIKE', $keyWord)
+						->orWhere('nit', 'LIKE', $keyWord)
+						->orWhere('rtu', 'LIKE', $keyWord)
+						->orWhere('patenteComercio', 'LIKE', $keyWord)
+						->orWhere('descripcionEmpresa', 'LIKE', $keyWord)
+						->orWhere('telefonoEmpresa', 'LIKE', $keyWord)
+						->orWhere('correoEmpresa', 'LIKE', $keyWord)
+						->orWhere('direccionEmpresa', 'LIKE', $keyWord)
+						->orWhere('encargadoEmpresa', 'LIKE', $keyWord)
+						->orWhere('telefonoEncargado', 'LIKE', $keyWord)
+						->orWhere('estadoEmpresa', 'LIKE', $keyWord)
+						->orWhere('estadoSolicitud', 'LIKE', $keyWord)
+						->orWhere('user_id', 'LIKE', $keyWord)
+						->orWhere('residencia_id', 'LIKE', $keyWord)
+						->paginate(10),
+						
+						
+						'Departamentos'=>Departamento::all()
+        ]);
+	}
 }

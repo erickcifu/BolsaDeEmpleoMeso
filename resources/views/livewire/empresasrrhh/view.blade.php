@@ -22,7 +22,7 @@
 				
 				<div class="card-body">
 						@include('livewire.empresasrrhh.modals')
-					<div class="table-responsive">
+					<div wire:poll.10s="refreshTable" class="table-responsive">
 						<table class="table table-bordered table-sm">
 							<thead class="thead">
 								<tr> 
@@ -38,21 +38,32 @@
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Municipio</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
-									
 								</tr>
 							</thead>
 							<tbody>
 								@forelse($empresas as $row)
 								<tr>
 									<td>{{ $loop->iteration }}</td> 
-									<td> <img src="{{asset($row->logo)}}" width="50" height="50" class="img-fluid">
+									<td> <img src="{{ Storage::url('logos/'. $row->logo) }}" width="50" height="50" class="img-fluid">
 									</td>
 									
 									<td>{{ $row->nombreEmpresa }}</td>
 									<td>{{ $row->nit }}</td>
-									<td> <a href="{{ $row->rtu }}" target="_blank"> Ver archivo </a> </td>
+									<td>
+										@if ( $row->rtu )
+											<a style="text-decoration: none; color: inherit; cursor:pointer" href="{{ Storage::url('rtus/'. $row->rtu) }}" target="_blank"><i class="fa fa-eye"></i> Ver archivo </a>
+										@else
+											RTU no disponible
+										@endif	
+									</td>
 									{{--<td>{{ $row->rtu }}</td>--}}
-									<td> <a href="{{ $row->patenteComercio }}" target="_blank"> Ver archivo </a> </td>
+									<td> 
+										@if ( $row->patenteComercio )
+											<a style="text-decoration: none; color: inherit; cursor:pointer;" href="{{ Storage::url('patentes/'. $row->patenteComercio) }}"  target="_blank"><i class="fa fa-eye"></i> Ver archivo </a>
+										@else
+											Patente de Comercio no disponible
+										@endif
+									</td>
 									{{--<td>{{ $row->patenteComercio }}</td>--}}
 									
 									<td>

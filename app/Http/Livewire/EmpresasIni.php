@@ -24,7 +24,10 @@ class EmpresasIni extends Component
     public $selected_id, $keyWord, $empresaId, $logo, $nombreEmpresa, $nit, $rtu, $patenteComercio, $descripcionEmpresa, $telefonoEmpresa, $correoEmpresa, $direccionEmpresa, $encargadoEmpresa, $telefonoEncargado, $estadoEmpresa, $estadoSolicitud, $user_id, $residencia_id;
     public $departamento=null, $municipio=null;
 	public $departamentos=null, $municipios=null; 
-   
+    public $recordlog;
+	public $newLogotipo;
+	public $recordrtu;
+	public $recordpan;
 	
 	
 	public function render()
@@ -236,20 +239,26 @@ class EmpresasIni extends Component
 //****************************************************** editar logo */
    public function editlog($empresaId)
    {
-       $recordlog = Empresa::findOrFail($empresaId);
+       $this->recordlog = Empresa::findOrFail($empresaId);
 	   $this->selected_id = $empresaId; 
-       $this->nombreEmpresa = $recordlog-> nombreEmpresa;
-       $this->logo = $recordlog-> logo;
+       $this->nombreEmpresa = $this->recordlog->nombreEmpresa;
+       $this->logo = $this->logo;
     
    }
    public function logo(){
        if ($this->selected_id) {
-           $recordlog = Empresa::find($this->selected_id);
+           $recordlogotipo = Empresa::find($this->selected_id);
 
-           $recordlog->update([ 
+		   if ($recordlogotipo->logo) {
+			// Elimina el logotipo anterior antes de cargar el nuevo
+			Storage::disk('public')->delete('logos/' . $recordlogotipo->logo);
+			}
+
+			$newLogotipo = uniqid() . '.' . $this->logo->getClientOriginalExtension();
+			$this->logo->storeAs('public/logos', $newLogotipo, 'local');
+            $recordlogotipo->update([ 
 			'nombreEmpresa' => $this-> nombreEmpresa,
-			'logo' => 'storage/'.$this-> logo->store('logos','public'),
-                 
+			'logo' => $newLogotipo,
            ]);
 
            $this->resetInput();
@@ -262,52 +271,68 @@ class EmpresasIni extends Component
   //****************************************************** editar rtu */
   public function editrtu($empresaId)
   {
-	  $recordrtu = Empresa::findOrFail($empresaId);
+	  $this->recordrtu = Empresa::findOrFail($empresaId);
 	  $this->selected_id = $empresaId; 
-	  $this->nombreEmpresa = $recordrtu-> nombreEmpresa;
-	  $this->rtu = $recordrtu-> rtu;
+	  $this->nombreEmpresa = $this->recordrtu->nombreEmpresa;
+	  $this->rtu = $this->rtu;
    
   }
   public function rtu(){
 	  if ($this->selected_id) {
-		  $recordrtu = Empresa::find($this->selected_id);
-		  $recordrtu->update([ 
-		   'nombreEmpresa' => $this-> nombreEmpresa,
-		   'rtu' => 'storage/'.$this-> rtu->store('rtus','public'),
-		   'estadoSolicitud' => "en Espera",
-	   
-		 
-		  ]);
+		  $recordRtus = Empresa::find($this->selected_id);
+
+		    // Verifica si hay un RTU existente
+			if ($recordRtus->rtu) {
+				// Elimina el RTU anterior antes de cargar el nuevo
+				Storage::disk('public')->delete('rtus/' . $recordRtus->rtu);
+			}
+
+			// Guarda el nuevo RTU
+			$nuevoRTU = uniqid() . '.' . $this->rtu->getClientOriginalExtension();
+			$this->rtu->storeAs('public/rtus', $nuevoRTU, 'local');
+		  	$recordRtus->update([ 
+				'nombreEmpresa' => $this->nombreEmpresa,
+		   		'rtu' => $nuevoRTU,
+		   		'estadoSolicitud' => "en Espera",
+		  	]);
 
 		  $this->resetInput();
 		  $this->dispatchBrowserEvent('closeModal');
-		  session()->flash('message', 'rtu actualizado Exitosamente!.');
+		  session()->flash('message', 'RTU actualizado exitosamente!.');
 	  }
   }
 
   //****************************************************** editar patente */
   public function editpan($empresaId)
   {
-	  $recordpan = Empresa::findOrFail($empresaId);
-	  $this->selected_id = $empresaId; 
-	  $this->nombreEmpresa = $recordpan-> nombreEmpresa;
-	  $this->patenteComercio = $recordpan-> patenteComercio;
+	$this->recordpan = Empresa::findOrFail($empresaId);
+	$this->selected_id = $empresaId; 
+	$this->nombreEmpresa = $this->recordpan-> nombreEmpresa;
+	$this->patenteComercio = $this->patenteComercio;
    
   }
   public function pan(){
-	  if ($this->selected_id) {
-		  $recordpan = Empresa::find($this->selected_id);
-		  $recordpan->update([ 
-		   'nombreEmpresa' => $this-> nombreEmpresa,
-		   'patenteComercio' =>'storage/'. $this-> patenteComercio->store('patentes','public'),
-		   'estadoSolicitud' => "en Espera",
-	   
-		  ]);
+	if ($this->selected_id) {
+		$recordPatente = Empresa::find($this->selected_id);
+		// Verifica si hay una Patente de Comercio existente
+		  if ($recordPatente->patenteComercio) {
+			  // Elimina la Patente de Comercio anterior antes de cargar el nuevo
+			  Storage::disk('public')->delete('patentes/' . $recordPatente->patenteComercio);
+		  }
 
-		  $this->resetInput();
-		  $this->dispatchBrowserEvent('closeModal');
-		  session()->flash('message', 'Patente actualizada Exitosamente!.');
-	  }
+		  // Guarda la nueva Patente
+		  $nuevaPatente = uniqid() . '.' . $this->patenteComercio->getClientOriginalExtension();
+		  $this->patenteComercio->storeAs('public/patentes', $nuevaPatente, 'local');
+			$recordPatente->update([ 
+				 'nombreEmpresa' => $this-> nombreEmpresa,
+				 'patenteComercio' => $nuevaPatente,
+				 'estadoSolicitud' => "en Espera",
+			]);
+
+		$this->resetInput();
+		$this->dispatchBrowserEvent('closeModal');
+		session()->flash('message', 'Patente actualizada Exitosamente!.');
+	}
   }
 //////******eliinar */
     public function destroy($empresaId)

@@ -1,6 +1,6 @@
 <!-- Add Modal -->
 <div wire:ignore.self class="modal fade" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
                 <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear Empresa</h5>
@@ -104,7 +104,7 @@
 
 <!-- Edit Modal -->
 <div wire:ignore.self class="modal fade" id="updateDataModal2" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
        <div class="modal-content">
         <div class="modal-header" style="background-color: #005c35;">
             <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Información de la Empresa</h5>
@@ -112,8 +112,6 @@
         </div>
             <div class="modal-body">
                 <form>
-                   
-                  
                     <div class="form-group">
                         <label for="nombreEmpresa"><b style="color: black;">Nombre de la Empresa<b></label>
                         <input wire:model="nombreEmpresa" type="text" class="form-control" id="nombreEmpresa" placeholder="Nombre empresa" disabled>@error('nombreEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -132,7 +130,7 @@
                         <input wire:model="telefonoEmpresa" type="text" class="form-control" id="telefonoEmpresa" placeholder="Telefono empresa"disabled>@error('telefonoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="correoEmpresa"><b style="color: black;">Correo de la Empresa<b></label>
+                        <label for="correoEmpresa"><b style="color: black;">Correo electrónico de la Empresa<b></label>
                         <input wire:model="correoEmpresa" type="text" class="form-control" id="correoEmpresa" placeholder="Correo empresa" disabled>@error('correoEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -147,11 +145,6 @@
                         <label for="telefonoEncargado"><b style="color: black;">Teléfono del Encargado<b></label>
                         <input wire:model="telefonoEncargado" type="text" class="form-control" id="telefonoEncargado" placeholder="Telefono encargado"disabled>@error('telefonoEncargado') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-             
-                  
-                   
-
-         
                 </form>
             </div>
             <div class="modal-footer">

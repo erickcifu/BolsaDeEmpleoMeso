@@ -21,6 +21,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Http\UploadedFile;
 
 class Ofertas extends Component
 {
@@ -33,7 +36,9 @@ class Ofertas extends Component
 	public $ofertaId;
 	public $id_postu, $nombreOferta;
 	public $imagenPuestoPath, $keyWordTwo;
-
+	public $recordImg;
+	public $newImagen;
+	public $storeImagen;
 	//Campos de la entrevista
 	public $tituloEntrevista, $descripcionEntrevista, $FechaEntrevista, $horaInicio, $horaFinal, $Contratado, $comentarioContratado, $postulacion_id;
 
@@ -63,7 +68,6 @@ class Ofertas extends Component
 
     public function render()
     {
-
 		$this->Postulaciones = Postulacion::all();
 		$facultades = Facultad::all();
 		// $this->habilidadesTecnicas = habilidadTecnica::all();
@@ -76,36 +80,34 @@ class Ofertas extends Component
 
     		$this->user = User::with('empresa')->find($this->userID);
 			
-
-			$keyWord = '%'.$this->keyWord .'%';
-    		// Accede a las ofertas laborales de la empresa
-    		$this->ofertasLaborales = $this->user->Empresa->ofertas()
-				->where(function ($query) use ($keyWord) {
-					$query->where('resumenPuesto', 'LIKE', $keyWord)
-							->orWhere('nombrePuesto', 'LIKE', $keyWord)
-							->orWhere('imagenPuesto', 'LIKE', $keyWord)
-							->orWhere('sueldoMinimo', 'LIKE', $keyWord)
-							->orWhere('cantVacantes', 'LIKE', $keyWord)
-							->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
-							->orWhere('edadRequerida', 'LIKE', $keyWord)
-							->orWhere('generoRequerido', 'LIKE', $keyWord)
-							->orWhere('comentarioCierre', 'LIKE', $keyWord)
-							->orWhere('sueldoMax', 'LIKE', $keyWord)
-							->orWhereHas('facultad', function ($queryFacultad) use ($keyWord) {
-								$queryFacultad->where('Nfacultad', 'LIKE', $keyWord);
-							});
-				})
-				->get();
 			
-			return view('livewire.ofertas.view', [
-				'ofertas' => Oferta::latest()
-							
-							->paginate(10),
-							'facultades' => $facultades,
-							'ofertasLaborales' => $this->ofertasLaborales,
-			]);
+				$keyWord = '%'.$this->keyWord .'%';
+				// Accede a las ofertas laborales de la empresa
+				$this->ofertasLaborales = $this->user->Empresa->ofertas()
+					->where(function ($query) use ($keyWord) {
+						$query->where('resumenPuesto', 'LIKE', $keyWord)
+								->orWhere('nombrePuesto', 'LIKE', $keyWord)
+								->orWhere('imagenPuesto', 'LIKE', $keyWord)
+								->orWhere('sueldoMinimo', 'LIKE', $keyWord)
+								->orWhere('cantVacantes', 'LIKE', $keyWord)
+								->orWhere('modalidadTrabajo', 'LIKE', $keyWord)
+								->orWhere('edadRequerida', 'LIKE', $keyWord)
+								->orWhere('generoRequerido', 'LIKE', $keyWord)
+								->orWhere('comentarioCierre', 'LIKE', $keyWord)
+								->orWhere('sueldoMax', 'LIKE', $keyWord)
+								->orWhereHas('facultad', function ($queryFacultad) use ($keyWord) {
+									$queryFacultad->where('Nfacultad', 'LIKE', $keyWord);
+								});
+					})
+					->get();
+
+					return view('livewire.ofertas.view', [
+						'ofertas' => Oferta::latest()->paginate(10),
+						'facultades' => $facultades,
+					]);
 		}
 	}
+	
 	
 	/*public function verPostulaciones($ofertaId)
 	{
@@ -339,6 +341,12 @@ public function validarPaso5()
 			$this->user = User::with('empresa')->find($this->userID);
 			$this->empresaAut = $this->user->Empresa->empresaId;
 			$this->validate();
+
+			if ($this->imagenPuesto!=null) {
+                $this->storeImagen = uniqid() . '.' . $this->imagenPuesto->getClientOriginalExtension();
+			    $this->imagenPuesto->storeAs('public/ofertaslab', $this->storeImagen, 'local');
+            }
+
 			$oferta = Oferta::create([ 
 				'resumenPuesto' => $this-> resumenPuesto,
 				'nombrePuesto' => $this-> nombrePuesto,
@@ -352,7 +360,7 @@ public function validarPaso5()
 				'beneficios' => $this-> beneficios,
 				'oportunidadesDesarrollo' => $this-> oportunidadesDesarrollo,
 				'fechaMax' => $this-> fechaMax,
-				'imagenPuesto' => 'storage/' . $this->imagenPuesto->store('ofertaslab', 'public'),
+				'imagenPuesto' => $this->storeImagen,
 				'cantVacantes' => $this-> cantVacantes,
 				'modalidadTrabajo' => $this-> modalidadTrabajo,
 				'edadRequerida' => $this-> edadRequerida,
@@ -808,21 +816,26 @@ public function validarPaso5()
 	//EDITAR IMAGEN DEL PUESTO//
 	public function editImagen($ofertaId){
 		
-		$recordImg = Oferta::findOrFail($ofertaId);
+		$this->recordImg = Oferta::findOrFail($ofertaId);
 		$this->selected_id = $ofertaId; 
-		$this->nombrePuesto = $recordImg-> nombrePuesto;
-		$this->imagenPuesto = $recordImg->imagenPuesto;
+		$this->nombrePuesto = $this->recordImg-> nombrePuesto;
+		$this->imagenPuesto = $this->imagenPuesto;
 	 
 	}
 
 	public function GuardarImagen(){
 		if ($this->selected_id) {
-			$recordImg = Oferta::find($this->selected_id);
+			$recordImagen = Oferta::find($this->selected_id);
 		
-		
-			$recordImg->update([ 
+			if ($recordImagen->imagenPuesto) {
+				Storage::disk('public')->delete('ofertaslab/' . $recordImagen->imagenPuesto);
+			}
+
+			$newImagen = uniqid() . '.' . $this->imagenPuesto->getClientOriginalExtension();
+			$this->imagenPuesto->storeAs('public/ofertaslab', $newImagen, 'local');
+			$this->recordImg->update([ 
 				'nombrePuesto' => $this->nombrePuesto,
-				'imagenPuesto' => 'storage/'.$this->imagenPuesto->store('ofertaslab', 'public'),
+				'imagenPuesto' => $newImagen,
 			]);
 			
 			$this->dispatchBrowserEvent('closeModal');
