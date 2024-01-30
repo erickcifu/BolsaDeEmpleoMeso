@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 <div class="row justify-content-center">			
-	@livewire('ofertas')
+	@livewire('empresas')
 </div>
 </div>
 @endsection
