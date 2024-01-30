@@ -66,7 +66,7 @@ class LoginController extends Controller
 
 
             // Redirección predeterminada para otros tipos de usuarios
-            return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::HOMEini);
         } elseif ($user->rol_id == 3) {
             return redirect(RouteServiceProvider::HOMEADMIN);
         } elseif ($user->rol_id == 4) {

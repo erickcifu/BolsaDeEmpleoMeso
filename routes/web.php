@@ -97,6 +97,7 @@ Route::get('/google-callback', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('empresa')->name('home');
+Route::get('/homeini', [App\Http\Controllers\HomeiniController::class, 'index'])->middleware('empresa')->name('homeini');
 Route::view('registroestudiante', 'livewire.registro.index')->middleware('estudiante');
 
 Route::view('registroempresa', 'livewire.registroempresas.index')->middleware('empresa');
