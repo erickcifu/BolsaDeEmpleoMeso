@@ -96,57 +96,57 @@ Route::get('/google-callback', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::view('registroestudiante', 'livewire.registro.index')->middleware('auth');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('empresa')->name('home');
+Route::view('registroestudiante', 'livewire.registro.index')->middleware('estudiante');
 
-Route::view('registroempresa', 'livewire.registroempresas.index')->middleware('auth');
-Route::view('estadisticasempresa', 'livewire.estadisticasempresa.index')->middleware('auth');
-Route::view('estadisticasrrhh', 'livewire.estadisticasrrhh.index')->middleware('auth');
-Route::view('estadisticassupervisor', 'livewire.estadisticassupervisor.index')->middleware('auth');
-Route::view('registro-empresa', 'livewire.registroempresas.index')->middleware('auth');
+Route::view('registroempresa', 'livewire.registroempresas.index')->middleware('empresa');
+Route::view('estadisticasempresa', 'livewire.estadisticasempresa.index')->middleware('empresa');
+Route::view('estadisticasrrhh', 'livewire.estadisticasrrhh.index')->middleware('rrhh');
+Route::view('estadisticassupervisor', 'livewire.estadisticassupervisor.index')->middleware('autoridad');
+Route::view('registro-empresa', 'livewire.registroempresas.index')->middleware('empresa');
 
-Route::get('/homeAdmin', [App\Http\Controllers\HomeAdminController::class, 'index'])->name('homeAdmin');
-Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::class, 'index'])->name('homeAutoridad');
+Route::get('/homeAdmin', [App\Http\Controllers\HomeAdminController::class, 'index'])->middleware('rrhh')->name('homeAdmin');
+Route::get('/homeAutoridad', [App\Http\Controllers\HomeAutoridadController::class, 'index'])->middleware('autoridad')->name('homeAutoridad');
 Route::get('/tutoriales', [App\Http\Controllers\Videotutoriales::class, 'index'])->name('tutoriales');
 //Route Hooks - Do not delete//
-	Route::view('idiomas', 'livewire.idiomas.index')->middleware('auth');
-	Route::view('habilidadtecnicas', 'livewire.habilidadtecnicas.index')->middleware('auth');
-	Route::view('habilidad-tecnicas', 'livewire.habilidadtecnicas.indexRRHH')->middleware('auth');
-	Route::view('Interpersonals', 'livewire.interpersonals.index')->middleware('auth');
-	Route::view('Interpersonal', 'livewire.interpersonals.indexRRhh')->middleware('auth');
-	Route::view('competencias', 'livewire.competencias.index')->middleware('auth');
-	Route::view('competenciasC', 'livewire.competencias.indexRrhh')->middleware('auth');
+	Route::view('idiomas', 'livewire.idiomas.index')->middleware('rrhh');
+	Route::view('habilidadtecnicas', 'livewire.habilidadtecnicas.index')->middleware('empresa');
+	Route::view('habilidad-tecnicas', 'livewire.habilidadtecnicas.indexRRHH')->middleware('rrhh');
+	Route::view('Interpersonals', 'livewire.interpersonals.index')->middleware('empresa');
+	Route::view('Interpersonal', 'livewire.interpersonals.indexRRhh')->middleware('rrhh');
+	Route::view('competencias', 'livewire.competencias.index')->middleware('auth','empresa');
+	Route::view('competenciasC', 'livewire.competencias.indexRrhh')->middleware('rrhh');
 
 	Route::get('/evento',[App\Http\Controllers\EventoController::class,'index']);
 	Route::get('/evento/mostrar',[App\Http\Controllers\EventoController::class,'show']);
 	Route::post('/evento/editar/{id}',[App\Http\Controllers\EventoController::class,'edit']);
 
-Route::get('/estadisticasuper-pdf', [Estadisticassupervisor::class, 'downloadPDF']);
-Route::get('/carta-pdf', [Cartarecomendacions::class, 'downloadPDF']);
-Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middleware('auth');
-Route::view('departamentos', 'livewire.departamentos.index')->middleware('auth');
-Route::view('municipios', 'livewire.municipios.index')->middleware('auth');
-Route::view('empresas', 'livewire.empresas.index')->middleware('auth');
-Route::view('empresasIni', 'livewire.empresasIni.index')->middleware('auth');
-Route::view('empresasrrhh', 'livewire.empresasrrhh.index')->middleware('auth');
-Route::view('empresas1', 'livewire.empresas1.index')->middleware('auth');
-Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middleware('auth');
+Route::get('/estadisticasuper-pdf', [Estadisticassupervisor::class, 'downloadPDF'])->middleware('autoridad');
+Route::get('/carta-pdf', [Cartarecomendacions::class, 'downloadPDF'])->middleware('estudiante');
+Route::view('autoridadacademicas', 'livewire.autoridadacademicas.index')->middleware('rrhh');
+Route::view('departamentos', 'livewire.departamentos.index')->middleware('rrhh');
+Route::view('municipios', 'livewire.municipios.index')->middleware('rrhh');
+Route::view('empresas', 'livewire.empresas.index')->middleware('empresa');
+Route::view('empresasIni', 'livewire.empresasIni.index')->middleware('empresa');
+Route::view('empresasrrhh', 'livewire.empresasrrhh.index')->middleware('rrhh');
+Route::view('empresas1', 'livewire.empresas1.index')->middleware('empresa');
+Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middleware('autoridad');
 
-Route::view('cvs', 'livewire.cvs.index')->middleware('auth');
+Route::view('cvs', 'livewire.cvs.index')->middleware('estudiante');
 
-Route::view('estudiantes', 'livewire.estudiantes.index')->middleware('auth');
-Route::view('estudiantes1', 'livewire.estudiantes1.index')->middleware('auth');
-Route::view('carreras', 'livewire.carreras.index')->middleware('auth');
-Route::view('facultads', 'livewire.facultads.index')->middleware('auth');
-Route::get('/formulario/create', [Ofertas::class, 'FormularioCreate'])->name('formulario.create')->middleware('auth');
+Route::view('estudiantes', 'livewire.estudiantes.index')->middleware('rrhh');
+Route::view('estudiantes1', 'livewire.estudiantes1.index')->middleware('autoridad');
+Route::view('carreras', 'livewire.carreras.index')->middleware('rrhh');
+Route::view('facultads', 'livewire.facultads.index')->middleware('rrhh');
+Route::get('/formulario/create', [Ofertas::class, 'FormularioCreate'])->name('formulario.create')->middleware('auth'); //ver  */
 //Route::get('/ofertasestudiantes', OfertasEstudiantes::class)->middleware('auth');
-Route::view('ofertasestudiantes', 'livewire.ofertasestudiantes.index')->middleware('auth')->name('ofertasestudiantes');
+Route::view('ofertasestudiantes', 'livewire.ofertasestudiantes.index')->middleware('estudiante')->name('ofertasestudiantes');
 Route::view('NoData', 'livewire.ofertasestudiantes.index')->middleware('auth')->name('defaultView');
-Route::view('VerOfertas', 'livewire.verofertas.index')->middleware('auth')->name('VerOfertas');
-Route::view('entrevistas/{ofertaId}', 'livewire.entrevistas.index')->middleware('auth')->name('entrevistas.index');
-Route::view('postulacions/{ofertaId}', 'livewire.postulacions.index')->middleware('auth')->name('postulacions.index');
-Route::view('ofertas', 'livewire.ofertas.index')->name('ofertas')->middleware('auth');
-Route::view('Mispostulaciones', 'livewire.postulacionestudiantes.index')->middleware('auth');
-Route::view('Misentrevistas', 'livewire.entrevistaestudiantes.index')->middleware('auth');
-Route::view('MiPerfil', 'livewire.perfilEstudiante.index')->middleware('auth');
+Route::view('VerOfertas', 'livewire.verofertas.index')->middleware('estudiante')->name('VerOfertas'); 
+Route::view('entrevistas/{ofertaId}', 'livewire.entrevistas.index')->middleware('empresa')->name('entrevistas.index');
+Route::view('postulacions/{ofertaId}', 'livewire.postulacions.index')->middleware('empresa')->name('postulacions.index');
+Route::view('ofertas', 'livewire.ofertas.index')->name('ofertas')->middleware('empresa');
+Route::view('Mispostulaciones', 'livewire.postulacionestudiantes.index')->middleware('estudiante');
+Route::view('Misentrevistas', 'livewire.entrevistaestudiantes.index')->middleware('estudiante');
+Route::view('MiPerfil', 'livewire.perfilEstudiante.index')->middleware('estudiante');
 Auth::routes();
