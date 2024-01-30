@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
+    public const HOMEini = '/homeini';
     public const HOMEADMIN = '/homeAdmin';
     public const HOMEAUTORIDAD = '/homeAutoridad';
     public const COMPANY_REGISTRATION = '/registroempresa';
