@@ -140,3 +140,20 @@
         </div>
     </div>
 </div>
+
+<!-- Incluye jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Tu script personalizado -->
+<script>
+   window.onload = function () {
+    console.log('Script ejecutado correctamente');
+        if (window.history && window.history.pushState) {
+            $(window).on('popstate', function () {
+                console.log('Se activó el evento popstate');
+                // Realizar logout aquí
+                window.location.href = '/';
+            });
+        }
+    }
+</script>

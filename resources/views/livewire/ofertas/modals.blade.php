@@ -30,7 +30,7 @@
                                     <div style="display: inline-block; width: 100%;">
                                         <div class="mb-2">
                                             @if($selected_id !== null)
-                                                <img src="{{asset($imagenPuesto)}}" width="50" height="50" class="img-fluid" alt="Imagen oferta">
+                                                <img src="{{ Storage::url('ofertaslab/'. $imagenPuesto) }}" width="50" height="50" class="img-fluid" alt="Imagen oferta">
                                                 <label for="imagenPuesto">Imagen</label>
                                                 <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen" hidden>
                                             @else
@@ -407,7 +407,7 @@
             </div>
             <div class="modal-body" style="color: #f0eadc;">
                 <div style="display: flex; justify-content: center; align-items: center; max-height: 300px; overflow: hidden;">
-                    <img src="{{ asset($imagenPuesto) }}" style="object-fit: cover; object-position: center;" alt="Imagen de Puesto">
+                    <img src="{{ Storage::url('ofertaslab/'. $imagenPuesto) }}" style="object-fit: cover; object-position: center;" alt="Imagen de Puesto">
                 </div>
                     <br/>
                     <form>

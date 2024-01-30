@@ -264,7 +264,6 @@
                 <form>
                     <div class="form-group">
                         <label for="rtu"><b style="color: black;">RTU (seleccione un archivo pdf)<b> <br>
-                        <b>!Al modificar su archivo rtu su estado de la Solicitud regresara a estar en espera!</b>
                         </label>
                         <input wire:model="rtu" type="file" accept="application/pdf" class="form-control" id="rtu" placeholder="Rtu">@error('rtu') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
@@ -295,7 +294,6 @@
                 <form>
                     <div class="form-group">  
                         <label for="patenteComercio"><b style="color: black;">Patente de Comercio (seleccione un archivo pdf)<b><br>
-                            <b>!Al modificar su archivo de patente de comercio su estado de la Solicitud regresara a estar en espera!</b></label>
                         <input wire:model="patenteComercio" type="file" accept="application/pdf" class="form-control" id="patenteComercio" placeholder="Patente comercio">@error('patenteComercio') <span class="error text-danger">{{ $message }}</span> @enderror
                         
                     </div>

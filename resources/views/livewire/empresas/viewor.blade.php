@@ -51,7 +51,17 @@
 							@forelse($empresas as $row)
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
-								<td> <img src="{{asset($row->logo)}}" width="50" height="50" class="img-fluid"><a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar logo </a>
+								<td> 
+									@if( $row->logo )
+										<img src="{{ Storage::url('logos/'. $row->logo) }}" width="50" height="50" class="img-fluid"/>
+										<a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})" style="cursor: pointer;"><i class="fa fa-edit"></i>Editar logotipo</a>
+									@else
+										Logotipo no disponible
+										<a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Cargar un logotipo" data-bs-content="En caso de que no lo haya subido o no aparezca, puede cargarlo en la opción 'Editar logotipo'">
+										<i class="fa-solid fa-circle-info"></i>
+										</a>
+										<a data-bs-toggle="modal" data-bs-target="#LogoDataModal" class="dropdown-item" wire:click="editlog({{$row->empresaId}})"><i class="fa fa-edit"></i> Editar logotipo </a>
+									@endif
 								</td>
 								
 								<td>{{ $row->nombreEmpresa }}</td>

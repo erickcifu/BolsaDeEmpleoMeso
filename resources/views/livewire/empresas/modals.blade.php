@@ -1,6 +1,6 @@
 <!-- Add Modal -->
-<div wire:ignore.self class="modal fade" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="createDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="createDataModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
                 <h5 class="modal-title" id="createDataModalLabel" style="color: #f0eadc;">Crear Empresa</h5>
@@ -8,7 +8,6 @@
             </div>
            <div class="modal-body">
 				<form>
-                   
                     <div class="form-group">
                         <label for="logo"><b style="color: black;">Logo (seleccione un archivo de imagen) <b></label>
                         <input wire:model="logo" type="file" accept="image/*" class="form-control" id="logo" placeholder="Logo">@error('logo') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -99,8 +98,8 @@
 </div>
 
 <!-- Edit Modal -->
-<div wire:ignore.self class="modal fade" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div wire:ignore.self class="modal fade modal-lg modal-dialog-scrollable" id="updateDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
        <div class="modal-content">
         <div class="modal-header" style="background-color: #005c35;">
             <h5 class="modal-title" id="updateModalLabel" style="color: #f0eadc;">Actualizar Empresa</h5>
@@ -108,17 +107,21 @@
         </div>
             <div class="modal-body">
                 <form>
-                   
-                  
-                    <div class="form-group">
-                        <label for="nombreEmpresa"><b style="color: black;">Nombre de la Empresa<b></label>
-                        <input wire:model="nombreEmpresa" type="text" class="form-control" id="nombreEmpresa" placeholder="Nombre empresa">@error('nombreEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <input type="hidden" wire:model="selected_id">
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="nombreEmpresa"><b style="color: black;">Nombre de la Empresa<b></label>
+                            <input wire:model="nombreEmpresa" type="text" class="form-control" id="nombreEmpresa" placeholder="Nombre empresa">
+                            @error('nombreEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="nit"><b style="color: black;">NIT<b></label>
+                            <input wire:model="nit" type="text" class="form-control" id="nit" placeholder="No. NIT de la empresa">
+                            @error('nit') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nit"><b style="color: black;">NIT<b></label>
-                        <input wire:model="nit" type="text" class="form-control" id="nit" placeholder="Nit">@error('nit') <span class="error text-danger">{{ $message }}</span> @enderror
-                    </div>
-                  
+
+                    
                     <div class="form-group">
                         <label for="descripcionEmpresa"><b style="color: black;">Descripción de la Empresa<b></label>
                         <input wire:model="descripcionEmpresa" type="text" class="form-control" id="descripcionEmpresa" placeholder="Descripcion empresa">@error('descripcionEmpresa') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -146,31 +149,26 @@
                   
                   
                     <div class="form-group">
-                        <label for="Departamento"><b style="color: black;">Departamento<b></label>
-                        <select wire:model="departamento" type="text" class="form-control" id="residencia_id" placeholder="Residencia Id">@error('residencia_id') <span class="error text-danger">{{ $message }}</span> @enderror
-                            <option value="">seleccione un departamento</option>
+                        <label for="departamento_id"><b style="color: black;">Departamento<b></label>
+                        <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento">
+                            <option selected>Seleccione un departamento</option>
                             @foreach ($Departamentos as $departamento)
-                            <option value="{{$departamento->departamentoId}}">{{$departamento->nombreDepartamento}}</option>
-                            
+                            <option value="{{ $departamento->departamentoId }}">{{$departamento->nombreDepartamento}}</option>
                             @endforeach
-                        
                         </select>
-                   
                     </div>
-
-         @if (!is_null($municipios))
+                    
                     <div class="form-group">
                         <label for="residencia_id"><b style="color: black;">Municipio<b></label>
-                        <select wire:model="residencia_id" type="text" class="form-control" id="residencia_id" placeholder="Residencia Id">@error('residencia_id') <span class="error text-danger">{{ $message }}</span> @enderror
-                            <option value="">seleccione un Municipios</option>
-                       @foreach ($municipios as $municipio )
-                           <option value="{{$municipio->municipioId}}">{{$municipio->nombreMunicipio}}</option>
-                       @endforeach
+                        <select wire:model="residencia_id"  class="form-control" id="residencia_id" placeholder="Municipio">
+                            <option selected>Seleccione un municipio</option>
+                                @foreach ($municipios as $municipio)
+                                    @if ($municipio->departamento_id == $departamento_id)
+                                        <option value="{{ $municipio->municipioId }}">{{$municipio->nombreMunicipio}}</option>
+                                    @endif
+                                @endforeach
                         </select>
-                   
                     </div>
-         @endif       
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -263,8 +261,8 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="rtu"><b style="color: black;">RTU (seleccione un archivo pdf)<b> <br>
-                        <b>!Al modificar su archivo rtu su estado de la Solicitud regresara a estar en espera!</b>
+                        <label for="rtu"><b style="color: black;">RTU (Seleccione un archivo .PDF)<b> <br>
+                        <small>¡Al momento de modificar su RTU, el estado de solicitud de la empresa quedará en espera!</small>
                         </label>
                         <input wire:model="rtu" type="file" accept="application/pdf" class="form-control" id="rtu" placeholder="Rtu">@error('rtu') <span class="error text-danger">{{ $message }}</span> @enderror
                         <div wire:loading wire:target="rtu"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>
@@ -295,8 +293,9 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">  
-                        <label for="patenteComercio"><b style="color: black;">Patente de Comercio (seleccione un archivo pdf)<b><br>
-                            <b>!Al modificar su archivo de patente de comercio su estado de la Solicitud regresara a estar en espera!</b></label>
+                        <label for="patenteComercio"><b style="color: black;">Patente de Comercio (Seleccione un archivo .PDF)<b><br>
+                        <small>¡Al momento de modificar su Patente de Comercio, el estado de solicitud de la empresa quedará en espera!</small>
+                        </label>
                         <input wire:model="patenteComercio" type="file" accept="application/pdf" class="form-control" id="patenteComercio" placeholder="Patente comercio">@error('patenteComercio') <span class="error text-danger">{{ $message }}</span> @enderror
                         <div wire:loading wire:target="patenteComercio"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>
                     </div>
