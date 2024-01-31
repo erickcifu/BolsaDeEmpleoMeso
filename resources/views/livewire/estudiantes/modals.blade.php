@@ -242,16 +242,11 @@
                                 <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar" readOnly>@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
-                    </div>        
-                    <div class="form-group">
-                        <label for="departamento_id"><b style="color: black;">Departamento<b></label>
-                        <!-- <input type="text" value="{{$nombre_departamento}}" class="form-control" id="departamento_id" placeholder="Departamento" readOnly/> -->
-                        <select wire:model="departamento_id" class="form-control" id="departamento_id" placeholder="Departamento">
-                            @foreach ($departamentos as $departamento)
-                                <option value="{{ $departamento->departamentoId}}">{{ $departamento->nombreDepartamento }}</option>
-                            @endforeach
-                        </select>
                     </div>
+                    <div class="form-group">
+                        <label for="departamento_id"><b style="color: black;">Departamento</b></label>
+                        <input value="{{$nombre_departamento}}" type="text" class="form-control" id="departamento_id" placeholder="Departamento" readOnly/>
+                    </div>        
                     <div class="form-group">
                         <label for="municipio_id"><b style="color: black;">Municipio<b></label>
                         <input type="text" value="{{$nombre_municipio}}" class="form-control" id="municipio_id" placeholder="Municipio" readOnly/>    
