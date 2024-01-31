@@ -14,6 +14,10 @@ use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Dompdf\Adapter\PDFLib;
 use Illuminate\Support\Facades\Abort;
+use Illuminate\Support\Facades\Storage;
+
+use Illuminate\Http\UploadedFile;
+use DB;
 
 
 class Cartarecomendacions extends Component
@@ -25,6 +29,7 @@ class Cartarecomendacions extends Component
     public $selected_id, $keyWord, $cartaId, $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
 	protected $cartaEncontrada = false;
 	public $newFirma;
+    
 
     public function render()
     {
@@ -126,6 +131,7 @@ class Cartarecomendacions extends Component
 			$this->newFirma = uniqid() . '.' . $this->firmaAutoridad->getClientOriginalExtension();
 			$this->firmaAutoridad->storeAs('public/firmas', $this->newFirma, 'local');
 		}
+
         Cartarecomendacion::create([ 
 			
 			'fechaCarta' => $this-> fechaCarta,
