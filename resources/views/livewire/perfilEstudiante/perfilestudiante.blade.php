@@ -52,16 +52,16 @@
 												<p class="m-0 card-text fs-5">Currículum:</p>
 												<div class="ms-2">
 													@if ( $row->curriculum )
-													<a style="text-decoration: none; color: inherit;" class="p-0" href="{{ Storage::url('cvs/'. $row->curriculum) }}" target="_blank"><i class="fa fa-eye"></i> Ver archivo</a>
+													<a style="text-decoration: none; color: inherit; cursor: pointer;" class="p-0" href="{{ Storage::url('cvs/'. $row->curriculum) }}" target="_blank"><i class="fa fa-eye"></i> Ver archivo</a>
 													<span class="text-muted">|</span>
-													<a style="text-decoration: none; color: inherit;" class="p-0" data-bs-toggle="modal" data-bs-target="#curriculumDataModal" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar</a>
+													<a style="text-decoration: none; color: inherit; cursor: pointer;" class="p-0" data-bs-toggle="modal" data-bs-target="#curriculumDataModal" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar</a>
 													@else
 														Sin currículum
 														<a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Cargar un currículum" data-bs-content="En caso de no tener un currículum, puede generarlo desde la pestaña 'Generar CV' y subirlo en la opción 'Editar'">
 														<i class="fa-solid fa-circle-info"></i>
 														</a>
 														<span class="text-muted">|</span>
-														<a style="text-decoration: none; color: inherit;" class="p-0" data-bs-toggle="modal" data-bs-target="#curriculumDataModal" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar</a>
+														<a style="text-decoration: none; color: inherit; cursor: pointer;" class="p-0" data-bs-toggle="modal" data-bs-target="#curriculumDataModal" wire:click="editCurriculum({{$row->estudianteId}})"><i class="fa fa-edit"></i> Editar</a>
 													@endif
 													
 												</div>

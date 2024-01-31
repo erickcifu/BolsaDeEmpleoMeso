@@ -46,7 +46,7 @@
 									<!-- Muestra algún marcador de posición o mensaje cuando no hay imagen -->
 									Sin imagen
 								@endif
-									<a data-bs-toggle="modal" data-bs-target="#ImagenDataModal" class="dropdown-item" wire:click="editImagen({{$row->ofertaId}})"><i class="fa fa-edit"></i>Editar</a>
+									<a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#ImagenDataModal" class="dropdown-item" wire:click="editImagen({{$row->ofertaId}})"><i class="fa fa-edit"></i>Editar</a>
 								</td>
 								<td>{{ $row->nombrePuesto }}</td>
 							    <td id="fechaRegistrada">{{ date('d-m-Y', strtotime($row->fechaMax)) }}</td>

@@ -826,20 +826,26 @@ public function validarPaso5()
 	public function GuardarImagen(){
 		if ($this->selected_id) {
 			$recordImagen = Oferta::find($this->selected_id);
-		
+			$this->validate([
+				'imagenPuesto' => ' image | mimes:png,jpg,jpeg '
+			]);
+
 			if ($recordImagen->imagenPuesto) {
 				Storage::disk('public')->delete('ofertaslab/' . $recordImagen->imagenPuesto);
 			}
 
-			$newImagen = uniqid() . '.' . $this->imagenPuesto->getClientOriginalExtension();
-			$this->imagenPuesto->storeAs('public/ofertaslab', $newImagen, 'local');
-			$this->recordImg->update([ 
-				'nombrePuesto' => $this->nombrePuesto,
-				'imagenPuesto' => $newImagen,
-			]);
+			if($this->imagenPuesto!==null){
+				$newImagen = uniqid() . '.' . $this->imagenPuesto->getClientOriginalExtension();
+				$this->imagenPuesto->storeAs('public/ofertaslab', $newImagen, 'local');
+				$this->recordImg->update([ 
+					'nombrePuesto' => $this->nombrePuesto,
+					'imagenPuesto' => $newImagen,
+				]);
+			}
 			
 			$this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Imagen actualizada exitosamente!');
+			return redirect('homeini');
 		}
 	}
 

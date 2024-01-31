@@ -14,19 +14,22 @@
            <div class="modal-body">
 				<form>
                     <div class="form-group">
-                        <label for="fechaCarta"><b style="color: black;">A quien pueda interesar:<b></label>
+                        <label for="fechaCarta"><b style="color: black;">A QUIEN INTERESE:<b></label>
                     </div>
                     <br/>
                     <div class="form-group">
                         <!-- <label for="cargoYTareasRealizadas"><b style="color: black;">Hábilidades y logros del estudiante<b></label> -->
                         @if($atributos)
-                            <p>A través de la presente, extiendo mi recomendación personal en apoyo del estudiante <b style="color: black;">{{ $atributos->nombre }} {{ $atributos->apellidos }}</b>,  quién se identifica con número de carné <b>{{ $atributos->carnet }}</b>, que se destaca por: <textarea wire:model="cargoYTareasRealizadas" type="text" class="form-control" id="cargoYTareasRealizadas" placeholder="Describe las habilidades, cualidades personales o logros del estudiante"></textarea>@error('cargoYTareasRealizadas') <span class="error text-danger">{{ $message }}</span> @enderror  </p>             
+                            <p>Por medio de la presente, hago constar que el estudiante <b style="color: black;">{{ $atributos->nombre }} {{ $atributos->apellidos }}</b>, quién se identifica con número 
+			        de CUI<b> {{ $atributos->DPI }}</b>, se caracteriza por ser una persona <textarea wire:model="cargoYTareasRealizadas" type="text" class="form-control" id="cargoYTareasRealizadas" placeholder="Describe las habilidades, cualidades personales o logros del estudiante"></textarea>@error('cargoYTareasRealizadas') <span class="error text-danger">{{ $message }}</span> @enderror  
+                    , por lo que no tengo ningún inconveniente en RECOMENDARLO a cualquier persona, empresa o institución que requieran sus servicios.
+                    </p>             
                         @endif
                     </div>
                     <br/>
                     <div class="form-group">
                         <label for="fechaCarta" style="color: black; display: inline-block; width: 70%;">
-                            <b>Y para los usos que al interesado convenga, extiéndola presente en la fecha</b>
+                            <b>Fecha de emisión</b>
                         </label>
                         <input wire:model="fechaCarta" type="date" class="form-control" id="fechaCarta" disabled/>
                         @error('fechaCarta') 
