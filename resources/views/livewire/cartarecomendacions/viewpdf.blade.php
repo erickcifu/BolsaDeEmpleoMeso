@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 <!doctype html>
 <html lang="es">
 
@@ -30,13 +33,14 @@
 			<br>
 			<br>
 			<br>
-			<p><b>A quién interese: </b></p>
+			<p><b>A QUIEN INTERESE: </b></p>
 			<br>
 			<p class="text-justify">
 
-			A través de la presente, extiendo la presente recomendación en apoyo del estudiante
-			<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}} </b>, quién se identifica con número 
-			de DPI <b>{{$item->estudiante->carnet}}</b>, quién se ha destacado por <b>{{ $item->cargoYTareasRealizadas }} </b>.  
+			Por medio de la presente, hago constar que el estudiante
+			<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}}</b>, quién se identifica con número 
+			de CUI <b>{{$item->estudiante->DPI}}</b>, se caracteriza por ser una persona <b>{{ $item->cargoYTareasRealizadas }}</b>,
+			por lo que no tengo ningún inconveniente en RECOMENDARLO a cualquier persona, empresa o institución que requieran sus servicios.
 			</p>
 			<p></p>
 			<p></p>
@@ -44,21 +48,22 @@
 			
 
 		<p class="text-justify">
-		Y para los usos legales que al interesado convenga, extiendo y firmo la presente en la ciudad de Quetzaltenango, a los {{ \Carbon\Carbon::parse($item->fechaCarta)->locale('es')->format('d') }} dias del mes de {{ \Carbon\Carbon::parse($item->fechaCarta)->format('F') }} del año {{ \Carbon\Carbon::parse($item->fechaCarta)->format('Y') }}. 
+		Y para los usos legales que al interesado convenga, extiendo y firmo la presente en la ciudad de Quetzaltenango, a los {{ Carbon::parse($item->fechaCarta)->locale('es')->isoFormat('D [días del mes de] MMMM [del año] YYYY') }}. 
+
 		
 		</p>
 
 		<br>
 		<br>
 		<br>
-		<p>Atentamente,   </p>
+		<p>Atentamente:   </p>
 		<br>
 		<br>
 		<p class="text-center">
-		<img src="{{ Storage::url('firmas/' . $item->firmaAutoridad) }}" alt="" width="100" height="100"/>
+		<img src="{{$item->firmaAutoridad}}" alt="" width="100" height="100"/>
 		</p>
 		<p class="text-center">{{$item->autoridadAcademica->nombreAutoridad}}  {{$item->autoridadAcademica->apellidosAutoridad}}</p>
-		<p class="text-center"> cel: {{$item->telefonoAutoridad}}</p>
+		<p class="text-center"> Tel: {{$item->telefonoAutoridad}}</p>
 		<br>
 		<br>
 		<br><br>

@@ -198,7 +198,9 @@ class PerfilEstudiante extends Component
 	{
 		if ($this->selected_id) {
 			$recordcv = Estudiante::find($this->selected_id);
-	
+			$this->validate([
+				'curriculum' => 'required|mimes:pdf|max:30720',
+			]);
 			// Verifica si hay un currículum existente
 			if ($recordcv->curriculum) {
 				// Elimina el currículum anterior antes de cargar el nuevo
@@ -210,14 +212,17 @@ class PerfilEstudiante extends Component
 			//$curriculumPath = $this->curriculum->store('cvs', 'public');
 			
 			//dd($this->curriculum);
-			$nuevoNombre = uniqid() . '.' . $this->curriculum->getClientOriginalExtension();
-			$this->curriculum->storeAs('public/cvs', $nuevoNombre, 'local');
-			$recordcv->update(['curriculum' => $nuevoNombre]);
+			if($this->curriculum!==null){
+				$nuevoNombre = uniqid() . '.' . $this->curriculum->getClientOriginalExtension();
+				$this->curriculum->storeAs('public/cvs', $nuevoNombre, 'local');
+				$recordcv->update(['curriculum' => $nuevoNombre]);
+			}
 
 			$this->emit('curriculumActualizado');
 			$this->resetInput();
 			$this->dispatchBrowserEvent('closeModal');
 			session()->flash('message', 'Currículum actualizado correctamente.');
+			return redirect('MiPerfil');
 		}
 	}
 	
