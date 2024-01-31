@@ -47,13 +47,12 @@ class Estudiantes1 extends Component
     // campos para la Carta
 
     public $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
-    public $newFirma;
+    
 	public function mount()
     {
 
         $this->fechaCarta = Carbon::now()->toDate()->format('Y-m-d');
         $this->tieneCarta = Estudiante::with('cartarecomendacions')->get();
-        echo $fechaCarta->format('F'); 
     }
     
     public function render()
@@ -162,16 +161,11 @@ class Estudiantes1 extends Component
         $rules = array_merge($this->rules, $this->selected_id === null ? $this->rulesCreate : $this->rulesUpdate);
 		$this->validate($rules);
 
-        if ($this->firmaAutoridad!=null) {
-			$this->newFirma = uniqid() . '.' . $this->firmaAutoridad->getClientOriginalExtension();
-			$this->firmaAutoridad->storeAs('public/firmas', $this->newFirma, 'local');
-		}
-
         Cartarecomendacion::create([ 
             'fechaCarta' => $this->fechaCarta,
             'cargoYTareasRealizadas' => $this->cargoYTareasRealizadas,
             'telefonoAutoridad' => $this->telefonoAutoridad,
-            'firmaAutoridad' => $this->newFirma,
+            'firmaAutoridad' => 'storage/' . $this->firmaAutoridad->store('firmas', 'public'),
             'autoridadAcademica_id' => $this->autoridad->autoridadId,   
             'estudiante_id' => $this->id_estu,
         ]);

@@ -245,6 +245,9 @@ class Empresas extends Component
    }
    public function logo(){
        if ($this->selected_id) {
+		$this->validate([
+			'logo' => 'required|mimes:jpeg,png,jpg,gif|max:200' // 1MB
+		]);
            $recordlogos = Empresa::find($this->selected_id);
 
 		   // Verifica si hay un logotipo existente
@@ -255,17 +258,19 @@ class Empresas extends Component
 
 
 		   // Guarda el nuevo logotipo
-		   $nuevoLogo = uniqid() . '.' . $this->logo->getClientOriginalExtension();
-		   $this->logo->storeAs('public/logos', $nuevoLogo, 'local');
-           $recordlogos->update([ 
-			'nombreEmpresa' => $this-> nombreEmpresa,
-			'logo' => $nuevoLogo,
-           ]);
-
+		   if($this->logo!==null){
+				$nuevoLogo = uniqid() . '.' . $this->logo->getClientOriginalExtension();
+				$this->logo->storeAs('public/logos', $nuevoLogo, 'local');
+				$recordlogos->update([ 
+					'nombreEmpresa' => $this-> nombreEmpresa,
+					'logo' => $nuevoLogo,
+				]);
+			}
 
            $this->resetInput();
            $this->dispatchBrowserEvent('closeModal');
            session()->flash('message', 'Logo actualizado Exitosamente!.');
+		   return redirect('empresas');
        }
    }
 
@@ -281,6 +286,11 @@ class Empresas extends Component
   }
   public function rtu(){
 	  if ($this->selected_id) {
+
+		$this->validate([
+			'rtu' => 'required|mimes:pdf|max:100'
+		]);
+
 		  $recordRtus = Empresa::find($this->selected_id);
 
 		    // Verifica si hay un RTU existente
@@ -290,17 +300,20 @@ class Empresas extends Component
 			}
 
 			// Guarda el nuevo RTU
-			$nuevoRTU = uniqid() . '.' . $this->rtu->getClientOriginalExtension();
-			$this->rtu->storeAs('public/rtus', $nuevoRTU, 'local');
-		  	$recordRtus->update([ 
-				'nombreEmpresa' => $this->nombreEmpresa,
-		   		'rtu' => $nuevoRTU,
-		   		'estadoSolicitud' => "en Espera",
-		  	]);
+			if($this->rtu!==null){
+				$nuevoRTU = uniqid() . '.' . $this->rtu->getClientOriginalExtension();
+				$this->rtu->storeAs('public/rtus', $nuevoRTU, 'local');
+				$recordRtus->update([ 
+					'nombreEmpresa' => $this->nombreEmpresa,
+					'rtu' => $nuevoRTU,
+					'estadoSolicitud' => "en Espera",
+				]);
+			}
 
 		  $this->resetInput();
 		  $this->dispatchBrowserEvent('closeModal');
 		  session()->flash('message', 'RTU actualizado exitosamente!.');
+		  return redirect('empresas');
 	  }
   }
 
@@ -315,6 +328,10 @@ class Empresas extends Component
 
   public function pan(){
 	  if ($this->selected_id) {
+		$this->validate([
+			'patenteComercio' => 'required|mimes:pdf|max:250',
+		]);
+
 		  $recordPatente = Empresa::find($this->selected_id);
 		  // Verifica si hay una Patente de Comercio existente
 			if ($recordPatente->patenteComercio) {
@@ -323,17 +340,20 @@ class Empresas extends Component
 			}
 
 			// Guarda la nueva Patente
-			$nuevaPatente = uniqid() . '.' . $this->patenteComercio->getClientOriginalExtension();
-			$this->patenteComercio->storeAs('public/patentes', $nuevaPatente, 'local');
-		  	$recordPatente->update([ 
-		   		'nombreEmpresa' => $this-> nombreEmpresa,
-		   		'patenteComercio' => $nuevaPatente,
-		   		'estadoSolicitud' => "en Espera",
-		  	]);
+			if($this->patenteComercio!==null){
+				$nuevaPatente = uniqid() . '.' . $this->patenteComercio->getClientOriginalExtension();
+				$this->patenteComercio->storeAs('public/patentes', $nuevaPatente, 'local');
+				$recordPatente->update([ 
+					'nombreEmpresa' => $this-> nombreEmpresa,
+					'patenteComercio' => $nuevaPatente,
+					'estadoSolicitud' => "en Espera",
+				]);
+			}
 
 		  $this->resetInput();
 		  $this->dispatchBrowserEvent('closeModal');
 		  session()->flash('message', 'Patente actualizada Exitosamente!.');
+		  return redirect('empresas');
 	  }
   }
 //////******eliinar */
