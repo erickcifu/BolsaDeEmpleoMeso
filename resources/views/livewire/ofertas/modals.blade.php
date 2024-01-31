@@ -772,7 +772,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" wire:click.prevent="cancel()" wire:loading.attr="disabled"  wire:target="imagenPuesto" class="btn" style="background-color:#d3d3d3;" data-bs-dismiss="modal"><b>Cancelar</b></button>
-                <button type="button" wire:click="GuardarImagen"  wire:loading.attr="disabled"  wire:target="imagenPuesto" class="btn btn-primary" style="background-color: #005c35;"data-bs-dismiss="modal">Actualizar</button>
+                <button type="button" wire:click="GuardarImagen"  wire:loading.attr="disabled"  wire:target="imagenPuesto" class="btn btn-primary" style="background-color: #005c35;">Actualizar</button>
             </div>
        </div>
     </div>
