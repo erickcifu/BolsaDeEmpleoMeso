@@ -214,21 +214,7 @@ class Cartarecomendacions extends Component
 		}
 	}
 
-	public function eliminar($cartaId)
-	{
-		$this->selected_id = $cartaId;
-		$this->dispatchBrowserEvent('showDeleteConfirmationModal');
-	}
-
-    public function destroy()
-    {
-        if ($this->selected_id) {
-			Cartarecomendacion::where('cartaId', $this->selected_id)->delete();
-		}
 	
-		$this->dispatchBrowserEvent('closeModal');
-		session()->flash('message', 'carta Eliminada');
-    }
 
 
 }

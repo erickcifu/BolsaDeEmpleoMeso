@@ -50,6 +50,7 @@
 									<a data-bs-toggle="modal" data-bs-target="#createCartaDataModal" class="dropdown-item" style="cursor: pointer;" wire:click="obtenerEstudianteId({{$row->estudianteId}})">
 										<i class="fa-solid fa-file-circle-plus"></i> Editar Carta
 									</a>
+									<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" style="cursor: pointer;" wire:click="eliminar({{$row->estudianteId}})"><i class="fa fa-trash"></i> Eliminar </a>
 								@else
 									<a data-bs-toggle="modal" data-bs-target="#createCartaDataModal" class="dropdown-item" style="cursor: pointer;" wire:click="setEstudianteId({{$row->estudianteId}})">
 										<i class="fa-solid fa-file-circle-plus"></i> Generar carta
