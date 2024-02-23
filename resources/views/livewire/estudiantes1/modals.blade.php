@@ -20,8 +20,8 @@
                     <div class="form-group">
                         <!-- <label for="cargoYTareasRealizadas"><b style="color: black;">Hábilidades y logros del estudiante<b></label> -->
                         @if($atributos)
-                            <p>Por medio de la presente, hago constar que el estudiante <b style="color: black;">{{ $atributos->nombre }} {{ $atributos->apellidos }}</b>, quién se identifica con número 
-			        de CUI<b> {{ $atributos->DPI }}</b>, se caracteriza por ser una persona <textarea wire:model="cargoYTareasRealizadas" type="text" class="form-control" id="cargoYTareasRealizadas" placeholder="Describe las habilidades, cualidades personales o logros del estudiante"></textarea>@error('cargoYTareasRealizadas') <span class="error text-danger">{{ $message }}</span> @enderror  
+                            <p>Por medio de la presente, hago constar que la persona <b style="color: black;">{{ $atributos->nombre }} {{ $atributos->apellidos }}</b>, quién se identifica con número 
+			        de CUI<b> {{ $atributos->DPI }}</b>, se caracteriza por ser <textarea wire:model="cargoYTareasRealizadas" type="text" class="form-control" id="cargoYTareasRealizadas" placeholder="Describe las habilidades, cualidades personales o logros del estudiante"></textarea>@error('cargoYTareasRealizadas') <span class="error text-danger">{{ $message }}</span> @enderror  
                     , por lo que no tengo ningún inconveniente en RECOMENDARLO a cualquier persona, empresa o institución que requieran sus servicios.
                     </p>             
                         @endif
@@ -111,6 +111,30 @@
         </div>
     </div>
 </div>
+
+{{-- creamos el modal para eliminar  --}}
+<div wire:ignore.self class="modal fade" id="DeletDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="DeletModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="DeletModalLabel" style="color: #f0eadc;">Eliminar</h5>
+                <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+					<input type="hidden" wire:model="selected_id">
+                    <h5 class="modal-title" style="color: black;">¿Desea eliminar este dato?</h5>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" wire:click.prevent="cancel()" class="btn" style="background-color: #005c35;" data-bs-dismiss="modal"><b style ="color: #d3d3d3;">Cancelar</b></button>
+                <button type="button" wire:click="destroy()" class="btn btn-primary" style="background-color:  #d3d3d3;" data-bs-dismiss="modal"><b style="color: black;">Sí, deseo eliminarlo<b></button>
+            </div>
+       </div>
+    </div>
+</div> 
+
 <script>
     document.addEventListener('livewire:load', function () {
         Livewire.on('recargarPagina', function () {

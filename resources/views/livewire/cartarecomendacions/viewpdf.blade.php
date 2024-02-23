@@ -37,9 +37,9 @@
 			<br>
 			<p class="text-justify">
 
-			Por medio de la presente, hago constar que el estudiante
+			Por medio de la presente, hago constar que la persona
 			<b> {{ $item->estudiante->nombre }} {{ $item->estudiante->apellidos}}</b>, quién se identifica con número 
-			de CUI <b>{{$item->estudiante->DPI}}</b>, se caracteriza por ser una persona <b>{{ $item->cargoYTareasRealizadas }}</b>,
+			de CUI <b>{{$item->estudiante->DPI}}</b>, se caracteriza por ser <b>{{ $item->cargoYTareasRealizadas }}</b>,
 			por lo que no tengo ningún inconveniente en RECOMENDARLO a cualquier persona, empresa o institución que requieran sus servicios.
 			</p>
 			<p></p>

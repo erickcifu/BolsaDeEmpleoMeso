@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Carrera;
 use App\Models\Facultad;
 use App\Models\Municipio;
-use App\Models\Departamento;
+use App\Models\Departamento;    
 use App\Models\Cartarecomendacion;
 use App\Models\AutoridadAcademica;
 
@@ -47,10 +47,9 @@ class Estudiantes1 extends Component
     // campos para la Carta
 
     public $fechaCarta, $cargoYTareasRealizadas, $telefonoAutoridad, $firmaAutoridad, $autoridadAcademica_id, $estudiante_id;
-    
-	public function mount()
-    {
 
+    public function mount()
+    {
         $this->fechaCarta = Carbon::now()->toDate()->format('Y-m-d');
         $this->tieneCarta = Estudiante::with('cartarecomendacions')->get();
     }
@@ -59,8 +58,8 @@ class Estudiantes1 extends Component
     {
         $facultades = Facultad::all();
         $userID = Auth::id();
-       $carreras = Carrera::where('facultad_id', $this->facultad_id)->get();
-       $this->autoridad=AutoridadAcademica::where('user_id',$userID)->first();
+        $carreras = Carrera::where('facultad_id', $this->facultad_id)->get();
+        $this->autoridad=AutoridadAcademica::where('user_id',$userID)->first();
         $departamentos = Departamento::all();
         $municipios = Municipio::where('departamento_id', $this->departamento_id)->get();
         $keyWord = '%' . $this->keyWord . '%';
@@ -242,5 +241,23 @@ class Estudiantes1 extends Component
             session()->flash('message', 'Carta actualizada correctamente!');
             return redirect('estudiantes1');
         
+    }
+
+
+    public function eliminar($estudianteId)
+	{
+		$this->selected_id = $estudianteId;
+		$this->dispatchBrowserEvent('showDeleteConfirmationModal');
+	}
+
+    public function destroy()
+    {
+        if ($this->selected_id) {
+			Cartarecomendacion::where('estudiante_id', $this->selected_id)->delete();
+		}
+	
+		$this->dispatchBrowserEvent('closeModal');
+		session()->flash('message', 'Carta eliminada correctamente');
+        return redirect('estudiantes1');
     }
 }
