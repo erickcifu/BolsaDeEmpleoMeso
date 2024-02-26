@@ -20,7 +20,7 @@
 				
 				<div class="card-body">
 						@include('livewire.postulacionestudiantes.modals')
-				<div class="table-responsive">
+				<div wire:poll.10s="refreshTable" class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
@@ -39,7 +39,15 @@
 								<td>{{ $row-> oferta -> nombrePuesto }}</td>
 								<td>{{ $row-> oferta -> empresa -> nombreEmpresa }}</td>
 								<td width="90">
-									<a  data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->postulacionId}})"><i class="fa fa-trash"></i> Eliminar </a> 		
+								@if ($row->entrevistas->isNotEmpty())
+									@if ($row->entrevistas->first()->Contratado == 1)
+											<span class="badge text-bg-warning"><b>Contratado</b></span>
+										@else
+											<a data-bs-toggle="modal" data-bs-target="#DeletDataModal" class="dropdown-item" wire:click="edit2({{$row->postulacionId}})"><i class="fa fa-trash"></i> Eliminar</a> 
+										@endif
+									@else
+										<span class="badge" style="background-color: #d3d3d3;"><b style="color: black;">Sin entrevistas</b></span>
+									@endif
 								</td>
 							</tr>
 							@empty
