@@ -6,7 +6,20 @@
 />
 
 @extends('layouts.app') @section('title', __('Welcome')) @section('content')
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('{{ asset('storage/Meso/Meso.png') }}') no-repeat center center fixed;
+        background-size: cover;
+    }
 
+    @media (max-width: 768px) {
+        body {
+            background-attachment: scroll;
+        }
+    }
+</style>
 <body background="{{ asset('storage/Meso/Meso.png') }}">
 
     @if (Session::has('message'))

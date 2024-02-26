@@ -7,6 +7,20 @@
 
 @extends('layouts.app') @section('title', __('Welcome')) @section('content')
 
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('{{ asset('storage/Meso/Meso.png') }}') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    @media (max-width: 768px) {
+        body {
+            background-attachment: scroll;
+        }
+    }
+</style>
 <body background="{{ asset('storage/Meso/Meso.png') }}">
     <div  style="display: inline-block; background-color: rgba(0, 92, 53, 0.6); padding: 10px;">
         <h2 style="color: #f0eadc;">Estudiantes</h2>
