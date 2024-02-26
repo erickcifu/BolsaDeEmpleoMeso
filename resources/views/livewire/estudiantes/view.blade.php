@@ -21,7 +21,7 @@
 				
 				<div class="card-body">
 						@include('livewire.estudiantes.modals')
-				<div  wire:poll.10s="refreshTable" class="table-responsive">
+				<div wire:poll.10s="refreshTable" class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 

@@ -1,4 +1,4 @@
-<!-- Add Modal -->
+<!-- Show detalles Modal -->
 <div wire:ignore.self class="modal fade" id="showDataModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="showDataModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -11,6 +11,30 @@
                     <div class="form-group">
                         <h6 for="descripcionEntrevista"><b style="color: black;">La empresa solicita que para el día de la entrevista, tomes en cuenta lo siguiente:</b></h6>
                         <p style="color: #373737;">{{$descripcionEntrevista}}</p>
+                    </div>
+                    <br/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn close-btn" style="background-color: #d3d3d3;" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Show Retroalimentación Modal -->
+<div wire:ignore.self class="modal fade" id="showComentarioModal" data-bs-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="showComentarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="showComentarioModalLabel" style="color: #f0eadc;">Retroalimentación</h5>
+                <button wire:click.prevent="cancel()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+           <div class="modal-body">
+				<form>
+                    <div class="form-group">
+                        <h6 for="comentarioContratado"><b style="color: black;">Retroalimentación por parte de la empresa:</b></h6>
+                        <p style="color: #373737;">{{$comentarioContratado}}</p>
                     </div>
                     <br/>
                 </form>
