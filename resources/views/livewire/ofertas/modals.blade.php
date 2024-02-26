@@ -34,7 +34,11 @@
                                                 <label for="imagenPuesto">Imagen</label>
                                                 <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen" hidden>
                                             @else
-                                            <label for="imagenPuesto">Imagen</label>
+                                            <label for="imagenPuesto">Imagen (500px * 300px)
+                                                    <a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Especificaciones de imagen" data-bs-content="La imagen debe tener como máximo 500px de altura y 300px de ancho.">
+														<i class="fa-solid fa-circle-info"></i>
+													</a>
+                                            </label>
                                             <input wire:model="imagenPuesto" type="file" accept="image/*" class="form-control" id="imagenPuesto" placeholder="Imagen">
                                             @endif
                                         </div>
@@ -785,5 +789,12 @@
                 location.reload();
             });
         });
+    });
+</script>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Inicializar el popover después de que se carga Livewire
+        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
     });
 </script>

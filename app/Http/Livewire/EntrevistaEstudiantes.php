@@ -106,6 +106,20 @@ class EntrevistaEstudiantes extends Component
 		$this->postulacion_id = $record-> postulacion_id;
     }
 
+	public function showComentario($entrevistaId)
+    {
+        $record = Entrevista::findOrFail($entrevistaId);
+        $this->selected_id = $entrevistaId; 
+		$this->tituloEntrevista = $record-> tituloEntrevista;
+		$this->descripcionEntrevista = $record-> descripcionEntrevista;
+		$this->FechaEntrevista = $record-> FechaEntrevista;
+		$this->horaInicio = $record-> horaInicio;
+		$this->horaFinal = $record-> horaFinal;
+		$this->Contratado = $record-> Contratado;
+		$this->comentarioContratado = $record-> comentarioContratado;
+		$this->postulacion_id = $record-> postulacion_id;
+    }
+
     public function edit($entrevistaId)
     {
         $record = Entrevista::findOrFail($entrevistaId);
@@ -156,4 +170,32 @@ class EntrevistaEstudiantes extends Component
             Entrevista::where('entrevistaId', $entrevistaId)->delete();
         }
     }
+
+	public function refreshTable(){
+		if (Auth::check()) {
+			$this->usuarioAutenticado = Auth::id();
+
+       	 	$this->user = User::with('estudiante')->find($this->usuarioAutenticado);
+
+			$keyWord = '%'.$this->keyWord .'%';
+			//Obtener entrevistas del estudiante
+			$this->entrevistasEstudiante = $this->user->estudiante->postulacions->flatMap(function ($postulacion) {
+                return $postulacion->entrevistas;
+            });
+        
+		}
+		
+        return view('livewire.entrevistaestudiantes.viewentrevista', [
+            'entrevistas' => Entrevista::latest()
+						->orWhere('tituloEntrevista', 'LIKE', $keyWord)
+						->orWhere('descripcionEntrevista', 'LIKE', $keyWord)
+						->orWhere('FechaEntrevista', 'LIKE', $keyWord)
+						->orWhere('horaInicio', 'LIKE', $keyWord)
+						->orWhere('horaFinal', 'LIKE', $keyWord)
+						->orWhere('Contratado', 'LIKE', $keyWord)
+						->orWhere('comentarioContratado', 'LIKE', $keyWord)
+						->orWhere('postulacion_id', 'LIKE', $keyWord)
+						->paginate(10), 'entrevistasEstudiante' => $this->entrevistasEstudiante,
+        ]);
+	}
 }

@@ -19,7 +19,7 @@
 				
 				<div class="card-body">
 						@include('livewire.entrevistaestudiantes.modals')
-				<div class="table-responsive">
+				<div wire:poll.10s="refreshTable" class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
@@ -39,7 +39,15 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td> 
 								<td>{{ optional($row->postulacions)->oferta->empresa->nombreEmpresa ?? 'N/A'  }}</td>
-								<td>{{ optional($row->postulacions)->oferta->nombrePuesto ?? 'N/A'  }}</td>
+								<td>{{ optional($row->postulacions)->oferta->nombrePuesto ?? 'N/A'  }}
+								<b> | </b> 
+									<?php if ($row->postulacions->oferta->estadoOferta == 1): ?>
+										<span class="badge" style="background-color: #005c35;"><b>Activa</b></span>
+										
+									<?php else: ?>
+										<span class="badge" style="background-color: #d3d3d3;"><b style="color: black;">Inactiva</b></span>
+									<?php endif; ?>
+								</td>
 								<td>{{ $row->tituloEntrevista }}</td>
 								<td>{{ date('d-m-Y', strtotime($row->FechaEntrevista))  }}</td>
 								<td>{{ $row->horaInicio }}</td>
@@ -47,13 +55,14 @@
 								<td>
 								<?php if ($row->Contratado == 1): ?>
 									<span class="badge" style="background-color: #005c35;"><b>Contratado</b></span>
+									<a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#showComentarioModal" class="dropdown-item" wire:click="showComentario({{$row->entrevistaId}})"><i class="fa-solid fa-eye"></i> Retroalimentación </a>
 								<?php else: ?>
 									<span class="badge" style="background-color: #d3d3d3;"><b style="color: black;">No contratado</b></span>
 								<?php endif; ?>
 									
 								</td>
 								<td width="90"> 
-									<a data-bs-toggle="modal" data-bs-target="#showDataModal" class="dropdown-item" wire:click="mostrar({{$row->entrevistaId}})"><i class="fa-solid fa-circle-info"></i> Detalles </a>
+									<a style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#showDataModal" class="dropdown-item" wire:click="mostrar({{$row->entrevistaId}})"><i class="fa-solid fa-circle-info"></i> Detalles </a>
 								</td>
 							</tr>
 							@empty

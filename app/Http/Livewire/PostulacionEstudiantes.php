@@ -125,4 +125,32 @@ class PostulacionEstudiantes extends Component
         session()->flash('message', 'Postulación eliminada correctamente');
     }
 
+    public function refreshTable(){
+        if (Auth::check()) {
+            // Obtén el usuario autenticado
+            $this->usuarioAutenticado = Auth::id();
+    
+            $this->user = User::with('estudiante')->find($this->usuarioAutenticado);
+            
+            $keyWord = '%'.$this->keyWord .'%';
+            // Accede a las postulaciones del estudiante
+            $this->postulacionesEstudiante = $this->user->Estudiante->postulacions()
+                ->where(function ($query) use ($keyWord) {
+                    $query->orWhere('fechaPostulacion', 'LIKE', $keyWord)
+                    ->orWhereHas('oferta', function ($queryOferta) use ($keyWord) {
+                        $queryOferta->where('nombrePuesto', 'LIKE', $keyWord);
+                    });
+                })
+                ->get();
+    
+               
+                return view('livewire.postulacionestudiantes.postulacionestudiante', [
+                    'postulacionStudent' => Postulacion::latest()
+                        ->paginate(10), 
+                        "postulacionesEstudiante" => $this->postulacionesEstudiante,
+                ]);
+                
+            }
+    }
+
 }
