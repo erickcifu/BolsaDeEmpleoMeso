@@ -1,11 +1,7 @@
-<link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous"
-/>
-
-@extends('layouts.app') @section('title', __('Welcome')) @section('content')
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+@extends('layouts.app')
+@section('title', __('Welcome'))
+@section('content')
 <style>
     body {
         margin: 0;
@@ -31,14 +27,10 @@
 
     <div class="container">
         
-        <!-- <div class="row">
+        <div class="row">
             @foreach ($grupos as $facultad=> $facultades)
-            <div class="col-sm-4 justify-content-center px-5">
-                <div
-                    id="carouselInd{{$loop->iteration}}"
-                    class="carousel slide"
-                    data-ride="carousel"
-                >
+            <div class="col-sm-12 col-md-4 px-2">
+                <div id="carouselInd{{$loop->iteration}}" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         @foreach ($facultades as $row)
                         <li
@@ -106,7 +98,7 @@
                 </div>
             </div>
             @endforeach
-        </div> -->
+        </div> 
 
         <!-- Carrusel -->
 
@@ -115,33 +107,28 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-12 mt-2">
-                    <div
-                        class="card"
-                        style="background-color: hsla(0, 0%, 0%, 0)"
-                    >
+                    <div class="card" style="background-color: hsla(0, 0%, 0%, 0)">
                         <div class="card-body d-flex justify-content-center">
-                            <button class="btn btn-success mr-5">
-                                <a
-                                    class="nav-link"
-                                    href="{{ route('login-google') }}"
-                                    >{{ __("LoginStudents") }}</a
-                                >
+                            <button class="btn btn-success mr-3">
+                                <a class="nav-link" href="{{ route('login-google') }}">{{ __("LoginStudents") }}</a>
                             </button>
                             <button class="btn btn-success">
-                                <a
-                                    class="nav-link"
-                                    href="{{ route('login') }}"
-                                    >{{ __("LoginBussines") }}</a
-                                >
+                                <a class="nav-link" href="{{ route('login') }}">{{ __("LoginBussines") }}</a>
                             </button>
+                            <br>
+                            <br>
                         </div>
+                        <br>
                     </div>
+                    <br>
                 </div>
+                <br>
             </div>
+            <br>
         </div>
         @endsection
 
-        <nav
+        {{-- <nav
             class="navbar fixed-bottom navbar-light bg-light px-5 d-flex justify-content-around"
             style="background-color: #005c35 !important"
         >
@@ -153,8 +140,27 @@
                 alt="Ejemplo"
             />
             @endforeach
-        </nav>
-
+        </nav> --}}
+        <footer class="footer">
+            <nav class="navbar navbar-light bg-light px-5 d-flex justify-content-around" style="background-color: #005c35 !important">
+                @foreach ($logos as $logo)
+                <img class="w-5" src="{{ Storage::url('logos/'. $logo) }}" height="75" alt="Ejemplo" />
+                @endforeach
+            </nav>
+        </footer>
+        
+        <style>
+            .footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 75px; /* Ajusta la altura según sea necesario */
+                background-color: #f5f5f5;
+            }
+        </style>
+        
+        
+        
         <script
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
