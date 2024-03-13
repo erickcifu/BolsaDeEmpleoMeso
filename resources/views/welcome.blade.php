@@ -30,7 +30,8 @@
     @endif
 
     <div class="container">
-        <div class="row">
+        
+        <!-- <div class="row">
             @foreach ($grupos as $facultad=> $facultades)
             <div class="col-sm-4 justify-content-center px-5">
                 <div
@@ -105,7 +106,11 @@
                 </div>
             </div>
             @endforeach
-        </div>
+        </div> -->
+
+        <!-- Carrusel -->
+
+        <!-- Fin Carrusel -->
 
         <div class="container-fluid">
             <div class="row justify-content-center">
