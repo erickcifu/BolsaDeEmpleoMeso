@@ -5,7 +5,7 @@
     crossorigin="anonymous"
 />
 
-@extends('layouts.app') @section('title', __('Welcome')) @section('content')
+@extends('layouts.app') @section('title', __('')) @section('content')
 
 <style>
     body {
@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-md-4 mb-3">
             <div class="video" style="position: relative;"s>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PIeV3Z_eRYI?si=8TTIIItHk2OscjKH" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/C6Whu7543FU" frameborder="0" allowfullscreen></iframe>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
                     <p class="fs-6 fw-bold" style="color: #f0eadc;">Crear cuenta</p>
                 </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="col-md-4 mb-3">
             <div class="video" style="position: relative;"s>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PIeV3Z_eRYI?si=8TTIIItHk2OscjKH" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/n9L6VUYikw8" frameborder="0" allowfullscreen></iframe>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
                     <p class="fs-6 fw-bold" style="color: #f0eadc;">Crear perfil</p>
                 </div>
@@ -45,9 +45,17 @@
         </div>
         <div class="col-md-4 mb-3">
             <div class="video" style="position: relative;"s>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PIeV3Z_eRYI?si=8TTIIItHk2OscjKH" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/9jjwsLGQVew" frameborder="0" allowfullscreen></iframe>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
                     <p class="fs-6 fw-bold" style="color: #f0eadc;">Crear CV</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="video" style="position: relative;"s>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/Xv2X7vVXgeM" frameborder="0" allowfullscreen></iframe>
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
+                    <p class="fs-6 fw-bold" style="color: #f0eadc;">Funciones de estudiante y egresado</p>
                 </div>
             </div>
         </div>
@@ -63,7 +71,7 @@
     <div class="row">
         <div class="col-md-4 mb-3">
             <div class="video" style="position: relative;"s>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PIeV3Z_eRYI?si=8TTIIItHk2OscjKH" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/qqjODOy_PI0" frameborder="0" allowfullscreen></iframe>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
                     <p class="fs-6 fw-bold" style="color: #f0eadc;">Registrarse</p>
                 </div>
@@ -71,17 +79,25 @@
         </div>
         <div class="col-md-4 mb-3">
             <div class="video" style="position: relative;"s>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PIeV3Z_eRYI?si=8TTIIItHk2OscjKH" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/DWzpcqbNyt8" frameborder="0" allowfullscreen></iframe>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
-                    <p class="fs-6 fw-bold" style="color: #f0eadc;">Crear solicitud</p>
+                    <p class="fs-6 fw-bold" style="color: #f0eadc;">Configuraciones generales</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-3">
             <div class="video" style="position: relative;"s>
-                <iframe width="100%" height="200" src="https://www.youtube.com/embed/PIeV3Z_eRYI?si=8TTIIItHk2OscjKH" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/rb-779Ttfhs" frameborder="0" allowfullscreen></iframe>
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
                     <p class="fs-6 fw-bold" style="color: #f0eadc;">Publicar ofertas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="video" style="position: relative;"s>
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/tXoviS_WILg" frameborder="0" allowfullscreen></iframe>
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 92, 53, 0.8); padding: 0px; text-align: center;">
+                    <p class="fs-6 fw-bold" style="color: #f0eadc;">Postulaciones y entrevistas</p>
                 </div>
             </div>
         </div>
