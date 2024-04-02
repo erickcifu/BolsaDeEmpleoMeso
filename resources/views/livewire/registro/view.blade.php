@@ -125,7 +125,10 @@
                    </div>
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="curriculum"><b style="color: black">Cargar Curriculum</b></label>
+                       <label for="curriculum"><b style="color: black">Cargar Curriculum</b>
+                        <a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Cargar un currículum" data-bs-content="En caso de no tener un currículum, puede generarlo desde la pestaña 'Generar CV' y subirlo en la opción 'Editar'">
+                            <i class="fa-solid fa-circle-info"></i>
+                            </a></label>
                        <input wire:model="curriculum" type="file"  accept="application/pdf" class="form-control" id="curriculum"
                            placeholder="Curriculum" />@error('curriculum')
                        <span class="error text-danger">{{ $message }}</span>
@@ -220,3 +223,10 @@
     </div>
     </body>
 </div>
+
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Inicializar el popover después de que se carga Livewire
+        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
+    });
+</script>

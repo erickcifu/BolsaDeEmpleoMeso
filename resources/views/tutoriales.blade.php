@@ -23,59 +23,28 @@
             background-attachment: scroll;
         }
     }
-   /* Estilo para el footer */
-   .footer {
+    /* Estilo para el footer y el botón de información */
+    .footer,
+    #info-btn {
         background-color: rgba(0, 92, 53, 0.6);
         padding: 10px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
         color: #ffffff; /* Texto en color blanco */
-        text-align: center; /* Centrado del texto */
         cursor: pointer; /* Cambia el cursor al pasar sobre el footer */
+        white-space: nowrap; /* Para reducir el footer y el botón a una sola línea */
+        text-align: center; /* Centrado del texto */
+    }
+    #info-btn {
+    float: right; /* Alinear a la derecha */
+    margin-left: 150px; /* Agregar un poco de margen izquierdo para separarlo del texto */
+    margin-top: -45px; /* Ajusta la posición vertical hacia arriba */    
     }
 
-    /* Estilo para el texto adicional al pasar el cursor */
-    .footer:hover::after {
-        content: "Haz clic aquí para más información";
-        display: block;
-        font-size: 12px;
-        color: #ffffff;
-        margin-top: 5px;
-    }  
+
+    .popover {
+        max-width: 400px; /* Ancho máximo del popover */
+    }
 </style>
-
-<!-- Modal -->
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="infoModalLabel">Información adicional</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Decano De la Facultad de Ingenieria Mgt Richard Mazariegos</p>
-          <p>Asesor Técnico Ing José Luis Hernández</p>
-          <p>Asesora de Método Ing Jenny de Zelada</p>
-          <p>Estudiantes:</p>
-          <ul>
-            <li>Erick Alfredo Cifuentes | Fuentes ErickCifu@umes.edu.gt</li>
-            <li>María Fernanda Mendoza y Mendoza | Fuentes ErickCifu@umes.edu.gt</li>
-            <li>Antulio José Barrios de león | Fuentes ErickCifu@umes.edu.gt</li>
-            <li>Edwin Aníbal Mejía Chan | Fuentes ErickCifu@umes.edu.gt</li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<div id="content">
-    
+   
   <body background="{{ asset('storage/Meso/Meso.png') }}">
     <div  style="display: inline-block; background-color: rgba(0, 92, 53, 0.6); padding: 10px;">
         <h2 style="color: #f0eadc;">Estudiantes</h2>
@@ -157,14 +126,36 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
 </div>
-    <!-- Footer -->
-    <div class="footer">
-        <p>Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria Grupo #13. Todos los derechos reservados.</p>
-    </div>
-</body>
-</div>
+<br>
 
+<!-- Footer -->
+
+<!-- Botón de información -->
+<a id="info-btn" type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Información de derechos de autor" data-bs-content="Decano De la Facultad de Ingenieria Mgt Richard Mazariegos. ||
+Asesor Técnico Ing José Luis Hernández. ||
+Asesora de Método Ing Jenny de Zelada. ||
+Estudiantes:                                                      
+- Erick Alfredo Cifuentes Fuentes | ErickCifu@umes.edu.gt
+- María Fernanda Mendoza y Mendoza | fernanda2000@umes.edu.gt 
+- Antulio José Barrios de león | ajlb@umes.Edu.gt
+- Edwin Aníbal Mejía Chan | mejiachan@umes.edu.gt ">
+    <i class="fa-solid fa-circle-info"></i>
+</a>
+
+<!-- Footer -->
+<div class="footer">
+    <p>Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria Grupo #13. Todos los derechos reservados.</p>
+</div>
+</body>
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Inicializar el popover después de que se carga Livewire
+        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
+    });
+</script>
 @endsection
 
 
