@@ -5,7 +5,10 @@
     crossorigin="anonymous"
 />
 
-@extends('layouts.app') @section('title', __('')) @section('content')
+@extends('layouts.app') 
+@section('title', __('')) 
+@section('content')
+
 
 <style>
     body {
@@ -20,8 +23,29 @@
             background-attachment: scroll;
         }
     }
+    /* Estilo para el footer y el botón de información */
+    .footer,
+    #info-btn {
+        background-color: rgba(0, 92, 53, 0.6);
+        padding: 10px;
+        color: #ffffff; /* Texto en color blanco */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el footer */
+        white-space: nowrap; /* Para reducir el footer y el botón a una sola línea */
+        text-align: center; /* Centrado del texto */
+    }
+    #info-btn {
+    float: right; /* Alinear a la derecha */
+    margin-left: 150px; /* Agregar un poco de margen izquierdo para separarlo del texto */
+    margin-top: -45px; /* Ajusta la posición vertical hacia arriba */    
+    }
+
+
+    .popover {
+        max-width: 400px; /* Ancho máximo del popover */
+    }
 </style>
-<body background="{{ asset('storage/Meso/Meso.png') }}">
+   
+  <body background="{{ asset('storage/Meso/Meso.png') }}">
     <div  style="display: inline-block; background-color: rgba(0, 92, 53, 0.6); padding: 10px;">
         <h2 style="color: #f0eadc;">Estudiantes</h2>
     </div>
@@ -102,6 +126,36 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+</div>
+<br>
+
+<!-- Footer -->
+
+<!-- Botón de información -->
+<a id="info-btn" type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Información de derechos de autor" data-bs-content="Decano De la Facultad de Ingenieria Mgt Richard Mazariegos. ||
+Asesor Técnico Ing José Luis Hernández. ||
+Asesora de Método Ing Jenny de Zelada. ||
+Estudiantes:                                                      
+- Erick Alfredo Cifuentes Fuentes | ErickCifu@umes.edu.gt
+- María Fernanda Mendoza y Mendoza | fernanda2000@umes.edu.gt 
+- Antulio José Barrios de león | ajlb@umes.Edu.gt
+- Edwin Aníbal Mejía Chan | mejiachan@umes.edu.gt ">
+    <i class="fa-solid fa-circle-info"></i>
+</a>
+
+<!-- Footer -->
+<div class="footer">
+    <p>Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria Grupo #13. Todos los derechos reservados.</p>
 </div>
 </body>
+<script>
+    document.addEventListener('livewire:load', function () {
+        // Inicializar el popover después de que se carga Livewire
+        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
+    });
+</script>
 @endsection
+
+
