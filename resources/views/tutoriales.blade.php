@@ -18,17 +18,15 @@
         background-size: cover;
     }
 
-    @media (max-width: 768px) {
+    @media  only screen and (max-width: 768px) {
         body {
             background-attachment: scroll;
         }
-    }
-    @media only screen and (min-width: 768px) {
-        /* Estilos específicos para pantallas más grandes */
         .footer p {
             font-size: 16px; /* Ajustar el tamaño de fuente para pantallas más grandes */
         }
-    /* Estilo para el footer y el botón de información */
+    }
+   
     .footer,
     #info-btn {
         background-color: rgba(0, 92, 53, 0.6);
