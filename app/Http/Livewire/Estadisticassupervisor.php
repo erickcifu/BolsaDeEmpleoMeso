@@ -4,7 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\AutoridadAcademica;
+use App\Models\Facultad;
+use App\Models\User;
 
 use PDF;
 //----
@@ -27,6 +32,12 @@ class Estadisticassupervisor extends Component
     public $rechazados = 0;
     public $ofertasYear = 0;
     public $ofertas = 0;
+    public $nombreFacultad;
+    public $user;
+    public $user_id;
+    public $autoridad;
+    public $imageUrl;
+
     public function mount()
     {
         $this->endsOnDate = now()->format('Y-m-d');
@@ -40,26 +51,28 @@ class Estadisticassupervisor extends Component
     public function render()
     {
 
-       $this->anioActual = date("Y");
-       $habilidadesT=DB::select('SELECT
-       nombreTecnica,                    COUNT(nombreTecnica) AS total
-                       FROM
-                           (
-                               SELECT
-                                   id
-                               FROM
-                                   users
-                               WHERE
-                                   estado = 1
-                                   AND rol_id = 4
-                           ) u
-                           LEFT JOIN autoridadacademicas au ON u.id = au.user_id
-                           LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
-                           LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
-                           LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
-                           GROUP BY nombreTecnica');
+        $this->anioActual = date("Y");
+        $habilidadesT=DB::select('SELECT
+        nombreTecnica,                    COUNT(nombreTecnica) AS total
+                        FROM
+                            (
+                                SELECT
+                                    id
+                                FROM
+                                    users
+                                WHERE
+                                    estado = 1
+                                    AND rol_id = 4
+                            ) u
+                            LEFT JOIN autoridadacademicas au ON u.id = au.user_id
+                            LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
+                            LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
+                            LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
+                            GROUP BY nombreTecnica');
         $this->buildDataSup();
+        
         return view('livewire.estadisticassupervisor.view', compact('habilidadesT'));
+        
     }
 
     public function buildDataSup()
@@ -214,6 +227,24 @@ class Estadisticassupervisor extends Component
     
 	public function downloadPDF()
 	{ 
+        $this->user_id = Auth::id();
+	    $this->user = User::find($this->user_id);
+        $this->nombreFacultad = null; 
+
+        if ($this->user && $this->user->AutoridadAcademica) {
+            $this->autoridad = $this->user->AutoridadAcademica;
+
+            if ($this->autoridad->facultad){
+            $this->nombreFacultad = $this->autoridad->facultad->Nfacultad;
+            } else {
+                $this->nombreFacultad = null;
+            }
+            
+            // return view('livewire.estadisticassupervisor.viewpdf', ['nombreFacultad' => $this->nombreFacultad]);
+        }
+
+        $imageUrl = 'storage/Meso/LogoVerde.png';
+
         //-----------
         $habilidadesT=DB::select('SELECT
         nombreTecnica,                    COUNT(*) AS total
@@ -341,7 +372,16 @@ class Estadisticassupervisor extends Component
 
                           
          
-         $pdf=Pdf::loadView('livewire.estadisticassupervisor.viewpdf', compact('habilidadesT','HabilidadesYear','ContratadosYear','PostuladosYear','RechazadosYear','OfertasYear'));
+         $pdf=Pdf::loadView('livewire.estadisticassupervisor.viewpdf',  [
+            'nombreFacultad' => $this->nombreFacultad,
+            'habilidadesT' => $habilidadesT,
+            'HabilidadesYear' => $HabilidadesYear,
+            'ContratadosYear' => $ContratadosYear,
+            'PostuladosYear' => $PostuladosYear,
+            'RechazadosYear' => $RechazadosYear,
+            'OfertasYear' => $OfertasYear,
+            'imageUrl' => $imageUrl,
+        ]);
 		
 		
 		
