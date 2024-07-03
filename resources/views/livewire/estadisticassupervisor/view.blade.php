@@ -70,7 +70,7 @@
 
                     <div class="row w-100 d-flex justify-content-center mb-2"
                         style="border: 1px solid gray; padding: 3px; border-radius: 5px">
-                        <div class="text-center">Total tecnicas</div>
+                        <div class="text-center">Total de habilidades técnicas</div>
                         <div class="col-md-3 mb-1">
                             <div class="card border-secondary mx-sm-1 p-2">
                                 <div class="card border-secondary text-secondary p-1">
