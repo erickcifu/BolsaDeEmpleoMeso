@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 @extends('layouts.app')
 @section('title', __('Welcome'))
 @section('content')
@@ -26,7 +27,27 @@
     @endif
 
     <div class="container">
-        
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #005c35;">
+                <h5 class="modal-title" id="infoModalLabel"  style="color: #f0eadc;">Información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #f0eadc;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Aquí se llenará la información -->
+                <p id="modalContent">Para acceder a los detalles de la oferta, inicia sesión o registrate desde el botón "Estudiantes" y selecciona tu correo electrónico institucional @umes.edu.gt ó @mesoamericana.edu.gt</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #005c35;">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         <div class="row">
             @foreach ($grupos as $facultad=> $facultades)
             <div class="col-sm-12 col-md-4 px-2">
@@ -42,6 +63,12 @@
                     </ol>
                     <div class="carousel-inner">
                         @foreach ($facultades as $row)
+                        <div
+                            class="zoom carousel-item @if($loop->index===0) active @endif"
+                            data-toggle="modal"
+                            data-target="#infoModal"
+                            data-info="Para conocer más información sobre la oferta: {{ $row->puesto }}, debe iniciar sesión o registrarse, desde el botón 'Estudiantes' "
+                        >
                         <div
                             class="zoom carousel-item @if($loop->index===0) active @endif"
                         >
@@ -187,4 +214,14 @@
             message.style.display = "none";
         }
     }, 5000);
+
+    $('#infoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Elemento que disparó el modal
+        var info = button.data('info'); // Extrae la información de los atributos data-*
+        var modal = $(this);
+        modal.find('.modal-body #modalContent').text(info);
+    });
 </script>
+
+
+
