@@ -20,7 +20,17 @@
                     <span class="text-center fa fa-person-circle-check" aria-hidden="true"></span>
                 </div>
                 <div class="text-secondary text-center mt-3">
-                    <h6>{{$item->rol}}</h6>
+                <h6>
+                        @if ($item->rol == 'Estudiante')
+                            Estudiantes
+                        @elseif ($item->rol == 'Empresa')
+                            Empresas
+                        @elseif ($item->rol == 'Recursos Humanos')
+                            Administradores
+                        @else
+                            Autoridades académicas
+                        @endif
+                    </h6>
                 </div>
                 <div class="text-secondary text-center mt-2">
                     <h4>{{ $item->total }}</h4>
@@ -79,7 +89,18 @@
                     <span class="text-center fa fa-person-circle-check" aria-hidden="true"></span>
                 </div>
                 <div class="text-success text-center mt-3">
-                    <h6>{{$item->rol}}</h6>
+                    <!-- <h6>{{$item->rol}}</h6> -->
+                    <h6>
+                        @if ($item->rol == 'Estudiante')
+                            Estudiantes
+                        @elseif ($item->rol == 'Empresa')
+                            Empresas
+                        @elseif ($item->rol == 'Recursos Humanos')
+                            Administradores
+                        @else
+                            Autoridades académicas
+                        @endif
+                    </h6>
                 </div>
                 <div class="text-success text-center mt-2">
                     <h4>{{ $item->total }}</h4>
