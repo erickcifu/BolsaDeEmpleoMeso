@@ -72,7 +72,7 @@
 
                 <div class="card-footer" style="background-color: white">
                 @if (Route::has('register'))
-                    <a class="btn btn-link" style="color: #005c35;" href="{{ route('register') }}"><b>Registro</b></a><h8 style="color: #005c35;">aquí, si aún no tienes una cuenta.</h8>
+                    <a class="btn btn-link" style="color: #005c35;" href="{{ route('register') }}"><b>Regístrate</b></a><h8 style="color: #005c35;">aquí, si aún no tienes una cuenta.</h8>
                 @endif
                 </div>
             </div>

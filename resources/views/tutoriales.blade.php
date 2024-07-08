@@ -187,7 +187,7 @@ Estudiantes:
 </body>
 <!-- Footer -->
 <div class="footer text-center py-3">
-    <p style="color: #f0eadc;">Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria Grupo #13. Todos los derechos reservados.</p>
+    <p style="color: #f0eadc;">Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria. Todos los derechos reservados.</p>
     <p style="color: #f0eadc;" id="terms-conditions" data-toggle="modal" data-target="#infoModal" data-info="1. Universidad mesoamericana no garantiza a los usuarios de la aplicación Bolsa de empleo, que sean contratados cuando se postulen a las ofertas laborales, ya que el proceso de selección y contratación lo lleva a cabo la empresa que realiza la publicación.
 2. Universidad Mesoamericana no se responsabiliza por la información publicada por parte de las empresas registradas en la aplicación, tampoco de las vacantes de empleo que se ofrecen dentro de la aplicación, ya que cada empresa se encarga de manera individual del proceso de contratación de los postulados.
 3. Universidad Mesoamericana únicamente proporciona este sitio web como un medio de comunicación, pero no adquiere una responsabilidad entre ninguna de las partes. 
