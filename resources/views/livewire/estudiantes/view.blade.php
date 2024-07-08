@@ -48,7 +48,7 @@
 								@if ( $row->curriculum )
 								<a href="{{ Storage::url('cvs/' . $row->curriculum) }}" target="_blank"> Ver archivo </a>
 								@else
-									Sin curriculum disponible
+									Sin currículum disponible
 								@endif
 								</td>
 								<td width="125" >

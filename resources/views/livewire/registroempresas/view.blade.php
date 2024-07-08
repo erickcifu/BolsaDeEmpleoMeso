@@ -71,7 +71,7 @@
                         <div style="display: inline-block; width: 100vh;">  
                                 <div class="mb-2">
                                     <label for="telefonoEncargado"><b style="color: black;">Teléfono del encargado*<b></label>
-                                    <input wire:model="telefonoEncargado" type="text" class="form-control" id="telefonoEncargado" placeholder="No. de telefono del encargado">@error('telefonoEncargado') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <input wire:model="telefonoEncargado" type="text" class="form-control" id="telefonoEncargado" placeholder="No. de teléfono del encargado">@error('telefonoEncargado') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div style="display: inline-block; width: 100vh;"> 

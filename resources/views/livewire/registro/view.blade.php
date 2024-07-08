@@ -96,10 +96,10 @@
                    <div style="display: inline-block; width: 100%;">                
                    <div class="mb-2">
                        <label for="numero_personal"
-                       ><b style="color: black">Numero Personal*</b></label
+                       ><b style="color: black">Número Personal*</b></label
                        >
                        <input
-                       wire:model="numero_personal"
+                       wire:model="número_personal"
                        type="number"
                        size="8"
                        value="00-000-000"
@@ -116,21 +116,21 @@
                <div class="hstack gap-3">
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="numero_domiciliar"><b style="color: black">Otro Numero de Telefono*</b></label>
+                       <label for="numero_domiciliar"><b style="color: black">Otro Número de Teléfono*</b></label>
                        <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar"
-                           placeholder="otro numero" />@error('numero_domiciliar')
+                           placeholder="otro número" />@error('numero_domiciliar')
                        <span class="error text-danger">{{ $message }}</span>
                        @enderror
                    </div>
                    </div>
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="curriculum"><b style="color: black">Cargar Curriculum</b>
+                       <label for="curriculum"><b style="color: black">Cargar Currículum</b>
                         <a type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Cargar un currículum" data-bs-content="En caso de no tener un currículum, puede generarlo desde la pestaña 'Generar CV' y subirlo en la opción 'Editar'">
                             <i class="fa-solid fa-circle-info"></i>
                             </a></label>
                        <input wire:model="curriculum" type="file"  accept="application/pdf" class="form-control" id="curriculum"
-                           placeholder="Curriculum" />@error('curriculum')
+                           placeholder="Currículum" />@error('curriculum')
                        <span class="error text-danger">{{ $message }}</span>
                        @enderror
                        <div wire:loading wire:target="curriculum"><h6 style="color: #005c35;"><b>Cargando archivo...</b></h6></div>

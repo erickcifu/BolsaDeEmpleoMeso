@@ -27,7 +27,7 @@
                         <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi">@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="correo"><b style="color: black;">Correo Electronico<b></label>
+                        <label for="correo"><b style="color: black;">Correo Electrónico<b></label>
                         <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo">@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -39,8 +39,8 @@
                         <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar">@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="curriculum"><b style="color: black;">Cargar Curriculum<b></label>
-                        <input wire:model="curriculum" type="file" class="form-control" id="curriculum" placeholder="Curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="curriculum"><b style="color: black;">Cargar Currículum<b></label>
+                        <input wire:model="curriculum" type="file" class="form-control" id="currículum" placeholder="Curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label for="departamento_id"><b style="color: black;">Departamento</b></label>
@@ -120,7 +120,7 @@
                         <input wire:model="DPI" type="number" class="form-control" id="DPI" placeholder="Dpi">@error('DPI') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="correo"><b style="color: black;">Correo Electronico<b></label>
+                        <label for="correo"><b style="color: black;">Correo Electrónico<b></label>
                         <input wire:model="correo" type="email" class="form-control" id="correo" placeholder="Correo">@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
@@ -132,8 +132,8 @@
                         <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar" placeholder="Numero Domiciliar">@error('numero_domiciliar') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
-                        <label for="curriculum"><b style="color: black;"><b>Cargar Curriculum</label>
-                        <input wire:model="curriculum" type="file" class="form-control" id="curriculum" placeholder="Curriculum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="curriculum"><b style="color: black;"><b>Cargar Currículum</label>
+                        <input wire:model="curriculum" type="file" class="form-control" id="curriculum" placeholder="Currículum">@error('curriculum') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label for="departamento_id"><b style="color: black;">Departamento</b></label>
@@ -279,7 +279,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">¿Seguro que desea eliminar este dato?</h5>
                     
                 </form>
             </div>

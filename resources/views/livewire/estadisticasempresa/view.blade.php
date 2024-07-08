@@ -1,13 +1,13 @@
 @section('title', __('Estadisticas'))
 <div class="row w-100 d-flex justify-content-center mb-3">
     <div class="col-12 mb-3 d-flex justify-content-end">
-        <label for="reminder" class="mx-3">Fecha Inicio:</label>
+        <label for="reminder" class="mx-3">Fecha inicio:</label>
         <input
             wire:model="reminder"
             type="date"
             wire:change="actualizarInformacion()"
         />
-        <label for="endsOnDate" class="mx-3">Fecha Fin:</label>
+        <label for="endsOnDate" class="mx-3">Fecha fin:</label>
         <input
             wire:model="endsOnDate"
             type="date"
