@@ -38,7 +38,7 @@
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Direccion empresa</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Encargado empresa</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Telefono del encargado</th>
-									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado empresa</th>
+									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado de empresa</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Estado solicitud</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">usuario</th>
 									<th style="background-color: #005c35;"><b style="color: #f0eadc;">Departamento</th>

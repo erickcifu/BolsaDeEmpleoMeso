@@ -1,9 +1,9 @@
 @section('title', __('Estadisticas'))
 <div class="row">
     <div class="col-12 mb-3 d-flex justify-content-end">
-        <label for="reminder" class="mx-3">Fecha Inicio:</label>
+        <label for="reminder" class="mx-3">Fecha inicio:</label>
         <input wire:model="reminder" type="date" wire:change="actualizarInformacion()" />
-        <label for="endsOnDate" class="mx-3">Fecha Fin:</label>
+        <label for="endsOnDate" class="mx-3">Fecha fin:</label>
         <input wire:model="endsOnDate" type="date" wire:change="actualizarInformacion()" />
     </div>
     
@@ -25,7 +25,7 @@
                         <div class="btn" style="background-color: #005c35; display: flex; align-items: center;">
                         <i class="fa-solid fa-download" style="color: #f0eadc;"></i>
                         <a href="{{ url('/estadisticasuper-pdf') }}" class="nav-link" style="color: #f0eadc; text-decoration: none; margin-left: 5px;">
-                            <span>Descargar Reporte</span>
+                            <span>Descargar reporte</span>
                         </a>
                     </div>
 					</div>
@@ -42,7 +42,7 @@
                                 <thead class="thead">
                                     <tr> 
                                         <th style="background-color: #005c35;"><b style="color: #f0eadc;">Habilidad</th>
-                                        <th style="background-color: #005c35;"><b style="color: #f0eadc;">Cant. Veces requerida</th>
+                                        <th style="background-color: #005c35;"><b style="color: #f0eadc;">Cantidad de veces requerida</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -101,7 +101,7 @@
 
                     <div class="row w-100 d-flex justify-content-center mb-2"
                         style="border: 1px solid gray; padding: 3px; border-radius: 5px">
-                        <div class="text-center">Total Contratados</div>
+                        <div class="text-center">Total contratados</div>
                         <div class="col-md-3 mb-1">
                             <div class="card border-primary mx-sm-1 p-2">
                                 <div class="card border-primary text-primary p-1">
@@ -132,7 +132,7 @@
 
                     <div class="row w-100 d-flex justify-content-center mb-2"
                         style="border: 1px solid gray; padding: 3px; border-radius: 5px">
-                        <div class="text-center">Total Postulados</div>
+                        <div class="text-center">Total postulados</div>
                         <div class="col-md-3 mb-1">
                             <div class="card border-danger mx-sm-1 p-2">
                                 <div class="card border-danger text-danger p-1">
@@ -162,7 +162,7 @@
                     </div>
                     <div class="row w-100 d-flex justify-content-center mb-2"
                         style="border: 1px solid gray; padding: 3px; border-radius: 5px">
-                        <div class="text-center">Total Rechazados</div>
+                        <div class="text-center">Total rechazados</div>
                         <div class="col-md-3 mb-1">
                             <div class="card border-info mx-sm-1 p-2">
                                 <div class="card border-info text-info p-1">
@@ -192,7 +192,7 @@
                     </div>
                     <div class="row w-100 d-flex justify-content-center mb-2"
                         style="border: 1px solid gray; padding: 3px; border-radius: 5px">
-                        <div class="text-center">Total Ofertas</div>
+                        <div class="text-center">Total ofertas</div>
                         <div class="col-md-3 mb-1">
                             <div class="card border-warning mx-sm-1 p-2">
                                 <div class="card border-warning text-warning p-1">

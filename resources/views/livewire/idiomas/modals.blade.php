@@ -62,7 +62,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">¿Seguro que desea eliminar este dato?</h5>
 
                 </form>
             </div>

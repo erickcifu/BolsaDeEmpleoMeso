@@ -132,7 +132,7 @@
                                 <!-- Competencias comportamentales -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Competencias comportamentales</b></p>
+                                        <p class="fs-6" for="experienciaLaboral"><b style="color: black;">Aptitudes comportamentales</b></p>
                                         <!-- Inputs Competencias -->
                                             @forelse($competencias as $competencia)
                                             <ul style="color: #373737;" class="ul-check">
@@ -219,7 +219,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn close-btn" data-bs-dismiss="modal" style="background-color: #d3d3d3;">Cancelar</button>
-                <button type="button" wire:click.prevent="postular()" data-bs-dismiss="modal" class="btn btn-primary" style="background-color: #005c35;">Sí, deseo postularme!</button>
+                <button type="button" wire:click.prevent="postular()" data-bs-dismiss="modal" class="btn btn-primary" style="background-color: #005c35;">¡Sí, deseo postularme!</button>
             </div>
         </div>
     </div>

@@ -76,7 +76,7 @@
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li class="nav-item">
-                                        <a href="{{ url('/competenciasC') }}" class="nav-link" style="color: #f0eadc;">Competencias Comportamentales</a> 
+                                        <a href="{{ url('/competenciasC') }}" class="nav-link" style="color: #f0eadc;">Aptitudes comportamentales</a> 
                                     </li>                                    
                                 </ul>
                         </li>
@@ -93,7 +93,7 @@
                             <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;">Usuarios</a> 
                         </li>						
 						<li class="nav-item">
-                            <a href="{{ url('/estadisticasrrhh') }}" class="nav-link" style="color: #f0eadc;">Estadisticas</a> 
+                            <a href="{{ url('/estadisticasrrhh') }}" class="nav-link" style="color: #f0eadc;">Estadística</a> 
                         </li>						
                     </ul>
 					@endauth()

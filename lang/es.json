@@ -19,7 +19,7 @@
     "Invalid JSON was returned from the route.": "Se devolvió un JSON no válido desde la ruta.",
     "Login": "Iniciar sesión",
     "LoginStudents": "Estudiantes",
-    "LoginBussines": "Empresas/Internos",
+    "LoginBussines": "Empresas y Administrativos",
     "Logout": "Finalizar sesión",
     "Name": "Nombre",
     "Not Found": "No encontrado",

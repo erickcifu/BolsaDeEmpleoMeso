@@ -48,7 +48,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Recuerdame') }}
+                                        {{ __('Recordarme') }}
                                     </label>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
 
                 <div class="card-footer" style="background-color: white">
                 @if (Route::has('register'))
-                    <a class="btn btn-link" style="color: #005c35;" href="{{ route('register') }}"><b>Registrate</b></a><h8 style="color: #005c35;">aquí, si aún no tienes una cuenta.</h8>
+                    <a class="btn btn-link" style="color: #005c35;" href="{{ route('register') }}"><b>Registro</b></a><h8 style="color: #005c35;">aquí, si aún no tienes una cuenta.</h8>
                 @endif
                 </div>
             </div>
