@@ -96,7 +96,7 @@
                    <div style="display: inline-block; width: 100%;">                
                    <div class="mb-2">
                        <label for="numero_personal"
-                       ><b style="color: black">Número Personal*</b></label
+                       ><b style="color: black">Número de teléfono personal*</b></label
                        >
                        <input
                        wire:model="número_personal"
@@ -105,7 +105,7 @@
                        value="00-000-000"
                        class="form-control"
                        id="numero_personal"
-                       placeholder="Numero Personal"
+                       placeholder="Número de teléfono personal"
                        />@error('numero_personal')
                        <span class="error text-danger">{{ $message }}</span>
                        @enderror
@@ -116,9 +116,9 @@
                <div class="hstack gap-3">
                    <div style="display: inline-block; width: 100%;">
                    <div class="mb-2">
-                       <label for="numero_domiciliar"><b style="color: black">Otro Número de Teléfono*</b></label>
+                       <label for="numero_domiciliar"><b style="color: black">Otro número de Teléfono*</b></label>
                        <input wire:model="numero_domiciliar" type="number" class="form-control" id="numero_domiciliar"
-                           placeholder="otro número" />@error('numero_domiciliar')
+                           placeholder="Otro número" />@error('numero_domiciliar')
                        <span class="error text-danger">{{ $message }}</span>
                        @enderror
                    </div>

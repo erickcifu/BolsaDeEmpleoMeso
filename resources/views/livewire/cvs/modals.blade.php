@@ -49,7 +49,7 @@
                                 <div class="hstack gap-3">
                                     <div style="display: inline-block; width: 100%;">
                                         <div class="mb-2">
-                                            <label for="correoElectronico">Correo electronico*</label>
+                                            <label for="correoElectronico">Correo electrónico*</label>
                                             <input wire:model="correoElectronico" type="text" class="form-control" id="correoElectronico" placeholder="ejemplo@gmail.com">
                                             @error('correoElectronico') <span class="error text-danger">{{ $message }}</span> @enderror
                                         </div>

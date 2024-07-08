@@ -29,7 +29,7 @@
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Nombres y apellidos</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carné</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">DPI</th>
-								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Número Personal</th>
+								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Número personal</th>
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Carrera</th> 
 								<th style="background-color: #005c35;"><b style="color: #f0eadc;">Currículum</th> 
 								<td style="background-color: #005c35;"><b style="color: #f0eadc;">Acciones</td>
