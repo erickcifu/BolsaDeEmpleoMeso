@@ -93,7 +93,7 @@
                             <a href="{{ url('/autoridadacademicas') }}" class="nav-link" style="color: #f0eadc;">Usuarios</a> 
                         </li>						
 						<li class="nav-item">
-                            <a href="{{ url('/estadisticasrrhh') }}" class="nav-link" style="color: #f0eadc;">Estadística</a> 
+                            <a href="{{ url('/estadisticasrrhh') }}" class="nav-link" style="color: #f0eadc;">Estadísticas</a> 
                         </li>						
                     </ul>
 					@endauth()
