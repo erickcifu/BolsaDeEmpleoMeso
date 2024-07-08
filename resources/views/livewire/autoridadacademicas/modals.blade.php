@@ -10,12 +10,12 @@
 				<form>
                    
                     <div class="form-group">                        
-                        <label for="nombreAutoridad"><b style="color: black;">Nombre<b></label>
-                        <input wire:model="nombreAutoridad" type="text" class="form-control" id="nombreAutoridad" placeholder="Nombre del usuario">@error('nombreAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="nombreAutoridad"><b style="color: black;">Nombres<b></label>
+                        <input wire:model="nombreAutoridad" type="text" class="form-control" id="nombreAutoridad" placeholder="Nombres de la autoridad académica">@error('nombreAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
-                        <label for="apellidosAutoridad"><b style="color: black;">Apellido<b></label>
-                        <input wire:model="apellidosAutoridad" type="text" class="form-control" id="apellidosAutoridad" placeholder="Apellidos del usuario">@error('apellidosAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <label for="apellidosAutoridad"><b style="color: black;">Apellidos<b></label>
+                        <input wire:model="apellidosAutoridad" type="text" class="form-control" id="apellidosAutoridad" placeholder="Apellidos de la autoridad académica">@error('apellidosAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
                         <label for="email"><b style="color: black;">Correo electrónico<b></label>
