@@ -1,13 +1,13 @@
 @section('title', __('Estadisticas'))
 <div class="row">
     <div class="col-12 mb-3 d-flex justify-content-end">
-        <label for="reminder" class="mx-3">Fecha Inicio:</label>
+        <label for="reminder" class="mx-3">Fecha inicio:</label>
         <input wire:model="reminder" type="date" wire:change="actualizarInformacion()" />
-        <label for="endsOnDate" class="mx-3">Fecha Fin:</label>
+        <label for="endsOnDate" class="mx-3">Fecha fin:</label>
         <input wire:model="endsOnDate" type="date" wire:change="actualizarInformacion()" />
     </div>
-    <div class="text-center"><h2>Estadísticas Generales</h2></div>
-    <div class="text-center">Total Usuarios</div>
+    <div class="text-center"><h2>Estadísticas generales</h2></div>
+    <div class="text-center">Total usuarios</div>
     <div class="row w-100 d-flex justify-content-center mb-2">
         {{-- @foreach ($usuarios as $item) --}}
     <!-- <span>  {{ $query }} </span> -->

@@ -132,7 +132,7 @@
                                 <!-- Competencias comportamentales -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6"><b style="color: black;">Competencias comportamentales</b></p>
+                                        <p class="fs-6"><b style="color: black;">Aptitudes comportamentales</b></p>
                                         <!-- Inputs Competencias -->
                                         @forelse($competencias as $competencia)
                                             <ul style="color: #373737;" class="ul-check">

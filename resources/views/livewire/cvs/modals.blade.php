@@ -65,7 +65,7 @@
                                 <br/>
                                 <div class="form-group">
                                     <label for="publicaciones">Enlace</label>
-                                    <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces de github, portafolios, publicaciones de los proyectos que haz realizado.">
+                                    <textarea wire:model="publicaciones" type="text" class="form-control" id="publicaciones" placeholder="Incluye enlaces a tu GitHub, portafolios, y publicaciones de proyectos realizados.">
                                     </textarea>    
                                     @error('publicaciones') <span class="error text-danger">{{ $message }}</span> @enderror                         
                                 </div>
@@ -116,7 +116,7 @@
                                             @error('habilidades') <span class="error text-danger">{{ $message }}</span> @enderror
                                         </div>
                                         <div class=" mb-3">
-                                            <label for="intereses">Áreas de intéres personal*</label>
+                                            <label for="intereses">Áreas de interés personal*</label>
                                             <textarea wire:model="intereses" type="text" class="form-control" id="intereses" placeholder="Escrube tus intereses y actividades extracurricuares">
                                             </textarea>
                                             @error('intereses') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -186,7 +186,7 @@
                     <div class="accordion-item" id="item3">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed"  style="color: #005c35;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"  data-bs-parent="#accordionExample" disabled>
-                                <b> Experiencia Laboral </b>
+                                <b> Experiencia laboral </b>
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
@@ -395,7 +395,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">¿Seguro que desea eliminar este dato?</h5>
 
                 </form>
             </div>

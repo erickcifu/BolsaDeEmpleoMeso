@@ -175,10 +175,8 @@
 <!-- Footer -->
 
 <!-- Botón de información -->
-<a id="info-btn" type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Información de derechos de autor" data-bs-content="Decano De la Facultad de Ingenieria Mgt Richard Mazariegos. ||
-Asesor Técnico Ing José Luis Hernández. ||
-Asesora de Método Ing Jenny de Zelada. ||
-Estudiantes:                                                      
+<a id="info-btn" type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Información de derechos de autor" data-bs-content="
+Estudiantes:                                                  
 - Erick Alfredo Cifuentes Fuentes | ErickCifu@umes.edu.gt
 - María Fernanda Mendoza y Mendoza | fernanda2000@umes.edu.gt 
 - Antulio José Barrios de león | ajlb@umes.Edu.gt

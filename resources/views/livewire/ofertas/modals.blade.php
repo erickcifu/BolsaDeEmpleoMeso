@@ -534,7 +534,7 @@
                                 <!-- Competencias comportamentales -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6"><b style="color: black;">Competencias comportamentales</b></p>
+                                        <p class="fs-6"><b style="color: black;">Aptitudes comportamentales</b></p>
                                         <!-- Inputs Competencias -->
                                         @forelse($competenciasShow as $competencia)
                                             <ul class="ul-check">
@@ -714,7 +714,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este dato?</h5>
+                    <h5 class="modal-title" style="color: black;">¿Seguro que desea eliminar este dato?</h5>
                     
                 </form>
             </div>

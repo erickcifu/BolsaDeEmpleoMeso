@@ -11,19 +11,19 @@
                    
                     <div class="form-group">                        
                         <label for="nombreAutoridad"><b style="color: black;">Nombre<b></label>
-                        <input wire:model="nombreAutoridad" type="text" class="form-control" id="nombreAutoridad" placeholder="Nombre autoridad">@error('nombreAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="nombreAutoridad" type="text" class="form-control" id="nombreAutoridad" placeholder="Nombre del usuario">@error('nombreAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
                         <label for="apellidosAutoridad"><b style="color: black;">Apellido<b></label>
-                        <input wire:model="apellidosAutoridad" type="text" class="form-control" id="apellidosAutoridad" placeholder="Apellidos autoridad">@error('apellidosAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="apellidosAutoridad" type="text" class="form-control" id="apellidosAutoridad" placeholder="Apellidos del usuario">@error('apellidosAutoridad') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
                         <label for="email"><b style="color: black;">Correo electrónico<b></label>
-                        <input wire:model="email" type="text" class="form-control" id="email" placeholder="Correo autoridad">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="email" type="text" class="form-control" id="email" placeholder="Correo Electrónico">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">                        
                         <label for="password"><b style="color: black;">Contraseña<b></label>
-                        <input wire:model="password" type="password" class="form-control" id="password" placeholder="Correo autoridad">@error('password') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input wire:model="password" type="password" class="form-control" id="password" placeholder="Contraseña autoridad">@error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group" hidden > 
                         <label for="estadoAutoridad"><b style="color: black;">Estado<b></label>
@@ -113,7 +113,7 @@
             <div class="modal-body">
                 <form>
 					<input type="hidden" wire:model="selected_id">
-                    <h5 class="modal-title" style="color: black;">Seguro que desea eliminar este usuario?</h5>
+                    <h5 class="modal-title" style="color: black;">¿Seguro que desea eliminar este usuario?</h5>
 
                 </form>
             </div>

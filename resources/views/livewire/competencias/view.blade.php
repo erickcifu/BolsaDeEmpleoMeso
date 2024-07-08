@@ -7,7 +7,7 @@
 					<div style="display: flex; justify-content: space-between; align-items: left;">
 						<div class="float-left">
 							<h4>
-							Competencias Comportamentales</h4>
+							Aptitudes comportamentales</h4>
 						</div>
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-warning" style="position: fixed; top: 50px; right: 10px; z-index: 1000; width: 500px;"> {{ session('message') }} </div>
