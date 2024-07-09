@@ -52,23 +52,18 @@ class Estadisticassupervisor extends Component
     {
 
         $this->anioActual = date("Y");
-        $habilidadesT=DB::select('SELECT
-        nombreTecnica,                    COUNT(nombreTecnica) AS total
-                        FROM
-                            (
-                                SELECT
-                                    id
-                                FROM
-                                    users
-                                WHERE
-                                    estado = 1
-                                    AND rol_id = 4
-                            ) u
-                            LEFT JOIN autoridadacademicas au ON u.id = au.user_id
-                            LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
-                            LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
-                            LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
-                            GROUP BY nombreTecnica');
+       $userID = Auth::id();
+
+       $habilidadesT=DB::table('users')
+       ->select('nombreTecnica', DB::raw('count(nombreTecnica)as total'))
+       ->leftJoin('autoridadacademicas','users.id','=','autoridadacademicas.user_id')
+       ->leftJoin('ofertas','ofertas.facultad_id','=','autoridadacademicas.facultad_id')
+       ->leftJoin('ofertatecnicas','ofertas.ofertaId','=','ofertatecnicas.oferta_id')
+       ->leftJoin('habilidadtecnicas','habilidadtecnicas.tecnicaId','=','ofertatecnicas.tecnica_id')
+       ->where('users.id','=', $userID )
+       ->groupBy('nombreTecnica')
+       ->get();
+        
         $this->buildDataSup();
         
         return view('livewire.estadisticassupervisor.view', compact('habilidadesT'));
@@ -80,6 +75,9 @@ class Estadisticassupervisor extends Component
 
         $endDate = Carbon::createFromFormat('Y-m-d', $this->endsOnDate)->toDateString();
         $startDate = Carbon::createFromFormat('Y-m-d', $this->reminder)->toDateString();
+        $userID = Auth::id();
+
+       
 
         $queryHabilidadesYear = "SELECT
                     COUNT(*) AS total
@@ -91,6 +89,7 @@ class Estadisticassupervisor extends Component
                             users
                         WHERE
                             estado = 1
+                            AND id=$userID
                             AND rol_id = 4
                     ) u
                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -113,6 +112,7 @@ class Estadisticassupervisor extends Component
                                         WHERE
                                             
                                             estado = 1
+                                             AND id=$userID
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -137,6 +137,7 @@ class Estadisticassupervisor extends Component
                                         WHERE
                                             
                                             estado = 1
+                                             AND id=$userID
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -158,6 +159,7 @@ class Estadisticassupervisor extends Component
                                         WHERE
                                             
                                             estado = 1
+                                             AND id=$userID
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -180,6 +182,7 @@ class Estadisticassupervisor extends Component
                                         WHERE
                                             
                                             estado = 1
+                                             AND id=$userID
                                             AND rol_id = 4
                                     ) u
                                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -246,26 +249,19 @@ class Estadisticassupervisor extends Component
         $imageUrl = 'storage/Meso/LogoVerde.png';
 
         //-----------
-        $habilidadesT=DB::select('SELECT
-        nombreTecnica,                    COUNT(*) AS total
-                        FROM
-                            (
-                                SELECT
-                                    id
-                                FROM
-                                    users
-                                WHERE
-                                    
-                                    estado = 1
-                                    AND rol_id = 4
-                            ) u
-                            LEFT JOIN autoridadacademicas au ON u.id = au.user_id
-                            LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
-                            LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
-                            LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
-                            GROUP BY nombreTecnica');
+        $userID = Auth::id();
+
+       $habilidadesT=DB::table('users')
+       ->select('nombreTecnica', DB::raw('count(nombreTecnica)as total'))
+       ->leftJoin('autoridadacademicas','users.id','=','autoridadacademicas.user_id')
+       ->leftJoin('ofertas','ofertas.facultad_id','=','autoridadacademicas.facultad_id')
+       ->leftJoin('ofertatecnicas','ofertas.ofertaId','=','ofertatecnicas.oferta_id')
+       ->leftJoin('habilidadtecnicas','habilidadtecnicas.tecnicaId','=','ofertatecnicas.tecnica_id')
+       ->where('users.id','=', $userID )
+       ->groupBy('nombreTecnica')
+       ->get();
                 //---------------
-                    $HabilidadesYear = DB::select( 'SELECT
+                    $QHabilidadesYear = "SELECT
                     COUNT(*) AS total
                     FROM
                     (
@@ -276,15 +272,17 @@ class Estadisticassupervisor extends Component
                         WHERE
                             
                             estado = 1
+                             AND id=$userID
+                          
                             AND rol_id = 4
                     ) u
                     LEFT JOIN autoridadacademicas au ON u.id = au.user_id
                     LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
                     LEFT JOIN ofertatecnicas of ON o.ofertaId = of.oferta_id
                     LEFT JOIN habilidadtecnicas ht ON ht.tecnicaId = of.tecnica_id
-                    ');
+                    ";
                 //-----------------------
-                $ContratadosYear =  DB::select('SELECT
+                $QContratadosYear = "SELECT
                 COUNT(*) as total
                 FROM
                 (
@@ -295,6 +293,7 @@ class Estadisticassupervisor extends Component
                     WHERE
                         
                         estado = 1
+                        AND id=$userID
                         AND rol_id = 4
                 ) u
                 LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -303,10 +302,10 @@ class Estadisticassupervisor extends Component
                 LEFT JOIN entrevistas e ON e.postulacion_id = p.postulacionId
                 WHERE
                                     e.Contratado = 1
-                ');
+                ";
                 //-------------------------------
 
-                $PostuladosYear = DB::select('SELECT
+                $QPostuladosYear = "SELECT
                 COUNT(*) as total
                 FROM
                 (
@@ -317,6 +316,7 @@ class Estadisticassupervisor extends Component
                     WHERE
                     
                         estado = 1
+                         AND id=$userID
                         AND rol_id = 4
                 ) u
                 LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -324,10 +324,10 @@ class Estadisticassupervisor extends Component
                 LEFT JOIN postulacions p ON o.ofertaId = p.oferta_id
                 WHERE
                                     YEAR(p.created_at) = YEAR(CURDATE())
-                ');
+                ";
                 //--------------
 
-                $RechazadosYear = DB::select('SELECT
+                $QRechazadosYear = "SELECT
                 COUNT(*) as total
             FROM
                 (
@@ -338,6 +338,7 @@ class Estadisticassupervisor extends Component
                     WHERE
                         
                         estado = 1
+                          AND id=$userID
                         AND rol_id = 4
                 ) u
                 LEFT JOIN autoridadacademicas au ON u.id = au.user_id
@@ -346,10 +347,10 @@ class Estadisticassupervisor extends Component
                 WHERE
                                     p.estadoPostulacion = 0
                                  
-           ');
+           ";
 
            //------
-           $OfertasYear = DB::select('SELECT
+           $QOfertasYear = "SELECT
            COUNT(*) as total
        FROM
            (
@@ -360,15 +361,20 @@ class Estadisticassupervisor extends Component
                WHERE
                    
                    estado = 1
+                   AND id=$userID
                    AND rol_id = 4
            ) u
            LEFT JOIN autoridadacademicas au ON u.id = au.user_id
            LEFT JOIN ofertas o ON o.facultad_id = au.facultad_id
        WHERE
-           YEAR(o.created_at) = YEAR(CURDATE())');
+           YEAR(o.created_at) = YEAR(CURDATE())";
 
 
-
+$HabilidadesYear= DB::select( $QHabilidadesYear);
+$ContratadosYear= DB::select(   $QContratadosYear);
+$PostuladosYear= DB::select(   $QPostuladosYear);
+$RechazadosYear= DB::select(   $QRechazadosYear);
+$OfertasYear= DB::select(  $QOfertasYear);
 
                           
          
