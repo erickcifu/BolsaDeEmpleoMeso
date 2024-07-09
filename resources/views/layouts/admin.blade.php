@@ -76,7 +76,7 @@
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li class="nav-item">
-                                        <a href="{{ url('/competenciasC') }}" class="nav-link" style="color: #f0eadc;">Aptitudes comportamentales</a> 
+                                        <a href="{{ url('/competenciasC') }}" class="nav-link" style="color: #f0eadc;">Aptitudes</a> 
                                     </li>                                    
                                 </ul>
                         </li>

@@ -67,7 +67,7 @@
                    type="number"
                    class="form-control"
                    id="DPI"
-                   placeholder="Dpi"
+                   placeholder="No. DPI/CUI"
                    />@error('DPI')
                    <span class="error text-danger">{{ $message }}</span>
                    @enderror
