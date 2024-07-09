@@ -58,13 +58,22 @@
 
 
     .popover {
-        max-width: 400px; /* Ancho máximo del popover */
+        max-width: 90%; /* Ancho máximo del popover */
     }
 
+    .popover-body ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        .popover-body li {
+            margin-bottom: 5px; /* Ajusta el valor según sea necesario */
+        }
+        
     #modalContent {
             text-align: justify;
         }
-        
+
     #modalContent li {
         margin-bottom: 10px; /* Ajusta el valor según sea necesario */
     }
@@ -179,12 +188,13 @@
 <!-- Footer -->
 
 <!-- Botón de información -->
-<a id="info-btn" type="button" data-bs-toggle="popover" data-bs-trigger="hover" title="Información de derechos de autor" data-bs-content="
+<a id="info-btn" type="button" data-bs-toggle="popover" data-bs-trigger="click" title="Información de derechos de autor" 
+data-bs-content="
 Estudiantes:                                                  
-- Erick Alfredo Cifuentes Fuentes | ErickCifu@umes.edu.gt
-- María Fernanda Mendoza y Mendoza | fernanda2000@umes.edu.gt 
-- Antulio José Barrios de león | ajlb@umes.Edu.gt
-- Edwin Aníbal Mejía Chan | mejiachan@umes.edu.gt ">
+Erick Alfredo Cifuentes Fuentes | erickcifu@umes.edu.gt
+María Fernanda Mendoza y Mendoza | fernanda2000@umes.edu.gt 
+Antulio José Barrios de león | ajlb@umes.edu.gt
+Edwin Aníbal Mejía Chan | mejiachan@umes.edu.gt ">
     <i class="fa-solid fa-circle-info"></i>
 </a>
 
@@ -205,7 +215,28 @@ Estudiantes:
 <script>
     document.addEventListener('livewire:load', function () {
         // Inicializar el popover después de que se carga Livewire
-        new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
+        var popoverTrigger = document.getElementById('info-btn');
+        var popover = new bootstrap.Popover(popoverTrigger, {
+            trigger: 'click',
+            html: true,
+            content: function () {
+                var content = popoverTrigger.getAttribute('data-bs-content');
+                var items = content.split('\n').map(item => item.trim()).filter(item => item !== "");
+                var list = '<ul class="list-unstyled">';
+                items.forEach(function (item) {
+                    list += '<li>' + item + '</li>';
+                });
+                list += '</ul>';
+                return list;
+            }
+        });
+
+        // Cerrar el popover al hacer clic fuera de él
+        document.addEventListener('click', function (e) {
+            if (!popoverTrigger.contains(e.target) && !document.querySelector('.popover')?.contains(e.target)) {
+                popover.hide();
+            }
+        });
     });
 
     $(document).ready(function(){
