@@ -99,7 +99,7 @@
                        ><b style="color: black">Número de teléfono personal*</b></label
                        >
                        <input
-                       wire:model="número_personal"
+                       wire:model="numero_personal"
                        type="number"
                        size="8"
                        value="00-000-000"
