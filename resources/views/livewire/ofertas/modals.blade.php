@@ -348,21 +348,21 @@
                     <div class="accordion-item" id="item6">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed"  style="background-color: #d3d3d3;"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix"  data-bs-parent="#accordionExample" disabled>
-                                <b style="color: #005c35;"> Competencias </b>
+                                <b style="color: #005c35;"> Aptitudes </b>
                             </button>
                         </h2>
                         <div id="collapseSix" class="accordion-collapse collapse"  wire:ignore.self data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="form-group text-end">
                                     <button type="button" wire:click="addCompetencias" class="btn btn-primary" style="background-color: #005c35;">
-                                        <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Competencia</h8>
+                                        <i class="fa-solid fa-circle-plus" style="color: #f0eadc;"></i> <h8 style="color: #f0eadc;">Agregar Aptitud</h8>
                                     </button>
                                 </div>
                             <!-- Inputs Condiciones y beneficios -->
                                 @foreach($competencias as $indice => $comp)
                                 <div class="row mb-3">
                                     <div class="col-6">
-                                        <label for="competenciaId">Habilidad Interpersonal*</label>
+                                        <label for="competenciaId">Aptitud*</label>
                                         <select wire:model="competencias.{{ $indice }}.competenciaId" type="text" class="form-control" id="competencias.{{ $indice }}.competenciaId">
                                             <option selected>- Selecciona Comptencias -</option>
                                             @foreach($competenciasTable as $competencia)
@@ -534,7 +534,7 @@
                                 <!-- Competencias comportamentales -->
                                 <div style="flex: 1;">
                                     <div class="mb-2">
-                                        <p class="fs-6"><b style="color: black;">Aptitudes comportamentales</b></p>
+                                        <p class="fs-6"><b style="color: black;">Aptitudes</b></p>
                                         <!-- Inputs Competencias -->
                                         @forelse($competenciasShow as $competencia)
                                             <ul class="ul-check">
