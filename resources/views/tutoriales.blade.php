@@ -60,6 +60,14 @@
     .popover {
         max-width: 400px; /* Ancho máximo del popover */
     }
+
+    #modalContent {
+            text-align: justify;
+        }
+        
+    #modalContent li {
+        margin-bottom: 10px; /* Ajusta el valor según sea necesario */
+    }
 </style>
    
   <body background="{{ asset('storage/Meso/Meso.png') }}">
@@ -148,7 +156,7 @@
 </div>
 <br>
 <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #005c35;">
                 <h5 class="modal-title" id="infoModalLabel" style="color: #f0eadc;">Términos y condiciones</h5>
@@ -157,13 +165,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p id="modalContent"> 1. Universidad mesoamericana no garantiza a los usuarios de la aplicación Bolsa de empleo, que sean contratados cuando se postulen a las ofertas laborales, ya que el proceso de selección y contratación lo lleva a cabo la empresa que realiza la publicación. <br>
-2. Universidad Mesoamericana no se responsabiliza por la información publicada por parte de las empresas registradas en la aplicación, tampoco de las vacantes de empleo que se ofrecen dentro de la aplicación, ya que cada empresa se encarga de manera individual del proceso de contratación de los postulados. <br>
-3. Universidad Mesoamericana únicamente proporciona este sitio web como un medio de comunicación, pero no adquiere una responsabilidad entre ninguna de las partes. <br>
-4. Al hacer uso de esta aplicación, cada usuario asume la responsabilidad sobre los datos que comparte dentro de la plataforma. <br>
-5. El proceso y decisión de contratación es totalmente ajeno a Universidad Mesoamericana, por lo que la misma no está obligada concluir <br>
-6. Universidad Mesoamericana mantiene estricta confidencialidad y se esfuerza por resguardar la integridad de la información publicada en esta aplicación web, sin embargo, no se responsabiliza por la posible difusión de datos por fuentes externas, ya sean agencias reclutadoras o empresas que cuentan con un usuario dentro de este sitio web. <br>
-</p>
+                <ol id="modalContent"> 
+                    
+                </ol>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #005c35;">Cerrar</button>
@@ -188,12 +192,15 @@ Estudiantes:
 <!-- Footer -->
 <div class="footer text-center py-3">
     <p style="color: #f0eadc;">Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria. Todos los derechos reservados.</p>
-    <p style="color: #f0eadc;" id="terms-conditions" data-toggle="modal" data-target="#infoModal" data-info="1. Universidad mesoamericana no garantiza a los usuarios de la aplicación Bolsa de empleo, que sean contratados cuando se postulen a las ofertas laborales, ya que el proceso de selección y contratación lo lleva a cabo la empresa que realiza la publicación.
-2. Universidad Mesoamericana no se responsabiliza por la información publicada por parte de las empresas registradas en la aplicación, tampoco de las vacantes de empleo que se ofrecen dentro de la aplicación, ya que cada empresa se encarga de manera individual del proceso de contratación de los postulados.
-3. Universidad Mesoamericana únicamente proporciona este sitio web como un medio de comunicación, pero no adquiere una responsabilidad entre ninguna de las partes. 
-4. Al hacer uso de esta aplicación, cada usuario asume la responsabilidad sobre los datos que comparte dentro de la plataforma. 
-5. El proceso y decisión de contratación es totalmente ajeno a Universidad Mesoamericana, por lo que la misma no está obligada concluir 
-6. Universidad Mesoamericana mantiene estricta confidencialidad y se esfuerza por resguardar la integridad de la información publicada en esta aplicación web, sin embargo, no se responsabiliza por la posible difusión de datos por fuentes externas, ya sean agencias reclutadoras o empresas que cuentan con un usuario dentro de este sitio web.">Términos y condiciones</p>
+    <p class="text-decoration-underline" style="color: #f0eadc;" id="terms-conditions" data-toggle="modal" data-target="#infoModal"
+     data-info="Universidad Mesoamericana no garantiza a los usuarios de la aplicación Bolsa de empleo, que sean contratados cuando se postulen a las ofertas laborales, ya que el proceso de selección y contratación lo lleva a cabo la empresa que realiza la publicación.
+    Universidad Mesoamericana no se responsabiliza por la información publicada por parte de las empresas registradas en la aplicación, tampoco de las vacantes de empleo que se ofrecen dentro de la aplicación, ya que cada empresa se encarga de manera individual del proceso de contratación de los postulados.
+    Universidad Mesoamericana únicamente proporciona este sitio web como un medio de comunicación, pero no adquiere una responsabilidad entre ninguna de las partes. 
+    Al hacer uso de esta aplicación, cada usuario asume la responsabilidad sobre los datos que comparte dentro de la plataforma. 
+    El proceso y decisión de contratación es totalmente ajeno a Universidad Mesoamericana, por lo que la misma no está obligada concluir 
+    Universidad Mesoamericana mantiene estricta confidencialidad y se esfuerza por resguardar la integridad de la información publicada en esta aplicación web, sin embargo, no se responsabiliza por la posible difusión de datos por fuentes externas, ya sean agencias reclutadoras o empresas que cuentan con un usuario dentro de este sitio web.
+    La Bolsa de empleo de Universidad Mesoamericana es de uso gratuito, sus usuarios están exentos de cualquier pago monetario por la utilización del software.
+    Universidad Mesoamericana no es responsable de socializar a los postulantes la información de su proceso de contratación, si desea más información de la que se brinda en la aplicación web, deberá comunicarse directamente con la empresa a la cual postuló.">Términos y condiciones</p>
 </div>
 <script>
     document.addEventListener('livewire:load', function () {
@@ -201,11 +208,17 @@ Estudiantes:
         new bootstrap.Popover(document.querySelector('[data-bs-toggle="popover"]'));
     });
 
-    $('#infoModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Elemento que disparó el modal
-        var info = button.data('info'); // Extrae la información de los atributos data-*
-        var modal = $(this);
-        modal.find('.modal-body #modalContent').text(info); // Actualiza el contenido del modal
+    $(document).ready(function(){
+        $('#infoModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); 
+            var info = button.data('info');
+            var items = info.split('\n');
+            var modalContent = $('#modalContent');
+            modalContent.empty();
+            items.forEach(function(item){
+                $('<li></li>').text(item.trim()).appendTo(modalContent);
+            });
+        });
     });
 </script>
 @endsection
