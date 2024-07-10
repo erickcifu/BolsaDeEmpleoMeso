@@ -130,6 +130,7 @@ Route::view('municipios', 'livewire.municipios.index')->middleware('rrhh');
 Route::view('empresas', 'livewire.empresas.index')->middleware('empresa');
 Route::view('empresasIni', 'livewire.empresasIni.index')->middleware('empresa');
 Route::view('empresasrrhh', 'livewire.empresasrrhh.index')->middleware('rrhh');
+Route::view('preRegistro', 'livewire.preRegistro.index')->middleware('rrhh');
 Route::view('empresas1', 'livewire.empresas1.index')->middleware('empresa');
 Route::view('cartarecomendacions', 'livewire.cartarecomendacions.index')->middleware('autoridad');
 
