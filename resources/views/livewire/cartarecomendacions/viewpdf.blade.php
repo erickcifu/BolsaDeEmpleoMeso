@@ -63,6 +63,7 @@
 		<img src="{{$item->firmaAutoridad}}" alt="" width="100" height="100"/>
 		</p>
 		<p class="text-center">{{$item->autoridadAcademica->nombreAutoridad}}  {{$item->autoridadAcademica->apellidosAutoridad}}</p>
+		<p class="text-center"> Decano de la facultad de: {{$item->autoridadAcademica->facultad->Nfacultad}}</p>
 		<p class="text-center"> Tel: {{$item->telefonoAutoridad}}</p>
 		<br>
 		<br>
