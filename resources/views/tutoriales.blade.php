@@ -55,14 +55,14 @@
     float: right; 
     margin-left: 150px; 
     margin-top: -45px; 
-    font-size: 18px; 
+    font-size: 10px; 
     padding: 10px 20px; 
     border: 2px solid; 
     }
     
 
     .popover {
-        max-width: 90%; /* Ancho máximo del popover */
+        max-width: 80%; /* Ancho máximo del popover */
     }
 
     .popover-body ul {
