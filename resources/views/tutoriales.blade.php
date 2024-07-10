@@ -51,11 +51,15 @@
         text-align: center; /* Centrado del texto */
     }
     #info-btn {
-    float: right; /* Alinear a la derecha */
-    margin-left: 150px; /* Agregar un poco de margen izquierdo para separarlo del texto */
-    margin-top: -45px; /* Ajusta la posición vertical hacia arriba */    
+    color: #005c35; 
+    float: right; 
+    margin-left: 150px; 
+    margin-top: -45px; 
+    font-size: 18px; 
+    padding: 10px 20px; 
+    border: 2px solid; 
     }
-
+    
 
     .popover {
         max-width: 90%; /* Ancho máximo del popover */
@@ -201,8 +205,8 @@ Edwin Aníbal Mejía Chan | mejiachan@umes.edu.gt ">
 </body>
 <!-- Footer -->
 <div class="footer text-center py-3">
-    <p style="color: #f0eadc;">Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria. Todos los derechos reservados.</p>
-    <p class="text-decoration-underline" style="color: #f0eadc;" id="terms-conditions" data-toggle="modal" data-target="#infoModal"
+    <p  style="color: #f0eadc;">Derechos de autor &copy; {{ date('Y') }} Estudiantes de la Facultad de Ingenieria. Todos los derechos reservados.</p>
+    <p  class="text-decoration-underline" style="color: #f0eadc; cursor: pointer;" id="terms-conditions" data-toggle="modal" data-target="#infoModal"
      data-info="Universidad Mesoamericana no garantiza a los usuarios de la aplicación Bolsa de empleo, que sean contratados cuando se postulen a las ofertas laborales, ya que el proceso de selección y contratación lo lleva a cabo la empresa que realiza la publicación.
     Universidad Mesoamericana no se responsabiliza por la información publicada por parte de las empresas registradas en la aplicación, tampoco de las vacantes de empleo que se ofrecen dentro de la aplicación, ya que cada empresa se encarga de manera individual del proceso de contratación de los postulados.
     Universidad Mesoamericana únicamente proporciona este sitio web como un medio de comunicación, pero no adquiere una responsabilidad entre ninguna de las partes. 
