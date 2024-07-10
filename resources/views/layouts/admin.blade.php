@@ -77,6 +77,10 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li class="nav-item">
                                         <a href="{{ url('/competenciasC') }}" class="nav-link" style="color: #f0eadc;">Aptitudes</a> 
+                                    </li> 
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li class="nav-item">
+                                        <a href="{{ url('/preRegistro') }}" class="nav-link" style="color: #f0eadc;">Pre-registro</a> 
                                     </li>                                    
                                 </ul>
                         </li>
