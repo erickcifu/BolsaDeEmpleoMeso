@@ -32,7 +32,7 @@ class PreRegistro extends Component
             $query->where('name', 'like', $keyWord)
                   ->orWhere('email', 'like', $keyWord);
         })
-        ->paginate(2);
+        ->paginate(10);
 
         return view('livewire.preRegistro.pre-registro', compact('enProceso'));
     }
